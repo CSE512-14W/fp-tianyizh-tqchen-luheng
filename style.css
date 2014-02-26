@@ -1,5 +1,19 @@
-.container div{
-  position: absolute;
+
+/* tree path style */
+.pathgraph.bar.right {
+    fill: steelblue;
 }
 
+.pathgraph.bar.left {
+    fill: brown;
+}
 
+.pathgraph.text.text {
+    font: 14px sans-serif;
+    fill: black;
+}
+
+.axis line {
+    fill: none;
+    stroke: #000;
+}
