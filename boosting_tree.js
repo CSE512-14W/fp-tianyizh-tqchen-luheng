@@ -5,7 +5,6 @@
 function boosting_tree (margin, width, height, tag) {
 	this.margin = margin;
     this.width = width - margin.left - margin.right;
-    this.legendwidth = this.width / 3;
     this.height = height - margin.top - margin.bottom;
 
     this.svg = d3.select(tag)
@@ -22,9 +21,8 @@ function boosting_tree (margin, width, height, tag) {
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) { return [d.x, d.y]; });
- 
-    //this.link_stoke_scale = d3.scale.linear();
-    //this.color_map = d3.scale.category10(); 
+    
+    this.node_count = 0;
 }
 
 boosting_tree.prototype = {
@@ -43,21 +41,15 @@ boosting_tree.prototype = {
 					self.forest.push(
 						self.recursive_tree_helper(self.roots[i]));
 				}
+				/**
+				 * Prepare for update.
+				 */
 				self.num_samples = 1000;
-				// prepare for update
-				var root = self.forest[0];
-				root.x0 = 0;
-				root.y0 = 0;
-				
-				var toggleAll = function (d) {
-					if (d && d.children) {
-						d.children.forEach(toggleAll);
-						self.toggle(d);
-					}
-				};
-				
-				root.children.forEach(toggleAll);
-				self.update(root);
+				self.root = self.forest[0];
+				self.root.x0 = 0;
+				self.root.y0 = 0;
+				self.root.children.forEach(self.toggleAll);
+				self.update(self.root);
 			});    
 	},
 	recursive_tree_helper : function (node_id) {
@@ -71,7 +63,25 @@ boosting_tree.prototype = {
 			return { label : node.label, type : "split", children : c_nodes,
 					samples : 100 };
 		} else {
-			return { label : node.label, type : "leaf", num_sampels : 50 };
+			return { label : node.label, type : "leaf", samples : 50 };
+		}
+	},
+	toggle : function (d) {
+		if (d.children) {
+			d._children = d.children;
+			d.children = null;
+		} else {
+			d.children = d._children;
+			d._children = null;
+		}
+	},	
+	toggleAll : function (d) {
+		if (d && d.children) {
+			for (var i = 0; i < d.children.length; i++) {
+				// FIXME: why this.toggleAll doesn't work? i don't understand..
+				boosting_tree.prototype.toggleAll(d.children[i]);
+			}
+			boosting_tree.prototype.toggle(d);
 		}
 	},
 	update : function(source) {
@@ -82,27 +92,28 @@ boosting_tree.prototype = {
 			char_to_pxl = 6;
 		var self = this;
 		
-		var nodes = self.tree.nodes(source).reverse();
-		
-		nodes.forEach(
-			function(d) { d.y = d.depth * 180; });
+		/**
+		 * NODES
+		 */
+		var nodes = self.tree.nodes(self.root).reverse();
+		nodes.forEach(function(d) {
+			d.y = d.depth * 180; });
 
-		var node = self.svg
-				.selectAll("g.node")
-		   	 	.data(nodes,
-		   	 		function(d, i) { return d.id || (d.id = ++i); });
+		var node = self.svg.selectAll("g.node")
+		   	 	.data(nodes, function(d) {
+		   	 		return d.id || (d.id = ++ self.node_count) ; });
 
 		/**
 		 * NODE ENTER
 		 */
-		
 		var nodeEnter = node.enter()
 			.append("g")
 			.attr("class", "node")
 			.attr("transform", function(d) {
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
-				self.toggle(d); self.update(d); });
+				self.toggle(d);
+				self.update(d); });
 
 		nodeEnter.append("rect")
 		   .attr("x", function(d) {
@@ -119,6 +130,7 @@ boosting_tree.prototype = {
 		   .style("stroke", function(d) {
 			   return d.type === "split" ? "steelblue" : "olivedrab";})
 		   .style("fill", function(d) {
+			   // is expandable
 			   return d._children ? "lightsteelblue" : "#fff"; });
 
 		nodeEnter.append("text")
@@ -137,7 +149,6 @@ boosting_tree.prototype = {
 		/**
 		 * NODE UPDATE
 		 */
-		
 		nodeUpdate.select("rect")
 			.attr("width", function(d) {
 				var text_len = d.label.length * char_to_pxl;
@@ -154,7 +165,6 @@ boosting_tree.prototype = {
 		/**
 		 * NODE EXIT
 		 */
-		
 		var nodeExit = node.exit().transition()
 			.duration(duration)
 			.attr("transform", function(d) {
@@ -171,7 +181,6 @@ boosting_tree.prototype = {
 		/**
 		 * LINKS
 		 */
-
 		var links = self.tree.links(nodes);
 		var link = self.svg
 					.selectAll("path.link")
@@ -186,7 +195,6 @@ boosting_tree.prototype = {
 		/**
 		 * LINK ENTER
 		 */
-		
 		link.enter().insert("path", "g")
 			.attr("class", "link")
 			.attr("d", function(d) {
@@ -214,7 +222,6 @@ boosting_tree.prototype = {
 		/**
 		 * LINK EXIT
 		 */
-		
 		link.exit().transition()
 			.duration(duration)
 			.attr("d", function(d) {
@@ -227,14 +234,5 @@ boosting_tree.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
-	},
-	toggle : function (d) {
-		if (d.children) {
-			d._children = d.children;
-			d.children = null;
-		} else {
-			d.children = d._children;
-			d._children = null;
-		}
 	}
 };
