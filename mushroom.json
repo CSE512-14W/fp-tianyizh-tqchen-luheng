@@ -1,0 +1,20 @@
+{
+"roots" : [0,] 
+"weights" : [1.0,]
+"nodes" : [
+  { "id" : 0, "label" : "odor=none", "children" : [1,2], "edge_tags" : ["yes", "no"] },
+  { "id" : 1, "label" : "spore-print-color=green", "children" : [3,4], "edge_tags" : ["yes", "no"] },  
+  { "id" : 2, "label" : "stalk-root=club", "children" : [7,8], "edge_tags" : ["yes", "no"] },
+  { "id" : 3, "label" : "leaf=1.487" },
+  { "id" : 4, "label" : "stalk-surface-below-ring=scaly", "children" : [5,6], "edge_tags" : ["yes", "no"] },
+  { "id" : 5, "label" : "leaf=0.381" },
+  { "id" : 6, "label" : "leaf=-2.632" },
+  { "id" : 7, "label" : "bruises?=bruises", "children"=[9,10], "edge_tags" : ["yes", "no"] },
+  { "id" : 8, "label" : "stalk-root=rooted", "children"=[11,12], "edge_tags" : ["yes", "no"] },
+  { "id" : 9, "label" : "leaf=-2.622" },
+  { "id" : 10, "label" : "leaf=1.418" },
+  { "id" : 11, "label" : "leaf=-2.579" },
+  { "id" : 12, "label" : "leaf=1.503" },
+]
+}  
+
