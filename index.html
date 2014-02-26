@@ -11,7 +11,7 @@
     <h1>Transparent Boosting Tree</h1>
     </header>
     <div id="knn_selection" class="selecter">
-      <h4>Test Selecter</h4>
+      <h4>Test Selector</h4>
       <select id="test_select">
         <option value="Data1" selected>Data1</option>
         <option value="Data2">Data2</option>
@@ -19,8 +19,8 @@
     </div>
    
     <div id="modelview">
-      <div id="modeltree"></div>
-      <div id="modelpathgraph"></div>
+      <div class="container" id="modeltreegraph"></div>
+      <div class="container" id="modelpathgraph"></div>
     </div>
     <div id="summaryview"></div>
     <div id="detailview"></div>
@@ -29,6 +29,7 @@
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>   
   <script src="tree.path.js"></script>
+  <script src="boosting_tree.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

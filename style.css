@@ -17,3 +17,22 @@
     fill: none;
     stroke: #000;
 }
+
+.container {
+  float: left;
+}
+
+.node rect {
+  cursor: pointer;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+ 
+.node text {
+	font: 12px Helvetica;
+}
+ 
+.boosting_tree.path.link {
+  fill: none;
+  stroke: #ccc;
+}

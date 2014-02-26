@@ -1,6 +1,9 @@
 // this is main js that cover all up 
 var gtreepath = new pathgraph( { top:30, right:10, bottom:10, left:10}, 
-                               400, 500, "#modelpathgraph" );
+                                400, 500, "#modelpathgraph" );
+
+var btrees = new boosting_tree( { top:30, right:10, bottom:10, left:10}, 
+        						400, 500, "#modeltreegraph" );
 
 // tree-view, fake data 
 data1 = [
@@ -14,9 +17,10 @@ data2 = [
     {"id":3, "pos_cnt":20, "neg_cnt":40, "cond":"ishot?", "left":5, "right":6 },
     {"id":6, "pos_cnt":2, "neg_cnt":20, "cond":"haha?", "left":10, "right":11 },
     {"id":11, "pos_cnt":0, "neg_cnt":10, "cond":"leaf", "left":-1, "right":-1 }
-]; 
+];
 
 gtreepath.update( data1 );
+btrees.mock_init();
 
 d3.selectAll("#test_select")
     .on( "change", function (){
@@ -26,3 +30,4 @@ d3.selectAll("#test_select")
             gtreepath.update( data2 );
         }
     });
+
