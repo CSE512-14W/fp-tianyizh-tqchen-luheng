@@ -4,7 +4,6 @@ function pathgraph( margin, width, height, tag ){
     this.width = width - margin.left - margin.right;
     this.legendwidth = this.width / 2;
     this.height = height - margin.top - margin.bottom;
-
     this.barHeight = 30;
     this.x = d3.scale.linear()
         .range([0, this.width - this.legendwidth]);
@@ -18,6 +17,20 @@ function pathgraph( margin, width, height, tag ){
     this.legend = this.svg.selectAll( '.legend' );
     this.textleft = null;
     this.textright = null;
+    
+    this.svg.append('text')
+        .attr( "text-anchor", "start" )
+        .attr( "x", 10 )
+        .attr( "y", -10 )
+        .attr( "dy", ".35em" )
+        .text( "negative count" );
+
+    this.svg.append('text')
+        .attr( "text-anchor", "end" )
+        .attr( "x", this.width - this.legendwidth - 10 )
+        .attr( "y", -10 )
+        .attr( "dy", ".35em" )
+        .text( "positive count" );
 }
 
 pathgraph.prototype = {
