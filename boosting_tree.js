@@ -21,58 +21,65 @@ function boosting_tree (margin, width, height, tag) {
     			.projection( function(d) { return [d.x, d.y]; });
     
     this.node_count = 0;
+    this.tree_margin = 20;   
 }
 
 boosting_tree.prototype = {
-	mock_init : function() {
+	init : function(tdata) {
 		var self = this;
-		d3.json( "data/mushroom.json",
-			function(error, tdata) {
-				self.root_nodes = tdata.roots;
-				self.root_weights = tdata.weights;
-				self.tree_nodes = tdata.nodes;
-				self.num_trees = self.root_nodes.length;
-				
-				// change data to d3 tree json style,
-				// with field "label", "type"
-				self.forest_data = [];
-				self.forest = [];
-				self.tree_width = self.width / self.num_trees - 20;
-				
-				for (var i = 0; i < self.num_trees; i++) {
-					self.forest_data.push(
-						self.recursive_tree_helper(self.root_nodes[i], -1, i));
-					self.forest.push(
-						d3.layout.tree().size([self.tree_width, self.height]));
-				}
-				// mock sample count
-				
-				/**
-				 * Prepare for update.
-				 */
-				self.num_samples = 1000;
-				for (var i = 0; i < self.num_trees; i++) {
-					self.forest_data[i].x0 = i * self.tree_width; 
-					self.forest_data[i].y0 = 0;
-					self.forest_data[i].children.forEach(self.toggleAll);
-				}
-				self.update(self.forest_data[0]);
-			});    
+		self.root_nodes = tdata.roots;
+		self.root_weights = tdata.weights;
+		self.tree_nodes = tdata.nodes;
+		self.num_nodes = self.tree_nodes.length;
+		self.num_trees = self.root_nodes.length;
+		self.parent_ptr = new Array(self.num_nodes);		
+		// change data to d3 tree json style,
+		// with field "label", "type"
+		self.forest_data = [];
+		self.forest = [];
+		self.tree_width = self.width / self.num_trees;
+		for (var i = 0; i < self.num_trees; i++) {
+			self.forest_data.push(
+				self.recursive_tree_helper(self.root_nodes[i], -1, i));
+			self.forest.push(
+				d3.layout.tree().size([self.tree_width - self.tree_margin,
+				                       self.height]));
+		}
+			
+		/**
+		 * Prepare for update.
+		 */
+		// FIXME
+		self.num_samples = 1000;
+		for (var i = 0; i < self.num_trees; i++) {
+			self.forest_data[i].children.forEach(self.toggleAll);
+		}
+		self.forest_data[0].x0 = 0;
+		self.forest_data[0].y0 = 0;
+		self.update(self.forest_data[0]);  
 	},
 	recursive_tree_helper : function (node_id, parent_id, my_rank) {
 		var node = this.tree_nodes[node_id];
+		this.parent_ptr[node_id] = parent_id;
 		if (node.children) {
 			var c_nodes = [];
 			for (var i = 0; i < node.children.length; i++) {
 				c_nodes.push(
 					this.recursive_tree_helper(node.children[i], node_id, i));
 			}
-			return { label : node.label, type : "split", children : c_nodes,
-					rank : my_rank, samples : 100 };
+			return { id : node_id, label : node.label, type : "split",
+					children : c_nodes, rank : my_rank};
 		} else {
-			return { label : node.label, type : "leaf",
-					rank : my_rank, samples : 50 };
+			return { id : node_id, label : node.label, type : "leaf",
+					rank : my_rank};
 		}
+	},
+	path_helper : function (d) {
+		path = [];
+		for (var p = d.id; p >= 0; p = this.parent_ptr[p]) {
+			path.push(this.tree_nodes[p]);
+		}
+		return path;
 	},
 	toggle : function (d) {
 		if (d.children) {
@@ -135,7 +142,10 @@ boosting_tree.prototype = {
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
 				self.toggle(d);
-				self.update(d); });
+				self.update(d); })
+			.on("mouseover", function(d) {
+				gtreepath.update(self.path_helper(d));
+			});
 
 		nodeEnter.append("rect")
 		   .attr("x", function(d) {
