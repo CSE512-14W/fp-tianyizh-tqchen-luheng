@@ -17,7 +17,7 @@ function pathgraph( margin, width, height, tag ){
     this.legend = this.svg.selectAll( '.legend' );
     this.textleft = null;
     this.textright = null;
-    
+
     this.svg.append('text')
         .attr( "text-anchor", "start" )
         .attr( "x", 10 )
@@ -108,11 +108,5 @@ pathgraph.prototype = {
             .attr( "dy", ".35em" )
             .text( function(d){ return d.neg_cnt; } );
 
-        // draw axis
-        this.svg.append( "g" )
-            .attr( "class", "pathgraph y axis")
-            .append( "line" )
-            .attr( {"x1":this.x(0), "x2":this.x(0), "y2": (barHeight+2)*(data.length+1)} );
-        
     }  
 };
