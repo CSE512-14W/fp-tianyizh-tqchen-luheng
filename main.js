@@ -13,8 +13,9 @@ d3.json( "data/mushroom.json",
              path.push( nodes[1] );              
              path.push( nodes[4] );
              path.push( nodes[6] );
-             gtreepath.update( path )
+             gtreepath.update( path );
+             btrees.init( data );
          }
        );
          
-btrees.mock_init();
+
