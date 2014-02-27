@@ -3,7 +3,7 @@ var gtreepath = new pathgraph( { top:30, right:10, bottom:10, left:10},
                                 400, 1000, "#modelpathgraph" );
 
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:50}, 
-        						800, 1000, "#modeltreegraph" );
+        						1000, 1000, "#modeltreegraph" );
 
 // tree-view, fake data 
 data1 = [
