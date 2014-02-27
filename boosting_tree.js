@@ -14,9 +14,7 @@ function boosting_tree (margin, width, height, tag) {
     			.append("g")
     			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-    this.tree = d3.layout
-    			.tree()
-    			.size([width, height]);
+    this.forest = [];
     
     this.diagonal = d3.svg
     			.diagonal()
@@ -30,40 +28,50 @@ boosting_tree.prototype = {
 		var self = this;
 		d3.json( "data/mushroom.json",
 			function(error, tdata) {
-				self.roots = tdata.roots;
-				self.weights = tdata.weights;
+				self.root_nodes = tdata.roots;
+				self.root_weights = tdata.weights;
 				self.tree_nodes = tdata.nodes;
+				self.num_trees = self.root_nodes.length;
 				
 				// change data to d3 tree json style,
-				// with field "label", "type" 
+				// with field "label", "type"
+				self.forest_data = [];
 				self.forest = [];
-				for (var i = 0; i < self.roots.length; i++) {
+				self.tree_width = self.width / self.num_trees - 20;
+				
+				for (var i = 0; i < self.num_trees; i++) {
+					self.forest_data.push(
+						self.recursive_tree_helper(self.root_nodes[i], -1, i));
 					self.forest.push(
-						self.recursive_tree_helper(self.roots[i]));
+						d3.layout.tree().size([self.tree_width, self.height]));
 				}
+				// mock sample count
+				
 				/**
 				 * Prepare for update.
 				 */
 				self.num_samples = 1000;
-				self.root = self.forest[0];
-				self.root.x0 = 0;
-				self.root.y0 = 0;
-				self.root.children.forEach(self.toggleAll);
-				self.update(self.root);
+				for (var i = 0; i < self.num_trees; i++) {
+					self.forest_data[i].x0 = i * self.tree_width; 
+					self.forest_data[i].y0 = 0;
+					self.forest_data[i].children.forEach(self.toggleAll);
+				}
+				self.update(self.forest_data[0]);
 			});    
 	},
-	recursive_tree_helper : function (node_id) {
+	recursive_tree_helper : function (node_id, parent_id, my_rank) {
 		var node = this.tree_nodes[node_id];
 		if (node.children) {
 			var c_nodes = [];
 			for (var i = 0; i < node.children.length; i++) {
 				c_nodes.push(
-					this.recursive_tree_helper(node.children[i]));
+					this.recursive_tree_helper(node.children[i], node_id, i));
 			}
 			return { label : node.label, type : "split", children : c_nodes,
-					samples : 100 };
+					rank : my_rank, samples : 100 };
 		} else {
-			return { label : node.label, type : "leaf", samples : 50 };
+			return { label : node.label, type : "leaf",
+					rank : my_rank, samples : 50 };
 		}
 	},
 	toggle : function (d) {
@@ -95,14 +103,28 @@ boosting_tree.prototype = {
 		/**
 		 * NODES
 		 */
-		var nodes = self.tree.nodes(self.root).reverse();
-		nodes.forEach(function(d) {
-			d.y = d.depth * 80; });
-
+		var nodes = [],
+			links = [];
+		for (var i = 0; i < self.num_trees; i++) {
+			var tree = self.forest[i];
+			var tree_data = self.forest_data[i];
+			var t_nodes = tree.nodes(tree_data).reverse();
+			t_nodes.forEach(function(d) {
+				d.x = d.x + i * self.tree_width;
+				d.y = d.depth * 80 + (d.rank * (rect_height + 8));
+			});
+			nodes.push.apply(nodes, t_nodes);
+			links.push.apply(links, tree.links(t_nodes));
+		}
+		
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
 		   	 		return d.id || (d.id = ++ self.node_count) ; });
-
+		var link = self.svg
+				.selectAll("path.link")
+				.data(links, function(d) {
+					return d.target.id; });
+		
 		/**
 		 * NODE ENTER
 		 */
@@ -129,8 +151,7 @@ boosting_tree.prototype = {
 			   return d.type === "split" ? 2 : 0;})
 		   .style("stroke", function(d) {
 			   return d.type === "split" ? "steelblue" : "olivedrab";})
-		   .style("fill", function(d) {
-			   // is expandable
+		   .style("fill", function(d) { // is expandable 
 			   return d._children ? "lightsteelblue" : "#fff"; });
 
 		nodeEnter.append("text")
@@ -177,16 +198,9 @@ boosting_tree.prototype = {
 	 
 		nodeExit.select("text")
 			.style("fill-opacity", 1e-6);
-	  
 		/**
 		 * LINKS
 		 */
-		var links = self.tree.links(nodes);
-		var link = self.svg
-					.selectAll("path.link")
-					.data(links, function(d) {
-						return d.target.id; });
-		
 		var link_stroke_scale = d3.scale.linear()
 				.domain([0, self.num_samples])
 				.range([min_link_width, max_link_width]);
@@ -211,7 +225,6 @@ boosting_tree.prototype = {
 		/**
 		 * LINK UPDATE
 		 */
-		
 		link.transition()
 			.duration(duration)
 			.attr("d", self.diagonal)
