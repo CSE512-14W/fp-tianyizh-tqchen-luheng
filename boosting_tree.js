@@ -85,7 +85,7 @@ boosting_tree.prototype = {
 		}
 	},
 	update : function(source) {
-		var rect_width = 150,
+		var rect_width = 60,
 			rect_height = 20,
 			max_link_width = 20,
 			min_link_width = 1.5,
@@ -97,7 +97,7 @@ boosting_tree.prototype = {
 		 */
 		var nodes = self.tree.nodes(self.root).reverse();
 		nodes.forEach(function(d) {
-			d.y = d.depth * 180; });
+			d.y = d.depth * 80; });
 
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {

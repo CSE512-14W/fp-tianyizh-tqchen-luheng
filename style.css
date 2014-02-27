@@ -32,7 +32,7 @@
 	font: 12px Helvetica;
 }
  
-.boosting_tree.path.link {
+.link {
   fill: none;
   stroke: #ccc;
 }
