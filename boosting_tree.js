@@ -79,7 +79,7 @@ boosting_tree.prototype = {
 		for (var p = d.id; p >= 0; p = this.parent_ptr[p]) {
 			path.push(this.tree_nodes[p]);
 		}
-		return path;
+		return path.reverse();
 	},
 	toggle : function (d) {
 		if (d.children) {
