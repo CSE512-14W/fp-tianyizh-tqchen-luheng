@@ -2,7 +2,7 @@
 function pathgraph( margin, width, height, tag ){
     this.margin = margin;
     this.width = width - margin.left - margin.right;
-    this.legendwidth = this.width / 3;
+    this.legendwidth = this.width / 2;
     this.height = height - margin.top - margin.bottom;
 
     this.barHeight = 30;
@@ -56,10 +56,10 @@ pathgraph.prototype = {
             .text( function(d,i){ 
                 if( i == 0 ) return "root";
                 else{
-                    if( data[i-1].left == data[i].id ){
-                        return data[i-1].cond+"=yes";
+                    if( data[i-1].children[0] === data[i].id ){
+                        return data[i-1].label+":yes";
                     }else{
-                        return data[i-1].cond+"=no";
+                        return data[i-1].label+":no";
                     }
                 }
             } );
