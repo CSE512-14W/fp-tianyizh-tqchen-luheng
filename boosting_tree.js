@@ -142,7 +142,16 @@ boosting_tree.prototype = {
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
 				self.toggle(d);
-				self.update(d); })
+				self.update(d); 
+				$.get("cgi-bin/dummy.py",
+		    	      	{ query : "dummy", node_id : d.node_id, label : d.label },
+		    	      	function(result){
+		    	      		console.log(result);
+		    	      		//alert(result);
+		    	      		
+	  	    		});
+
+			})
 			.on("mouseover", function(d) {
 				gtreepath.update(self.path_helper(d));
 			});
