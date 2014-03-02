@@ -33,8 +33,7 @@ boosting_tree.prototype = {
 		self.num_nodes = self.tree_nodes.length;
 		self.num_trees = self.root_nodes.length;
 		self.parent_ptr = new Array(self.num_nodes);		
-		// change data to d3 tree json style,
-		// with field "label", "type"
+		// change data to d3 tree json style with field "label", "type"
 		self.forest_data = [];
 		self.forest = [];
 		self.tree_width = self.width / self.num_trees;
@@ -49,14 +48,14 @@ boosting_tree.prototype = {
 		/**
 		 * Prepare for update.
 		 */
-		// FIXME
-		self.num_samples = 1000;
+		self.first_root = self.forest_data[0];
+		self.num_samples = self.first_root.samples;
 		for (var i = 0; i < self.num_trees; i++) {
 			self.forest_data[i].children.forEach(self.toggleAll);
 		}
-		self.forest_data[0].x0 = 0;
-		self.forest_data[0].y0 = 0;
-		self.update(self.forest_data[0]);  
+		self.first_root.x0 = 0;
+		self.first_root.y0 = 0;
+		self.update(self.first_root);  
 	},
 	recursive_tree_helper : function (node_id, parent_id, my_rank) {
 		var node = this.tree_nodes[node_id];
@@ -67,16 +66,17 @@ boosting_tree.prototype = {
 				c_nodes.push(
 					this.recursive_tree_helper(node.children[i], node_id, i));
 			}
-			return { id : node_id, label : node.label, type : "split",
-					children : c_nodes, rank : my_rank};
+			return { node_id : node_id, label : node.label, type : "split",
+					children : c_nodes, rank : my_rank,
+					samples : node.pos_cnt + node.neg_cnt };
 		} else {
-			return { id : node_id, label : node.label, type : "leaf",
-					rank : my_rank};
+			return { node_id : node_id, label : node.label, type : "leaf",
+					rank : my_rank, samples : node.pos_cnt + node.neg_cnt};
 		}
 	},
 	path_helper : function (d) {
 		path = [];
-		for (var p = d.id; p >= 0; p = this.parent_ptr[p]) {
+		for (var p = d.node_id; p >= 0; p = this.parent_ptr[p]) {
 			path.push(this.tree_nodes[p]);
 		}
 		return path.reverse();
@@ -126,7 +126,7 @@ boosting_tree.prototype = {
 		
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
-		   	 		return d.id || (d.id = ++ self.node_count) ; });
+		   	 		return d.id || (d.id = ++ self.node_count); });
 		var link = self.svg
 				.selectAll("path.link")
 				.data(links, function(d) {
