@@ -160,13 +160,38 @@ boosting_tree.prototype = {
 			.attr("transform", function(d) {
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
-				self.toggle(d);
-				self.update(d); 
-				$.get("cgi-bin/dummy.py",
-					{ query : "dummy", node_id : d.node_id, label : d.label },
-					function(result){
-		    	      	console.log(result);
-				});
+				if (self.enable_toggle) {
+					self.toggle(d);
+					self.update(d);
+				} else {
+					// try to show a tooltip
+					var tooltip = self.svg.append("rect")
+						//.transition().duration(self.duration)
+						.attr("class", "tooltip")
+						.attr("x", d.x - 10)
+						.attr("y", d.y - 10)
+						.attr("width", 80)
+						.attr("height", 30)
+						.attr("fill", "purple")
+						.attr("opacity", 0.3)
+						.on("mouseout", function() {
+							this.remove();
+						})
+						.on("click", function() {
+							$.get("cgi-bin/dummy.py",
+								{ query : "dummy", node_id : d.node_id, label : d.label },
+								function(result){
+									console.log(result);
+								});
+						});
+					tooltip.append("text")
+						//.text(d.type === "leaf" ? "+ Expand this node" : " - Prune this node")
+						.text("this is a tooltip")
+						.attr("dy", "12px")
+						.attr("text-anchor", "middle")
+						.attr("fill", "black")
+						.style("fill-opacity", "1");
+				}
 			})
 			.on("mouseover", function(d) {
 				gtreepath.update(self.path_helper(d));
