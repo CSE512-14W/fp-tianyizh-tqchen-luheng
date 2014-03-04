@@ -27,15 +27,27 @@
   fill: #fff;
   stroke-width: 1.5px;
 }
- 
-.tooltip text {
-	font: 12px Helvetica;
-	fill: black;
-}
 
 .node text {
   font: 12px Helvetica;
+  pointer-events: None;
 }
+
+.tooltip rect {
+	cursor: pointer;
+	fill: lightsteelblue;
+	stroke-width: 1.5px;
+	stroke: steelblue;
+	opacity: 0.9;
+} 
+
+.tooltip text {
+  font: 12px Helvetica;
+  font-weight: bold;
+  fill: black;
+  pointer-events: None;
+}
+
  
 .link {
   fill: none;

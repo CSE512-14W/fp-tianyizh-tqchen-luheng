@@ -148,12 +148,6 @@ boosting_tree.prototype = {
 				.data(links, function(d) {
 					return d.target.id; });
 		
-		var node_box_width = function(label) {
-	    	var text_len = label.length * self.char_to_pxl + 15;
-	    	var width = d3.max([self.rect_width, text_len]);
-	    	return width;
-	    };
-	    
 		var nodeEnter = node.enter()
 			.append("g")
 			.attr("class", "node")
@@ -165,43 +159,8 @@ boosting_tree.prototype = {
 					self.update(d);
 				} else {
 					// try to show a tooltip
-					self.svg.select("g.tooltip").remove();
-					var tooltip = self.svg.append("g")
-						.attr("class", "tooltip");
-				
-					var xx = d.x + node_box_width(d.label) / 2;
-					var yy = d.y;
-					
-					tooltip.append("rect")
-						//.transition().duration(self.duration)
-						.attr("class", "tooltip")
-						.attr("x", xx)
-						.attr("y", yy)
-						.attr("rx", 2)
-						.attr("ry", 2)
-						.attr("width", 120)
-						.attr("height", 30)
-						.attr("fill", "purple")
-						.attr("opacity", 0.3)
-						.on("mouseout", function() {
-							tooltip.select("rect").remove();
-							tooltip.select("text").remove();
-						})
-						.on("click", function() {
-							$.get("cgi-bin/dummy.py",
-								{ query : "dummy", node_id : d.node_id, label : d.label },
-								function(result){
-									console.log(result);
-								});
-						});
-					tooltip.append("text")
-						.text(d.type === "leaf" ? "+ Expand this node" : " - Remove this node")
-						.attr("x", xx + 50)
-						.attr("y", yy + 15)
-						.attr("text-anchor", "middle")
-						.attr("fill", "black")
-						.style("fill-opacity", "1")
-						.style("pointer-events", "none"); // disable mouseover text
+					// TODO: make this more OO 
+					self.showNodeOperationTooltip(d);
 				}
 			})
 			.on("mouseover", function(d) {
@@ -210,7 +169,7 @@ boosting_tree.prototype = {
 
 		nodeEnter.append("rect")
 		   .attr("x", function(d) {
-			   return - node_box_width(d.label) / 2;
+			   return - self.node_box_width(d.label) / 2;
 		   })
 		   .attr("width", 1e-6)
 		   .attr("height", 1e-6);
@@ -230,7 +189,7 @@ boosting_tree.prototype = {
 	 
 		nodeUpdate.select("rect")
 			.attr("width", function(d) {
-				return node_box_width(d.label);
+				return self.node_box_width(d.label);
 			})
 			.attr("height", self.rect_height)
 			.attr("rx", 2)
@@ -298,5 +257,50 @@ boosting_tree.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
+	},
+	node_box_width : function(label) {
+    	var text_len = label.length * this.char_to_pxl + 15;
+    	var width = d3.max([this.rect_width, text_len]);
+    	return width;
+    },
+	showNodeOperationTooltip : function(d) {
+		// remove all previous tooltips
+		var self = this;
+		self.svg.select("g.tooltip")
+			//.transition().duration(100)
+			.remove();
+		
+		var xx = d.x + self.node_box_width(d.label) / 2 + 2;
+		var yy = d.y;
+		
+		// add new tooltip
+		var tooltip = self.svg.append("g")
+			.attr("class", "tooltip")
+			.attr("transform", "translate(" + xx + "," + yy + ")");
+	
+		tooltip.append("rect")
+			.attr("class", "tooltip")
+			.attr("rx", 2)
+			.attr("ry", 2)
+			.attr("width", 120)
+			.attr("height", 24)
+			.on("mouseout", function() {
+				self.svg.select("g.tooltip")
+					//.transition().duration(100)
+					.remove();
+			})
+			.on("click", function() {
+				$.get("cgi-bin/dummy.py",
+					{ query : "dummy", node_id : d.node_id, label : d.label },
+					function(result){
+						console.log(result);
+					});
+			});
+		
+		tooltip.append("text")
+			.text(d.type === "leaf" ? "+ Expand this node" : " - Remove this node")
+			.attr("x", 5)
+			.attr("y", 15)
+			.attr("text-anchor", "left");
 	}
-}
+};
