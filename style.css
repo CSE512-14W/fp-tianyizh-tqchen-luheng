@@ -28,8 +28,13 @@
   stroke-width: 1.5px;
 }
  
-.node text {
+.tooltip text {
 	font: 12px Helvetica;
+	fill: black;
+}
+
+.node text {
+  font: 12px Helvetica;
 }
  
 .link {

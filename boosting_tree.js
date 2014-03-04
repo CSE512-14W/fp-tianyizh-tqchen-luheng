@@ -165,17 +165,27 @@ boosting_tree.prototype = {
 					self.update(d);
 				} else {
 					// try to show a tooltip
-					var tooltip = self.svg.append("rect")
+					self.svg.select("g.tooltip").remove();
+					var tooltip = self.svg.append("g")
+						.attr("class", "tooltip");
+				
+					var xx = d.x + node_box_width(d.label) / 2;
+					var yy = d.y;
+					
+					tooltip.append("rect")
 						//.transition().duration(self.duration)
 						.attr("class", "tooltip")
-						.attr("x", d.x - 10)
-						.attr("y", d.y - 10)
-						.attr("width", 80)
+						.attr("x", xx)
+						.attr("y", yy)
+						.attr("rx", 2)
+						.attr("ry", 2)
+						.attr("width", 120)
 						.attr("height", 30)
 						.attr("fill", "purple")
 						.attr("opacity", 0.3)
 						.on("mouseout", function() {
-							this.remove();
+							tooltip.select("rect").remove();
+							tooltip.select("text").remove();
 						})
 						.on("click", function() {
 							$.get("cgi-bin/dummy.py",
@@ -185,12 +195,13 @@ boosting_tree.prototype = {
 								});
 						});
 					tooltip.append("text")
-						//.text(d.type === "leaf" ? "+ Expand this node" : " - Prune this node")
-						.text("this is a tooltip")
-						.attr("dy", "12px")
+						.text(d.type === "leaf" ? "+ Expand this node" : " - Remove this node")
+						.attr("x", xx + 50)
+						.attr("y", yy + 15)
 						.attr("text-anchor", "middle")
 						.attr("fill", "black")
-						.style("fill-opacity", "1");
+						.style("fill-opacity", "1")
+						.style("pointer-events", "none"); // disable mouseover text
 				}
 			})
 			.on("mouseover", function(d) {
