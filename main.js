@@ -2,8 +2,10 @@
 var gtreepath = new pathgraph( { top:30, right:10, bottom:10, left:10}, 
                                 560, 800, "#modelpathgraph" );
 
+var enable_toggle = false;
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:50}, 
-        						900, 1000, "#modeltreegraph" );
+        						900, 1000, "#modeltreegraph" , enable_toggle);
+
 
 d3.json( "data/mushroom.json",
          function( error, data ){
