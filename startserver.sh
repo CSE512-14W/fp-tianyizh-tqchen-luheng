@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python -m SimpleHTTPServer 
+python -m CGIHTTPServer  
