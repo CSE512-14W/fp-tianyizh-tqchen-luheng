@@ -1,28 +1,50 @@
+
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
   <title>Transparent Boosting Tree Learning using Interactive Visualization</title>
   <link rel="stylesheet" href="style.css">
 </head> 
+
+<style type="text/css">
+  
+.container div{
+  position: absolute;
+}
+
+.c2 div{
+  z-index: 99;
+}
+
+</style>
  
 <body>
   <div id="container" class="container">    
     <header>
-    <h1>Transparent Boosting Tree</h1>
-    <!--  img src="image/mushroom2.jpg" alt="mushroom" width="300" height="300"-->
+    <h1>Transparent Boosting Tree: Is this mushroom poisonous?</h1>
+    <img src="image/mushroom.gif" alt="mushroom" width="1500" height="60">
     </header>   
     <div id="modelview">
       <div class="container" id="modeltreegraph"></div>
-      <div class="container" id="modelpathgraph"></div>
+      <div class="c2" id="modelpathgraph"></div>
     </div>
-    <div id="summaryview"></div>
-    <div id="detailview"></div>
   </div> 
+  
+  <div id="container" class="c2">    
+      <div id="summaryview"></div>
+      <div id="detailview"></div>
+  </div>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>   
   <script src="tree.path.js"></script>
   <script src="boosting_tree.js"></script>
   <script src="main.js"></script>
+
+<script>
+
+  $(".c2").offset({left:860});
+
+</script>
 </body>
 </html>
