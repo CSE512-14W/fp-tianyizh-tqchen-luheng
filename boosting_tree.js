@@ -158,8 +158,6 @@ boosting_tree.prototype = {
 					self.toggle(d);
 					self.update(d);
 				} else {
-					// try to show a tooltip
-					// TODO: make this more OO 
 					self.showNodeOperationTooltip(d);
 				}
 			})
@@ -267,7 +265,6 @@ boosting_tree.prototype = {
 		// remove all previous tooltips
 		var self = this;
 		self.svg.select("g.tooltip")
-			//.transition().duration(100)
 			.remove();
 		
 		var xx = d.x + self.node_box_width(d.label) / 2 + 2;
@@ -277,7 +274,15 @@ boosting_tree.prototype = {
 		var tooltip = self.svg.append("g")
 			.attr("class", "tooltip")
 			.attr("transform", "translate(" + xx + "," + yy + ")");
-	
+		var curr_op_type;
+		if (d.type == "leaf") {
+			curr_op_type = "node_expand";
+		} else if (d.parent != null) {
+			curr_op_type = "node_remove";
+		} else {
+			curr_op_type = "tree_remove";
+		}
+		
 		tooltip.append("rect")
 			.attr("class", "tooltip")
 			.attr("rx", 2)
@@ -286,19 +291,21 @@ boosting_tree.prototype = {
 			.attr("height", 24)
 			.on("mouseout", function() {
 				self.svg.select("g.tooltip")
-					//.transition().duration(100)
 					.remove();
 			})
 			.on("click", function() {
-				$.get("cgi-bin/dummy.py",
-					{ query : "dummy", node_id : d.node_id, label : d.label },
+				$.get("cgi-bin/tree_manipulation.py",
+					{ op_type : curr_op_type,
+						node_id : d.node_id, label : d.label },
 					function(result){
 						console.log(result);
 					});
 			});
 		
 		tooltip.append("text")
-			.text(d.type === "leaf" ? "+ Expand this node" : " - Remove this node")
+			.text(curr_op_type === "node_expand" ? " + Expand this node" : 
+				(curr_op_type === "node_remove" ? " - Remove this node" :
+					" - Remove this tree"))
 			.attr("x", 5)
 			.attr("y", 15)
 			.attr("text-anchor", "left");
