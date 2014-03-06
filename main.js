@@ -6,7 +6,20 @@ var enable_toggle = false;
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:50}, 
         						900, 1000, "#modeltreegraph" , enable_toggle);
 
+$.get("cgi-bin/tree_manipulation.py", 
+		{ op_type : "init", op_iter : 0 },
+		function(data) {
+			var nodes = data.nodes;
+            var path = [];
+            path.push( nodes[0] );
+            path.push( nodes[1] );              
+            path.push( nodes[4] );
+            path.push( nodes[6] );
+            gtreepath.update( path );
+            btrees.init( data );
+		});
 
+/*
 d3.json( "data/mushroom.json",
          function( error, data ){
              var nodes = data.nodes;
@@ -19,6 +32,5 @@ d3.json( "data/mushroom.json",
              btrees.init( data );
          }
        );
-         
-
+*/
  

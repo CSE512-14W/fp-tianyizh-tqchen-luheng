@@ -31,6 +31,9 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
+    
+    // number of operation so far
+    this.op_iter = 1;
 }
 
 boosting_tree.prototype = {
@@ -294,12 +297,23 @@ boosting_tree.prototype = {
 					.remove();
 			})
 			.on("click", function() {
-				$.get("cgi-bin/tree_manipulation.py",
-					{ op_type : curr_op_type,
-						node_id : d.node_id, label : d.label },
-					function(result){
-						console.log(result);
-					});
+				$.get("cgi-bin/tree_manipulation.py", 
+						{ op_type : curr_op_type,
+							op_iter : self.op_iter,
+							node_id : d.node_id,
+							bst_id : self.tree_nodes[d.node_id].bst_id,
+							loc_id : self.tree_nodes[d.node_id].loc_id
+						},
+						function(data) {
+							var nodes = data.nodes;
+				            var path = [];
+				            path.push( nodes[0] );
+				            path.push( nodes[1] );              
+				            path.push( nodes[4] );
+				            path.push( nodes[6] );
+				            btrees.init( data );
+						});
+				self.op_iter ++;
 			});
 		
 		tooltip.append("text")
