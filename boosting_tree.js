@@ -297,20 +297,19 @@ boosting_tree.prototype = {
 					.remove();
 			})
 			.on("click", function() {
+				console.log(self.tree_nodes[d.node_id]);
+				op_node = self.tree_nodes[d.node_id];
 				$.get("cgi-bin/tree_manipulation.py", 
 						{ op_type : curr_op_type,
 							op_iter : self.op_iter,
 							node_id : d.node_id,
-							bst_id : self.tree_nodes[d.node_id].bst_id,
-							loc_id : self.tree_nodes[d.node_id].loc_id
+							bst_id : op_node.bst_id,
+							loc_id : op_node.loc_id
 						},
 						function(data) {
 							var nodes = data.nodes;
 				            var path = [];
 				            path.push( nodes[0] );
-				            path.push( nodes[1] );              
-				            path.push( nodes[4] );
-				            path.push( nodes[6] );
 				            btrees.init( data );
 						});
 				self.op_iter ++;
