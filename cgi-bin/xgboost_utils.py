@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import json
 import os
 import sys
 import subprocess
@@ -91,12 +92,18 @@ def loadStats(dumppath_path):
         test_file.close()
     return results
     
+def remapNode(node_map, node_key):
+    if not node_key in node_map:
+        node_map[node_key] = len(node_map)
+    return node_map[node_key]
+        
 def dump2json(dump_path):
     roots = []
     nodes = []
     weights = []
     root_id = 0
     featmap = {}
+    node_map = {}
     """
     with open(FEATMAP_PATH, 'r') as featmap_file:
         for line in featmap_file:
@@ -116,7 +123,7 @@ def dump2json(dump_path):
             else:
                 node = {}
                 local_node_id = int(line.split(':')[0] )
-                node['id'] = root_id + local_node_id
+                node['id'] = remapNode(node_map, (booster_id, local_node_id))
                 node['bst_id'] = booster_id
                 node['loc_id'] = local_node_id
                 node['neg_cnt' ] = stats[booster_id][local_node_id][0]
@@ -125,7 +132,7 @@ def dump2json(dump_path):
                 idx = line.find('[')
                 if idx != -1:   
                     node['label'] = line[idx+1:].split(']')[0]
-                    node['children'] = [root_id + int(c.split('=')[1])\
+                    node['children'] = [remapNode(node_map, (booster_id, int(c.split('=')[1])))\
                                         for c in line.split()[1].split(',')]
                     node['edge_tags'] = ['yes','no']
                 else:
@@ -137,7 +144,9 @@ def dump2json(dump_path):
         nodes.sort(key = lambda x:x['id'] )
         dump_file.close()
     
-    return { "nodes" : nodes, "roots" : roots, "weights" : weights}
+    forest = { "nodes" : nodes, "roots" : roots, "weights" : weights}
+    sys.stderr.write(json.dumps(forest, indent=4, separators=(',', ': ')) + "\n")
+    return forest
     
 
 if __name__ == "__main__":
