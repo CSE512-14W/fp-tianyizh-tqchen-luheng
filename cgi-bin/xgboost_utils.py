@@ -4,18 +4,25 @@ import sys
 import subprocess
 
 DATASET_NAME = "mushroom"
+
 XGBOOST_PATH = "../xgboost/xgboost"
 TRAIN_PATH = "./data/agaricus.txt.train"
 TEST_PATH = "./data/agaricus.txt.test"
 FEATMAP_PATH = "./data/featmap.txt"
 TEMP_PATH = "./temp"
-
+"""
+XGBOOST_PATH = "../../xgboost/xgboost"
+TRAIN_PATH = "../data/agaricus.txt.train"
+TEST_PATH = "../data/agaricus.txt.test"
+FEATMAP_PATH = "../data/featmap.txt"
+TEMP_PATH = "../temp"
+"""
 DEFAULT_CONFIG = [
     ("num_round" , 1),
     ("save_period" , 0),
     ("data" , TRAIN_PATH),
     ("eval[test]" , TEST_PATH),
-    ("test,data" , TEST_PATH),
+    ("test:data" , TEST_PATH),
     ("booster_type" , 0),
     ("loss_type" , 2),
     ("bst:tree_maker" , 2),
@@ -30,7 +37,7 @@ def trainNewModel(iter, new_config):
     config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, iter)
     model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter)
     model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter + 1)
-    dump_path = "%s/%s_%04d.dump.txt" % (TEMP_PATH, DATASET_NAME, iter + 1)
+    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, iter + 1)
     
     sys.stderr.write("\n".join([config_path, model_in_path, model_out_path, dump_path]) + "\n")
     
@@ -48,13 +55,43 @@ def trainNewModel(iter, new_config):
         subprocess.call([XGBOOST_PATH, config_path, "task=interact",\
                         "model_in=" + model_in_path,\
                         "model_out=" + model_out_path], stdout=sys.stderr)
-    # dump model
+    # dump model and path
     subprocess.call([XGBOOST_PATH, config_path, "task=dump",\
                     "model_in=" + model_out_path, "fmap=" + FEATMAP_PATH,\
                     "name_dump=" + dump_path], stdout=sys.stderr)
     
+    subprocess.call([XGBOOST_PATH, config_path, "task=dumppath",\
+                    "model_in=" + model_out_path,\
+                    "name_dumppath=" + dump_path + ".path"], stdout=sys.stderr)
+    
     return dump2json(dump_path)
 
+def recordStats( rec, l, label ):
+    for it in l.split(','):
+        k = int( it )
+        if k not in rec:
+            rec[ k ] = (0,0)
+        else:
+            if label == 0:
+                rec[k] = (rec[k][0]+1,rec[k][1])
+            else:
+                rec[k] = (rec[k][0],rec[k][1]+1)
+
+def loadStats(dumppath_path):
+    results = {}
+    with open(TEST_PATH, 'r') as test_file:
+        with open(dumppath_path) as dumppath_file:
+            for line in dumppath_file:
+                label = int(test_file.readline().split()[0])
+                info = line.split()
+                for i in xrange(len(info)):
+                    if i not in results:
+                        results[i] = {}
+                    recordStats(results[i], info[i], label)
+            dumppath_file.close() 
+        test_file.close()
+    return results
+    
 def dump2json(dump_path):
     roots = []
     nodes = []
@@ -68,6 +105,7 @@ def dump2json(dump_path):
             featmap[int(info[0])] = info[1].strip()
         featmap_file.close()
     """
+    stats = loadStats(dump_path + ".path") 
     with open(dump_path, 'r') as dump_file:
         for line in dump_file:
             line = line.strip()
@@ -82,10 +120,8 @@ def dump2json(dump_path):
                 node['id'] = root_id + local_node_id
                 node['bst_id'] = booster_id
                 node['loc_id'] = local_node_id
-                #node['neg_cnt' ] = stat[booster_id][local_node_id][0]
-                #node['pos_cnt' ] = stat[booster_id][local_node_id][0]
-                node['neg_cnt'] = 50
-                node['pos_cnt'] = 50
+                node['neg_cnt' ] = stats[booster_id][local_node_id][0]
+                node['pos_cnt' ] = stats[booster_id][local_node_id][1]
                 
                 idx = line.find('[')
                 if idx != -1:   
@@ -104,8 +140,7 @@ def dump2json(dump_path):
     
     return { "nodes" : nodes, "roots" : roots, "weights" : weights}
     
-        
-   
+
 if __name__ == "__main__":
     # test
     forest = trainNewModel(0, [])
