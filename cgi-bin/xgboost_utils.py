@@ -70,12 +70,11 @@ def recordStats( rec, l, label ):
     for it in l.split(','):
         k = int( it )
         if k not in rec:
-            rec[ k ] = (0,0)
+            rec[ k ] = (0,0)            
+        if label == 0:
+            rec[k] = (rec[k][0]+1,rec[k][1])
         else:
-            if label == 0:
-                rec[k] = (rec[k][0]+1,rec[k][1])
-            else:
-                rec[k] = (rec[k][0],rec[k][1]+1)
+            rec[k] = (rec[k][0],rec[k][1]+1)
 
 def loadStats(dumppath_path):
     results = {}
