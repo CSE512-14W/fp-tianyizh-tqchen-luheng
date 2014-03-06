@@ -5,9 +5,10 @@ import subprocess
 
 DATASET_NAME = "mushroom"
 XGBOOST_PATH = "../xgboost/xgboost"
-TRAIN_PATH = "./cgi-bin/agaricus.txt.train"
-TEST_PATH = "./cgi-bin/agaricus.txt.test"
-FEATMAP_PATH = "./cgi-bin/featmap.txt"
+TRAIN_PATH = "./data/agaricus.txt.train"
+TEST_PATH = "./data/agaricus.txt.test"
+FEATMAP_PATH = "./data/featmap.txt"
+TEMP_PATH = "./temp"
 
 DEFAULT_CONFIG = [
     ("num_round" , 1),
@@ -26,10 +27,10 @@ DEFAULT_CONFIG = [
         
 def trainNewModel(iter, new_config):
     #sys.stderr.write(os.getcwd() + "\n")
-    config_path = "%s_%04d.conf" % (DATASET_NAME, iter)
-    model_in_path = "%s_%04d.model" % (DATASET_NAME, iter)
-    model_out_path = "%s_%04d.model" % (DATASET_NAME, iter + 1)
-    dump_path = "%s_%04d.dump.txt" % (DATASET_NAME, iter + 1)
+    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, iter)
+    model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter)
+    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter + 1)
+    dump_path = "%s/%s_%04d.dump.txt" % (TEMP_PATH, DATASET_NAME, iter + 1)
     
     sys.stderr.write("\n".join([config_path, model_in_path, model_out_path, dump_path]) + "\n")
     
@@ -42,7 +43,7 @@ def trainNewModel(iter, new_config):
     
     if iter == 0:
         subprocess.call([XGBOOST_PATH, config_path,\
-                        "model_in=" + model_out_path], stdout=sys.stderr)
+                        "model_out=" + model_out_path], stdout=sys.stderr)
     else:
         subprocess.call([XGBOOST_PATH, config_path, "task=interact",\
                         "model_in=" + model_in_path,\
