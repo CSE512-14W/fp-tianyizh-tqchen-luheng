@@ -14,15 +14,14 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     			.attr("height", height + margin.top + margin.bottom )
     			.append("g")
     			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    this.forest = []; 
+     
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) { return [d.x, d.y]; });
     
     this.node_count = 0;
+    this.node_mapper = {};
     this.tree_margin = 20;
-    
     this.rect_width = 60,
     this.rect_height = 20,
 	this.max_link_width = 20,
@@ -39,33 +38,18 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 boosting_tree.prototype = {
 	init : function(tdata) {
 		var self = this;
-		/*
-		self.root_nodes = tdata.roots;
-		self.root_weights = tdata.weights;
-		self.tree_nodes = tdata.nodes;
-		self.num_nodes = self.tree_nodes.length;
-		self.num_trees = self.root_nodes.length;
-		self.parent_ptr = new Array(self.num_nodes);
-		*/
-		// change data to d3 tree json style with field "label", "type"
 		self.forest_data = tdata.forest;
 		self.forest = [];
 		self.num_trees = self.forest_data.length;
 		self.tree_width = self.width / self.num_trees;
+		
 		for (var i = 0; i < self.num_trees; i++) {
-			/*
-			self.forest_data.push(
-				self.recursive_tree_helper(self.root_nodes[i], -1, i));
-			*/
-			// using d3 tree layout: https://github.com/mbostock/d3/wiki/Tree-Layout
+			self.node_id_helper(self.forest_data[i]);
 			self.forest.push(
 				d3.layout.tree().size([self.tree_width - self.tree_margin,
 				                       self.height]));
 		}
-		/**
-		 * Prepare for update.
-		 */
-		console.log(self.forest_data);
+		
 		self.first_root = self.forest_data[0];
 		self.num_samples = self.first_root.samples;
 		if (self.enable_toggle) {
@@ -76,29 +60,19 @@ boosting_tree.prototype = {
 		self.link_stroke_scale = d3.scale.linear()
 				.domain([0, self.num_samples])
 				.range([self.min_link_width, self.max_link_width]);
-		
 		self.first_root.x0 = 0;
 		self.first_root.y0 = 0;
 		self.update(self.first_root);  
 	},
-	recursive_tree_helper : function (node_id, parent_id, my_rank) {
-		var node = this.tree_nodes[node_id];
-		this.parent_ptr[node_id] = parent_id;
+	node_id_helper : function (node) {
+		var old_id = this.node_mapper[[node.tree_id, node.node_id]];
+		if (old_id != null) {
+			node.id = old_id;
+		}
 		if (node.children) {
-			var c_nodes = [];
 			for (var i = 0; i < node.children.length; i++) {
-				c_nodes.push(
-					this.recursive_tree_helper(node.children[i], node_id, i));
+				this.node_id_helper(node.children[i]);
 			}
-			return { node_id : node_id, label : node.label, type : "split",
-					children : c_nodes, rank : my_rank,
-					samples : node.pos_cnt + node.neg_cnt,
-					weight : 1.0 };
-		} else {
-			var leaf_weight = parseFloat(node.label.split("=")[1]);
-			return { node_id : node_id, label : node.label, type : "leaf",
-					rank : my_rank, samples : node.pos_cnt + node.neg_cnt,
-					weight : leaf_weight};
 		}
 	},
 	path_helper : function (d) {
@@ -109,15 +83,14 @@ boosting_tree.prototype = {
 		return path.reverse();
 	},
 	toggle : function (d) {
-		if (!self.enable_toggle) {
-			return;
-		}
 		if (d.children) {
 			d._children = d.children;
 			d.children = null;
+			return 0;
 		} else {
 			d.children = d._children;
 			d._children = null;
+			return 1;
 		}
 	},	
 	toggleAll : function (d) {
@@ -132,7 +105,6 @@ boosting_tree.prototype = {
 	update : function(source) {
 		var self = this;
 	
-		// compute all the nodes in tree layout according to current data
 		var nodes = [],
 			links = [];
 		for (var i = 0; i < self.num_trees; i++) {
@@ -146,15 +118,24 @@ boosting_tree.prototype = {
 			nodes.push.apply(nodes, t_nodes);
 			links.push.apply(links, tree.links(t_nodes));
 		}
-		
 		// data binding for nodes and links
+		console.log(self.node_mapper);
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
-		   	 		return d.id || (d.id = ++ self.node_count); });
+		   	 		if (d.id == null) {
+		   	 			d.id = ++ self.node_count;
+		   	 			self.node_mapper[[d.tree_id, d.node_id]] = d.id;
+		   	 			console.log(d.tree_id, d.node_id, d.id);
+		   	 		}
+		   	 		return d.id; 
+		   	 	});
 		var link = self.svg
 				.selectAll("path.link")
 				.data(links, function(d) {
 					return d.target.id; });
+		
+		console.log("FOREST DATA");
+		console.log(self.forest_data);
 		
 		var nodeEnter = node.enter()
 			.append("g")
@@ -180,13 +161,13 @@ boosting_tree.prototype = {
 		   .attr("width", 1e-6)
 		   .attr("height", 1e-6);
 		
-		nodeEnter.append("text")
+		nodeEnter.append("text");/*
 		   .attr("dy", "12px")
 		   .attr("text-anchor", "middle")
 		   .text(function(d) {
 			   return d.label; })
-		   .style("fill-opacity", 1e-6);
-	
+		   .style("fill-opacity", 1e-6);*/
+		
 		// for every existing nodes
 		var nodeUpdate = node.transition()
 	      .duration(self.duration)
@@ -194,6 +175,9 @@ boosting_tree.prototype = {
 	    	  return "translate(" + d.x + "," + d.y + ")"; });
 	 
 		nodeUpdate.select("rect")
+			.attr("x", function(d) {
+			   return - self.node_box_width(d.label) / 2;
+		   	})
 			.attr("width", function(d) {
 				return self.node_box_width(d.label);
 			})
@@ -208,11 +192,15 @@ boosting_tree.prototype = {
 				}
 				return d._children ? "lightsteelblue" : "#fff"; })
 			.style("opacity", 0.6);
-	 
+		
 		nodeUpdate
 			.select("text")
+			.attr("dy", "12px")
+			.attr("text-anchor", "middle")
+			.text(function(d) {
+			   return d.label; })
 			.style("fill-opacity", 1);
-	 
+	 	
 		// For nodes that no longer bind with data ...
 		var nodeExit = node.exit().transition()
 			.duration(self.duration)
@@ -289,8 +277,7 @@ boosting_tree.prototype = {
 			curr_op_type = "node_remove";
 		} else {
 			curr_op_type = "tree_remove";
-		}
-		
+		}	
 		tooltip.append("rect")
 			.attr("class", "tooltip")
 			.attr("rx", 2)
@@ -327,3 +314,27 @@ boosting_tree.prototype = {
 			.attr("text-anchor", "left");
 	}
 };
+
+/******** BACKUP CODE *******
+ recursive_tree_helper : function (node_id, parent_id, my_rank) {
+		var node = this.tree_nodes[node_id];
+		this.parent_ptr[node_id] = parent_id;
+		if (node.children) {
+			var c_nodes = [];
+			for (var i = 0; i < node.children.length; i++) {
+				c_nodes.push(
+					this.recursive_tree_helper(node.children[i], node_id, i));
+			}
+			return { node_id : node_id, label : node.label, type : "split",
+					children : c_nodes, rank : my_rank,
+					samples : node.pos_cnt + node.neg_cnt,
+					weight : 1.0 };
+		} else {
+			var leaf_weight = parseFloat(node.label.split("=")[1]);
+			return { node_id : node_id, label : node.label, type : "leaf",
+					rank : my_rank, samples : node.pos_cnt + node.neg_cnt,
+					weight : leaf_weight};
+		}
+	},
+ */
+ 
