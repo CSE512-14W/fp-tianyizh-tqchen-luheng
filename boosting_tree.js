@@ -39,28 +39,33 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 boosting_tree.prototype = {
 	init : function(tdata) {
 		var self = this;
+		/*
 		self.root_nodes = tdata.roots;
 		self.root_weights = tdata.weights;
 		self.tree_nodes = tdata.nodes;
 		self.num_nodes = self.tree_nodes.length;
 		self.num_trees = self.root_nodes.length;
-		self.parent_ptr = new Array(self.num_nodes);		
+		self.parent_ptr = new Array(self.num_nodes);
+		*/
 		// change data to d3 tree json style with field "label", "type"
-		self.forest_data = [];
+		self.forest_data = tdata.forest;
 		self.forest = [];
+		self.num_trees = self.forest_data.length;
 		self.tree_width = self.width / self.num_trees;
 		for (var i = 0; i < self.num_trees; i++) {
+			/*
 			self.forest_data.push(
 				self.recursive_tree_helper(self.root_nodes[i], -1, i));
+			*/
 			// using d3 tree layout: https://github.com/mbostock/d3/wiki/Tree-Layout
 			self.forest.push(
 				d3.layout.tree().size([self.tree_width - self.tree_margin,
 				                       self.height]));
 		}
-			
 		/**
 		 * Prepare for update.
 		 */
+		console.log(self.forest_data);
 		self.first_root = self.forest_data[0];
 		self.num_samples = self.first_root.samples;
 		if (self.enable_toggle) {
@@ -98,8 +103,8 @@ boosting_tree.prototype = {
 	},
 	path_helper : function (d) {
 		path = [];
-		for (var p = d.node_id; p >= 0; p = this.parent_ptr[p]) {
-			path.push(this.tree_nodes[p]);
+		for (var nd = d; nd != null; nd = nd.parent) {
+			path.push(nd);
 		}
 		return path.reverse();
 	},
@@ -297,19 +302,17 @@ boosting_tree.prototype = {
 					.remove();
 			})
 			.on("click", function() {
-				console.log(self.tree_nodes[d.node_id]);
-				op_node = self.tree_nodes[d.node_id];
+				//console.log(self.tree_nodes[d.node_id]);
+				//op_node = self.tree_nodes[d.node_id];
 				$.get("cgi-bin/tree_manipulation.py", 
 						{ op_type : curr_op_type,
 							op_iter : self.op_iter,
 							node_id : d.node_id,
-							bst_id : op_node.bst_id,
-							loc_id : op_node.loc_id
+							tree_id : d.tree_id
 						},
 						function(data) {
-							var nodes = data.nodes;
-				            var path = [];
-				            path.push( nodes[0] );
+							// FIXME: what path to use?
+				            path.push( data.forest[0] );
 				            btrees.init( data );
 						});
 				self.op_iter ++;

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import copy
 import json
 import os
 import sys
@@ -33,12 +34,12 @@ DEFAULT_CONFIG = [
     ("bst:max_depth" , 3)    
 ]
         
-def trainNewModel(iter, new_config):
+def trainNewModel(op_iter, new_config):
     #sys.stderr.write(os.getcwd() + "\n")
-    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, iter)
-    model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter)
-    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, iter + 1)
-    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, iter + 1)
+    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
+    model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter)
+    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
+    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
     
     sys.stderr.write("\n".join([config_path, model_in_path, model_out_path, dump_path]) + "\n")
     
@@ -93,60 +94,71 @@ def loadStats(dumppath_path):
     return results
     
 def remapNode(node_map, node_key):
+    ''' deprecated
+    '''
     if not node_key in node_map:
         node_map[node_key] = len(node_map)
     return node_map[node_key]
+
+def getRecursiveTreeData(nodes, node_id, rank):
+    node = nodes[node_id]
+    if 'children' in node:
+        cids = node['children']
+        print node['label'], node['children']
+        children = [getRecursiveTreeData(nodes, cid, i) for (i, cid)\
+                    in enumerate(cids)]
+        node['children'] = children
+    node['rank'] = rank
+    return node
         
 def dump2json(dump_path):
-    roots = []
-    nodes = []
-    weights = []
-    root_id = 0
-    featmap = {}
-    node_map = {}
-    """
-    with open(FEATMAP_PATH, 'r') as featmap_file:
-        for line in featmap_file:
-            info = line.split()
-            featmap[int(info[0])] = info[1].strip()
-        featmap_file.close()
-    """
-    stats = loadStats(dump_path + ".path") 
+    nodes = {}
+    forest = []
+    booster_id = 0
+    
+    stats = loadStats(dump_path + ".path")
+
     with open(dump_path, 'r') as dump_file:
         for line in dump_file:
             line = line.strip()
             if line.startswith('booster['):
                 booster_id = int(line.split('[')[1].split(']')[0])
-                root_id = len(nodes)
-                roots.append(root_id)
-                weights.append(1.0)
+                if len(nodes) > 0:
+                    forest.append(getRecursiveTreeData(nodes, 0, booster_id))
+                    nodes = {}
             else:
                 node = {}
-                local_node_id = int(line.split(':')[0] )
-                node['id'] = remapNode(node_map, (booster_id, local_node_id))
-                node['bst_id'] = booster_id
-                node['loc_id'] = local_node_id
-                node['neg_cnt' ] = stats[booster_id][local_node_id][0]
-                node['pos_cnt' ] = stats[booster_id][local_node_id][1]
+                node_id = int(line.split(':')[0])
+                node['node_id'] = node_id
+                node['tree_id'] = booster_id
+                node['neg_cnt' ] = stats[booster_id][node_id][0]
+                node['pos_cnt' ] = stats[booster_id][node_id][1]
+                node['samples'] = node['pos_cnt'] + node['neg_cnt']
                 
                 idx = line.find('[')
                 if idx != -1:   
                     node['label'] = line[idx+1:].split(']')[0]
-                    node['children'] = [remapNode(node_map, (booster_id, int(c.split('=')[1])))\
-                                        for c in line.split()[1].split(',')]
+                    node['children'] = [int(c.split('=')[1]) for c in\
+                                        line.split()[1].split(',')]
                     node['edge_tags'] = ['yes','no']
+                    node['type'] = 'split'
                 else:
-                    node['label'] = line.split(':')[1].strip()
-                    node['value'] = float(line.split(':')[1].split('=')[1])
-                    
-                nodes.append(node)
+                    label = line.split(':')[1].strip()
+                    node['label'] = label
+                    node['weight'] = float(label.split('=')[1])
+                    node['type'] = 'leaf'
                 
-        nodes.sort(key = lambda x:x['id'] )
+                nodes[node_id] = node
+    
+        # prepare json data for visualization, substitute children ids to children
+        #nodes.sort(key = lambda x:x['id'] )
+        forest.append(getRecursiveTreeData(nodes, 0, booster_id))
         dump_file.close()
     
-    forest = { "nodes" : nodes, "roots" : roots, "weights" : weights}
-    sys.stderr.write(json.dumps(forest, indent=4, separators=(',', ': ')) + "\n")
-    return forest
+    
+    json_obj = { "forest" : forest }
+    sys.stderr.write(json.dumps(json_obj, indent=4, separators=(',', ': ')) + "\n")
+    return json_obj
     
 
 if __name__ == "__main__":
