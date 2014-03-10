@@ -15,6 +15,7 @@ request = cgi.FieldStorage()
 
 op_type = request["op_type"].value
 op_iter = int(request["op_iter"].value)
+num_trees = int(request["num_trees"].value)
 
 # initialize model
 new_config = []
@@ -31,7 +32,7 @@ if op_iter > 0:
     elif op_type == "tree_expand":
     # how to encode tree operation ?
     # TODO: change this
-        new_config = [("interact:booster_index", booster_id), ("bst:interact:expand", node_id)]
+        new_config = [("num_round", num_trees + 1), ]
     elif op_type == "tree_remove":
         new_config = [("interact:booster_index", booster_id), ("bst:interact:remove", node_id)]
 

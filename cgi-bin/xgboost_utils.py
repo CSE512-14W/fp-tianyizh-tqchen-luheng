@@ -102,13 +102,12 @@ def remapNode(node_map, node_key):
 
 def getRecursiveTreeData(nodes, node_id, rank):
     node = nodes[node_id]
+    node['rank'] = rank
     if 'children' in node:
         cids = node['children']
-        print node['label'], node['children']
         children = [getRecursiveTreeData(nodes, cid, i) for (i, cid)\
                     in enumerate(cids)]
         node['children'] = children
-    node['rank'] = rank
     return node
         
 def dump2json(dump_path):
@@ -122,10 +121,10 @@ def dump2json(dump_path):
         for line in dump_file:
             line = line.strip()
             if line.startswith('booster['):
-                booster_id = int(line.split('[')[1].split(']')[0])
                 if len(nodes) > 0:
-                    forest.append(getRecursiveTreeData(nodes, 0, booster_id))
+                    forest.append(getRecursiveTreeData(nodes, 0, 0))
                     nodes = {}
+                booster_id = int(line.split('[')[1].split(']')[0])
             else:
                 node = {}
                 node_id = int(line.split(':')[0])
@@ -152,12 +151,12 @@ def dump2json(dump_path):
     
         # prepare json data for visualization, substitute children ids to children
         #nodes.sort(key = lambda x:x['id'] )
-        forest.append(getRecursiveTreeData(nodes, 0, booster_id))
+        forest.append(getRecursiveTreeData(nodes, 0, 0))
         dump_file.close()
     
     
     json_obj = { "forest" : forest }
-    sys.stderr.write(json.dumps(json_obj, indent=4, separators=(',', ': ')) + "\n")
+    #sys.stderr.write(json.dumps(json_obj, indent=4, separators=(',', ': ')) + "\n")
     return json_obj
     
 

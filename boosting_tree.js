@@ -39,6 +39,7 @@ boosting_tree.prototype = {
 	init : function(tdata) {
 		var self = this;
 		self.forest_data = tdata.forest;
+		console.log(self.forest_data);
 		self.forest = [];
 		self.num_trees = self.forest_data.length;
 		self.tree_width = self.width / self.num_trees;
@@ -54,7 +55,11 @@ boosting_tree.prototype = {
 		self.num_samples = self.first_root.samples;
 		if (self.enable_toggle) {
 			for (var i = 0; i < self.num_trees; i++) {
-				self.forest_data[i].children.forEach(self.toggleAll);
+				if (forest_data[i].children) {
+					for (var j = 0; j < forest_data[i].children.length; j++) {
+						self.toggleAll(forest_data[i].children[j]);
+					}
+				}
 			}
 		}
 		self.link_stroke_scale = d3.scale.linear()
@@ -96,15 +101,17 @@ boosting_tree.prototype = {
 	toggleAll : function (d) {
 		if (d && d.children) {
 			for (var i = 0; i < d.children.length; i++) {
-				// FIXME: why this.toggleAll doesn't work? i don't understand..
-				boosting_tree.prototype.toggleAll(d.children[i]);
+				this.toggleAll(d.children[i]);
 			}
-			boosting_tree.prototype.toggle(d);
+			this.toggle(d);
 		}
 	},
 	update : function(source) {
 		var self = this;
-	
+		
+		// remove tooltips
+		self.svg.select("g.tooltip").remove();
+		
 		var nodes = [],
 			links = [];
 		for (var i = 0; i < self.num_trees; i++) {
@@ -119,13 +126,11 @@ boosting_tree.prototype = {
 			links.push.apply(links, tree.links(t_nodes));
 		}
 		// data binding for nodes and links
-		console.log(self.node_mapper);
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
 		   	 		if (d.id == null) {
 		   	 			d.id = ++ self.node_count;
 		   	 			self.node_mapper[[d.tree_id, d.node_id]] = d.id;
-		   	 			console.log(d.tree_id, d.node_id, d.id);
 		   	 		}
 		   	 		return d.id; 
 		   	 	});
@@ -133,9 +138,6 @@ boosting_tree.prototype = {
 				.selectAll("path.link")
 				.data(links, function(d) {
 					return d.target.id; });
-		
-		console.log("FOREST DATA");
-		console.log(self.forest_data);
 		
 		var nodeEnter = node.enter()
 			.append("g")
@@ -147,6 +149,7 @@ boosting_tree.prototype = {
 					self.toggle(d);
 					self.update(d);
 				} else {
+					// show tooltip
 					self.showNodeOperationTooltip(d);
 				}
 			})
@@ -161,12 +164,12 @@ boosting_tree.prototype = {
 		   .attr("width", 1e-6)
 		   .attr("height", 1e-6);
 		
-		nodeEnter.append("text");/*
+		nodeEnter.append("text")
 		   .attr("dy", "12px")
 		   .attr("text-anchor", "middle")
 		   .text(function(d) {
 			   return d.label; })
-		   .style("fill-opacity", 1e-6);*/
+		   .style("fill-opacity", 1e-6);
 		
 		// for every existing nodes
 		var nodeUpdate = node.transition()
@@ -258,26 +261,28 @@ boosting_tree.prototype = {
     	return width;
     },
 	showNodeOperationTooltip : function(d) {
-		// remove all previous tooltips
 		var self = this;
+		// remove all previous tooltips
 		self.svg.select("g.tooltip")
 			.remove();
 		
 		var xx = d.x + self.node_box_width(d.label) / 2 + 2;
 		var yy = d.y;
+		var curr_op_type;
 		
 		// add new tooltip
 		var tooltip = self.svg.append("g")
 			.attr("class", "tooltip")
 			.attr("transform", "translate(" + xx + "," + yy + ")");
-		var curr_op_type;
-		if (d.type == "leaf") {
+		
+		if (d.type === "leaf") {
 			curr_op_type = "node_expand";
-		} else if (d.parent != null) {
+		} else if (d.parent) {
 			curr_op_type = "node_remove";
 		} else {
-			curr_op_type = "tree_remove";
-		}	
+			curr_op_type = "tree_expand";
+		}
+		
 		tooltip.append("rect")
 			.attr("class", "tooltip")
 			.attr("rx", 2)
@@ -285,30 +290,33 @@ boosting_tree.prototype = {
 			.attr("width", 120)
 			.attr("height", 24)
 			.on("mouseout", function() {
-				self.svg.select("g.tooltip")
-					.remove();
+				self.svg.select("g.tooltip").remove();
 			})
 			.on("click", function() {
-				//console.log(self.tree_nodes[d.node_id]);
-				//op_node = self.tree_nodes[d.node_id];
 				$.get("cgi-bin/tree_manipulation.py", 
 						{ op_type : curr_op_type,
 							op_iter : self.op_iter,
 							node_id : d.node_id,
-							tree_id : d.tree_id
+							tree_id : d.tree_id,
+							num_trees : self.num_trees
 						},
 						function(data) {
-							// FIXME: what path to use?
-				            path.push( data.forest[0] );
-				            btrees.init( data );
+							gtreepath.update(self.path_helper(d));
+				            btrees.init(data);
 						});
 				self.op_iter ++;
 			});
 		
+		var op_text_snippets = {
+				"node_expand" : " + Expand this node",
+				"node_remove" : " - Remove this node",
+				"tree_expand" : " + Grow a new tree",
+				"tree_remove" : " - Remove this tree"
+		};
+		//console.log(op_text_snippets);
+		//console.log(curr_op_type);
 		tooltip.append("text")
-			.text(curr_op_type === "node_expand" ? " + Expand this node" : 
-				(curr_op_type === "node_remove" ? " - Remove this node" :
-					" - Remove this tree"))
+			.text(op_text_snippets[curr_op_type])
 			.attr("x", 5)
 			.attr("y", 15)
 			.attr("text-anchor", "left");
