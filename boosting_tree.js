@@ -287,7 +287,7 @@ boosting_tree.prototype = {
 			d3.select(this).classed("active", true);
 		})
 		.on("mouseout", function() {
-			self.svg.select("g.tooltip").remove();
+			d3.select(this).classed("active", false);
 		})
 		.on("click", function() {
 			$.get("cgi-bin/tree_manipulation.py", request,
