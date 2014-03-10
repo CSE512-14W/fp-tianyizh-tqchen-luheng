@@ -36,7 +36,6 @@ if op_iter > 0:
     elif op_type == "tree_remove":
         new_config = [("interact:booster_index", booster_id), ("bst:interact:remove", node_id)]
 
-
 new_forest = xgboost_utils.trainNewModel(op_iter, new_config)
 
 print 'Content-type: application/json\n\n' 

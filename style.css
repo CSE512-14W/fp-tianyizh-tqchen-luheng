@@ -41,6 +41,13 @@
 	opacity: 0.9;
 } 
 
+.tooltip rect.active {
+	fill: lightsteelblue;
+  stroke-width: 2.5px;
+  stroke: yellow;
+  opacity: 0.3;
+}
+
 .tooltip text {
   font: 12px Helvetica;
   font-weight: bold;
@@ -48,7 +55,6 @@
   pointer-events: None;
 }
 
- 
 .link {
   fill: none;
   stroke: #ccc;
