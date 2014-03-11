@@ -50,7 +50,7 @@ def trainNewModel(op_iter, new_config):
             config_file.write(cfg[0] + "=" + str(cfg[1]) + "\n")
         config_file.close()
     
-    if iter == 0:
+    if op_iter == 0:
         subprocess.call([XGBOOST_PATH, config_path,\
                         "model_out=" + model_out_path], stdout=sys.stderr)
     else:

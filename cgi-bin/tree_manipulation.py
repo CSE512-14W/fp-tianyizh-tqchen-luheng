@@ -30,11 +30,9 @@ if op_iter > 0:
     elif op_type == "node_remove":
         new_config = [("interact:booster_index", booster_id), ("bst:interact:remove", node_id)]
     elif op_type == "tree_expand":
-    # how to encode tree operation ?
-    # TODO: change this
         new_config = [("num_round", num_trees + 1), ]
     elif op_type == "tree_remove":
-        new_config = [("interact:booster_index", booster_id), ("bst:interact:remove", node_id)]
+        new_config = [("interact:booster_index", booster_id), ("interact:action", "remove")]
 
 new_forest = xgboost_utils.trainNewModel(op_iter, new_config)
 

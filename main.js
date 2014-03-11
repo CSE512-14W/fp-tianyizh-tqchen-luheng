@@ -1,8 +1,8 @@
 // this is main js that cover all up
-var gtreepath = new pathgraph( { top:30, right:50, bottom:10, left:10}, 
-                                400, 300, "#modelpathgraph" );
+var gtreepath = new pathgraph( { top:30, right:10, bottom:10, left:10}, 
+                                500, 300, "#modelpathgraph" );
 var history = new op_history( { top:30, right:10, bottom:10, left:10}, 
-		 400, 300, "#historygraph");
+		 500, 300, "#historygraph");
 
 var enable_toggle = false;
 var btrees = new boosting_tree( { top:30, right:150, bottom:10, left:50}, 

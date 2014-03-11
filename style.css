@@ -96,7 +96,7 @@
 .history rect {
   cursor: pointer;
   fill: lightsteelblue;
-  stroke-width: 1.5px;
+  stroke-width: 0px;
   stroke: steelblue;
   opacity: 0.9;
 }

@@ -6,8 +6,6 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 	this.margin = margin;
     this.width = window.innerWidth - gtreepath.width - margin.left - margin.right;
     this.height = height - margin.top - margin.bottom;
-    console.log(gtreepath.width)
-    console.log([this.width, this.height]);
     this.enable_toggle = enable_toggle;
     
     this.svg = d3.select(tag)
@@ -17,6 +15,7 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     			.append("g")
     			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
    
+    this.tooltips = new op_tooltips(this.svg);
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) { return [d.x, d.y]; });
@@ -36,13 +35,6 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     // number of operation so far
     this.op_iter = 1;
     history.ops.push("initialize tree");
-    
-    this.op_text_snippets = {
-		"node_expand" : " + Expand this node",
-		"node_remove" : " - Remove this node",
-		"tree_expand" : " + Grow a new tree",
-		"tree_remove" : " - Remove this tree"
-	};
 }
 
 boosting_tree.prototype = {
@@ -55,6 +47,7 @@ boosting_tree.prototype = {
 		self.tree_width = self.width / self.num_trees;
 		
 		for (var i = 0; i < self.num_trees; i++) {
+			// only use node_id of last time ..
 			self.node_id_helper(self.forest_data[i]);
 			self.forest.push(
 				d3.layout.tree().size([self.tree_width - self.tree_margin,
@@ -141,6 +134,7 @@ boosting_tree.prototype = {
 		// data binding for nodes and links
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
+		   	 		// remap nodes here every time 
 		   	 		if (d.id == null) {
 		   	 			d.id = ++ self.node_count;
 		   	 			self.node_mapper[[d.tree_id, d.node_id]] = d.id;
@@ -162,7 +156,6 @@ boosting_tree.prototype = {
 					self.toggle(d);
 					self.update(d);
 				} else {
-					// show tooltip
 					self.showNodeOperationTooltip(d);
 				}
 			})
@@ -268,9 +261,8 @@ boosting_tree.prototype = {
 		    d.y0 = d.y;
 		});
 		
-		// remove tooltips
-		self.svg.selectAll("g.tooltip").remove();
-		// update op history
+		// remove tooltips and update history
+		self.tooltips.clear();
 		history.update();
 	},
 	node_box_width : function(label) {
@@ -278,52 +270,18 @@ boosting_tree.prototype = {
     	var width = d3.max([this.rect_width, text_len]);
     	return width;
     },
-    tooltipHelper : function(xx, yy, request) {
-    	// show a single tooltip at specified location
-    	var self = this;
-    	var tooltip = self.svg.append("g")
-			.attr("class", "tooltip")
-			.attr("transform", "translate(" + xx + "," + yy + ")");
-    	
-    	tooltip.append("rect")
-		.attr("class", "tooltip")
-		.attr("rx", 2)
-		.attr("ry", 2)
-		.attr("width", 120)
-		.attr("height", 24)
-		.on("mouseover", function() {
-			d3.select(this).classed("active", true);
-		})
-		.on("mouseout", function() {
-			d3.select(this).classed("active", false);
-		})
-		.on("click", function() {
-			$.get("cgi-bin/tree_manipulation.py", request,
-					function(data) {
-						history.ops.push(history.op_log_helper(request));
-			            btrees.init(data);
-					});
-			self.op_iter ++;
-		});
-    	
-    	var op_type = request.op_type;
-    	tooltip.append("text")
-			.text(self.op_text_snippets[op_type])
-			.attr("x", 5)
-			.attr("y", 15)
-			.attr("text-anchor", "left");
-    },
 	showNodeOperationTooltip : function(d) {
 		var self = this;
 		// remove all previous tooltips
-		self.svg.selectAll("g.tooltip").remove();
+		self.tooltips.clear();
+		history.tooltips.clear();
 		
 		var box_width = self.node_box_width(d.label);
 		if (d.parent == null) {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
-			if (d.tree_id > 0) {
-				self.tooltipHelper(d.x + box_width / 2 + 2, d.y - 15, {
+			if (self.num_trees > 1) {
+				self.tooltips.add(d.x + box_width / 2 + 2, d.y - 15, {
 					op_type : "tree_remove",
 					op_iter : self.op_iter,
 					node_id : d.node_id,
@@ -332,14 +290,14 @@ boosting_tree.prototype = {
 				y_offset = 15;
 			}
 			// show expand tree option
-			self.tooltipHelper(d.x + box_width / 2 + 2, d.y + y_offset, {
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
 					op_type : "tree_expand",
 					op_iter : self.op_iter,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
 		} else if (d.type === "split") {
-			self.tooltipHelper(d.x + box_width / 2 + 2, d.y, {
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
 				op_type : "node_remove",
 				op_iter : self.op_iter,
 				node_id : d.node_id,
@@ -353,7 +311,7 @@ boosting_tree.prototype = {
 					tree_id : d.tree_id,
 					num_trees : self.num_trees
 				};
-			self.tooltipHelper(d.x + box_width / 2 + 2, d.y, request);
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y, request);
 		}
 	}
 };
