@@ -1,4 +1,35 @@
 
+/* div style */
+
+ .container div{
+  position: absolute;
+}
+
+#modeltreegraph {
+	float: left;
+	width: 70%;
+	height: 1000;
+}
+
+.c2 {
+  float: right;
+  width: 30%;
+  height: auto;
+}
+
+#modelpathgraph {
+	float: right;
+	width: auto;
+	height: auto;
+}
+
+#historygraph {
+	float: right;
+	width: auto;
+  height: auto;
+  text-align: left;
+}
+
 /* tree path style */
 .pathgraph.bar.right {
     fill: steelblue;
@@ -33,6 +64,14 @@
   pointer-events: None;
 }
 
+
+.link {
+  fill: none;
+  stroke: #ccc;
+}
+
+/* tooltip style */
+
 .tooltip rect {
 	cursor: pointer;
 	fill: lightsteelblue;
@@ -41,6 +80,13 @@
 	opacity: 0.9;
 } 
 
+.tooltip rect.active {
+	fill: lightsteelblue;
+  stroke-width: 2.5px;
+  stroke: yellow;
+  opacity: 0.3;
+}
+
 .tooltip text {
   font: 12px Helvetica;
   font-weight: bold;
@@ -48,8 +94,48 @@
   pointer-events: None;
 }
 
- 
-.link {
-  fill: none;
-  stroke: #ccc;
+/* history style */
+
+.history rect {
+  cursor: pointer;
+  fill: lightsteelblue;
+  stroke-width: 0px;
+  stroke: steelblue;
+  opacity: 0.4;
+}
+
+.history rect.active {
+  fill: lightsteelblue;
+  stroke-width: 2.5px;
+  stroke: yellow;
+  opacity: 0.3;
+}
+
+.history text {
+  font: 14px Helvetica;
+  font-weight: bold;
+  fill: black;
+  pointer-events: None;
+}
+
+.history text.active {
+	cursor: pointer;
+  font: 14px Helvetica;
+  font-weight: bold;
+  fill: black;
+  background: lightsteelblue;
+}
+
+
+/* pretty html layout! */
+
+h1 {
+	font-family: helvetica;
+	text-align: center;
+}
+
+h2 {
+  font-family: helvetica;
+  color: steelblue;
+  text-align: center;
 }
