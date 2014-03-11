@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <meta charset="utf-8">
 <head>
@@ -23,9 +22,14 @@
     <header>
     <h1>Transparent Boosting Tree: Is this mushroom poisonous?</h1>
     <img src="image/mushroom.gif" alt="mushroom" width="1500" height="60">
-    </header>   
+    </header>
+
+    <div id = "featureview">
+      <div class = "container" id = "featuretable"></div>
+    </div>
+    
     <div id="modelview">
-      <div class="container" id="modeltreegraph"></div>
+      <div class="c1" id="modeltreegraph"></div>
       <div class="c2" id="modelpathgraph"></div>
     </div>
   </div> 
@@ -35,15 +39,21 @@
       <div id="detailview"></div>
   </div>
 
+  <link rel="stylesheet" type="text/css" href="d3-tablesort.css">
+  <script src="d3-tablesort.js"></script>
+
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>
   <script src="http://d3js.org/d3.v3.min.js"></script>   
   <script src="tree.path.js"></script>
   <script src="boosting_tree.js"></script>
   <script src="main.js"></script>
 
+  <!-- script src="featuretable.js"></script> -->
+
 <script>
 
-  $(".c2").offset({left:860});
+  $(".c1").offset({left:450});
+  $(".c2").offset({left:1100});
 
 </script>
 </body>
