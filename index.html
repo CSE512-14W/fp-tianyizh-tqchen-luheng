@@ -5,36 +5,29 @@
   <link rel="stylesheet" href="style.css">
 </head> 
 
-<style type="text/css">
-  
-.container div{
-  position: absolute;
-}
-
-.c2 div{
-  z-index: 99;
-}
-
-</style>
  
 <body>
-  <div id="container" class="container">    
+     
     <header>
     <h1>Transparent Boosting Tree: Is this mushroom poisonous?</h1>
-    <img src="image/mushroom.gif" alt="mushroom" width="1500" height="60">
+    <!-- img src="image/mushroom.gif" alt="mushroom" width="1500" height="60"-->  
     </header>
+    
+    <hr style="background:#91C5EB; border:0; height:3px" />
     
     <!-- div id = "featureview">
       <div class = "container" id = "featuretable"></div>
     </div> -->
     
     <div id="modelview">
-      <div class="container" id="modeltreegraph"></div>
-      <div class="c2" id="modelpathgraph"></div>
+      <div class="c1" id="modeltreegraph"></div>
+      <div class="c2" >
+         <div class="c21" id="modelpathgraph"></div>
+         <div class="c22" id="historygraph"> Tree Modification History </div>
+      </div>
     </div>
-  </div> 
   
-  <div id="container" class="c2">    
+  <div id="container" class="c3">    
       <div id="summaryview"></div>
       <div id="detailview"></div>
   </div>
@@ -43,16 +36,12 @@
   <script src="http://d3js.org/d3.v3.min.js"></script>   
   <script src="tree.path.js"></script>
   <script src="boosting_tree.js"></script>
+  <script src="op_history.js"></script>
   <script src="main.js"></script>
   
   <!-- link rel="stylesheet" type="text/css" href="d3-tablesort.css">
   <!-- script src="d3-tablesort.js"></script>
   <!-- script src="featuretable.js"></script> -->
 
-<script>
-
-  $(".c2").offset({left:860});
-
-</script>
 </body>
 </html>
