@@ -30,11 +30,10 @@ op_tooltips.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function() {
-				console.log(request);
 				$.get("cgi-bin/tree_manipulation.py", request,
 						function(data) {
 							btrees.op_iter ++;
-							history.ops.push(history.op_log_helper(request));
+							history.add(request);
 				            btrees.init(data);
 						});
 			});

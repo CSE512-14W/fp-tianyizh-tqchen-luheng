@@ -64,6 +64,14 @@
   pointer-events: None;
 }
 
+
+.link {
+  fill: none;
+  stroke: #ccc;
+}
+
+/* tooltip style */
+
 .tooltip rect {
 	cursor: pointer;
 	fill: lightsteelblue;
@@ -86,19 +94,14 @@
   pointer-events: None;
 }
 
-.history text {
-	font: 12px Helvetica;
-	font-weight: normal;
-  fill: black;
-  pointer-events: None;
-}
+/* history style */
 
 .history rect {
   cursor: pointer;
   fill: lightsteelblue;
   stroke-width: 0px;
   stroke: steelblue;
-  opacity: 0.9;
+  opacity: 0.4;
 }
 
 .history rect.active {
@@ -108,21 +111,31 @@
   opacity: 0.3;
 }
 
+.history text {
+  font: 14px Helvetica;
+  font-weight: normal;
+  fill: black;
+  pointer-events: None;
+}
+
 .history text.active {
 	cursor: pointer;
-  font: 12px Helvetica;
+  font: 14px Helvetica;
   font-weight: bold;
   fill: black;
   background: lightsteelblue;
 }
 
-.link {
-  fill: none;
-  stroke: #ccc;
-}
 
 /* pretty html layout! */
+
 h1 {
 	font-family: helvetica;
 	text-align: center;
+}
+
+h2 {
+  font-family: helvetica;
+  color: steelblue;
+  text-align: center;
 }

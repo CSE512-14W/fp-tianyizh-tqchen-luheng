@@ -34,7 +34,6 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     
     // number of operation so far
     this.op_iter = 1;
-    history.ops.push("initialize tree");
 }
 
 boosting_tree.prototype = {

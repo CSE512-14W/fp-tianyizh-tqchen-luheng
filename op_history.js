@@ -1,6 +1,6 @@
 function op_history (margin, width, height, tag) {
 	this.margin = margin;
-    this.width = width;
+    this.width = width - margin.left -margin.right;
     this.height = height - margin.top - margin.bottom;
     
     this.entry_width = 300;
@@ -10,18 +10,28 @@ function op_history (margin, width, height, tag) {
     this.svg = d3.select(tag)
     			.append("svg")
     			.attr("width", this.width + margin.left + margin.right)
-    			.attr("height", this.height + margin.top + margin.bottom )
-    			.attr("transform", "translate(" + x0 + ", " + y0 + ")");
+    			.attr("height", this.height + margin.top + margin.bottom );
     			
     this.panel = this.svg.append("g")
-    				.attr("class", "history");
+    				.attr("class", "history")
+    				.attr("transform", "translate(" + x0 + ", " + y0 + ")");
     			
-    this.tooltips = new op_tooltips(this.svg);
+    this.tooltips = new op_tooltips(this.panel);
     this.ops = [];
+    this.active_op_id = -1;
 	this.char_to_pxl = 5.5;
 }
 
 op_history.prototype = {
+	add : function(request) {
+		var log_content = this.op_log_helper(request);
+		if (this.active_op_id < this.ops.length - 1) {
+			this.ops = this.ops.slice(0, this.active_op_id + 1);
+		}
+		this.ops.push(log_content);
+		this.active_op_id ++;
+		console.log(this.ops, this.active_op_id);
+	},
 	update : function() {
 		var self = this;
 		var opEnter = self.panel
@@ -45,11 +55,11 @@ op_history.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function(d, i) {
-				if (i == 0) {
-					return;
-				}
 				self.tooltips.clear();
 				btrees.tooltips.clear();
+				if (i == 0 || i == self.active_op_id) {
+					return;
+				}
 				var xx = self.entry_width + 2;
 				var yy = i * self.entry_height;
 				self.tooltips.add(xx, yy, {
@@ -71,6 +81,10 @@ op_history.prototype = {
 			});
 	},
 	op_log_helper : function(request) {
-		return request.op_type + " on " + request.tree_id + ", " + request.node_id;
+		if (request.op_type === "init") {
+			return "Initialize tree";
+		} else {
+			return request.op_type + " on " + request.tree_id + ", " + request.node_id;
+		}
 	}
 };
