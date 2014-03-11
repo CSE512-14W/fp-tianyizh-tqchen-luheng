@@ -33,7 +33,7 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
     
     // number of operation so far
-    this.op_iter = 1;
+    // this.op_iter = 1;
 }
 
 boosting_tree.prototype = {
@@ -262,6 +262,7 @@ boosting_tree.prototype = {
 		
 		// remove tooltips and update history
 		self.tooltips.clear();
+		history.tooltips.clear();
 		history.update();
 	},
 	node_box_width : function(label) {
@@ -282,7 +283,7 @@ boosting_tree.prototype = {
 			if (self.num_trees > 1) {
 				self.tooltips.add(d.x + box_width / 2 + 2, d.y - 15, {
 					op_type : "tree_remove",
-					op_iter : self.op_iter,
+					op_iter :  history.active_op_id + 1, //self.op_iter,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
@@ -291,21 +292,21 @@ boosting_tree.prototype = {
 			// show expand tree option
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
 					op_type : "tree_expand",
-					op_iter : self.op_iter,
+					op_iter :  history.active_op_id + 1, //self.op_iter,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
 		} else if (d.type === "split") {
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
 				op_type : "node_remove",
-				op_iter : self.op_iter,
+				op_iter :  history.active_op_id + 1, //self.op_iter,
 				node_id : d.node_id,
 				tree_id : d.tree_id,
 				num_trees : self.num_trees});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
 			var request = {
 					op_type : "node_expand",
-					op_iter : self.op_iter,
+					op_iter :  history.active_op_id + 1, //self.op_iter,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees

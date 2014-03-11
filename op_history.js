@@ -57,14 +57,14 @@ op_history.prototype = {
 			.on("click", function(d, i) {
 				self.tooltips.clear();
 				btrees.tooltips.clear();
-				if (i == 0 || i == self.active_op_id) {
+				if (i == self.active_op_id) {
 					return;
 				}
 				var xx = self.entry_width + 2;
 				var yy = i * self.entry_height;
 				self.tooltips.add(xx, yy, {
-						op_type : "restore_history",
-						op_iter : self.op_iter,
+						op_type : "restore_op",
+						op_iter : i,
 						node_id : 0,
 						tree_id : 0,
 						num_trees : btrees.num_trees});

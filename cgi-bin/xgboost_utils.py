@@ -33,9 +33,13 @@ DEFAULT_CONFIG = [
     ("bst:min_child_weight" , 1),
     ("bst:max_depth" , 3)    
 ]
-        
+
+def loadModel(op_iter):
+    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
+    sys.stderr.write(dump_path + "\n")
+    return dump2json(dump_path)
+
 def trainNewModel(op_iter, new_config):
-    #sys.stderr.write(os.getcwd() + "\n")
     config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
     model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter)
     model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
@@ -49,6 +53,8 @@ def trainNewModel(op_iter, new_config):
         for cfg in new_config:
             config_file.write(cfg[0] + "=" + str(cfg[1]) + "\n")
         config_file.close()
+    
+    subprocess.call(["cat", config_path], stdout=sys.stderr)
     
     if op_iter == 0:
         subprocess.call([XGBOOST_PATH, config_path,\
@@ -165,3 +171,5 @@ if __name__ == "__main__":
     forest = trainNewModel(0, [])
     print forest
     
+    forest = loadModel(0)
+    print forest
