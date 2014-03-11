@@ -14,7 +14,7 @@ var init_request = {
 $.get("cgi-bin/tree_manipulation.py", 
 		init_request,
 		function(data) {
-			history.add( init_request );
+			history.update( init_request, data );
             gtreepath.update( [data.forest[0],] );
             btrees.init( data );
 		});

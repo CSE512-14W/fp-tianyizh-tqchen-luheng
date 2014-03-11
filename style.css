@@ -113,7 +113,7 @@
 
 .history text {
   font: 14px Helvetica;
-  font-weight: normal;
+  font-weight: bold;
   fill: black;
   pointer-events: None;
 }

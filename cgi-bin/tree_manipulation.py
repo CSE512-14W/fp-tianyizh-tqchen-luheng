@@ -40,5 +40,7 @@ if op_type == "restore_op":
 else:
     new_forest = xgboost_utils.trainNewModel(op_iter, new_config)
 
+new_forest["op_iter"] = op_iter + 1
+
 print 'Content-type: application/json\n\n' 
 print json.dumps(new_forest)

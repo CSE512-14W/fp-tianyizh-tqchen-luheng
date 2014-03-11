@@ -10,36 +10,40 @@ function op_history (margin, width, height, tag) {
     this.svg = d3.select(tag)
     			.append("svg")
     			.attr("width", this.width + margin.left + margin.right)
-    			.attr("height", this.height + margin.top + margin.bottom );
+    			.attr("height", this.height + margin.top + margin.bottom )
+    			.append("g")
+    			.attr("transform", "translate(" + x0 + ", " + y0 + ")");
     			
     this.panel = this.svg.append("g")
-    				.attr("class", "history")
-    				.attr("transform", "translate(" + x0 + ", " + y0 + ")");
+    				.attr("class", "history");
     			
-    this.tooltips = new op_tooltips(this.panel);
+    this.tooltips = new op_tooltips(this.svg);
     this.ops = [];
-    this.active_op_id = -1;
+    this.active_op_id = 0;
 	this.char_to_pxl = 5.5;
 }
 
 op_history.prototype = {
-	add : function(request) {
-		var log_content = this.op_log_helper(request);
-		if (this.active_op_id < this.ops.length - 1) {
-			this.ops = this.ops.slice(0, this.active_op_id + 1);
-		}
-		this.ops.push(log_content);
-		this.active_op_id ++;
-		console.log(this.ops, this.active_op_id);
-	},
-	update : function() {
+	update : function(request, response) {
 		var self = this;
+		
+		if (request.op_type != "restore_op") {
+			var log_content = self.op_log_helper(request);
+			if (self.active_op_id < self.ops.length) {
+				self.ops = this.ops.slice(0, self.active_op_id);
+			}
+			self.ops.push(log_content);
+		}
+		self.active_op_id = response.op_iter;
+		console.log(this.ops, this.active_op_id);
+		
+		self.panel.selectAll("rect").remove();
+		self.panel.selectAll("text").remove();
+		
 		var opEnter = self.panel
 			.selectAll("rect")
 			.data(self.ops)
 			.enter();
-		
-		console.log(self.ops);
 		
 		opEnter.append("rect")
 			.attr("x", 0)
@@ -57,7 +61,7 @@ op_history.prototype = {
 			.on("click", function(d, i) {
 				self.tooltips.clear();
 				btrees.tooltips.clear();
-				if (i == self.active_op_id) {
+				if (i == self.active_op_id - 1) {
 					return;
 				}
 				var xx = self.entry_width + 2;
@@ -78,7 +82,13 @@ op_history.prototype = {
 			.attr("text-anchor", "middle")
 			.text(function(d) {
 				return d;
+			})
+			.style("opacity", function(d, i) {
+				return (i < self.active_op_id ? 1.0 : 0.5); 
 			});
+		
+		// clear tooltips ...
+		self.tooltips.clear();
 	},
 	op_log_helper : function(request) {
 		if (request.op_type === "init") {

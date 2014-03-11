@@ -32,8 +32,7 @@ op_tooltips.prototype = {
 			.on("click", function() {
 				$.get("cgi-bin/tree_manipulation.py", request,
 						function(data) {
-							btrees.op_iter ++;
-							history.add(request);
+							history.update(request, data);
 				            btrees.init(data);
 						});
 			});

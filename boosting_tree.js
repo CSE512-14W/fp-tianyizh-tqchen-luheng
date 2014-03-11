@@ -31,16 +31,13 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
-    
-    // number of operation so far
-    // this.op_iter = 1;
 }
 
 boosting_tree.prototype = {
 	init : function(tdata) {
 		var self = this;
 		self.forest_data = tdata.forest;
-		console.log(self.forest_data);
+		//console.log(self.forest_data);
 		self.forest = [];
 		self.num_trees = self.forest_data.length;
 		self.tree_width = self.width / self.num_trees;
@@ -69,7 +66,9 @@ boosting_tree.prototype = {
 				.range([self.min_link_width, self.max_link_width]);
 		self.first_root.x0 = 0;
 		self.first_root.y0 = 0;
-		self.update(self.first_root);  
+		self.update(self.first_root);
+		// remove tooltips and update history
+		self.tooltips.clear();
 	},
 	node_id_helper : function (node) {
 		var old_id = this.node_mapper[[node.tree_id, node.node_id]];
@@ -259,11 +258,6 @@ boosting_tree.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
-		
-		// remove tooltips and update history
-		self.tooltips.clear();
-		history.tooltips.clear();
-		history.update();
 	},
 	node_box_width : function(label) {
     	var text_len = label.length * this.char_to_pxl + 15;
@@ -283,7 +277,7 @@ boosting_tree.prototype = {
 			if (self.num_trees > 1) {
 				self.tooltips.add(d.x + box_width / 2 + 2, d.y - 15, {
 					op_type : "tree_remove",
-					op_iter :  history.active_op_id + 1, //self.op_iter,
+					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
@@ -292,21 +286,21 @@ boosting_tree.prototype = {
 			// show expand tree option
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
 					op_type : "tree_expand",
-					op_iter :  history.active_op_id + 1, //self.op_iter,
+					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
 		} else if (d.type === "split") {
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
 				op_type : "node_remove",
-				op_iter :  history.active_op_id + 1, //self.op_iter,
+				op_iter :  history.active_op_id,
 				node_id : d.node_id,
 				tree_id : d.tree_id,
 				num_trees : self.num_trees});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
 			var request = {
 					op_type : "node_expand",
-					op_iter :  history.active_op_id + 1, //self.op_iter,
+					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees
