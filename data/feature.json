@@ -1,0 +1,27 @@
+{
+    "set": "mushroom",
+    "nodes":[
+        {"feature" : "cap-shape", "id" : 1, "types" : "category" , "explanation" : "bell=b,conical=c,convex=x,flat=f, knobbed=k,sunken=s"},
+        {"feature" : "cap-surface", "id" : 2, "types" : "category" , "explanation" : "fibrous=f,grooves=g,scaly=y,smooth=s"},
+        {"feature" : "cap-color", "id" : 3, "types" : "category" , "explanation" : "brown=n,buff=b,cinnamon=c,gray=g,green=r,pink=p,purple=u,red=e,white=w,yellow=y "},
+        {"feature" : "bruises?", "id" : 4, "types" : "category" , "explanation" : "bruises=t,no=f"},
+        {"feature" : "odor", "id" : 5, "types" : "category" , "explanation" : "almond=a,anise=l,creosote=c,fishy=y,foul=f, musty=m,none=n,pungent=p,spicy=s"},
+        {"feature" : "gill-attachment", "id" : 6, "types" : "category" , "explanation" : "attached=a,descending=d,free=f,notched=n"},
+        {"feature" : "gill-spacing", "id" : 7, "types" : "category" , "explanation" : "close=c,crowded=w,distant=d"},
+        {"feature" : "gill-size", "id" : 8, "types" : "category" , "explanation" : "broad=b,narrow=n"},
+        {"feature" : "gill-color", "id" : 9, "types" : "category" , "explanation" : "black=k,brown=n,buff=b,chocolate=h,gray=g, green=r,orange=o,pink=p,purple=u,red=e, white=w,yellow=y"},
+        {"feature" : "stalk-shape", "id" : 10, "types" : "category" , "explanation" : "enlarging=e,tapering=t"},
+        {"feature" : "stalk-root", "id" : 11, "types" : "category" , "explanation" : "bulbous=b,club=c,cup=u,equal=e, rhizomorphs=z,rooted=r,missing=?"},
+        {"feature" : "stalk-surface-above-ring", "id" : 12, "types" : "category" , "explanation" : "fibrous=f,scaly=y,silky=k,smooth=s"},
+        {"feature" : "stalk-surface-below-ring", "id" : 13, "types" : "category" , "explanation" : "fibrous=f,scaly=y,silky=k,smooth=s"},
+        {"feature" : "stalk-color-above-ring", "id" : 14, "types" : "category" , "explanation" : "brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y"},
+        {"feature" : "stalk-color-below-ring", "id" : 15, "types" : "category" , "explanation" : "brown=n,buff=b,cinnamon=c,gray=g,orange=o, pink=p,red=e,white=w,yellow=y"},
+        {"feature" : "veil-type", "id" : 16, "types" : "category" , "explanation" : "partial=p,universal=u"},
+        {"feature" : "veil-color", "id" : 17, "types" : "category" , "explanation" : "brown=n,orange=o,white=w,yellow=y"},
+        {"feature" : "ring-number", "id" : 18, "types" : "category" , "explanation" : "none=n,one=o,two=t"},
+        {"feature" : "ring-type", "id" : 19, "types" : "category" , "explanation" : "cobwebby=c,evanescent=e,flaring=f,large=l, none=n,pendant=p,sheathing=s,zone=z"},
+        {"feature" : "spore-print-color", "id" : 20, "types" : "category" , "explanation" : "black=k,brown=n,buff=b,chocolate=h,green=r, orange=o,purple=u,white=w,yellow=y"},
+        {"feature" : "population", "id" : 21, "types" : "category" , "explanation" : "abundant=a,clustered=c,numerous=n,scattered=s,several=v,solitary=y"},
+        {"feature" : "habitat", "id" : 22, "types" : "category" , "explanation" : "grasses=g,leaves=l,meadows=m,paths=p,urban=u,waste=w,woods=d"}
+   ]
+}
