@@ -60,7 +60,7 @@ op_history.prototype = {
 			.on("mouseout", function() {
 				d3.select(this).classed("active", false);
 			})
-			.on("click", function(d, i) {
+			.on("contextmenu", function(d, i) {
 				self.tooltips.clear();
 				btrees.tooltips.clear();
 				if (i == self.active_op_id - 1) {
@@ -74,8 +74,9 @@ op_history.prototype = {
 						node_id : 0,
 						tree_id : 0,
 						num_trees : btrees.num_trees});
-				});
-		
+				d3.event.preventDefault();
+			});
+			
 		opEnter.append("text")
 			.attr("x", self.entry_width / 2)
 			.attr("y", function(d, i) {

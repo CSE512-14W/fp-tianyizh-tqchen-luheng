@@ -21,8 +21,12 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     			.projection( function(d) { return [d.x, d.y]; });
     
     this.node_count = 0;
+    
     this.node_mapper = {};
     this.tree_margin = 20;
+    this.tree_layout = [];
+    this.is_collapsed = [];
+    
     this.rect_width = 60,
     this.rect_height = 22,
 	this.max_link_width = 20,
@@ -45,9 +49,9 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			// only use node_id of last time ..
 			self.node_id_helper(self.forest_data[i]);
-			self.forest.push(
-				d3.layout.tree().size([self.tree_width - self.tree_margin,
-				                       self.height]));
+			if (i < self.is_collapsed.length && self.is_collapsed[i]) {
+				self.toggle(self.forest_data[i]);
+			}
 		}
 		
 		self.first_root = self.forest_data[0];
@@ -67,8 +71,6 @@ boosting_tree.prototype = {
 		self.first_root.x0 = 0;
 		self.first_root.y0 = 0;
 		self.update(self.first_root);
-		// remove tooltips and update history
-		self.tooltips.clear();
 	},
 	node_id_helper : function (node) {
 		var old_id = this.node_mapper[[node.tree_id, node.node_id]];
@@ -107,23 +109,77 @@ boosting_tree.prototype = {
 			this.toggle(d);
 		}
 	},
+	tree_layout_helper : function() {
+		var self = this;
+		var layout = [];
+		var offset_x = 0;
+		var offset_y = 0;
+		var width = function(d) {
+			// TODO: estimate width smarter
+			return d.children ? 400 : 100;
+		};
+		var height = function(d) {
+			return 800;
+		};
+		var total_width = 0;
+		for (var i = 0; i < self.num_trees; i++) {
+			total_width += width(self.forest_data[i]);
+		}
+		if (total_width >= self.width) {
+			// auto collapse trees
+			// ???
+		}
+		var last_x = 100;
+		var last_y = -50;
+		var offset_x = 0, offset_y = 0;
+		for (var i = 0; i < self.num_trees; i++) {
+			var root = self.forest_data[i];
+			if (root._children) {
+				offset_x = 0;
+				offset_y = last_y + 50;
+				last_y = offset_y;
+			} else {
+				if (i > 0) {
+					//offset_x = layout[i-1].offset.x + layout[i-1].width + self.tree_margin;
+					offset_x = last_x + self.tree_margin;
+					offset_y = 0;
+					last_x = offset_x + width(root);
+					console.log("x", last_x);
+				} else {
+					offset_x = 0;
+					offset_y = 0;
+				}
+			}
+			layout.push( { width : width(root), height : height(root),
+				offset : { x : offset_x, y : offset_y} } );
+		}
+		return layout;
+	},
 	update : function(source) {
 		var self = this;
 			
+		// remove tooltips and update history
+		self.tooltips.clear();
+		history.tooltips.clear();
+		
 		var nodes = [],
 			links = [];
+		
+		// compute tree layout info
+		self.tree_layout = self.tree_layout_helper();
+		
 		for (var i = 0; i < self.num_trees; i++) {
-			var tree = self.forest[i];
+			var tree = d3.layout.tree()
+				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
 			var tree_data = self.forest_data[i];
-			var t_nodes = tree.nodes(tree_data); //.reverse();
+			var t_nodes = tree.nodes(tree_data); 
 			t_nodes.forEach(function(d) {
-				//console.log(d.label + ", " + d.x + ", " + d.y + ", " + d.depth);
-				d.x = d.x + i * self.tree_width;
+				// computing absolute node position
+				d.x = d.x + self.tree_layout[i].offset.x;
 				if (d.parent) {
 					d.y = d.parent.y + 80 + (d.rank * (self.rect_height + 8));
-					//d.y = d.depth * 80 + (d.rank * (self.rect_height + 8));
 				} else {
-					d.y = 0;
+					d.y = self.tree_layout[i].offset.y;
 				}
 			});
 			nodes.push.apply(nodes, t_nodes);
@@ -132,6 +188,7 @@ boosting_tree.prototype = {
 		// data binding for nodes and links
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
+		   	 		// TODO: check this:
 		   	 		// remap nodes here every time 
 		   	 		if (d.id == null) {
 		   	 			d.id = ++ self.node_count;
@@ -139,23 +196,28 @@ boosting_tree.prototype = {
 		   	 		}
 		   	 		return d.id; 
 		   	 	});
+		
 		var link = self.svg
 				.selectAll("path.link")
 				.data(links, function(d) {
-					return d.target.id; });
+					return d.target.id;
+				});
 		
 		var nodeEnter = node.enter()
 			.append("g")
 			.attr("class", "node")
 			.attr("transform", function(d) {
+				// TODO: fix source 
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
-				if (self.enable_toggle) {
-					self.toggle(d);
-					self.update(d);
-				} else {
+				self.toggle(d);
+				self.update(d);
+			})
+			.on("contextmenu", function(d) {
+				if (!d.parent || !d._children) {
 					self.showNodeOperationTooltip(d);
 				}
+				d3.event.preventDefault();
 			})
 			.on("mouseover", function(d) {
 				self.path_view_helper(d);
@@ -170,7 +232,7 @@ boosting_tree.prototype = {
 		   })
 		   .attr("width", 1e-6)
 		   .attr("height", 1e-6);
-		
+		  
 		nodeEnter.append("text")
 			.attr("y", 2)
 			.attr("dy", "12px")
@@ -244,6 +306,9 @@ boosting_tree.prototype = {
 		self.svg.selectAll("path.link")
 			.on("mouseover", function(d) {
 				self.path_view_helper(d.target);
+			})
+			.on("mouseout", function() {
+				link.classed("active", false);
 			});
 		
 		// existing links
@@ -268,6 +333,11 @@ boosting_tree.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
+		self.is_collapsed = [];
+		for (var i = 0; i < self.num_trees; i++) {
+			self.is_collapsed.push(self.forest_data[i]._children ? true : false); 
+		}
+		console.log(self.is_collapsed);
 	},
 	path_view_helper : function(nd) {
 		var self = this;
