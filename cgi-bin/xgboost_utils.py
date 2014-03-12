@@ -7,7 +7,7 @@ import subprocess
 
 DATASET_NAME = "mushroom"
 
-XGBOOST_PATH = "../xgboost/xgboost"
+XGBOOST_PATH = "xgboost/xgboost"
 TRAIN_PATH = "./data/agaricus.txt.train"
 TEST_PATH = "./data/agaricus.txt.test"
 FEATMAP_PATH = "./data/featmap.txt"
