@@ -59,6 +59,7 @@ pathgraph.prototype = {
 
         x.domain( [ -xMax, xMax ] );                
 
+        var y_offset = 20;
         // paint legend
         legend = legend.enter();
         legend.append( "g" )
@@ -66,16 +67,12 @@ pathgraph.prototype = {
             .attr( "class", "pathgraph text" )
             .attr( "text-anchor", "start" )
             .attr( "x", 3 + this.width - this.legendwidth )
-            .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2; } )
+            .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2 + y_offset; } )
             .attr( "dy", ".35em" )
             .text( function(d,i){
                 if( i == 0 ) return "root";
                 else{
-                    if( data[i-1].children[0] === data[i].id ){
-                        return data[i-1].label+":yes";
-                    } else{
-                        return data[i-1].label+":no";
-                    }
+                	return data[i-1].label + " ? " + data[i-1].edge_tags[data[i].rank];
                 }
             } );
         
@@ -83,14 +80,14 @@ pathgraph.prototype = {
         bar.append( "rect" )
             .attr( "class", "pathgraph bar right" )
             .attr( "x", x(0) )
-            .attr( "y", function(d,i) { return i * (barHeight+2); } )
+            .attr( "y", function(d,i) { return i * (barHeight+2) + y_offset; } )
             .attr( "width", function(d) { return x( d.pos_cnt ) - x( 0 );  } )
             .attr( "height", barHeight );
         
         bar.append( "rect" )
             .attr( "class", "pathgraph bar left" )
             .attr( "x", function(d){ return x( -d.neg_cnt ); } )
-            .attr( "y", function(d,i) { return i*(barHeight+2); } )
+            .attr( "y", function(d,i) { return i*(barHeight+2) + y_offset; } )
             .attr( "width", function(d) { return x( d.neg_cnt ) - x( 0 );  } )
             .attr( "height", barHeight );
 
@@ -98,7 +95,7 @@ pathgraph.prototype = {
             .attr( "class", "pathgraph text" )
             .attr( "text-anchor", "start" )
             .attr( "x", function(d){ return x( d.pos_cnt ) + 3; } )
-            .attr( "y", function(d,i) { return i*(barHeight+2)+ barHeight / 2; } )
+            .attr( "y", function(d,i) { return i*(barHeight+2)+ barHeight / 2 + y_offset; } )
             .attr( "dy", ".35em" )
             .text( function(d){ return d.pos_cnt; } );
 
@@ -106,7 +103,7 @@ pathgraph.prototype = {
             .attr( "class", "pathgraph text" )
             .attr( "text-anchor", "end" )
             .attr( "x", function(d) { return  x( -d.neg_cnt ) - 3; } )
-            .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2; } )
+            .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2 + y_offset; } )
             .attr( "dy", ".35em" )
             .text( function(d){ return d.neg_cnt; } );
 
