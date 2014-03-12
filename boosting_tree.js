@@ -132,25 +132,27 @@ boosting_tree.prototype = {
 		var last_x = 100;
 		var last_y = -50;
 		var offset_x = 0, offset_y = 0;
+		var t_width = 0, t_height = 0;
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
-				offset_x = 0;
+				offset_x = 50;
 				offset_y = last_y + 50;
 				last_y = offset_y;
 			} else {
+				t_width = width(root);
+				t_height = height(root);
 				if (i > 0) {
-					//offset_x = layout[i-1].offset.x + layout[i-1].width + self.tree_margin;
 					offset_x = last_x + self.tree_margin;
 					offset_y = 0;
-					last_x = offset_x + width(root);
-					console.log("x", last_x);
+					last_x = offset_x;
 				} else {
 					offset_x = 0;
 					offset_y = 0;
 				}
+				last_x = offset_x + t_width;
 			}
-			layout.push( { width : width(root), height : height(root),
+			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
 		}
 		return layout;
