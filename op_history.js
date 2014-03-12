@@ -4,7 +4,7 @@ function op_history (margin, width, height, tag) {
     this.height = height - margin.top - margin.bottom;
     
     this.entry_width = 300;
-    this.entry_height = 20;
+    this.entry_height = 24;
     var x0 = margin.left + (this.width - this.entry_width) * 0.5;
     var y0 = margin.top;
     this.svg = d3.select(tag)
@@ -52,8 +52,10 @@ op_history.prototype = {
 			})
 			.attr("width", self.entry_width)
 			.attr("height", self.entry_height)
-			.on("mouseover", function() {
-				d3.select(this).classed("active", true);
+			.on("mouseover", function(d, i) {
+				if (i != self.active_op_id - 1) {
+					d3.select(this).classed("active", true);
+				}
 			})
 			.on("mouseout", function() {
 				d3.select(this).classed("active", false);
@@ -64,7 +66,7 @@ op_history.prototype = {
 				if (i == self.active_op_id - 1) {
 					return;
 				}
-				var xx = self.entry_width + 2;
+				var xx = self.entry_width + 4;
 				var yy = i * self.entry_height;
 				self.tooltips.add(xx, yy, {
 						op_type : "restore_op",

@@ -1,19 +1,21 @@
 
-/* div style */
+/* page layout configuration */
 
- .container div{
-  position: absolute;
+#featureview {
+  float: left;
+  width: 10%;
+  height: auto;
 }
 
-#modeltreegraph {
+#modelview {
 	float: left;
 	width: 70%;
-	height: 1000;
+	height: auto;
 }
 
-.c2 {
+#interactionview {
   float: right;
-  width: 30%;
+  width: 20%;
   height: auto;
 }
 
@@ -101,12 +103,12 @@
   fill: lightsteelblue;
   stroke-width: 0px;
   stroke: steelblue;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .history rect.active {
   fill: lightsteelblue;
-  stroke-width: 2.5px;
+  stroke-width: 3px;
   stroke: yellow;
   opacity: 0.3;
 }
@@ -131,6 +133,7 @@
 
 h1 {
 	font-family: helvetica;
+	color: darkblue;
 	text-align: center;
 }
 

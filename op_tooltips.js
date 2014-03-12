@@ -5,7 +5,7 @@ function op_tooltips(svg) {
 		"node_remove" : " - Remove this node",
 		"tree_expand" : " + Grow a new tree",
 		"tree_remove" : " - Remove this tree",
-		"restore_op" : "- Restore history"	
+		"restore_op" : " Restore "	
 	};
 }
 
