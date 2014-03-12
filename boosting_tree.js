@@ -129,7 +129,7 @@ boosting_tree.prototype = {
 			// auto collapse trees
 			// ???
 		}
-		var last_x = 100;
+		var last_x = 200;
 		var last_y = -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
@@ -147,11 +147,12 @@ boosting_tree.prototype = {
 					offset_y = 0;
 					last_x = offset_x;
 				} else {
-					offset_x = 0;
+					offset_x = 100;
 					offset_y = 0;
 				}
 				last_x = offset_x + t_width;
 			}
+			console.log(i, offset_x, offset_y, last_x, last_y);
 			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
 		}
@@ -174,10 +175,18 @@ boosting_tree.prototype = {
 			var tree = d3.layout.tree()
 				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
 			var tree_data = self.forest_data[i];
-			var t_nodes = tree.nodes(tree_data); 
+			var t_nodes = tree.nodes(tree_data);
+			if (tree_data._children) {
+				t_nodes.forEach(function(d) {
+					d.x = self.tree_layout[i].offset.x;
+					d.y = self.tree_layout[i].offset.y;
+				});
+			}
 			t_nodes.forEach(function(d) {
 				// computing absolute node position
+				//if (!d.parent) console.log(d.x);
 				d.x = d.x + self.tree_layout[i].offset.x;
+				//if (!d.parent) console.log(d.x);
 				if (d.parent) {
 					d.y = d.parent.y + 80 + (d.rank * (self.rect_height + 8));
 				} else {
