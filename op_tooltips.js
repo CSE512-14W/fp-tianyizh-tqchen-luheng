@@ -7,6 +7,7 @@ function op_tooltips(svg) {
 		"tree_remove" : " - Remove this tree",
 		"restore_op" : " Restore "	
 	};
+	this.char_to_pxl = 6.4;
 }
 
 op_tooltips.prototype = {
@@ -17,12 +18,17 @@ op_tooltips.prototype = {
 			.attr("class", "tooltip")
 			.attr("transform", "translate(" + xx + "," + yy + ")");
 	    	
+	    var op_type = request.op_type;
+	    var tt_label = snippets[op_type];
+	    var tt_width = tt_label.length * this.char_to_pxl;
+	    var tt_height = 24;
+	    
 	    tooltip.append("rect")
 			.attr("class", "tooltip")
 			.attr("rx", 2)
 			.attr("ry", 2)
-			.attr("width", 120)
-			.attr("height", 24)
+			.attr("width", tt_width)
+			.attr("height", tt_height)
 			.on("mouseover", function() {
 				d3.select(this).classed("active", true);
 			})
@@ -37,9 +43,8 @@ op_tooltips.prototype = {
 						});
 			});
 	    	
-	    var op_type = request.op_type;
 	    tooltip.append("text")
-			.text(snippets[op_type])
+			.text(tt_label)
 			.attr("x", 5)
 			.attr("y", 15)
 			.attr("text-anchor", "left");

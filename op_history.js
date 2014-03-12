@@ -3,7 +3,7 @@ function op_history (margin, width, height, tag) {
     this.width = width - margin.left -margin.right;
     this.height = height - margin.top - margin.bottom;
     
-    this.entry_width = 300;
+    this.entry_width = 240;
     this.entry_height = 24;
     var x0 = margin.left + (this.width - this.entry_width) * 0.5;
     var y0 = margin.top;

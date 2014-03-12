@@ -4,7 +4,7 @@
 
 function boosting_tree (margin, width, height, tag, enable_toggle) {
 	this.margin = margin;
-    this.width = window.innerWidth - gtreepath.width - margin.left - margin.right;
+    this.width = width - margin.left - margin.right;
     this.height = height - margin.top - margin.bottom;
     this.enable_toggle = enable_toggle;
     
@@ -24,7 +24,7 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     this.node_mapper = {};
     this.tree_margin = 20;
     this.rect_width = 60,
-    this.rect_height = 20,
+    this.rect_height = 22,
 	this.max_link_width = 20,
 	this.min_link_width = 1.5,
 	this.char_to_pxl = 5.5;
@@ -158,7 +158,10 @@ boosting_tree.prototype = {
 				}
 			})
 			.on("mouseover", function(d) {
-				gtreepath.update(self.path_helper(d));
+				self.path_view_helper(d);
+			})
+			.on("mouseout", function() {
+				link.classed("active", false);
 			});
 
 		nodeEnter.append("rect")
@@ -169,17 +172,19 @@ boosting_tree.prototype = {
 		   .attr("height", 1e-6);
 		
 		nodeEnter.append("text")
-		   .attr("dy", "12px")
-		   .attr("text-anchor", "middle")
-		   .text(function(d) {
-			   return d.label; })
-		   .style("fill-opacity", 1e-6);
+			.attr("y", 2)
+			.attr("dy", "12px")
+			.attr("text-anchor", "middle")
+			.text(function(d) {
+				return d.label; })
+			.style("fill-opacity", 1e-6);
 		
 		// for every existing nodes
 		var nodeUpdate = node.transition()
-	      .duration(self.duration)
-	      .attr("transform", function(d) {
-	    	  return "translate(" + d.x + "," + d.y + ")"; });
+			.duration(self.duration)
+			.attr("transform", function(d) {
+				return "translate(" + d.x + "," + d.y + ")";
+			});
 	 
 		nodeUpdate.select("rect")
 			.attr("x", function(d) {
@@ -202,6 +207,7 @@ boosting_tree.prototype = {
 		
 		nodeUpdate
 			.select("text")
+			.attr("y", 2)
 			.attr("dy", "12px")
 			.attr("text-anchor", "middle")
 			.text(function(d) {
@@ -233,16 +239,20 @@ boosting_tree.prototype = {
 			.duration(self.duration)
 			.attr("d", self.diagonal)
 			.style("stroke-width", function(d) {
-				return self.link_stroke_scale(d.target.samples);})
-			.style("stroke", self.stroke_callback);
-	 
+				return self.link_stroke_scale(d.target.samples);});
+		
+		self.svg.selectAll("path.link")
+			.on("mouseover", function(d) {
+				self.path_view_helper(d.target);
+			});
+		
 		// existing links
 		link.transition()
 			.duration(self.duration)
 			.attr("d", self.diagonal)
 			.style("stroke-width", function(d) {
-				return self.link_stroke_scale(d.target.samples);})
-			.style("stroke", self.stroke_callback);
+				return self.link_stroke_scale(d.target.samples);});
+			//.style("stroke", self.stroke_callback);
 	 
 		// removed links
 		link.exit().transition()
@@ -253,11 +263,27 @@ boosting_tree.prototype = {
 			})
 			.remove();
 	 
-		// backup locations0
+		// backup locations
 		nodes.forEach(function(d) {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
+	},
+	path_view_helper : function(nd) {
+		var self = this;
+		var path = self.path_helper(nd);
+		self.svg.selectAll("path.link")
+			.classed("active", false);
+		//link.classed("active", false);
+		active_links = [];
+		for (var i = 0; i + 1 < path.length; i++) {
+			active_links.push({source : path[i], target : path[i+1]});
+		}
+		self.svg.selectAll("path.link")
+			.data(active_links, function(d) {
+				return d.target.id; })
+			.classed("active", true);
+		gtreepath.update(path);
 	},
 	node_box_width : function(label) {
     	var text_len = label.length * this.char_to_pxl + 15;

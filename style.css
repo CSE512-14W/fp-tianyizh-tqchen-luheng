@@ -3,13 +3,13 @@
 
 #featureview {
   float: left;
-  width: 10%;
+  width: 20%;
   height: auto;
 }
 
 #modelview {
 	float: left;
-	width: 70%;
+	width: 60%;
 	height: auto;
 }
 
@@ -70,6 +70,13 @@
 .link {
   fill: none;
   stroke: #ccc;
+  opacity: 0.7;
+}
+
+.link.active {
+  fill: none;
+  stroke: orange;
+  opacity: 0.7;
 }
 
 /* tooltip style */

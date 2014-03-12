@@ -36,9 +36,11 @@ function pathgraph( margin, width, height, tag ){
 pathgraph.prototype = {
     update: function( data ){
         this.legend = this.legend.data([]);
-        this.legend.exit().remove();
-        var legend = this.legend = this.legend.data( data );
-                
+        this.legend
+        	.exit()
+        	.remove();
+        
+        var legend = this.legend = this.legend.data( data );    
         // initialize variables     
         // bit dirty here.. don't know other ways to repaint text
         if( this.textleft != null ) {
@@ -66,12 +68,12 @@ pathgraph.prototype = {
             .attr( "x", 3 + this.width - this.legendwidth )
             .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2; } )
             .attr( "dy", ".35em" )
-            .text( function(d,i){ 
+            .text( function(d,i){
                 if( i == 0 ) return "root";
                 else{
                     if( data[i-1].children[0] === data[i].id ){
                         return data[i-1].label+":yes";
-                    }else{
+                    } else{
                         return data[i-1].label+":no";
                     }
                 }
