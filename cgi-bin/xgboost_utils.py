@@ -24,6 +24,7 @@ DEFAULT_CONFIG = [
     ("save_period" , 0),
     ("data" , TRAIN_PATH),
     ("eval[test]" , TEST_PATH),
+    ("eval[train]" , TRAIN_PATH),
     ("test:data" , TEST_PATH),
     ("booster_type" , 0),
     ("loss_type" , 2),
@@ -63,6 +64,7 @@ def trainNewModel(op_iter, new_config):
         subprocess.call([XGBOOST_PATH, config_path, "task=interact",\
                         "model_in=" + model_in_path,\
                         "model_out=" + model_out_path], stdout=sys.stderr)
+    
     # dump model and path
     subprocess.call([XGBOOST_PATH, config_path, "task=dump",\
                     "model_in=" + model_out_path, "fmap=" + FEATMAP_PATH,\
@@ -72,7 +74,20 @@ def trainNewModel(op_iter, new_config):
                     "model_in=" + model_out_path,\
                     "name_dumppath=" + dump_path + ".path"], stdout=sys.stderr)
     
-    return dump2json(dump_path)
+    # evaluation
+    proc = subprocess.Popen([XGBOOST_PATH, config_path, "task=eval",\
+                    "model_in=" + model_out_path],
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    eval_info = proc.stderr.read().split()
+    sys.stderr.write("eval log: " + str(eval_info) + "\n")
+    test_error = float(eval_info[1].split(':')[1])
+    train_error = float(eval_info[2].split(':')[1])
+    
+    json_obj = dump2json(dump_path)
+    json_obj['test_error'] = test_error
+    json_obj['train_error'] = train_error
+    return json_obj
 
 def recordStats( rec, l, label ):
     for it in l.split(','):

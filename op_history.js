@@ -19,6 +19,7 @@ function op_history (margin, width, height, tag) {
     			
     this.tooltips = new op_tooltips(this.svg);
     this.ops = [];
+    this.evals = [];
     this.active_op_id = 0;
 	this.char_to_pxl = 5.5;
 }
@@ -29,13 +30,15 @@ op_history.prototype = {
 		
 		if (request.op_type != "restore_op") {
 			var log_content = self.op_log_helper(request);
+			var test_error = response.test_error;
 			if (self.active_op_id < self.ops.length) {
 				self.ops = this.ops.slice(0, self.active_op_id);
 			}
 			self.ops.push(log_content);
+			self.evals.push(test_error);
 		}
 		self.active_op_id = response.op_iter;
-		console.log(this.ops, this.active_op_id);
+		//console.log(this.ops, this.active_op_id);
 		
 		self.panel.selectAll("rect").remove();
 		self.panel.selectAll("text").remove();
@@ -83,8 +86,8 @@ op_history.prototype = {
 				return (i + 0.6) * self.entry_height;
 			})
 			.attr("text-anchor", "middle")
-			.text(function(d) {
-				return d;
+			.text(function(d, i) {
+				return d + " ... err: " + self.evals[i];
 			})
 			.style("opacity", function(d, i) {
 				return (i < self.active_op_id ? 1.0 : 0.5); 
