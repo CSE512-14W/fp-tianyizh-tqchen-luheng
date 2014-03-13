@@ -1,1054 +1,3149 @@
 {
-    "feature": [
-        "Gender",
-        "YearOfBirth",
-        "State",
-        "HeightMedian",
-        "WeightMedian",
-        "WeightMaxT",
-        "BMIMaxT",
-        "BMIMinT",
-        "BMIMedian",
-        "RangeBMI",
-        "SystolicBPMaxT",
-        "SystolicBPMinT",
-        "SystolicBPMedian",
-        "DiastolicBPMaxT",
-        "DiastolicBPMinT",
-        "DiastolicBPMedian",
-        "RangeSystolicBP",
-        "RangeDiastolicBP",
-        "HighLowBP",
-        "RespiratoryRateMaxT",
-        "RespiratoryRateMedian",
-        "TemperatureRank2th",
-        "TemperatureMedian",
-        "PrevSmoker",
-        "Smoker",
-        "InternalMedicine",
-        "CardiovascularDisease",
-        "FamilyPractice",
-        "GeneralPractice",
-        "Podiatry",
-        "NumSpecialties",
-        "VisitYearBlank",
-        "VisitYear2009",
-        "VisitYear2010",
-        "VisitYear2011",
-        "VisitYear2012",
-        "VisitTotal",
-        "MaxVisitYear",
-        "FirstYear",
-        "LastYear",
-        "RangeYear",
-        "Years2Date",
-        "MaxVisitWYear",
-        "MinVisit2Date",
-        "MinVisit2Last",
-        "NumPhysicians",
-        "VisitPerWYear2Date",
-        "VisitPerWYear2Last",
-        "Heighted",
-        "Weighted",
-        "L2_AbdominalHernia",
-        "L2_AbdominalPain",
-        "L2_AbuseMonotoring",
-        "L2_Acne",
-        "L2_AcuteBronchitis",
-        "L2_AcuteCystitis",
-        "L2_Alcohol",
-        "L2_Allergy",
-        "L2_AMI",
-        "L2_AnginaPectoris",
-        "L2_Anxiety",
-        "L2_Arthropathy",
-        "L2_Asthma",
-        "L2_AtherosclerosisCoronary",
-        "L2_AtherosclerosisPeripheral",
-        "L2_BackPain",
-        "L2_Bladder",
-        "L2_BlindDeficiency",
-        "L2_BloodAnormal",
-        "L2_BoneCartilage",
-        "L2_BoneDeformity",
-        "L2_Calculus",
-        "L2_Candida",
-        "L2_CaProstate",
-        "L2_CardiacInsufficiency",
-        "L2_CardiacOther",
-        "L2_CardiacValve",
-        "L2_CarpalSyndrome",
-        "L2_CaSkin",
-        "L2_Cataract",
-        "L2_Cellulitis",
-        "L2_CerebralDegeneration",
-        "L2_CerebroVascular",
-        "L2_Cerumen",
-        "L2_Cervical",
-        "L2_ChestPain",
-        "L2_ChronicCystitis",
-        "L2_ChronicPainSynd",
-        "L2_ChronicRenalFailure",
-        "L2_Coagulation",
-        "L2_ColitisNoninfectious",
-        "L2_Conjunctivitis",
-        "L2_Constipation",
-        "L2_COPD",
-        "L2_Corns",
-        "L2_Cough",
-        "L2_CRP",
-        "L2_DeficiencyAnemia",
-        "L2_Dementia",
-        "L2_Dermatitis",
-        "L2_Diarrhea",
-        "L2_DieteticMonotoring",
-        "L2_DigestiveBleeding",
-        "L2_DigestiveUlcer",
-        "L2_Diverticula",
-        "L2_DMII",
-        "L2_DMRelated",
-        "L2_DMRelated2",
-        "L2_Drug",
-        "L2_DrugOther",
-        "L2_Dysphagia",
-        "L2_Dyspnea",
-        "L2_Dysrhythmia",
-        "L2_Dysuria",
-        "L2_Edema",
-        "L2_EKGAbnormal",
-        "L2_Elbow",
-        "L2_EndocrineOther",
-        "L2_Enthesopathy",
-        "L2_Epilepsy",
-        "L2_Esophagus",
-        "L2_EssentialTremor",
-        "L2_Exanthem",
-        "L2_ExternalOtitis",
-        "L2_EyeInfection",
-        "L2_EyeOther",
-        "L2_FamilyCV",
-        "L2_FamilyDM",
-        "L2_Fever",
-        "L2_Fibromatoses",
-        "L2_Flatulence",
-        "L2_Flu",
-        "L2_FluidDisorder",
-        "L2_Furuncle",
-        "L2_GallBladder",
-        "L2_GastricFunctional",
-        "L2_GastritisDuodenitis",
-        "L2_Glaucoma",
-        "L2_GlucoseAbnormal",
-        "L2_Goitier",
-        "L2_Gout",
-        "L2_HairDisease",
-        "L2_Headache",
-        "L2_Healthy",
-        "L2_Hearing",
-        "L2_Hematury",
-        "L2_Hemorrhagic",
-        "L2_HemorrhagicAnemia",
-        "L2_Hemorrhoids",
-        "L2_Hepatitis",
-        "L2_Hepatobiliary",
-        "L2_HerpesSimplex",
-        "L2_HerpesZoster",
-        "L2_HighBP",
-        "L2_Hypercholesterolemia",
-        "L2_Hyperkalemia",
-        "L2_HyperlipOther",
-        "L2_HypertensionComp",
-        "L2_HypertensionEssential",
-        "L2_Hypertriglyceridemia",
-        "L2_Hypoglycemia",
-        "L2_Hypokalemia",
-        "L2_Hyposmolarity",
-        "L2_Hypotension",
-        "L2_Hypothyroidism",
-        "L2_Impetigo",
-        "L2_ImpGlucoseAbnormal",
-        "L2_Impotence",
-        "L2_InadequatedDiet",
-        "L2_Insomnia",
-        "L2_InsomnioNO",
-        "L2_IntestinalInfection",
-        "L2_IntestinalMalabsorption",
-        "L2_IronAnemia",
-        "L2_IrritableBowel",
-        "L2_Leukocytes",
-        "L2_LichenPruritus",
-        "L2_LimbCramp",
-        "L2_LimbPain",
-        "L2_LiverAbnormal",
-        "L2_LumbarPain",
-        "L2_Lymphadenitis",
-        "L2_Malaise",
-        "L2_MaleGenitalInf",
-        "L2_Malnutrition",
-        "L2_MemoryLoss",
-        "L2_Menopausal",
-        "L2_MenstruationDisorder",
-        "L2_MentalMiscelanea",
-        "L2_MentalRetardation",
-        "L2_MetabolicMineral",
-        "L2_MetabolicOther",
-        "L2_Migraine",
-        "L2_MixedHyperlipidemia",
-        "L2_Mixuria",
-        "L2_MoodDisorder",
-        "L2_MuscleSpasm",
-        "L2_Myalgia",
-        "L2_MycosisFoot",
-        "L2_MycosisOther",
-        "L2_Myopathy",
-        "L2_Nails",
-        "L2_NasalCavity",
-        "L2_NeoSkin",
-        "L2_NervousSystem",
-        "L2_NervousSystemOther",
-        "L2_NeurRadiculitis",
-        "L2_Nocturia",
-        "L2_NonFollow",
-        "L2_Obesity",
-        "L2_OpenWound",
-        "L2_Oral",
-        "Feature",
-        "L2_Osteoarthrosis",
-        "L2_Osteoporosis",
-        "L2_Otalgia",
-        "L2_OtherInfection",
-        "L2_OtitisMedia",
-        "L2_OvarianCyst",
-        "L2_Ovaries",
-        "L2_Overweight",
-        "L2_PainJoint",
-        "L2_Pancreas",
-        "L2_ParasiteInfection",
-        "L2_Parkinson",
-        "L2_PerEndMiocard",
-        "L2_PeriphNeuropathy",
-        "L2_Pneumonia",
-        "L2_PNS",
-        "L2_PNSFace",
-        "L2_PNSInflamToxic",
-        "L2_Polydipsia",
-        "L2_Polyuria",
-        "L2_Proctology",
-        "L2_ProstateBenign",
-        "L2_Proteinuria",
-        "L2_PSA",
-        "L2_Psoriasis",
-        "L2_Pyrosis",
-        "L2_Renal",
-        "L2_RespiratoryFail",
-        "L2_RespUpAcute",
-        "L2_RespUpChronic",
-        "L2_RheumaticPain",
-        "L2_Rhinitis",
-        "L2_RLS",
-        "L2_Schizophrenic",
-        "L2_SciaticPain",
-        "L2_Screening",
-        "L2_SeborrheicCyst",
-        "L2_SeborrheicDermatitis",
-        "L2_SexDysfunction",
-        "L2_Shoulder",
-        "L2_Sinus",
-        "L2_SkinAtrophic",
-        "L2_SkinInflammatory",
-        "L2_SkinKeratosis",
-        "L2_SkinOther",
-        "L2_SkinSense",
-        "L2_SkinViric",
-        "L2_Sleep",
-        "L2_SleepApnea",
-        "L2_SpinalStenosis",
-        "L2_Spondylosis",
-        "L2_Sprains",
-        "L2_Stress",
-        "L2_SuperficialInjury",
-        "L2_SweatGland",
-        "L2_Syncope",
-        "L2_SyndromeX",
-        "L2_SynoviumTendon",
-        "L2_Teeth",
-        "L2_Temporomandibular",
-        "L2_TensionalPsicalgia",
-        "L2_TesticularDysfunction",
-        "L2_ThyroidOther",
-        "L2_Tobacco",
-        "L2_TonsilsAdenoids",
-        "L2_TriggerFinger",
-        "L2_Ulcer",
-        "L2_UlcerousColitis",
-        "L2_UrinaryIncontinency",
-        "L2_UrinaryUrgency",
-        "L2_Urticaria",
-        "L2_UTIOther",
-        "L2_Vaccine",
-        "L2_Vaginal",
-        "L2_VarixLeg",
-        "L2_VascularPeripheral",
-        "L2_VertiginousSyndromes",
-        "L2_VIH",
-        "L2_VitaminB",
-        "L2_VitaminD",
-        "L2_VomitingNausea",
-        "L2_WeightGain",
-        "L2_WeightLoss",
-        "L1_Anemia",
-        "L1_Back",
-        "L1_ColitisMSC",
-        "L1_ConnectiveTissue",
-        "L1_Dermatitis",
-        "L1_Digestive",
-        "L1_DMSymptom",
-        "L1_Glucose",
-        "L1_Headache",
-        "L1_Herpes",
-        "L1_Hormonal",
-        "L1_Insomnia",
-        "L1_IschemicCardiopathy",
-        "L1_MycosisFoot",
-        "L1_NervousSystemOther",
-        "L1_Prostate",
-        "L1_RespInfec",
-        "L1_Skin",
-        "L1_SkinInfection",
-        "L1_SkinInflammatory",
-        "L1_SkinOther",
-        "StartYear",
-        "PreviousYear",
-        "DiffDMOtherRelatedSymptoms",
-        "VisitsDMOtherRelatedSymptoms",
-        "DiffLevel2Diag",
-        "Tot3digitICD9",
-        "TotDiagWYear",
-        "TotDiag",
-        "TotDiagPerVisit",
-        "TotDiagWOTranscript",
-        "acetaminophen_bin",
-        "acetaminophen_dose",
-        "acetaminophen_npr",
-        "ACEI_bin",
-        "benazepril_bin",
-        "benazepril_dose",
-        "enalapril_bin",
-        "enalapril_dose",
-        "ramipril_bin",
-        "ramipril_dose",
-        "lisinopril_bin",
-        "lisinopril_dose",
-        "ACEI_dose",
-        "ACEI_npr",
-        "aspirin_bin",
-        "aspirin_dose",
-        "aspirin_npr",
-        "Feature",
-        "losartan_bin",
-        "olmesartan_bin",
-        "telmisartan_bin",
-        "valsartan_bin",
-        "losartan_npr",
-        "olmesartan_npr",
-        "telmisartan_npr",
-        "valsartan_npr",
-        "losartan_dose",
-        "olmesartan_dose",
-        "telmisartan_dose",
-        "valsartan_dose",
-        "AIIRA_nap",
-        "AIIRA_bin",
-        "losartan_telmisartan_dose",
-        "AIIRA_npr",
-        "antifungical_general_npr",
-        "antifungical_general_nap",
-        "antifungical_general_bin",
-        "antifungical_topical_npr",
-        "antifungical_topical_nap",
-        "antifungical_topical_bin",
-        "antiplatelet_bin",
-        "antiplatelet_dose",
-        "antiplatelet_npr",
-        "alprazolam_bin",
-        "alprazolam_dose",
-        "clonazepam_bin",
-        "clonazepam_dose",
-        "diazepam_bin",
-        "diazepam_dose",
-        "lorazepam_bin",
-        "lorazepam_dose",
-        "temazepam_bin",
-        "temazepam_dose",
-        "benzodiazepine_nap",
-        "benzodiazepine_bin",
-        "benzodiazepine_npr",
-        "atenolol_bin",
-        "atenolol_npr",
-        "atenolol_dose",
-        "carvedilol_bin",
-        "carvedilol_npr",
-        "carvedilol_dose",
-        "Feature",
-        "metoprolol_bin",
-        "metoprolol_dose",
-        "nebivolol_bin",
-        "nebivolol_dose",
-        "propranolol_bin",
-        "propranolol_dose",
-        "betablocker_nap",
-        "betablocker_bin",
-        "betablocker_npr",
-        "fenofibrate_dose",
-        "fenofibric_acid_dose",
-        "gemfibrozil_dose",
-        "fenofibrate_bin",
-        "fenofibric_acid_bin",
-        "gemfibrozil_bin",
-        "fibrate_npr",
-        "fibrate_bin",
-        "fibrate_nap",
-        "gabapentin_dose",
-        "pregabalin_dose",
-        "gabapentin_bin",
-        "pregabalin_bin",
-        "GABA_npr",
-        "GABA_bin",
-        "gastroparesia_bin",
-        "gastroparesia_dose",
-        "gastroparesia_npr",
-        "glucocorticoid_injec_bin",
-        "glucocorticoid_injec_npr",
-        "glucocorticoid_local_npr",
-        "glucocorticoid_local_nap",
-        "glucocorticoid_local_bin",
-        "betamethasone_local_npr",
-        "betamethasone_local_bin",
-        "hydrocortisone_local_npr",
-        "hydrocortisone_local_bin",
-        "triamcinolone_local_npr",
-        "triamcinolone_local_bin",
-        "glucocorticoid_general_npr",
-        "glucocorticoid_general_nap",
-        "glucocorticoid_general_bin",
-        "hydrocortisone_general_dose",
-        "hydrocortisone_general_bin",
-        "hydrocortisone_general_npr",
-        "Feature",
-        "methylprednisolone_general_dose",
-        "methylprednisolone_general_bin",
-        "methylprednisolone_general_npr",
-        "prednisone_general_dose",
-        "prednisone_general_bin",
-        "prednisone_general_npr",
-        "LtypeCaChB_nap",
-        "LtypeCaChB_bin",
-        "LtypeCaChB_npr",
-        "amlodipine_dose",
-        "amlodipine_bin",
-        "protonpumpinhibitor_nap",
-        "protonpumpinhibitor_bin",
-        "protonpumpinhibitor_npr",
-        "statin_nap",
-        "statin_npr",
-        "statin_bin",
-        "atorvastatin_dose",
-        "lovastatin_dose",
-        "pravastatin_dose",
-        "rosuvastatin_dose",
-        "simvastatin_dose",
-        "atorvastatin_bin",
-        "lovastatin_bin",
-        "pravastatin_bin",
-        "rosuvastatin_bin",
-        "simvastatin_bin",
-        "statin_dose_adjusted",
-        "thiazide_nap",
-        "thiazide_bin",
-        "thiazide_npr",
-        "hydrochlorothiazide_dose",
-        "niacin_npr",
-        "niacin_bin",
-        "ezetimibe_npr",
-        "ezetimibe_bin",
-        "antilipid_npr",
-        "antilipid_bin",
-        "nasal_npr",
-        "inhalation_npr",
-        "otic_nmed",
-        "otic_nap",
-        "otic_bin",
-        "otic_npr",
-        "Feature",
-        "allergy_inflam_opht_nap",
-        "allergy_inflam_opht_bin",
-        "allergy_inflam_opht_npr",
-        "antibiotic_opht_nap",
-        "antibiotic_opht_bin",
-        "antibiotic_opht_npr",
-        "glaucoma_opht_nap",
-        "glaucoma_opht_bin",
-        "glaucoma_opht_npr",
-        "oral_contracep_npr",
-        "oral_contracep_bin",
-        "no_oral_contracep_npr",
-        "no_oral_contracep_bin",
-        "alfa1blocker_npr",
-        "calcium_npr",
-        "calcium_bin",
-        "coxib_npr",
-        "digoxin_npr",
-        "laxatives_npr",
-        "laxatives_bin",
-        "fiveareductase_npr",
-        "iron_npr",
-        "loopdiuretic_bin",
-        "Kdiuretic_npr",
-        "Kdiuretic_bin",
-        "isosorbide_npr",
-        "omega_3_npr",
-        "potassium_chloride_bin",
-        "isopropyl_npr",
-        "null_npr",
-        "osteoporosis_bin",
-        "alkylamine_bin",
-        "amphetamine_npr",
-        "BPOther_npr",
-        "BPOther_bin",
-        "triptan_npr",
-        "corticosteroids_npr",
-        "gout_npr",
-        "gout_bin",
-        "vitamin_bin",
-        "active_principle",
-        "prescripts",
-        "medication_wo_prescript",
-        "nomedication"
+    "nodes": [
+        {
+            "explanation": "Gender",
+            "feature": "Gender",
+            "types": "",
+            "id": 1
+        },
+        {
+            "explanation": "Year of birth",
+            "feature": "YearOfBirth",
+            "types": "",
+            "id": 2
+        },
+        {
+            "explanation": "State",
+            "feature": "State",
+            "types": "",
+            "id": 3
+        },
+        {
+            "explanation": "Height median",
+            "feature": "HeightMedian",
+            "types": "",
+            "id": 4
+        },
+        {
+            "explanation": "Weight median",
+            "feature": "WeightMedian",
+            "types": "",
+            "id": 5
+        },
+        {
+            "explanation": "Weight truncated max",
+            "feature": "WeightMaxT",
+            "types": "",
+            "id": 6
+        },
+        {
+            "explanation": "BMI truncated max",
+            "feature": "BMIMaxT",
+            "types": "",
+            "id": 7
+        },
+        {
+            "explanation": "BMI truncated min",
+            "feature": "BMIMinT",
+            "types": "",
+            "id": 8
+        },
+        {
+            "explanation": "BMI median",
+            "feature": "BMIMedian",
+            "types": "",
+            "id": 9
+        },
+        {
+            "explanation": "Range BMI",
+            "feature": "RangeBMI",
+            "types": "",
+            "id": 10
+        },
+        {
+            "explanation": "Systolic BP truncated max",
+            "feature": "SystolicBPMaxT",
+            "types": "",
+            "id": 11
+        },
+        {
+            "explanation": "Systolic BP truncated min",
+            "feature": "SystolicBPMinT",
+            "types": "",
+            "id": 12
+        },
+        {
+            "explanation": "Systolic BP median",
+            "feature": "SystolicBPMedian",
+            "types": "",
+            "id": 13
+        },
+        {
+            "explanation": "Diastolic BP truncated max",
+            "feature": "DiastolicBPMaxT",
+            "types": "",
+            "id": 14
+        },
+        {
+            "explanation": "Diastolic BP truncated min",
+            "feature": "DiastolicBPMinT",
+            "types": "",
+            "id": 15
+        },
+        {
+            "explanation": "Diastolic BP median",
+            "feature": "DiastolicBPMedian",
+            "types": "",
+            "id": 16
+        },
+        {
+            "explanation": "Range systolic BP",
+            "feature": "RangeSystolicBP",
+            "types": "",
+            "id": 17
+        },
+        {
+            "explanation": "Range diastolic BP",
+            "feature": "RangeDiastolicBP",
+            "types": "",
+            "id": 18
+        },
+        {
+            "explanation": "High Low difference BP",
+            "feature": "HighLowBP",
+            "types": "",
+            "id": 19
+        },
+        {
+            "explanation": "Respiratory rate truncated max",
+            "feature": "RespiratoryRateMaxT",
+            "types": "",
+            "id": 20
+        },
+        {
+            "explanation": "Respiratory rate median",
+            "feature": "RespiratoryRateMedian",
+            "types": "",
+            "id": 21
+        },
+        {
+            "explanation": "Temperature second lowest",
+            "feature": "TemperatureRank2th",
+            "types": "",
+            "id": 22
+        },
+        {
+            "explanation": "Temperature median",
+            "feature": "TemperatureMedian",
+            "types": "",
+            "id": 23
+        },
+        {
+            "explanation": "Previous smoker",
+            "feature": "PrevSmoker",
+            "types": "",
+            "id": 24
+        },
+        {
+            "explanation": "Smoker status",
+            "feature": "Smoker",
+            "types": "",
+            "id": 25
+        },
+        {
+            "explanation": "Internal medicine",
+            "feature": "InternalMedicine",
+            "types": "",
+            "id": 26
+        },
+        {
+            "explanation": "Cardiovascular disease",
+            "feature": "CardiovascularDisease",
+            "types": "",
+            "id": 27
+        },
+        {
+            "explanation": "Family practice",
+            "feature": "FamilyPractice",
+            "types": "",
+            "id": 28
+        },
+        {
+            "explanation": "General practice",
+            "feature": "GeneralPractice",
+            "types": "",
+            "id": 29
+        },
+        {
+            "explanation": "Podiatry",
+            "feature": "Podiatry",
+            "types": "",
+            "id": 30
+        },
+        {
+            "explanation": "Number of specialties",
+            "feature": "NumSpecialties",
+            "types": "",
+            "id": 31
+        },
+        {
+            "explanation": "Visits with year blank",
+            "feature": "VisitYearBlank",
+            "types": "",
+            "id": 32
+        },
+        {
+            "explanation": "Visits in year 2009",
+            "feature": "VisitYear2009",
+            "types": "",
+            "id": 33
+        },
+        {
+            "explanation": "Visits in year 2010",
+            "feature": "VisitYear2010",
+            "types": "",
+            "id": 34
+        },
+        {
+            "explanation": "Visits in year 2011",
+            "feature": "VisitYear2011",
+            "types": "",
+            "id": 35
+        },
+        {
+            "explanation": "Visits in year 2012",
+            "feature": "VisitYear2012",
+            "types": "",
+            "id": 36
+        },
+        {
+            "explanation": "Visits total",
+            "feature": "VisitTotal",
+            "types": "",
+            "id": 37
+        },
+        {
+            "explanation": "Max visits per year",
+            "feature": "MaxVisitYear",
+            "types": "",
+            "id": 38
+        },
+        {
+            "explanation": "First year with visits",
+            "feature": "FirstYear",
+            "types": "",
+            "id": 39
+        },
+        {
+            "explanation": "Last year with visits",
+            "feature": "LastYear",
+            "types": "",
+            "id": 40
+        },
+        {
+            "explanation": "Range year (last -first)",
+            "feature": "RangeYear",
+            "types": "",
+            "id": 41
+        },
+        {
+            "explanation": "Range year (2012 - first)",
+            "feature": "Years2Date",
+            "types": "",
+            "id": 42
+        },
+        {
+            "explanation": "Max visits per weighted year",
+            "feature": "MaxVisitWYear",
+            "types": "",
+            "id": 43
+        },
+        {
+            "explanation": "Min visits a year (to date)",
+            "feature": "MinVisit2Date",
+            "types": "",
+            "id": 44
+        },
+        {
+            "explanation": "Min visits a year (to last year with visits)",
+            "feature": "MinVisit2Last",
+            "types": "",
+            "id": 45
+        },
+        {
+            "explanation": "Number of physicians",
+            "feature": "NumPhysicians",
+            "types": "",
+            "id": 46
+        },
+        {
+            "explanation": "Visits per weighted year (to date)",
+            "feature": "VisitPerWYear2Date",
+            "types": "",
+            "id": 47
+        },
+        {
+            "explanation": "Visits per weighted year (to last year with visits)",
+            "feature": "VisitPerWYear2Last",
+            "types": "",
+            "id": 48
+        },
+        {
+            "explanation": "Visits with not null height",
+            "feature": "Heighted",
+            "types": "",
+            "id": 49
+        },
+        {
+            "explanation": "Visits with not null weight",
+            "feature": "Weighted",
+            "types": "",
+            "id": 50
+        },
+        {
+            "explanation": "Abdominal hernia (level 2)(number of transcript diagnostics)",
+            "feature": "L2_AbdominalHernia",
+            "types": "",
+            "id": 51
+        },
+        {
+            "explanation": "Abdominal pain (level 2)(number of diagnostics)",
+            "feature": "L2_AbdominalPain",
+            "types": "",
+            "id": 52
+        },
+        {
+            "explanation": "Abuse monotoring (level 2)(number of diagnostics)",
+            "feature": "L2_AbuseMonotoring",
+            "types": "",
+            "id": 53
+        },
+        {
+            "explanation": "Acne (level 2)(number of diagnostics)",
+            "feature": "L2_Acne",
+            "types": "",
+            "id": 54
+        },
+        {
+            "explanation": "Acute bronchitis (level 2)(number of diagnostics)",
+            "feature": "L2_AcuteBronchitis",
+            "types": "",
+            "id": 55
+        },
+        {
+            "explanation": "Acute cystitis (level 2)(number of diagnostics)",
+            "feature": "L2_AcuteCystitis",
+            "types": "",
+            "id": 56
+        },
+        {
+            "explanation": "Alcohol (level 2)(number of diagnostics)",
+            "feature": "L2_Alcohol",
+            "types": "",
+            "id": 57
+        },
+        {
+            "explanation": "Allergy (level 2)(number of diagnostics)",
+            "feature": "L2_Allergy",
+            "types": "",
+            "id": 58
+        },
+        {
+            "explanation": "AMI (level 2)(number of diagnostics)",
+            "feature": "L2_AMI",
+            "types": "",
+            "id": 59
+        },
+        {
+            "explanation": "Angina pectoris (level 2)(number of diagnostics)",
+            "feature": "L2_AnginaPectoris",
+            "types": "",
+            "id": 60
+        },
+        {
+            "explanation": "Anxiety (level 2)(number of diagnostics)",
+            "feature": "L2_Anxiety",
+            "types": "",
+            "id": 61
+        },
+        {
+            "explanation": "Arthropathy (level 2)(number of diagnostics)",
+            "feature": "L2_Arthropathy",
+            "types": "",
+            "id": 62
+        },
+        {
+            "explanation": "Asthma (level 2)(number of diagnostics)",
+            "feature": "L2_Asthma",
+            "types": "",
+            "id": 63
+        },
+        {
+            "explanation": "Atherosclerosis coronary (level 2)(number of diagnostics)",
+            "feature": "L2_AtherosclerosisCoronary",
+            "types": "",
+            "id": 64
+        },
+        {
+            "explanation": "Atherosclerosis peripheral (level 2)(number of diagnostics)",
+            "feature": "L2_AtherosclerosisPeripheral",
+            "types": "",
+            "id": 65
+        },
+        {
+            "explanation": "Back pain (level 2)(number of diagnostics)",
+            "feature": "L2_BackPain",
+            "types": "",
+            "id": 66
+        },
+        {
+            "explanation": "Bladder (level 2)(number of diagnostics)",
+            "feature": "L2_Bladder",
+            "types": "",
+            "id": 67
+        },
+        {
+            "explanation": "Blind deficiency (level 2)(number of diagnostics)",
+            "feature": "L2_BlindDeficiency",
+            "types": "",
+            "id": 68
+        },
+        {
+            "explanation": "Blood anormal (level 2)(number of diagnostics)",
+            "feature": "L2_BloodAnormal",
+            "types": "",
+            "id": 69
+        },
+        {
+            "explanation": "Bone cartilage (level 2)(number of diagnostics)",
+            "feature": "L2_BoneCartilage",
+            "types": "",
+            "id": 70
+        },
+        {
+            "explanation": "Bone deformity (level 2)(number of diagnostics)",
+            "feature": "L2_BoneDeformity",
+            "types": "",
+            "id": 71
+        },
+        {
+            "explanation": "Calculus (level 2)(number of diagnostics)",
+            "feature": "L2_Calculus",
+            "types": "",
+            "id": 72
+        },
+        {
+            "explanation": "Candida (level 2)(number of diagnostics)",
+            "feature": "L2_Candida",
+            "types": "",
+            "id": 73
+        },
+        {
+            "explanation": "Ca prostate (level 2)(number of diagnostics)",
+            "feature": "L2_CaProstate",
+            "types": "",
+            "id": 74
+        },
+        {
+            "explanation": "Cardiac insufficiency (level 2)(number of diagnostics)",
+            "feature": "L2_CardiacInsufficiency",
+            "types": "",
+            "id": 75
+        },
+        {
+            "explanation": "Cardiac other (level 2)(number of diagnostics)",
+            "feature": "L2_CardiacOther",
+            "types": "",
+            "id": 76
+        },
+        {
+            "explanation": "Cardiac valve (level 2)(number of diagnostics)",
+            "feature": "L2_CardiacValve",
+            "types": "",
+            "id": 77
+        },
+        {
+            "explanation": "Carpal syndrome (level 2)(number of diagnostics)",
+            "feature": "L2_CarpalSyndrome",
+            "types": "",
+            "id": 78
+        },
+        {
+            "explanation": "Ca skin (level 2)(number of diagnostics)",
+            "feature": "L2_CaSkin",
+            "types": "",
+            "id": 79
+        },
+        {
+            "explanation": "Cataract (level 2)(number of diagnostics)",
+            "feature": "L2_Cataract",
+            "types": "",
+            "id": 80
+        },
+        {
+            "explanation": "Cellulitis (level 2)(number of diagnostics)",
+            "feature": "L2_Cellulitis",
+            "types": "",
+            "id": 81
+        },
+        {
+            "explanation": "Cerebral degeneration (level 2)(number of diagnostics)",
+            "feature": "L2_CerebralDegeneration",
+            "types": "",
+            "id": 82
+        },
+        {
+            "explanation": "Cerebro vascular (level 2)(number of diagnostics)",
+            "feature": "L2_CerebroVascular",
+            "types": "",
+            "id": 83
+        },
+        {
+            "explanation": "Earwax (level 2)(number of diagnostics)",
+            "feature": "L2_Cerumen",
+            "types": "",
+            "id": 84
+        },
+        {
+            "explanation": "Cervical (level 2)(number of diagnostics)",
+            "feature": "L2_Cervical",
+            "types": "",
+            "id": 85
+        },
+        {
+            "explanation": "Chest pain (level 2)(number of diagnostics)",
+            "feature": "L2_ChestPain",
+            "types": "",
+            "id": 86
+        },
+        {
+            "explanation": "Chronic cystitis (level 2)(number of diagnostics)",
+            "feature": "L2_ChronicCystitis",
+            "types": "",
+            "id": 87
+        },
+        {
+            "explanation": "Chronic pain syndrome (level 2)(number of diagnostics)",
+            "feature": "L2_ChronicPainSynd",
+            "types": "",
+            "id": 88
+        },
+        {
+            "explanation": "Chronic renal failure (level 2)(number of diagnostics)",
+            "feature": "L2_ChronicRenalFailure",
+            "types": "",
+            "id": 89
+        },
+        {
+            "explanation": "Coagulation (level 2)(number of diagnostics)",
+            "feature": "L2_Coagulation",
+            "types": "",
+            "id": 90
+        },
+        {
+            "explanation": "Colitis no infectious (level 2)(number of diagnostics)",
+            "feature": "L2_ColitisNoninfectious",
+            "types": "",
+            "id": 91
+        },
+        {
+            "explanation": "Conjunctivitis (level 2)(number of diagnostics)",
+            "feature": "L2_Conjunctivitis",
+            "types": "",
+            "id": 92
+        },
+        {
+            "explanation": "Constipation (level 2)(number of diagnostics)",
+            "feature": "L2_Constipation",
+            "types": "",
+            "id": 93
+        },
+        {
+            "explanation": "COPD (level 2)(number of diagnostics)",
+            "feature": "L2_COPD",
+            "types": "",
+            "id": 94
+        },
+        {
+            "explanation": "Corns (level 2)(number of diagnostics)",
+            "feature": "L2_Corns",
+            "types": "",
+            "id": 95
+        },
+        {
+            "explanation": "Cough (level 2)(number of diagnostics)",
+            "feature": "L2_Cough",
+            "types": "",
+            "id": 96
+        },
+        {
+            "explanation": "CRP (level 2)(number of diagnostics)",
+            "feature": "L2_CRP",
+            "types": "",
+            "id": 97
+        },
+        {
+            "explanation": "Deficiency anemia (level 2)(number of diagnostics)",
+            "feature": "L2_DeficiencyAnemia",
+            "types": "",
+            "id": 98
+        },
+        {
+            "explanation": "Dementia (level 2)(number of diagnostics)",
+            "feature": "L2_Dementia",
+            "types": "",
+            "id": 99
+        },
+        {
+            "explanation": "Dermatitis (level 2)(number of diagnostics)",
+            "feature": "L2_Dermatitis",
+            "types": "",
+            "id": 100
+        },
+        {
+            "explanation": "Diarrhea (level 2)(number of diagnostics)",
+            "feature": "L2_Diarrhea",
+            "types": "",
+            "id": 101
+        },
+        {
+            "explanation": "Dietetic monitoring (level 2)(number of diagnostics)",
+            "feature": "L2_DieteticMonotoring",
+            "types": "",
+            "id": 102
+        },
+        {
+            "explanation": "Digestive bleeding (level 2)(number of diagnostics)",
+            "feature": "L2_DigestiveBleeding",
+            "types": "",
+            "id": 103
+        },
+        {
+            "explanation": "Digestive ulcer (level 2)(number of diagnostics)",
+            "feature": "L2_DigestiveUlcer",
+            "types": "",
+            "id": 104
+        },
+        {
+            "explanation": "Diverticula (level 2)(number of diagnostics)",
+            "feature": "L2_Diverticula",
+            "types": "",
+            "id": 105
+        },
+        {
+            "explanation": "DMII sure related (level 2)(number of diagnostics)",
+            "feature": "L2_DMII",
+            "types": "",
+            "id": 106
+        },
+        {
+            "explanation": "DM medium Related (level 2)(number of diagnostics)",
+            "feature": "L2_DMRelated",
+            "types": "",
+            "id": 107
+        },
+        {
+            "explanation": "DM high Related (level 2)(number of diagnostics)",
+            "feature": "L2_DMRelated2",
+            "types": "",
+            "id": 108
+        },
+        {
+            "explanation": "Drug (level 2)(number of diagnostics)",
+            "feature": "L2_Drug",
+            "types": "",
+            "id": 109
+        },
+        {
+            "explanation": "Drug other (level 2)(number of diagnostics)",
+            "feature": "L2_DrugOther",
+            "types": "",
+            "id": 110
+        },
+        {
+            "explanation": "Dysphagia (level 2)(number of diagnostics)",
+            "feature": "L2_Dysphagia",
+            "types": "",
+            "id": 111
+        },
+        {
+            "explanation": "Dyspnea (level 2)(number of diagnostics)",
+            "feature": "L2_Dyspnea",
+            "types": "",
+            "id": 112
+        },
+        {
+            "explanation": "Dysrhythmia (level 2)(number of diagnostics)",
+            "feature": "L2_Dysrhythmia",
+            "types": "",
+            "id": 113
+        },
+        {
+            "explanation": "Dysuria (level 2)(number of diagnostics)",
+            "feature": "L2_Dysuria",
+            "types": "",
+            "id": 114
+        },
+        {
+            "explanation": "Edema (level 2)(number of diagnostics)",
+            "feature": "L2_Edema",
+            "types": "",
+            "id": 115
+        },
+        {
+            "explanation": "EKG abnormal (level 2)(number of diagnostics)",
+            "feature": "L2_EKGAbnormal",
+            "types": "",
+            "id": 116
+        },
+        {
+            "explanation": "Elbow (level 2)(number of diagnostics)",
+            "feature": "L2_Elbow",
+            "types": "",
+            "id": 117
+        },
+        {
+            "explanation": "Endocrine other (level 2)(number of diagnostics)",
+            "feature": "L2_EndocrineOther",
+            "types": "",
+            "id": 118
+        },
+        {
+            "explanation": "Enthesopathy (level 2)(number of diagnostics)",
+            "feature": "L2_Enthesopathy",
+            "types": "",
+            "id": 119
+        },
+        {
+            "explanation": "Epilepsy (level 2)(number of diagnostics)",
+            "feature": "L2_Epilepsy",
+            "types": "",
+            "id": 120
+        },
+        {
+            "explanation": "Esophagus (level 2)(number of diagnostics)",
+            "feature": "L2_Esophagus",
+            "types": "",
+            "id": 121
+        },
+        {
+            "explanation": "Essential tremor (level 2)(number of diagnostics)",
+            "feature": "L2_EssentialTremor",
+            "types": "",
+            "id": 122
+        },
+        {
+            "explanation": "Exanthem (level 2)(number of diagnostics)",
+            "feature": "L2_Exanthem",
+            "types": "",
+            "id": 123
+        },
+        {
+            "explanation": "External otitis (level 2)(number of diagnostics)",
+            "feature": "L2_ExternalOtitis",
+            "types": "",
+            "id": 124
+        },
+        {
+            "explanation": "Eye infection (level 2)(number of diagnostics)",
+            "feature": "L2_EyeInfection",
+            "types": "",
+            "id": 125
+        },
+        {
+            "explanation": "Eye other (level 2)(number of diagnostics)",
+            "feature": "L2_EyeOther",
+            "types": "",
+            "id": 126
+        },
+        {
+            "explanation": "Family cardiovascular history (level 2)(number of diagnostics)",
+            "feature": "L2_FamilyCV",
+            "types": "",
+            "id": 127
+        },
+        {
+            "explanation": "Family diabetes history (level 2)(number of diagnostics)",
+            "feature": "L2_FamilyDM",
+            "types": "",
+            "id": 128
+        },
+        {
+            "explanation": "Fever (level 2)(number of diagnostics)",
+            "feature": "L2_Fever",
+            "types": "",
+            "id": 129
+        },
+        {
+            "explanation": "Fibromatoses (level 2)(number of diagnostics)",
+            "feature": "L2_Fibromatoses",
+            "types": "",
+            "id": 130
+        },
+        {
+            "explanation": "Flatulence (level 2)(number of diagnostics)",
+            "feature": "L2_Flatulence",
+            "types": "",
+            "id": 131
+        },
+        {
+            "explanation": "Flu (level 2)(number of diagnostics)",
+            "feature": "L2_Flu",
+            "types": "",
+            "id": 132
+        },
+        {
+            "explanation": "Fluid disorder (level 2)(number of diagnostics)",
+            "feature": "L2_FluidDisorder",
+            "types": "",
+            "id": 133
+        },
+        {
+            "explanation": "Furuncle (level 2)(number of diagnostics)",
+            "feature": "L2_Furuncle",
+            "types": "",
+            "id": 134
+        },
+        {
+            "explanation": "Gall bladder (level 2)(number of diagnostics)",
+            "feature": "L2_GallBladder",
+            "types": "",
+            "id": 135
+        },
+        {
+            "explanation": "Gastric functional (level 2)(number of diagnostics)",
+            "feature": "L2_GastricFunctional",
+            "types": "",
+            "id": 136
+        },
+        {
+            "explanation": "Gastritis duodenitis (level 2)(number of diagnostics)",
+            "feature": "L2_GastritisDuodenitis",
+            "types": "",
+            "id": 137
+        },
+        {
+            "explanation": "Glaucoma (level 2)(number of diagnostics)",
+            "feature": "L2_Glaucoma",
+            "types": "",
+            "id": 138
+        },
+        {
+            "explanation": "Glucose abnormal (level 2)(number of diagnostics)",
+            "feature": "L2_GlucoseAbnormal",
+            "types": "",
+            "id": 139
+        },
+        {
+            "explanation": "Goitier (level 2)(number of diagnostics)",
+            "feature": "L2_Goitier",
+            "types": "",
+            "id": 140
+        },
+        {
+            "explanation": "Gout (level 2)(number of diagnostics)",
+            "feature": "L2_Gout",
+            "types": "",
+            "id": 141
+        },
+        {
+            "explanation": "Hair disease (level 2)(number of diagnostics)",
+            "feature": "L2_HairDisease",
+            "types": "",
+            "id": 142
+        },
+        {
+            "explanation": "Headache (level 2)(number of diagnostics)",
+            "feature": "L2_Headache",
+            "types": "",
+            "id": 143
+        },
+        {
+            "explanation": "Healthy (level 2)(number of diagnostics)",
+            "feature": "L2_Healthy",
+            "types": "",
+            "id": 144
+        },
+        {
+            "explanation": "Hearing (level 2)(number of diagnostics)",
+            "feature": "L2_Hearing",
+            "types": "",
+            "id": 145
+        },
+        {
+            "explanation": "Hematury (level 2)(number of diagnostics)",
+            "feature": "L2_Hematury",
+            "types": "",
+            "id": 146
+        },
+        {
+            "explanation": "Hemorrhagic (level 2)(number of diagnostics)",
+            "feature": "L2_Hemorrhagic",
+            "types": "",
+            "id": 147
+        },
+        {
+            "explanation": "Hemorrhagic anemia (level 2)(number of diagnostics)",
+            "feature": "L2_HemorrhagicAnemia",
+            "types": "",
+            "id": 148
+        },
+        {
+            "explanation": "Hemorrhoids (level 2)(number of diagnostics)",
+            "feature": "L2_Hemorrhoids",
+            "types": "",
+            "id": 149
+        },
+        {
+            "explanation": "Hepatitis (level 2)(number of diagnostics)",
+            "feature": "L2_Hepatitis",
+            "types": "",
+            "id": 150
+        },
+        {
+            "explanation": "Hepatobiliary (level 2)(number of diagnostics)",
+            "feature": "L2_Hepatobiliary",
+            "types": "",
+            "id": 151
+        },
+        {
+            "explanation": "Herpes simplex (level 2)(number of diagnostics)",
+            "feature": "L2_HerpesSimplex",
+            "types": "",
+            "id": 152
+        },
+        {
+            "explanation": "Herpes zoster (level 2)(number of diagnostics)",
+            "feature": "L2_HerpesZoster",
+            "types": "",
+            "id": 153
+        },
+        {
+            "explanation": "High BP without hypertension (level 2)(number of diagnostics)",
+            "feature": "L2_HighBP",
+            "types": "",
+            "id": 154
+        },
+        {
+            "explanation": "Hypercholesterolemia (level 2)(number of diagnostics)",
+            "feature": "L2_Hypercholesterolemia",
+            "types": "",
+            "id": 155
+        },
+        {
+            "explanation": "Hyperkalemia (level 2)(number of diagnostics)",
+            "feature": "L2_Hyperkalemia",
+            "types": "",
+            "id": 156
+        },
+        {
+            "explanation": "Hyperlipemic other (level 2)(number of diagnostics)",
+            "feature": "L2_HyperlipOther",
+            "types": "",
+            "id": 157
+        },
+        {
+            "explanation": "Hypertension complicated (level 2)(number of diagnostics)",
+            "feature": "L2_HypertensionComp",
+            "types": "",
+            "id": 158
+        },
+        {
+            "explanation": "Hypertension essential (level 2)(number of diagnostics)",
+            "feature": "L2_HypertensionEssential",
+            "types": "",
+            "id": 159
+        },
+        {
+            "explanation": "Hypertriglyceridemia (level 2)(number of diagnostics)",
+            "feature": "L2_Hypertriglyceridemia",
+            "types": "",
+            "id": 160
+        },
+        {
+            "explanation": "Hypoglycemia (level 2)(number of diagnostics)",
+            "feature": "L2_Hypoglycemia",
+            "types": "",
+            "id": 161
+        },
+        {
+            "explanation": "Hypokalemia (level 2)(number of diagnostics)",
+            "feature": "L2_Hypokalemia",
+            "types": "",
+            "id": 162
+        },
+        {
+            "explanation": "Hyposmolarity (level 2)(number of diagnostics)",
+            "feature": "L2_Hyposmolarity",
+            "types": "",
+            "id": 163
+        },
+        {
+            "explanation": "Hypotension (level 2)(number of diagnostics)",
+            "feature": "L2_Hypotension",
+            "types": "",
+            "id": 164
+        },
+        {
+            "explanation": "Hypothyroidism (level 2)(number of diagnostics)",
+            "feature": "L2_Hypothyroidism",
+            "types": "",
+            "id": 165
+        },
+        {
+            "explanation": "Impetigo (level 2)(number of diagnostics)",
+            "feature": "L2_Impetigo",
+            "types": "",
+            "id": 166
+        },
+        {
+            "explanation": "Impaired glucose abnormal (level 2)(number of diagnostics)",
+            "feature": "L2_ImpGlucoseAbnormal",
+            "types": "",
+            "id": 167
+        },
+        {
+            "explanation": "Impotence (level 2)(number of diagnostics)",
+            "feature": "L2_Impotence",
+            "types": "",
+            "id": 168
+        },
+        {
+            "explanation": "Inadequated diet (level 2)(number of diagnostics)",
+            "feature": "L2_InadequatedDiet",
+            "types": "",
+            "id": 169
+        },
+        {
+            "explanation": "Insomnia (level 2)(number of diagnostics)",
+            "feature": "L2_Insomnia",
+            "types": "",
+            "id": 170
+        },
+        {
+            "explanation": "Insomnio (no organic) (level 2)(number of diagnostics)",
+            "feature": "L2_InsomnioNO",
+            "types": "",
+            "id": 171
+        },
+        {
+            "explanation": "Intestinal infection (level 2)(number of diagnostics)",
+            "feature": "L2_IntestinalInfection",
+            "types": "",
+            "id": 172
+        },
+        {
+            "explanation": "Intestinal malabsorption (level 2)(number of diagnostics)",
+            "feature": "L2_IntestinalMalabsorption",
+            "types": "",
+            "id": 173
+        },
+        {
+            "explanation": "Iron anemia (level 2)(number of diagnostics)",
+            "feature": "L2_IronAnemia",
+            "types": "",
+            "id": 174
+        },
+        {
+            "explanation": "Irritable bowel (level 2)(number of diagnostics)",
+            "feature": "L2_IrritableBowel",
+            "types": "",
+            "id": 175
+        },
+        {
+            "explanation": "Leukocytes (level 2)(number of diagnostics)",
+            "feature": "L2_Leukocytes",
+            "types": "",
+            "id": 176
+        },
+        {
+            "explanation": "Lichen pruritus (level 2)(number of diagnostics)",
+            "feature": "L2_LichenPruritus",
+            "types": "",
+            "id": 177
+        },
+        {
+            "explanation": "Limb cramp (level 2)(number of diagnostics)",
+            "feature": "L2_LimbCramp",
+            "types": "",
+            "id": 178
+        },
+        {
+            "explanation": "Limb pain (level 2)(number of diagnostics)",
+            "feature": "L2_LimbPain",
+            "types": "",
+            "id": 179
+        },
+        {
+            "explanation": "Liver abnormal (level 2)(number of diagnostics)",
+            "feature": "L2_LiverAbnormal",
+            "types": "",
+            "id": 180
+        },
+        {
+            "explanation": "Lumbar pain (level 2)(number of diagnostics)",
+            "feature": "L2_LumbarPain",
+            "types": "",
+            "id": 181
+        },
+        {
+            "explanation": "Lymphadenitis (level 2)(number of diagnostics)",
+            "feature": "L2_Lymphadenitis",
+            "types": "",
+            "id": 182
+        },
+        {
+            "explanation": "Malaise (level 2)(number of diagnostics)",
+            "feature": "L2_Malaise",
+            "types": "",
+            "id": 183
+        },
+        {
+            "explanation": "Male genital infection (level 2)(number of diagnostics)",
+            "feature": "L2_MaleGenitalInf",
+            "types": "",
+            "id": 184
+        },
+        {
+            "explanation": "Malnutrition (level 2)(number of diagnostics)",
+            "feature": "L2_Malnutrition",
+            "types": "",
+            "id": 185
+        },
+        {
+            "explanation": "Memory loss (level 2)(number of diagnostics)",
+            "feature": "L2_MemoryLoss",
+            "types": "",
+            "id": 186
+        },
+        {
+            "explanation": "Menopausal (level 2)(number of diagnostics)",
+            "feature": "L2_Menopausal",
+            "types": "",
+            "id": 187
+        },
+        {
+            "explanation": "Menstruation disorder (level 2)(number of diagnostics)",
+            "feature": "L2_MenstruationDisorder",
+            "types": "",
+            "id": 188
+        },
+        {
+            "explanation": "Mental miscelanea (level 2)(number of diagnostics)",
+            "feature": "L2_MentalMiscelanea",
+            "types": "",
+            "id": 189
+        },
+        {
+            "explanation": "Mental retardation (level 2)(number of diagnostics)",
+            "feature": "L2_MentalRetardation",
+            "types": "",
+            "id": 190
+        },
+        {
+            "explanation": "Metabolic mineral (level 2)(number of diagnostics)",
+            "feature": "L2_MetabolicMineral",
+            "types": "",
+            "id": 191
+        },
+        {
+            "explanation": "Metabolic other (level 2)(number of diagnostics)",
+            "feature": "L2_MetabolicOther",
+            "types": "",
+            "id": 192
+        },
+        {
+            "explanation": "Migraine (level 2)(number of diagnostics)",
+            "feature": "L2_Migraine",
+            "types": "",
+            "id": 193
+        },
+        {
+            "explanation": "Mixed hyperlipidemia (level 2)(number of diagnostics)",
+            "feature": "L2_MixedHyperlipidemia",
+            "types": "",
+            "id": 194
+        },
+        {
+            "explanation": "Mixuria (level 2)(number of diagnostics)",
+            "feature": "L2_Mixuria",
+            "types": "",
+            "id": 195
+        },
+        {
+            "explanation": "Mood disorder (level 2)(number of diagnostics)",
+            "feature": "L2_MoodDisorder",
+            "types": "",
+            "id": 196
+        },
+        {
+            "explanation": "Muscle spasm (level 2)(number of diagnostics)",
+            "feature": "L2_MuscleSpasm",
+            "types": "",
+            "id": 197
+        },
+        {
+            "explanation": "Myalgia (level 2)(number of diagnostics)",
+            "feature": "L2_Myalgia",
+            "types": "",
+            "id": 198
+        },
+        {
+            "explanation": "Mycosis foot (level 2)(number of diagnostics)",
+            "feature": "L2_MycosisFoot",
+            "types": "",
+            "id": 199
+        },
+        {
+            "explanation": "Mycosis other (level 2)(number of diagnostics)",
+            "feature": "L2_MycosisOther",
+            "types": "",
+            "id": 200
+        },
+        {
+            "explanation": "Myopathy (level 2)(number of diagnostics)",
+            "feature": "L2_Myopathy",
+            "types": "",
+            "id": 201
+        },
+        {
+            "explanation": "Nails disease (level 2)(number of diagnostics)",
+            "feature": "L2_Nails",
+            "types": "",
+            "id": 202
+        },
+        {
+            "explanation": "Nasal cavity (level 2)(number of diagnostics)",
+            "feature": "L2_NasalCavity",
+            "types": "",
+            "id": 203
+        },
+        {
+            "explanation": "Neo skin (level 2)(number of diagnostics)",
+            "feature": "L2_NeoSkin",
+            "types": "",
+            "id": 204
+        },
+        {
+            "explanation": "Nervous system (level 2)(number of diagnostics)",
+            "feature": "L2_NervousSystem",
+            "types": "",
+            "id": 205
+        },
+        {
+            "explanation": "Nervous system other (level 2)(number of diagnostics)",
+            "feature": "L2_NervousSystemOther",
+            "types": "",
+            "id": 206
+        },
+        {
+            "explanation": "Neuritis radiculitis (level 2)(number of diagnostics)",
+            "feature": "L2_NeurRadiculitis",
+            "types": "",
+            "id": 207
+        },
+        {
+            "explanation": "Nocturia (level 2)(number of diagnostics)",
+            "feature": "L2_Nocturia",
+            "types": "",
+            "id": 208
+        },
+        {
+            "explanation": "Non follow of treatment (level 2)(number of diagnostics)",
+            "feature": "L2_NonFollow",
+            "types": "",
+            "id": 209
+        },
+        {
+            "explanation": "Obesity (level 2)(number of diagnostics)",
+            "feature": "L2_Obesity",
+            "types": "",
+            "id": 210
+        },
+        {
+            "explanation": "Open wound (level 2)(number of diagnostics)",
+            "feature": "L2_OpenWound",
+            "types": "",
+            "id": 211
+        },
+        {
+            "explanation": "Oral (level 2)(number of diagnostics)",
+            "feature": "L2_Oral",
+            "types": "",
+            "id": 212
+        },
+        {
+            "explanation": "Description",
+            "feature": "Feature",
+            "types": "",
+            "id": 213
+        },
+        {
+            "explanation": "Osteoarthrosis (level 2)(number of diagnostics)",
+            "feature": "L2_Osteoarthrosis",
+            "types": "",
+            "id": 214
+        },
+        {
+            "explanation": "Osteoporosis (level 2)(number of diagnostics)",
+            "feature": "L2_Osteoporosis",
+            "types": "",
+            "id": 215
+        },
+        {
+            "explanation": "Otalgia (level 2)(number of diagnostics)",
+            "feature": "L2_Otalgia",
+            "types": "",
+            "id": 216
+        },
+        {
+            "explanation": "Other infection (level 2)(number of diagnostics)",
+            "feature": "L2_OtherInfection",
+            "types": "",
+            "id": 217
+        },
+        {
+            "explanation": "Otitis media (level 2)(number of diagnostics)",
+            "feature": "L2_OtitisMedia",
+            "types": "",
+            "id": 218
+        },
+        {
+            "explanation": "Ovarian cyst (level 2)(number of diagnostics)",
+            "feature": "L2_OvarianCyst",
+            "types": "",
+            "id": 219
+        },
+        {
+            "explanation": "Ovaries (level 2)(number of diagnostics)",
+            "feature": "L2_Ovaries",
+            "types": "",
+            "id": 220
+        },
+        {
+            "explanation": "Overweight (level 2)(number of diagnostics)",
+            "feature": "L2_Overweight",
+            "types": "",
+            "id": 221
+        },
+        {
+            "explanation": "Pain joint (level 2)(number of diagnostics)",
+            "feature": "L2_PainJoint",
+            "types": "",
+            "id": 222
+        },
+        {
+            "explanation": "Pancreas (level 2)(number of diagnostics)",
+            "feature": "L2_Pancreas",
+            "types": "",
+            "id": 223
+        },
+        {
+            "explanation": "Parasite infection (level 2)(number of diagnostics)",
+            "feature": "L2_ParasiteInfection",
+            "types": "",
+            "id": 224
+        },
+        {
+            "explanation": "Parkinson (level 2)(number of diagnostics)",
+            "feature": "L2_Parkinson",
+            "types": "",
+            "id": 225
+        },
+        {
+            "explanation": "Pericardic endocardic miocardic (level 2)(number of diagnostics)",
+            "feature": "L2_PerEndMiocard",
+            "types": "",
+            "id": 226
+        },
+        {
+            "explanation": "Peripheral neuropathy (level 2)(number of diagnostics)",
+            "feature": "L2_PeriphNeuropathy",
+            "types": "",
+            "id": 227
+        },
+        {
+            "explanation": "Pneumonia (level 2)(number of diagnostics)",
+            "feature": "L2_Pneumonia",
+            "types": "",
+            "id": 228
+        },
+        {
+            "explanation": "Peripheral nervous system (level 2)(number of diagnostics)",
+            "feature": "L2_PNS",
+            "types": "",
+            "id": 229
+        },
+        {
+            "explanation": "Nervous system face (level 2)(number of diagnostics)",
+            "feature": "L2_PNSFace",
+            "types": "",
+            "id": 230
+        },
+        {
+            "explanation": "PNS Inflamatory or Toxic (level 2)(number of diagnostics)",
+            "feature": "L2_PNSInflamToxic",
+            "types": "",
+            "id": 231
+        },
+        {
+            "explanation": "Polydipsia (level 2)(number of diagnostics)",
+            "feature": "L2_Polydipsia",
+            "types": "",
+            "id": 232
+        },
+        {
+            "explanation": "Polyuria (level 2)(number of diagnostics)",
+            "feature": "L2_Polyuria",
+            "types": "",
+            "id": 233
+        },
+        {
+            "explanation": "Proctology (level 2)(number of diagnostics)",
+            "feature": "L2_Proctology",
+            "types": "",
+            "id": 234
+        },
+        {
+            "explanation": "Prostate benign (level 2)(number of diagnostics)",
+            "feature": "L2_ProstateBenign",
+            "types": "",
+            "id": 235
+        },
+        {
+            "explanation": "Proteinuria (level 2)(number of diagnostics)",
+            "feature": "L2_Proteinuria",
+            "types": "",
+            "id": 236
+        },
+        {
+            "explanation": "PSA (level 2)(number of diagnostics)",
+            "feature": "L2_PSA",
+            "types": "",
+            "id": 237
+        },
+        {
+            "explanation": "Psoriasis (level 2)(number of diagnostics)",
+            "feature": "L2_Psoriasis",
+            "types": "",
+            "id": 238
+        },
+        {
+            "explanation": "Pyrosis (level 2)(number of diagnostics)",
+            "feature": "L2_Pyrosis",
+            "types": "",
+            "id": 239
+        },
+        {
+            "explanation": "Renal (level 2)(number of diagnostics)",
+            "feature": "L2_Renal",
+            "types": "",
+            "id": 240
+        },
+        {
+            "explanation": "Respiratory fail (level 2)(number of diagnostics)",
+            "feature": "L2_RespiratoryFail",
+            "types": "",
+            "id": 241
+        },
+        {
+            "explanation": "Respiratory upper chronic (level 2)(number of diagnostics)",
+            "feature": "L2_RespUpAcute",
+            "types": "",
+            "id": 242
+        },
+        {
+            "explanation": "Respiratory upper acute (level 2)(number of diagnostics)",
+            "feature": "L2_RespUpChronic",
+            "types": "",
+            "id": 243
+        },
+        {
+            "explanation": "Rheumatic pain (level 2)(number of diagnostics)",
+            "feature": "L2_RheumaticPain",
+            "types": "",
+            "id": 244
+        },
+        {
+            "explanation": "Rhinitis (level 2)(number of diagnostics)",
+            "feature": "L2_Rhinitis",
+            "types": "",
+            "id": 245
+        },
+        {
+            "explanation": "Restless legs syndrome (level 2)(number of diagnostics)",
+            "feature": "L2_RLS",
+            "types": "",
+            "id": 246
+        },
+        {
+            "explanation": "Schizophrenic (level 2)(number of diagnostics)",
+            "feature": "L2_Schizophrenic",
+            "types": "",
+            "id": 247
+        },
+        {
+            "explanation": "Sciatic pain (level 2)(number of diagnostics)",
+            "feature": "L2_SciaticPain",
+            "types": "",
+            "id": 248
+        },
+        {
+            "explanation": "Screening (level 2)(number of diagnostics)",
+            "feature": "L2_Screening",
+            "types": "",
+            "id": 249
+        },
+        {
+            "explanation": "Seborrheic cyst (level 2)(number of diagnostics)",
+            "feature": "L2_SeborrheicCyst",
+            "types": "",
+            "id": 250
+        },
+        {
+            "explanation": "Seborrheic dermatitis (level 2)(number of diagnostics)",
+            "feature": "L2_SeborrheicDermatitis",
+            "types": "",
+            "id": 251
+        },
+        {
+            "explanation": "Sex dysfunction (level 2)(number of diagnostics)",
+            "feature": "L2_SexDysfunction",
+            "types": "",
+            "id": 252
+        },
+        {
+            "explanation": "Shoulder (level 2)(number of diagnostics)",
+            "feature": "L2_Shoulder",
+            "types": "",
+            "id": 253
+        },
+        {
+            "explanation": "Sinus (level 2)(number of diagnostics)",
+            "feature": "L2_Sinus",
+            "types": "",
+            "id": 254
+        },
+        {
+            "explanation": "Skin atrophic (level 2)(number of diagnostics)",
+            "feature": "L2_SkinAtrophic",
+            "types": "",
+            "id": 255
+        },
+        {
+            "explanation": "Skin inflammatory (level 2)(number of diagnostics)",
+            "feature": "L2_SkinInflammatory",
+            "types": "",
+            "id": 256
+        },
+        {
+            "explanation": "Skin keratosis (level 2)(number of diagnostics)",
+            "feature": "L2_SkinKeratosis",
+            "types": "",
+            "id": 257
+        },
+        {
+            "explanation": "Skin other (level 2)(number of diagnostics)",
+            "feature": "L2_SkinOther",
+            "types": "",
+            "id": 258
+        },
+        {
+            "explanation": "Skin sense (level 2)(number of diagnostics)",
+            "feature": "L2_SkinSense",
+            "types": "",
+            "id": 259
+        },
+        {
+            "explanation": "Skin viric (level 2)(number of diagnostics)",
+            "feature": "L2_SkinViric",
+            "types": "",
+            "id": 260
+        },
+        {
+            "explanation": "Sleep (level 2)(number of diagnostics)",
+            "feature": "L2_Sleep",
+            "types": "",
+            "id": 261
+        },
+        {
+            "explanation": "Sleep apnea (level 2)(number of diagnostics)",
+            "feature": "L2_SleepApnea",
+            "types": "",
+            "id": 262
+        },
+        {
+            "explanation": "Spinal stenosis (level 2)(number of diagnostics)",
+            "feature": "L2_SpinalStenosis",
+            "types": "",
+            "id": 263
+        },
+        {
+            "explanation": "Spondylosis (level 2)(number of diagnostics)",
+            "feature": "L2_Spondylosis",
+            "types": "",
+            "id": 264
+        },
+        {
+            "explanation": "Sprains (level 2)(number of diagnostics)",
+            "feature": "L2_Sprains",
+            "types": "",
+            "id": 265
+        },
+        {
+            "explanation": "Stress (level 2)(number of diagnostics)",
+            "feature": "L2_Stress",
+            "types": "",
+            "id": 266
+        },
+        {
+            "explanation": "Superficial injury (level 2)(number of diagnostics)",
+            "feature": "L2_SuperficialInjury",
+            "types": "",
+            "id": 267
+        },
+        {
+            "explanation": "Sweat gland (level 2)(number of diagnostics)",
+            "feature": "L2_SweatGland",
+            "types": "",
+            "id": 268
+        },
+        {
+            "explanation": "Syncope (level 2)(number of diagnostics)",
+            "feature": "L2_Syncope",
+            "types": "",
+            "id": 269
+        },
+        {
+            "explanation": "Syndrome X (level 2)(number of diagnostics)",
+            "feature": "L2_SyndromeX",
+            "types": "",
+            "id": 270
+        },
+        {
+            "explanation": "Synovium and tendon (level 2)(number of diagnostics)",
+            "feature": "L2_SynoviumTendon",
+            "types": "",
+            "id": 271
+        },
+        {
+            "explanation": "Teeth (level 2)(number of diagnostics)",
+            "feature": "L2_Teeth",
+            "types": "",
+            "id": 272
+        },
+        {
+            "explanation": "Temporomandibular (level 2)(number of diagnostics)",
+            "feature": "L2_Temporomandibular",
+            "types": "",
+            "id": 273
+        },
+        {
+            "explanation": "Tensional psicalgia (level 2)(number of diagnostics)",
+            "feature": "L2_TensionalPsicalgia",
+            "types": "",
+            "id": 274
+        },
+        {
+            "explanation": "Testicular dysfunction (level 2)(number of diagnostics)",
+            "feature": "L2_TesticularDysfunction",
+            "types": "",
+            "id": 275
+        },
+        {
+            "explanation": "Thyroid other (level 2)(number of diagnostics)",
+            "feature": "L2_ThyroidOther",
+            "types": "",
+            "id": 276
+        },
+        {
+            "explanation": "Tobacco (level 2)(number of diagnostics)",
+            "feature": "L2_Tobacco",
+            "types": "",
+            "id": 277
+        },
+        {
+            "explanation": "Tonsils and adenoids (level 2)(number of diagnostics)",
+            "feature": "L2_TonsilsAdenoids",
+            "types": "",
+            "id": 278
+        },
+        {
+            "explanation": "Trigger finger (level 2)(number of diagnostics)",
+            "feature": "L2_TriggerFinger",
+            "types": "",
+            "id": 279
+        },
+        {
+            "explanation": "Ulcer (level 2)(number of diagnostics)",
+            "feature": "L2_Ulcer",
+            "types": "",
+            "id": 280
+        },
+        {
+            "explanation": "Ulcerous colitis (level 2)(number of diagnostics)",
+            "feature": "L2_UlcerousColitis",
+            "types": "",
+            "id": 281
+        },
+        {
+            "explanation": "Urinary incontinency (level 2)(number of diagnostics)",
+            "feature": "L2_UrinaryIncontinency",
+            "types": "",
+            "id": 282
+        },
+        {
+            "explanation": "Urinary urgency (level 2)(number of diagnostics)",
+            "feature": "L2_UrinaryUrgency",
+            "types": "",
+            "id": 283
+        },
+        {
+            "explanation": "Urticaria (level 2)(number of diagnostics)",
+            "feature": "L2_Urticaria",
+            "types": "",
+            "id": 284
+        },
+        {
+            "explanation": "UTI Other (level 2)(number of diagnostics)",
+            "feature": "L2_UTIOther",
+            "types": "",
+            "id": 285
+        },
+        {
+            "explanation": "Vaccine (level 2)(number of diagnostics)",
+            "feature": "L2_Vaccine",
+            "types": "",
+            "id": 286
+        },
+        {
+            "explanation": "Vaginal (level 2)(number of diagnostics)",
+            "feature": "L2_Vaginal",
+            "types": "",
+            "id": 287
+        },
+        {
+            "explanation": "Varix leg (level 2)(number of diagnostics)",
+            "feature": "L2_VarixLeg",
+            "types": "",
+            "id": 288
+        },
+        {
+            "explanation": "Vascular peripheral (level 2)(number of diagnostics)",
+            "feature": "L2_VascularPeripheral",
+            "types": "",
+            "id": 289
+        },
+        {
+            "explanation": "Vertiginous syndromes (level 2)(number of diagnostics)",
+            "feature": "L2_VertiginousSyndromes",
+            "types": "",
+            "id": 290
+        },
+        {
+            "explanation": "Vih (level 2)(number of diagnostics)",
+            "feature": "L2_VIH",
+            "types": "",
+            "id": 291
+        },
+        {
+            "explanation": "Vitamin B (level 2)(number of diagnostics)",
+            "feature": "L2_VitaminB",
+            "types": "",
+            "id": 292
+        },
+        {
+            "explanation": "Vitamin D (level 2)(number of diagnostics)",
+            "feature": "L2_VitaminD",
+            "types": "",
+            "id": 293
+        },
+        {
+            "explanation": "Vomiting and nausea (level 2)(number of diagnostics)",
+            "feature": "L2_VomitingNausea",
+            "types": "",
+            "id": 294
+        },
+        {
+            "explanation": "Weight gain (level 2)(number of diagnostics)",
+            "feature": "L2_WeightGain",
+            "types": "",
+            "id": 295
+        },
+        {
+            "explanation": "Weight loss (level 2)(number of diagnostics)",
+            "feature": "L2_WeightLoss",
+            "types": "",
+            "id": 296
+        },
+        {
+            "explanation": "Anemia (level 1)(number of diagnostics)",
+            "feature": "L1_Anemia",
+            "types": "",
+            "id": 297
+        },
+        {
+            "explanation": "Back (level 1)(number of diagnostics)",
+            "feature": "L1_Back",
+            "types": "",
+            "id": 298
+        },
+        {
+            "explanation": "Colitis miscelanea (level 1)(number of diagnostics)",
+            "feature": "L1_ColitisMSC",
+            "types": "",
+            "id": 299
+        },
+        {
+            "explanation": "Connective tissue (level 1)(number of diagnostics)",
+            "feature": "L1_ConnectiveTissue",
+            "types": "",
+            "id": 300
+        },
+        {
+            "explanation": "Dermatitis (level 1)(number of diagnostics)",
+            "feature": "L1_Dermatitis",
+            "types": "",
+            "id": 301
+        },
+        {
+            "explanation": "Digestive (level 1)(number of diagnostics)",
+            "feature": "L1_Digestive",
+            "types": "",
+            "id": 302
+        },
+        {
+            "explanation": "DM Symptom (level 1)(number of diagnostics)",
+            "feature": "L1_DMSymptom",
+            "types": "",
+            "id": 303
+        },
+        {
+            "explanation": "Glucose (level 1)(number of diagnostics)",
+            "feature": "L1_Glucose",
+            "types": "",
+            "id": 304
+        },
+        {
+            "explanation": "Headache (level 1)(number of diagnostics)",
+            "feature": "L1_Headache",
+            "types": "",
+            "id": 305
+        },
+        {
+            "explanation": "Herpes (level 1)(number of diagnostics)",
+            "feature": "L1_Herpes",
+            "types": "",
+            "id": 306
+        },
+        {
+            "explanation": "Hormonal (level 1)(number of diagnostics)",
+            "feature": "L1_Hormonal",
+            "types": "",
+            "id": 307
+        },
+        {
+            "explanation": "Insomnia (level 1)(number of diagnostics)",
+            "feature": "L1_Insomnia",
+            "types": "",
+            "id": 308
+        },
+        {
+            "explanation": "Ischemic cardiopathy (level 1)(number of diagnostics)",
+            "feature": "L1_IschemicCardiopathy",
+            "types": "",
+            "id": 309
+        },
+        {
+            "explanation": "Mycosis foot (level 1)(number of diagnostics)",
+            "feature": "L1_MycosisFoot",
+            "types": "",
+            "id": 310
+        },
+        {
+            "explanation": "Nervous system other (level 1)(number of diagnostics)",
+            "feature": "L1_NervousSystemOther",
+            "types": "",
+            "id": 311
+        },
+        {
+            "explanation": "Prostate (level 1)(number of diagnostics)",
+            "feature": "L1_Prostate",
+            "types": "",
+            "id": 312
+        },
+        {
+            "explanation": "Respinfec (level 1)(number of diagnostics)",
+            "feature": "L1_RespInfec",
+            "types": "",
+            "id": 313
+        },
+        {
+            "explanation": "Skin (level 1)(number of diagnostics)",
+            "feature": "L1_Skin",
+            "types": "",
+            "id": 314
+        },
+        {
+            "explanation": "Skin infection (level 1)(number of diagnostics)",
+            "feature": "L1_SkinInfection",
+            "types": "",
+            "id": 315
+        },
+        {
+            "explanation": "Skin inflammatory (level 1)(number of diagnostics)",
+            "feature": "L1_SkinInflammatory",
+            "types": "",
+            "id": 316
+        },
+        {
+            "explanation": "Skin other (level 1)(number of diagnostics)",
+            "feature": "L1_SkinOther",
+            "types": "",
+            "id": 317
+        },
+        {
+            "explanation": "Oldest start year of all diagnostics",
+            "feature": "StartYear",
+            "types": "",
+            "id": 318
+        },
+        {
+            "explanation": "Number of diagnostics with start year < 2009",
+            "feature": "PreviousYear",
+            "types": "",
+            "id": 319
+        },
+        {
+            "explanation": "Number of different level1 with level2=DMSymptom",
+            "feature": "DiffDMOtherRelatedSymptoms",
+            "types": "",
+            "id": 320
+        },
+        {
+            "explanation": "Visits with diagnostics with level2=DMSymptom",
+            "feature": "VisitsDMOtherRelatedSymptoms",
+            "types": "",
+            "id": 321
+        },
+        {
+            "explanation": "Different level 2 categories with diagnostics",
+            "feature": "DiffLevel2Diag",
+            "types": "",
+            "id": 322
+        },
+        {
+            "explanation": "Different 3 digit icd9 categories with diagnostics",
+            "feature": "Tot3digitICD9",
+            "types": "",
+            "id": 323
+        },
+        {
+            "explanation": "Total diagnostics per weighted year",
+            "feature": "TotDiagWYear",
+            "types": "",
+            "id": 324
+        },
+        {
+            "explanation": "Total diagnostics",
+            "feature": "TotDiag",
+            "types": "",
+            "id": 325
+        },
+        {
+            "explanation": "Total diagnostics per visit",
+            "feature": "TotDiagPerVisit",
+            "types": "",
+            "id": 326
+        },
+        {
+            "explanation": "Total diagnostics without transcripts",
+            "feature": "TotDiagWOTranscript",
+            "types": "",
+            "id": 327
+        },
+        {
+            "explanation": "Acetaminophen (binary)",
+            "feature": "acetaminophen_bin",
+            "types": "",
+            "id": 328
+        },
+        {
+            "explanation": "Acetaminophen (max dose)",
+            "feature": "acetaminophen_dose",
+            "types": "",
+            "id": 329
+        },
+        {
+            "explanation": "Acetaminophen (prescriptions)",
+            "feature": "acetaminophen_npr",
+            "types": "",
+            "id": 330
+        },
+        {
+            "explanation": "ACEI (binary)",
+            "feature": "ACEI_bin",
+            "types": "",
+            "id": 331
+        },
+        {
+            "explanation": "Benazepril (binary)",
+            "feature": "benazepril_bin",
+            "types": "",
+            "id": 332
+        },
+        {
+            "explanation": "Benazepril (max dose)",
+            "feature": "benazepril_dose",
+            "types": "",
+            "id": 333
+        },
+        {
+            "explanation": "Enalapril (binary)",
+            "feature": "enalapril_bin",
+            "types": "",
+            "id": 334
+        },
+        {
+            "explanation": "Enalapril (max dose)",
+            "feature": "enalapril_dose",
+            "types": "",
+            "id": 335
+        },
+        {
+            "explanation": "Ramipril (binary)",
+            "feature": "ramipril_bin",
+            "types": "",
+            "id": 336
+        },
+        {
+            "explanation": "Ramipril (max dose)",
+            "feature": "ramipril_dose",
+            "types": "",
+            "id": 337
+        },
+        {
+            "explanation": "Lisinopril (binary)",
+            "feature": "lisinopril_bin",
+            "types": "",
+            "id": 338
+        },
+        {
+            "explanation": "Lisinopril (max dose)",
+            "feature": "lisinopril_dose",
+            "types": "",
+            "id": 339
+        },
+        {
+            "explanation": "ACEI (max dose)",
+            "feature": "ACEI_dose",
+            "types": "",
+            "id": 340
+        },
+        {
+            "explanation": "ACEI (prescriptions)",
+            "feature": "ACEI_npr",
+            "types": "",
+            "id": 341
+        },
+        {
+            "explanation": "Aspirin (binary)",
+            "feature": "aspirin_bin",
+            "types": "",
+            "id": 342
+        },
+        {
+            "explanation": "Aspirin (max dose)",
+            "feature": "aspirin_dose",
+            "types": "",
+            "id": 343
+        },
+        {
+            "explanation": "Aspirin (prescriptions)",
+            "feature": "aspirin_npr",
+            "types": "",
+            "id": 344
+        },
+        {
+            "explanation": "Description",
+            "feature": "Feature",
+            "types": "",
+            "id": 345
+        },
+        {
+            "explanation": "Losartan (binary)",
+            "feature": "losartan_bin",
+            "types": "",
+            "id": 346
+        },
+        {
+            "explanation": "Olmesartan (binary)",
+            "feature": "olmesartan_bin",
+            "types": "",
+            "id": 347
+        },
+        {
+            "explanation": "Telmisartan (binary)",
+            "feature": "telmisartan_bin",
+            "types": "",
+            "id": 348
+        },
+        {
+            "explanation": "Valsartan (binary)",
+            "feature": "valsartan_bin",
+            "types": "",
+            "id": 349
+        },
+        {
+            "explanation": "Losartan (prescriptions)",
+            "feature": "losartan_npr",
+            "types": "",
+            "id": 350
+        },
+        {
+            "explanation": "Olmesartan (prescriptions)",
+            "feature": "olmesartan_npr",
+            "types": "",
+            "id": 351
+        },
+        {
+            "explanation": "Telmisartan (prescriptions)",
+            "feature": "telmisartan_npr",
+            "types": "",
+            "id": 352
+        },
+        {
+            "explanation": "Valsartan (prescriptions)",
+            "feature": "valsartan_npr",
+            "types": "",
+            "id": 353
+        },
+        {
+            "explanation": "Losartan (max dose)",
+            "feature": "losartan_dose",
+            "types": "",
+            "id": 354
+        },
+        {
+            "explanation": "Olmesartan (max dose)",
+            "feature": "olmesartan_dose",
+            "types": "",
+            "id": 355
+        },
+        {
+            "explanation": "Telmisartan (max dose)",
+            "feature": "telmisartan_dose",
+            "types": "",
+            "id": 356
+        },
+        {
+            "explanation": "Valsartan (max dose)",
+            "feature": "valsartan_dose",
+            "types": "",
+            "id": 357
+        },
+        {
+            "explanation": "AIIRA (different active principles)",
+            "feature": "AIIRA_nap",
+            "types": "",
+            "id": 358
+        },
+        {
+            "explanation": "AIIRA (binary)",
+            "feature": "AIIRA_bin",
+            "types": "",
+            "id": 359
+        },
+        {
+            "explanation": "Losartan (max dose)",
+            "feature": "losartan_telmisartan_dose",
+            "types": "",
+            "id": 360
+        },
+        {
+            "explanation": "AIIRA (prescriptions)",
+            "feature": "AIIRA_npr",
+            "types": "",
+            "id": 361
+        },
+        {
+            "explanation": "Antifungal (prescriptions)",
+            "feature": "antifungical_general_npr",
+            "types": "",
+            "id": 362
+        },
+        {
+            "explanation": "Antifungal (different active principles)",
+            "feature": "antifungical_general_nap",
+            "types": "",
+            "id": 363
+        },
+        {
+            "explanation": "Antifungal (binary)",
+            "feature": "antifungical_general_bin",
+            "types": "",
+            "id": 364
+        },
+        {
+            "explanation": "Antifungal (prescriptions)",
+            "feature": "antifungical_topical_npr",
+            "types": "",
+            "id": 365
+        },
+        {
+            "explanation": "Antifungal (different active principles)",
+            "feature": "antifungical_topical_nap",
+            "types": "",
+            "id": 366
+        },
+        {
+            "explanation": "Antifungal (binary)",
+            "feature": "antifungical_topical_bin",
+            "types": "",
+            "id": 367
+        },
+        {
+            "explanation": "Antiplatelet (binary)",
+            "feature": "antiplatelet_bin",
+            "types": "",
+            "id": 368
+        },
+        {
+            "explanation": "Antiplatelet (max dose)",
+            "feature": "antiplatelet_dose",
+            "types": "",
+            "id": 369
+        },
+        {
+            "explanation": "Antiplatelet (prescriptions)",
+            "feature": "antiplatelet_npr",
+            "types": "",
+            "id": 370
+        },
+        {
+            "explanation": "Alprazolam (binary)",
+            "feature": "alprazolam_bin",
+            "types": "",
+            "id": 371
+        },
+        {
+            "explanation": "Alprazolam (max dose)",
+            "feature": "alprazolam_dose",
+            "types": "",
+            "id": 372
+        },
+        {
+            "explanation": "Clonazepam (binary)",
+            "feature": "clonazepam_bin",
+            "types": "",
+            "id": 373
+        },
+        {
+            "explanation": "Clonazepam (max dose)",
+            "feature": "clonazepam_dose",
+            "types": "",
+            "id": 374
+        },
+        {
+            "explanation": "Diazepam (binary)",
+            "feature": "diazepam_bin",
+            "types": "",
+            "id": 375
+        },
+        {
+            "explanation": "Diazepam (max dose)",
+            "feature": "diazepam_dose",
+            "types": "",
+            "id": 376
+        },
+        {
+            "explanation": "Lorazepam (binary)",
+            "feature": "lorazepam_bin",
+            "types": "",
+            "id": 377
+        },
+        {
+            "explanation": "Lorazepam (max dose)",
+            "feature": "lorazepam_dose",
+            "types": "",
+            "id": 378
+        },
+        {
+            "explanation": "Temazepam (binary)",
+            "feature": "temazepam_bin",
+            "types": "",
+            "id": 379
+        },
+        {
+            "explanation": "Temazepam (max dose)",
+            "feature": "temazepam_dose",
+            "types": "",
+            "id": 380
+        },
+        {
+            "explanation": "Benzodiazepine (different active principles)",
+            "feature": "benzodiazepine_nap",
+            "types": "",
+            "id": 381
+        },
+        {
+            "explanation": "Benzodiazepine (binary)",
+            "feature": "benzodiazepine_bin",
+            "types": "",
+            "id": 382
+        },
+        {
+            "explanation": "Benzodiazepine (prescriptions)",
+            "feature": "benzodiazepine_npr",
+            "types": "",
+            "id": 383
+        },
+        {
+            "explanation": "Atenolol (binary)",
+            "feature": "atenolol_bin",
+            "types": "",
+            "id": 384
+        },
+        {
+            "explanation": "Atenolol (prescriptions)",
+            "feature": "atenolol_npr",
+            "types": "",
+            "id": 385
+        },
+        {
+            "explanation": "Atenolol (max dose)",
+            "feature": "atenolol_dose",
+            "types": "",
+            "id": 386
+        },
+        {
+            "explanation": "Carvedilol (binary)",
+            "feature": "carvedilol_bin",
+            "types": "",
+            "id": 387
+        },
+        {
+            "explanation": "Carvedilol (prescriptions)",
+            "feature": "carvedilol_npr",
+            "types": "",
+            "id": 388
+        },
+        {
+            "explanation": "Carvedilol (max dose)",
+            "feature": "carvedilol_dose",
+            "types": "",
+            "id": 389
+        },
+        {
+            "explanation": "Description",
+            "feature": "Feature",
+            "types": "",
+            "id": 390
+        },
+        {
+            "explanation": "Metoprolol (binary)",
+            "feature": "metoprolol_bin",
+            "types": "",
+            "id": 391
+        },
+        {
+            "explanation": "Metoprolol (max dose)",
+            "feature": "metoprolol_dose",
+            "types": "",
+            "id": 392
+        },
+        {
+            "explanation": "Nebivolol (binary)",
+            "feature": "nebivolol_bin",
+            "types": "",
+            "id": 393
+        },
+        {
+            "explanation": "Nebivolol (max dose)",
+            "feature": "nebivolol_dose",
+            "types": "",
+            "id": 394
+        },
+        {
+            "explanation": "Propranolol (binary)",
+            "feature": "propranolol_bin",
+            "types": "",
+            "id": 395
+        },
+        {
+            "explanation": "Propranolol (max dose)",
+            "feature": "propranolol_dose",
+            "types": "",
+            "id": 396
+        },
+        {
+            "explanation": "Betablocker (different active principles)",
+            "feature": "betablocker_nap",
+            "types": "",
+            "id": 397
+        },
+        {
+            "explanation": "Betablocker (binary)",
+            "feature": "betablocker_bin",
+            "types": "",
+            "id": 398
+        },
+        {
+            "explanation": "Betablocker (prescriptions)",
+            "feature": "betablocker_npr",
+            "types": "",
+            "id": 399
+        },
+        {
+            "explanation": "Fenofibrate (max dose)",
+            "feature": "fenofibrate_dose",
+            "types": "",
+            "id": 400
+        },
+        {
+            "explanation": "Fenofibric (max dose)",
+            "feature": "fenofibric_acid_dose",
+            "types": "",
+            "id": 401
+        },
+        {
+            "explanation": "Gemfibrozil (max dose)",
+            "feature": "gemfibrozil_dose",
+            "types": "",
+            "id": 402
+        },
+        {
+            "explanation": "Fenofibrate (binary)",
+            "feature": "fenofibrate_bin",
+            "types": "",
+            "id": 403
+        },
+        {
+            "explanation": "Fenofibric (binary)",
+            "feature": "fenofibric_acid_bin",
+            "types": "",
+            "id": 404
+        },
+        {
+            "explanation": "Gemfibrozil (binary)",
+            "feature": "gemfibrozil_bin",
+            "types": "",
+            "id": 405
+        },
+        {
+            "explanation": "Fibrate (prescriptions)",
+            "feature": "fibrate_npr",
+            "types": "",
+            "id": 406
+        },
+        {
+            "explanation": "Fibrate (binary)",
+            "feature": "fibrate_bin",
+            "types": "",
+            "id": 407
+        },
+        {
+            "explanation": "Fibrate (different active principles)",
+            "feature": "fibrate_nap",
+            "types": "",
+            "id": 408
+        },
+        {
+            "explanation": "Gabapentin (max dose)",
+            "feature": "gabapentin_dose",
+            "types": "",
+            "id": 409
+        },
+        {
+            "explanation": "Pregabalin (max dose)",
+            "feature": "pregabalin_dose",
+            "types": "",
+            "id": 410
+        },
+        {
+            "explanation": "Gabapentin (binary)",
+            "feature": "gabapentin_bin",
+            "types": "",
+            "id": 411
+        },
+        {
+            "explanation": "Pregabalin (binary)",
+            "feature": "pregabalin_bin",
+            "types": "",
+            "id": 412
+        },
+        {
+            "explanation": "GABA (prescriptions)",
+            "feature": "GABA_npr",
+            "types": "",
+            "id": 413
+        },
+        {
+            "explanation": "GABA (binary)",
+            "feature": "GABA_bin",
+            "types": "",
+            "id": 414
+        },
+        {
+            "explanation": "Gastroparesia drugs (binary)",
+            "feature": "gastroparesia_bin",
+            "types": "",
+            "id": 415
+        },
+        {
+            "explanation": "Gastroparesia drugs (max dose)",
+            "feature": "gastroparesia_dose",
+            "types": "",
+            "id": 416
+        },
+        {
+            "explanation": "Gastroparesia drugs (prescriptions)",
+            "feature": "gastroparesia_npr",
+            "types": "",
+            "id": 417
+        },
+        {
+            "explanation": "Glucocorticoid injectable (binary)",
+            "feature": "glucocorticoid_injec_bin",
+            "types": "",
+            "id": 418
+        },
+        {
+            "explanation": "Glucocorticoid injectable (prescriptions)",
+            "feature": "glucocorticoid_injec_npr",
+            "types": "",
+            "id": 419
+        },
+        {
+            "explanation": "Glucocorticoid local (prescriptions)",
+            "feature": "glucocorticoid_local_npr",
+            "types": "",
+            "id": 420
+        },
+        {
+            "explanation": "Glucocorticoid local (different active principles)",
+            "feature": "glucocorticoid_local_nap",
+            "types": "",
+            "id": 421
+        },
+        {
+            "explanation": "Glucocorticoid local (binary)",
+            "feature": "glucocorticoid_local_bin",
+            "types": "",
+            "id": 422
+        },
+        {
+            "explanation": "Betamethasone (prescriptions)",
+            "feature": "betamethasone_local_npr",
+            "types": "",
+            "id": 423
+        },
+        {
+            "explanation": "Betamethasone (binary)",
+            "feature": "betamethasone_local_bin",
+            "types": "",
+            "id": 424
+        },
+        {
+            "explanation": "Hydrocortisone (prescriptions)",
+            "feature": "hydrocortisone_local_npr",
+            "types": "",
+            "id": 425
+        },
+        {
+            "explanation": "Hydrocortisone (binary)",
+            "feature": "hydrocortisone_local_bin",
+            "types": "",
+            "id": 426
+        },
+        {
+            "explanation": "Triamcinolone (prescriptions)",
+            "feature": "triamcinolone_local_npr",
+            "types": "",
+            "id": 427
+        },
+        {
+            "explanation": "Triamcinolone (binary)",
+            "feature": "triamcinolone_local_bin",
+            "types": "",
+            "id": 428
+        },
+        {
+            "explanation": "Glucocorticoid (prescriptions)",
+            "feature": "glucocorticoid_general_npr",
+            "types": "",
+            "id": 429
+        },
+        {
+            "explanation": "Glucocorticoid (different active principles)",
+            "feature": "glucocorticoid_general_nap",
+            "types": "",
+            "id": 430
+        },
+        {
+            "explanation": "Glucocorticoid (binary)",
+            "feature": "glucocorticoid_general_bin",
+            "types": "",
+            "id": 431
+        },
+        {
+            "explanation": "Hydrocortisone (max dose)",
+            "feature": "hydrocortisone_general_dose",
+            "types": "",
+            "id": 432
+        },
+        {
+            "explanation": "Hydrocortisone (binary)",
+            "feature": "hydrocortisone_general_bin",
+            "types": "",
+            "id": 433
+        },
+        {
+            "explanation": "Hydrocortisone (prescriptions)",
+            "feature": "hydrocortisone_general_npr",
+            "types": "",
+            "id": 434
+        },
+        {
+            "explanation": "Description",
+            "feature": "Feature",
+            "types": "",
+            "id": 435
+        },
+        {
+            "explanation": "Methylprednisolone (max dose)",
+            "feature": "methylprednisolone_general_dose",
+            "types": "",
+            "id": 436
+        },
+        {
+            "explanation": "Methylprednisolone (binary)",
+            "feature": "methylprednisolone_general_bin",
+            "types": "",
+            "id": 437
+        },
+        {
+            "explanation": "Methylprednisolone (prescriptions)",
+            "feature": "methylprednisolone_general_npr",
+            "types": "",
+            "id": 438
+        },
+        {
+            "explanation": "Prednisone (max dose)",
+            "feature": "prednisone_general_dose",
+            "types": "",
+            "id": 439
+        },
+        {
+            "explanation": "Prednisone (binary)",
+            "feature": "prednisone_general_bin",
+            "types": "",
+            "id": 440
+        },
+        {
+            "explanation": "Prednisone (prescriptions)",
+            "feature": "prednisone_general_npr",
+            "types": "",
+            "id": 441
+        },
+        {
+            "explanation": "L type calcium channel blocker (different active principles)",
+            "feature": "LtypeCaChB_nap",
+            "types": "",
+            "id": 442
+        },
+        {
+            "explanation": "L type calcium channel blocker (binary)",
+            "feature": "LtypeCaChB_bin",
+            "types": "",
+            "id": 443
+        },
+        {
+            "explanation": "L type calcium channel blocker (prescriptions)",
+            "feature": "LtypeCaChB_npr",
+            "types": "",
+            "id": 444
+        },
+        {
+            "explanation": "Amlodipine (max dose)",
+            "feature": "amlodipine_dose",
+            "types": "",
+            "id": 445
+        },
+        {
+            "explanation": "Amlodipine (binary)",
+            "feature": "amlodipine_bin",
+            "types": "",
+            "id": 446
+        },
+        {
+            "explanation": "Proton pump inhibitor (different active principles)",
+            "feature": "protonpumpinhibitor_nap",
+            "types": "",
+            "id": 447
+        },
+        {
+            "explanation": "Proton pump inhibitor (binary)",
+            "feature": "protonpumpinhibitor_bin",
+            "types": "",
+            "id": 448
+        },
+        {
+            "explanation": "Proton pump inhibitor (prescriptions)",
+            "feature": "protonpumpinhibitor_npr",
+            "types": "",
+            "id": 449
+        },
+        {
+            "explanation": "Statin (different active principles)",
+            "feature": "statin_nap",
+            "types": "",
+            "id": 450
+        },
+        {
+            "explanation": "Statin (prescriptions)",
+            "feature": "statin_npr",
+            "types": "",
+            "id": 451
+        },
+        {
+            "explanation": "Statin (binary)",
+            "feature": "statin_bin",
+            "types": "",
+            "id": 452
+        },
+        {
+            "explanation": "Atorvastatin (max dose)",
+            "feature": "atorvastatin_dose",
+            "types": "",
+            "id": 453
+        },
+        {
+            "explanation": "Lovastatin (max dose)",
+            "feature": "lovastatin_dose",
+            "types": "",
+            "id": 454
+        },
+        {
+            "explanation": "Pravastatin (max dose)",
+            "feature": "pravastatin_dose",
+            "types": "",
+            "id": 455
+        },
+        {
+            "explanation": "Rosuvastatin (max dose)",
+            "feature": "rosuvastatin_dose",
+            "types": "",
+            "id": 456
+        },
+        {
+            "explanation": "Simvastatin (max dose)",
+            "feature": "simvastatin_dose",
+            "types": "",
+            "id": 457
+        },
+        {
+            "explanation": "Atorvastatin (binary)",
+            "feature": "atorvastatin_bin",
+            "types": "",
+            "id": 458
+        },
+        {
+            "explanation": "Lovastatin (binary)",
+            "feature": "lovastatin_bin",
+            "types": "",
+            "id": 459
+        },
+        {
+            "explanation": "Pravastatin (binary)",
+            "feature": "pravastatin_bin",
+            "types": "",
+            "id": 460
+        },
+        {
+            "explanation": "Rosuvastatin (binary)",
+            "feature": "rosuvastatin_bin",
+            "types": "",
+            "id": 461
+        },
+        {
+            "explanation": "Simvastatin (binary)",
+            "feature": "simvastatin_bin",
+            "types": "",
+            "id": 462
+        },
+        {
+            "explanation": "Statin",
+            "feature": "statin_dose_adjusted",
+            "types": "",
+            "id": 463
+        },
+        {
+            "explanation": "Thiazide (different active principles)",
+            "feature": "thiazide_nap",
+            "types": "",
+            "id": 464
+        },
+        {
+            "explanation": "Thiazide (binary)",
+            "feature": "thiazide_bin",
+            "types": "",
+            "id": 465
+        },
+        {
+            "explanation": "Thiazide (prescriptions)",
+            "feature": "thiazide_npr",
+            "types": "",
+            "id": 466
+        },
+        {
+            "explanation": "Hydrochlorothiazide (max dose)",
+            "feature": "hydrochlorothiazide_dose",
+            "types": "",
+            "id": 467
+        },
+        {
+            "explanation": "Niacin (prescriptions)",
+            "feature": "niacin_npr",
+            "types": "",
+            "id": 468
+        },
+        {
+            "explanation": "Niacin (binary)",
+            "feature": "niacin_bin",
+            "types": "",
+            "id": 469
+        },
+        {
+            "explanation": "Ezetimibe (prescriptions)",
+            "feature": "ezetimibe_npr",
+            "types": "",
+            "id": 470
+        },
+        {
+            "explanation": "Ezetimibe (binary)",
+            "feature": "ezetimibe_bin",
+            "types": "",
+            "id": 471
+        },
+        {
+            "explanation": "Antilipemics (prescriptions)",
+            "feature": "antilipid_npr",
+            "types": "",
+            "id": 472
+        },
+        {
+            "explanation": "Antilipemics (binary)",
+            "feature": "antilipid_bin",
+            "types": "",
+            "id": 473
+        },
+        {
+            "explanation": "Nasal route (prescriptions)",
+            "feature": "nasal_npr",
+            "types": "",
+            "id": 474
+        },
+        {
+            "explanation": "Inhalation route (prescriptions)",
+            "feature": "inhalation_npr",
+            "types": "",
+            "id": 475
+        },
+        {
+            "explanation": "Otic route (number of different drugs)",
+            "feature": "otic_nmed",
+            "types": "",
+            "id": 476
+        },
+        {
+            "explanation": "Otic route (different active principles)",
+            "feature": "otic_nap",
+            "types": "",
+            "id": 477
+        },
+        {
+            "explanation": "Otic route (binary)",
+            "feature": "otic_bin",
+            "types": "",
+            "id": 478
+        },
+        {
+            "explanation": "Otic route (prescriptions)",
+            "feature": "otic_npr",
+            "types": "",
+            "id": 479
+        },
+        {
+            "explanation": "Description",
+            "feature": "Feature",
+            "types": "",
+            "id": 480
+        },
+        {
+            "explanation": "Ophtalmic allergy inflamatory (different active principles)",
+            "feature": "allergy_inflam_opht_nap",
+            "types": "",
+            "id": 481
+        },
+        {
+            "explanation": "Ophtalmic allergy inflamatory (binary)",
+            "feature": "allergy_inflam_opht_bin",
+            "types": "",
+            "id": 482
+        },
+        {
+            "explanation": "Ophtalmic allergy inflamatory (prescriptions)",
+            "feature": "allergy_inflam_opht_npr",
+            "types": "",
+            "id": 483
+        },
+        {
+            "explanation": "Ophtalmic antibiotic (different active principles)",
+            "feature": "antibiotic_opht_nap",
+            "types": "",
+            "id": 484
+        },
+        {
+            "explanation": "Ophtalmic antibiotic (binary)",
+            "feature": "antibiotic_opht_bin",
+            "types": "",
+            "id": 485
+        },
+        {
+            "explanation": "Ophtalmic antibiotic (prescriptions)",
+            "feature": "antibiotic_opht_npr",
+            "types": "",
+            "id": 486
+        },
+        {
+            "explanation": "Ophtalmic glaucoma (different active principles)",
+            "feature": "glaucoma_opht_nap",
+            "types": "",
+            "id": 487
+        },
+        {
+            "explanation": "Ophtalmic glaucoma (binary)",
+            "feature": "glaucoma_opht_bin",
+            "types": "",
+            "id": 488
+        },
+        {
+            "explanation": "Ophtalmic glaucoma (prescriptions)",
+            "feature": "glaucoma_opht_npr",
+            "types": "",
+            "id": 489
+        },
+        {
+            "explanation": "Oral contraceptive (prescriptions)",
+            "feature": "oral_contracep_npr",
+            "types": "",
+            "id": 490
+        },
+        {
+            "explanation": "Oral contraceptive (binary)",
+            "feature": "oral_contracep_bin",
+            "types": "",
+            "id": 491
+        },
+        {
+            "explanation": "No oral contraceptive (prescriptions)",
+            "feature": "no_oral_contracep_npr",
+            "types": "",
+            "id": 492
+        },
+        {
+            "explanation": "No oral contraceptive (binary)",
+            "feature": "no_oral_contracep_bin",
+            "types": "",
+            "id": 493
+        },
+        {
+            "explanation": "Alfa1 blocker (prescriptions)",
+            "feature": "alfa1blocker_npr",
+            "types": "",
+            "id": 494
+        },
+        {
+            "explanation": "Calcium (prescriptions)",
+            "feature": "calcium_npr",
+            "types": "",
+            "id": 495
+        },
+        {
+            "explanation": "Calcium (binary)",
+            "feature": "calcium_bin",
+            "types": "",
+            "id": 496
+        },
+        {
+            "explanation": "Coxib (prescriptions)",
+            "feature": "coxib_npr",
+            "types": "",
+            "id": 497
+        },
+        {
+            "explanation": "Digoxin (prescriptions)",
+            "feature": "digoxin_npr",
+            "types": "",
+            "id": 498
+        },
+        {
+            "explanation": "Laxatives (prescriptions)",
+            "feature": "laxatives_npr",
+            "types": "",
+            "id": 499
+        },
+        {
+            "explanation": "Laxatives (binary)",
+            "feature": "laxatives_bin",
+            "types": "",
+            "id": 500
+        },
+        {
+            "explanation": "5a-reductase (prescriptions)",
+            "feature": "fiveareductase_npr",
+            "types": "",
+            "id": 501
+        },
+        {
+            "explanation": "Iron (prescriptions)",
+            "feature": "iron_npr",
+            "types": "",
+            "id": 502
+        },
+        {
+            "explanation": "Loop diuretic (binary)",
+            "feature": "loopdiuretic_bin",
+            "types": "",
+            "id": 503
+        },
+        {
+            "explanation": "K-diuteric (prescriptions)",
+            "feature": "Kdiuretic_npr",
+            "types": "",
+            "id": 504
+        },
+        {
+            "explanation": "K-diuretic (binary)",
+            "feature": "Kdiuretic_bin",
+            "types": "",
+            "id": 505
+        },
+        {
+            "explanation": "Isosorbide (prescriptions)",
+            "feature": "isosorbide_npr",
+            "types": "",
+            "id": 506
+        },
+        {
+            "explanation": "Omega-3 (prescriptions)",
+            "feature": "omega_3_npr",
+            "types": "",
+            "id": 507
+        },
+        {
+            "explanation": "Potassium chloride (binary)",
+            "feature": "potassium_chloride_bin",
+            "types": "",
+            "id": 508
+        },
+        {
+            "explanation": "Isopropyl (prescriptions)",
+            "feature": "isopropyl_npr",
+            "types": "",
+            "id": 509
+        },
+        {
+            "explanation": "Null medication description (prescriptions)",
+            "feature": "null_npr",
+            "types": "",
+            "id": 510
+        },
+        {
+            "explanation": "Osteoporosis drugs (binary)",
+            "feature": "osteoporosis_bin",
+            "types": "",
+            "id": 511
+        },
+        {
+            "explanation": "Alkylamine (binary)",
+            "feature": "alkylamine_bin",
+            "types": "",
+            "id": 512
+        },
+        {
+            "explanation": "Amphetamine (prescriptions)",
+            "feature": "amphetamine_npr",
+            "types": "",
+            "id": 513
+        },
+        {
+            "explanation": "Blood preassure other drugs (prescriptions)",
+            "feature": "BPOther_npr",
+            "types": "",
+            "id": 514
+        },
+        {
+            "explanation": "Blood preassure other drugs (binary)",
+            "feature": "BPOther_bin",
+            "types": "",
+            "id": 515
+        },
+        {
+            "explanation": "Triptan (prescriptions)",
+            "feature": "triptan_npr",
+            "types": "",
+            "id": 516
+        },
+        {
+            "explanation": "Corticosteroids (prescriptions)",
+            "feature": "corticosteroids_npr",
+            "types": "",
+            "id": 517
+        },
+        {
+            "explanation": "Gout drugs (prescriptions)",
+            "feature": "gout_npr",
+            "types": "",
+            "id": 518
+        },
+        {
+            "explanation": "Gout drugs (binary)",
+            "feature": "gout_bin",
+            "types": "",
+            "id": 519
+        },
+        {
+            "explanation": "Vitamin (binary)",
+            "feature": "vitamin_bin",
+            "types": "",
+            "id": 520
+        },
+        {
+            "explanation": "Total active principles",
+            "feature": "active_principle",
+            "types": "",
+            "id": 521
+        },
+        {
+            "explanation": "Total prescriptions",
+            "feature": "prescripts",
+            "types": "",
+            "id": 522
+        },
+        {
+            "explanation": "Medication without prescription",
+            "feature": "medication_wo_prescript",
+            "types": "",
+            "id": 523
+        },
+        {
+            "explanation": "No medication at all",
+            "feature": "nomedication",
+            "types": "",
+            "id": 524
+        }
     ],
-    "description": [
-        "Gender",
-        "Year of birth",
-        "State",
-        "Height median",
-        "Weight median",
-        "Weight truncated max",
-        "BMI truncated max",
-        "BMI truncated min",
-        "BMI median",
-        "Range BMI",
-        "Systolic BP truncated max",
-        "Systolic BP truncated min",
-        "Systolic BP median",
-        "Diastolic BP truncated max",
-        "Diastolic BP truncated min",
-        "Diastolic BP median",
-        "Range systolic BP",
-        "Range diastolic BP",
-        "High Low difference BP",
-        "Respiratory rate truncated max",
-        "Respiratory rate median",
-        "Temperature second lowest",
-        "Temperature median",
-        "Previous smoker",
-        "Smoker status",
-        "Internal medicine",
-        "Cardiovascular disease",
-        "Family practice",
-        "General practice",
-        "Podiatry",
-        "Number of specialties",
-        "Visits with year blank",
-        "Visits in year 2009",
-        "Visits in year 2010",
-        "Visits in year 2011",
-        "Visits in year 2012",
-        "Visits total",
-        "Max visits per year",
-        "First year with visits",
-        "Last year with visits",
-        "Range year (last -first)",
-        "Range year (2012 - first)",
-        "Max visits per weighted year",
-        "Min visits a year (to date)",
-        "Min visits a year (to last year with visits)",
-        "Number of physicians",
-        "Visits per weighted year (to date)",
-        "Visits per weighted year (to last year with visits)",
-        "Visits with not null height",
-        "Visits with not null weight",
-        "Abdominal hernia (level 2)(number of transcript diagnostics)",
-        "Abdominal pain (level 2)(number of diagnostics)",
-        "Abuse monotoring (level 2)(number of diagnostics)",
-        "Acne (level 2)(number of diagnostics)",
-        "Acute bronchitis (level 2)(number of diagnostics)",
-        "Acute cystitis (level 2)(number of diagnostics)",
-        "Alcohol (level 2)(number of diagnostics)",
-        "Allergy (level 2)(number of diagnostics)",
-        "AMI (level 2)(number of diagnostics)",
-        "Angina pectoris (level 2)(number of diagnostics)",
-        "Anxiety (level 2)(number of diagnostics)",
-        "Arthropathy (level 2)(number of diagnostics)",
-        "Asthma (level 2)(number of diagnostics)",
-        "Atherosclerosis coronary (level 2)(number of diagnostics)",
-        "Atherosclerosis peripheral (level 2)(number of diagnostics)",
-        "Back pain (level 2)(number of diagnostics)",
-        "Bladder (level 2)(number of diagnostics)",
-        "Blind deficiency (level 2)(number of diagnostics)",
-        "Blood anormal (level 2)(number of diagnostics)",
-        "Bone cartilage (level 2)(number of diagnostics)",
-        "Bone deformity (level 2)(number of diagnostics)",
-        "Calculus (level 2)(number of diagnostics)",
-        "Candida (level 2)(number of diagnostics)",
-        "Ca prostate (level 2)(number of diagnostics)",
-        "Cardiac insufficiency (level 2)(number of diagnostics)",
-        "Cardiac other (level 2)(number of diagnostics)",
-        "Cardiac valve (level 2)(number of diagnostics)",
-        "Carpal syndrome (level 2)(number of diagnostics)",
-        "Ca skin (level 2)(number of diagnostics)",
-        "Cataract (level 2)(number of diagnostics)",
-        "Cellulitis (level 2)(number of diagnostics)",
-        "Cerebral degeneration (level 2)(number of diagnostics)",
-        "Cerebro vascular (level 2)(number of diagnostics)",
-        "Earwax (level 2)(number of diagnostics)",
-        "Cervical (level 2)(number of diagnostics)",
-        "Chest pain (level 2)(number of diagnostics)",
-        "Chronic cystitis (level 2)(number of diagnostics)",
-        "Chronic pain syndrome (level 2)(number of diagnostics)",
-        "Chronic renal failure (level 2)(number of diagnostics)",
-        "Coagulation (level 2)(number of diagnostics)",
-        "Colitis no infectious (level 2)(number of diagnostics)",
-        "Conjunctivitis (level 2)(number of diagnostics)",
-        "Constipation (level 2)(number of diagnostics)",
-        "COPD (level 2)(number of diagnostics)",
-        "Corns (level 2)(number of diagnostics)",
-        "Cough (level 2)(number of diagnostics)",
-        "CRP (level 2)(number of diagnostics)",
-        "Deficiency anemia (level 2)(number of diagnostics)",
-        "Dementia (level 2)(number of diagnostics)",
-        "Dermatitis (level 2)(number of diagnostics)",
-        "Diarrhea (level 2)(number of diagnostics)",
-        "Dietetic monitoring (level 2)(number of diagnostics)",
-        "Digestive bleeding (level 2)(number of diagnostics)",
-        "Digestive ulcer (level 2)(number of diagnostics)",
-        "Diverticula (level 2)(number of diagnostics)",
-        "DMII sure related (level 2)(number of diagnostics)",
-        "DM medium Related (level 2)(number of diagnostics)",
-        "DM high Related (level 2)(number of diagnostics)",
-        "Drug (level 2)(number of diagnostics)",
-        "Drug other (level 2)(number of diagnostics)",
-        "Dysphagia (level 2)(number of diagnostics)",
-        "Dyspnea (level 2)(number of diagnostics)",
-        "Dysrhythmia (level 2)(number of diagnostics)",
-        "Dysuria (level 2)(number of diagnostics)",
-        "Edema (level 2)(number of diagnostics)",
-        "EKG abnormal (level 2)(number of diagnostics)",
-        "Elbow (level 2)(number of diagnostics)",
-        "Endocrine other (level 2)(number of diagnostics)",
-        "Enthesopathy (level 2)(number of diagnostics)",
-        "Epilepsy (level 2)(number of diagnostics)",
-        "Esophagus (level 2)(number of diagnostics)",
-        "Essential tremor (level 2)(number of diagnostics)",
-        "Exanthem (level 2)(number of diagnostics)",
-        "External otitis (level 2)(number of diagnostics)",
-        "Eye infection (level 2)(number of diagnostics)",
-        "Eye other (level 2)(number of diagnostics)",
-        "Family cardiovascular history (level 2)(number of diagnostics)",
-        "Family diabetes history (level 2)(number of diagnostics)",
-        "Fever (level 2)(number of diagnostics)",
-        "Fibromatoses (level 2)(number of diagnostics)",
-        "Flatulence (level 2)(number of diagnostics)",
-        "Flu (level 2)(number of diagnostics)",
-        "Fluid disorder (level 2)(number of diagnostics)",
-        "Furuncle (level 2)(number of diagnostics)",
-        "Gall bladder (level 2)(number of diagnostics)",
-        "Gastric functional (level 2)(number of diagnostics)",
-        "Gastritis duodenitis (level 2)(number of diagnostics)",
-        "Glaucoma (level 2)(number of diagnostics)",
-        "Glucose abnormal (level 2)(number of diagnostics)",
-        "Goitier (level 2)(number of diagnostics)",
-        "Gout (level 2)(number of diagnostics)",
-        "Hair disease (level 2)(number of diagnostics)",
-        "Headache (level 2)(number of diagnostics)",
-        "Healthy (level 2)(number of diagnostics)",
-        "Hearing (level 2)(number of diagnostics)",
-        "Hematury (level 2)(number of diagnostics)",
-        "Hemorrhagic (level 2)(number of diagnostics)",
-        "Hemorrhagic anemia (level 2)(number of diagnostics)",
-        "Hemorrhoids (level 2)(number of diagnostics)",
-        "Hepatitis (level 2)(number of diagnostics)",
-        "Hepatobiliary (level 2)(number of diagnostics)",
-        "Herpes simplex (level 2)(number of diagnostics)",
-        "Herpes zoster (level 2)(number of diagnostics)",
-        "High BP without hypertension (level 2)(number of diagnostics)",
-        "Hypercholesterolemia (level 2)(number of diagnostics)",
-        "Hyperkalemia (level 2)(number of diagnostics)",
-        "Hyperlipemic other (level 2)(number of diagnostics)",
-        "Hypertension complicated (level 2)(number of diagnostics)",
-        "Hypertension essential (level 2)(number of diagnostics)",
-        "Hypertriglyceridemia (level 2)(number of diagnostics)",
-        "Hypoglycemia (level 2)(number of diagnostics)",
-        "Hypokalemia (level 2)(number of diagnostics)",
-        "Hyposmolarity (level 2)(number of diagnostics)",
-        "Hypotension (level 2)(number of diagnostics)",
-        "Hypothyroidism (level 2)(number of diagnostics)",
-        "Impetigo (level 2)(number of diagnostics)",
-        "Impaired glucose abnormal (level 2)(number of diagnostics)",
-        "Impotence (level 2)(number of diagnostics)",
-        "Inadequated diet (level 2)(number of diagnostics)",
-        "Insomnia (level 2)(number of diagnostics)",
-        "Insomnio (no organic) (level 2)(number of diagnostics)",
-        "Intestinal infection (level 2)(number of diagnostics)",
-        "Intestinal malabsorption (level 2)(number of diagnostics)",
-        "Iron anemia (level 2)(number of diagnostics)",
-        "Irritable bowel (level 2)(number of diagnostics)",
-        "Leukocytes (level 2)(number of diagnostics)",
-        "Lichen pruritus (level 2)(number of diagnostics)",
-        "Limb cramp (level 2)(number of diagnostics)",
-        "Limb pain (level 2)(number of diagnostics)",
-        "Liver abnormal (level 2)(number of diagnostics)",
-        "Lumbar pain (level 2)(number of diagnostics)",
-        "Lymphadenitis (level 2)(number of diagnostics)",
-        "Malaise (level 2)(number of diagnostics)",
-        "Male genital infection (level 2)(number of diagnostics)",
-        "Malnutrition (level 2)(number of diagnostics)",
-        "Memory loss (level 2)(number of diagnostics)",
-        "Menopausal (level 2)(number of diagnostics)",
-        "Menstruation disorder (level 2)(number of diagnostics)",
-        "Mental miscelanea (level 2)(number of diagnostics)",
-        "Mental retardation (level 2)(number of diagnostics)",
-        "Metabolic mineral (level 2)(number of diagnostics)",
-        "Metabolic other (level 2)(number of diagnostics)",
-        "Migraine (level 2)(number of diagnostics)",
-        "Mixed hyperlipidemia (level 2)(number of diagnostics)",
-        "Mixuria (level 2)(number of diagnostics)",
-        "Mood disorder (level 2)(number of diagnostics)",
-        "Muscle spasm (level 2)(number of diagnostics)",
-        "Myalgia (level 2)(number of diagnostics)",
-        "Mycosis foot (level 2)(number of diagnostics)",
-        "Mycosis other (level 2)(number of diagnostics)",
-        "Myopathy (level 2)(number of diagnostics)",
-        "Nails disease (level 2)(number of diagnostics)",
-        "Nasal cavity (level 2)(number of diagnostics)",
-        "Neo skin (level 2)(number of diagnostics)",
-        "Nervous system (level 2)(number of diagnostics)",
-        "Nervous system other (level 2)(number of diagnostics)",
-        "Neuritis radiculitis (level 2)(number of diagnostics)",
-        "Nocturia (level 2)(number of diagnostics)",
-        "Non follow of treatment (level 2)(number of diagnostics)",
-        "Obesity (level 2)(number of diagnostics)",
-        "Open wound (level 2)(number of diagnostics)",
-        "Oral (level 2)(number of diagnostics)",
-        "Description",
-        "Osteoarthrosis (level 2)(number of diagnostics)",
-        "Osteoporosis (level 2)(number of diagnostics)",
-        "Otalgia (level 2)(number of diagnostics)",
-        "Other infection (level 2)(number of diagnostics)",
-        "Otitis media (level 2)(number of diagnostics)",
-        "Ovarian cyst (level 2)(number of diagnostics)",
-        "Ovaries (level 2)(number of diagnostics)",
-        "Overweight (level 2)(number of diagnostics)",
-        "Pain joint (level 2)(number of diagnostics)",
-        "Pancreas (level 2)(number of diagnostics)",
-        "Parasite infection (level 2)(number of diagnostics)",
-        "Parkinson (level 2)(number of diagnostics)",
-        "Pericardic endocardic miocardic (level 2)(number of diagnostics)",
-        "Peripheral neuropathy (level 2)(number of diagnostics)",
-        "Pneumonia (level 2)(number of diagnostics)",
-        "Peripheral nervous system (level 2)(number of diagnostics)",
-        "Nervous system face (level 2)(number of diagnostics)",
-        "PNS Inflamatory or Toxic (level 2)(number of diagnostics)",
-        "Polydipsia (level 2)(number of diagnostics)",
-        "Polyuria (level 2)(number of diagnostics)",
-        "Proctology (level 2)(number of diagnostics)",
-        "Prostate benign (level 2)(number of diagnostics)",
-        "Proteinuria (level 2)(number of diagnostics)",
-        "PSA (level 2)(number of diagnostics)",
-        "Psoriasis (level 2)(number of diagnostics)",
-        "Pyrosis (level 2)(number of diagnostics)",
-        "Renal (level 2)(number of diagnostics)",
-        "Respiratory fail (level 2)(number of diagnostics)",
-        "Respiratory upper chronic (level 2)(number of diagnostics)",
-        "Respiratory upper acute (level 2)(number of diagnostics)",
-        "Rheumatic pain (level 2)(number of diagnostics)",
-        "Rhinitis (level 2)(number of diagnostics)",
-        "Restless legs syndrome (level 2)(number of diagnostics)",
-        "Schizophrenic (level 2)(number of diagnostics)",
-        "Sciatic pain (level 2)(number of diagnostics)",
-        "Screening (level 2)(number of diagnostics)",
-        "Seborrheic cyst (level 2)(number of diagnostics)",
-        "Seborrheic dermatitis (level 2)(number of diagnostics)",
-        "Sex dysfunction (level 2)(number of diagnostics)",
-        "Shoulder (level 2)(number of diagnostics)",
-        "Sinus (level 2)(number of diagnostics)",
-        "Skin atrophic (level 2)(number of diagnostics)",
-        "Skin inflammatory (level 2)(number of diagnostics)",
-        "Skin keratosis (level 2)(number of diagnostics)",
-        "Skin other (level 2)(number of diagnostics)",
-        "Skin sense (level 2)(number of diagnostics)",
-        "Skin viric (level 2)(number of diagnostics)",
-        "Sleep (level 2)(number of diagnostics)",
-        "Sleep apnea (level 2)(number of diagnostics)",
-        "Spinal stenosis (level 2)(number of diagnostics)",
-        "Spondylosis (level 2)(number of diagnostics)",
-        "Sprains (level 2)(number of diagnostics)",
-        "Stress (level 2)(number of diagnostics)",
-        "Superficial injury (level 2)(number of diagnostics)",
-        "Sweat gland (level 2)(number of diagnostics)",
-        "Syncope (level 2)(number of diagnostics)",
-        "Syndrome X (level 2)(number of diagnostics)",
-        "Synovium and tendon (level 2)(number of diagnostics)",
-        "Teeth (level 2)(number of diagnostics)",
-        "Temporomandibular (level 2)(number of diagnostics)",
-        "Tensional psicalgia (level 2)(number of diagnostics)",
-        "Testicular dysfunction (level 2)(number of diagnostics)",
-        "Thyroid other (level 2)(number of diagnostics)",
-        "Tobacco (level 2)(number of diagnostics)",
-        "Tonsils and adenoids (level 2)(number of diagnostics)",
-        "Trigger finger (level 2)(number of diagnostics)",
-        "Ulcer (level 2)(number of diagnostics)",
-        "Ulcerous colitis (level 2)(number of diagnostics)",
-        "Urinary incontinency (level 2)(number of diagnostics)",
-        "Urinary urgency (level 2)(number of diagnostics)",
-        "Urticaria (level 2)(number of diagnostics)",
-        "UTI Other (level 2)(number of diagnostics)",
-        "Vaccine (level 2)(number of diagnostics)",
-        "Vaginal (level 2)(number of diagnostics)",
-        "Varix leg (level 2)(number of diagnostics)",
-        "Vascular peripheral (level 2)(number of diagnostics)",
-        "Vertiginous syndromes (level 2)(number of diagnostics)",
-        "Vih (level 2)(number of diagnostics)",
-        "Vitamin B (level 2)(number of diagnostics)",
-        "Vitamin D (level 2)(number of diagnostics)",
-        "Vomiting and nausea (level 2)(number of diagnostics)",
-        "Weight gain (level 2)(number of diagnostics)",
-        "Weight loss (level 2)(number of diagnostics)",
-        "Anemia (level 1)(number of diagnostics)",
-        "Back (level 1)(number of diagnostics)",
-        "Colitis miscelanea (level 1)(number of diagnostics)",
-        "Connective tissue (level 1)(number of diagnostics)",
-        "Dermatitis (level 1)(number of diagnostics)",
-        "Digestive (level 1)(number of diagnostics)",
-        "DM Symptom (level 1)(number of diagnostics)",
-        "Glucose (level 1)(number of diagnostics)",
-        "Headache (level 1)(number of diagnostics)",
-        "Herpes (level 1)(number of diagnostics)",
-        "Hormonal (level 1)(number of diagnostics)",
-        "Insomnia (level 1)(number of diagnostics)",
-        "Ischemic cardiopathy (level 1)(number of diagnostics)",
-        "Mycosis foot (level 1)(number of diagnostics)",
-        "Nervous system other (level 1)(number of diagnostics)",
-        "Prostate (level 1)(number of diagnostics)",
-        "Respinfec (level 1)(number of diagnostics)",
-        "Skin (level 1)(number of diagnostics)",
-        "Skin infection (level 1)(number of diagnostics)",
-        "Skin inflammatory (level 1)(number of diagnostics)",
-        "Skin other (level 1)(number of diagnostics)",
-        "Oldest start year of all diagnostics",
-        "Number of diagnostics with start year < 2009",
-        "Number of different level1 with level2=DMSymptom",
-        "Visits with diagnostics with level2=DMSymptom",
-        "Different level 2 categories with diagnostics",
-        "Different 3 digit icd9 categories with diagnostics",
-        "Total diagnostics per weighted year",
-        "Total diagnostics",
-        "Total diagnostics per visit",
-        "Total diagnostics without transcripts",
-        "Acetaminophen (binary)",
-        "Acetaminophen (max dose)",
-        "Acetaminophen (prescriptions)",
-        "ACEI (binary)",
-        "Benazepril (binary)",
-        "Benazepril (max dose)",
-        "Enalapril (binary)",
-        "Enalapril (max dose)",
-        "Ramipril (binary)",
-        "Ramipril (max dose)",
-        "Lisinopril (binary)",
-        "Lisinopril (max dose)",
-        "ACEI (max dose)",
-        "ACEI (prescriptions)",
-        "Aspirin (binary)",
-        "Aspirin (max dose)",
-        "Aspirin (prescriptions)",
-        "Description",
-        "Losartan (binary)",
-        "Olmesartan (binary)",
-        "Telmisartan (binary)",
-        "Valsartan (binary)",
-        "Losartan (prescriptions)",
-        "Olmesartan (prescriptions)",
-        "Telmisartan (prescriptions)",
-        "Valsartan (prescriptions)",
-        "Losartan (max dose)",
-        "Olmesartan (max dose)",
-        "Telmisartan (max dose)",
-        "Valsartan (max dose)",
-        "AIIRA (different active principles)",
-        "AIIRA (binary)",
-        "Losartan (max dose)",
-        "AIIRA (prescriptions)",
-        "Antifungal (prescriptions)",
-        "Antifungal (different active principles)",
-        "Antifungal (binary)",
-        "Antifungal (prescriptions)",
-        "Antifungal (different active principles)",
-        "Antifungal (binary)",
-        "Antiplatelet (binary)",
-        "Antiplatelet (max dose)",
-        "Antiplatelet (prescriptions)",
-        "Alprazolam (binary)",
-        "Alprazolam (max dose)",
-        "Clonazepam (binary)",
-        "Clonazepam (max dose)",
-        "Diazepam (binary)",
-        "Diazepam (max dose)",
-        "Lorazepam (binary)",
-        "Lorazepam (max dose)",
-        "Temazepam (binary)",
-        "Temazepam (max dose)",
-        "Benzodiazepine (different active principles)",
-        "Benzodiazepine (binary)",
-        "Benzodiazepine (prescriptions)",
-        "Atenolol (binary)",
-        "Atenolol (prescriptions)",
-        "Atenolol (max dose)",
-        "Carvedilol (binary)",
-        "Carvedilol (prescriptions)",
-        "Carvedilol (max dose)",
-        "Description",
-        "Metoprolol (binary)",
-        "Metoprolol (max dose)",
-        "Nebivolol (binary)",
-        "Nebivolol (max dose)",
-        "Propranolol (binary)",
-        "Propranolol (max dose)",
-        "Betablocker (different active principles)",
-        "Betablocker (binary)",
-        "Betablocker (prescriptions)",
-        "Fenofibrate (max dose)",
-        "Fenofibric (max dose)",
-        "Gemfibrozil (max dose)",
-        "Fenofibrate (binary)",
-        "Fenofibric (binary)",
-        "Gemfibrozil (binary)",
-        "Fibrate (prescriptions)",
-        "Fibrate (binary)",
-        "Fibrate (different active principles)",
-        "Gabapentin (max dose)",
-        "Pregabalin (max dose)",
-        "Gabapentin (binary)",
-        "Pregabalin (binary)",
-        "GABA (prescriptions)",
-        "GABA (binary)",
-        "Gastroparesia drugs (binary)",
-        "Gastroparesia drugs (max dose)",
-        "Gastroparesia drugs (prescriptions)",
-        "Glucocorticoid injectable (binary)",
-        "Glucocorticoid injectable (prescriptions)",
-        "Glucocorticoid local (prescriptions)",
-        "Glucocorticoid local (different active principles)",
-        "Glucocorticoid local (binary)",
-        "Betamethasone (prescriptions)",
-        "Betamethasone (binary)",
-        "Hydrocortisone (prescriptions)",
-        "Hydrocortisone (binary)",
-        "Triamcinolone (prescriptions)",
-        "Triamcinolone (binary)",
-        "Glucocorticoid (prescriptions)",
-        "Glucocorticoid (different active principles)",
-        "Glucocorticoid (binary)",
-        "Hydrocortisone (max dose)",
-        "Hydrocortisone (binary)",
-        "Hydrocortisone (prescriptions)",
-        "Description",
-        "Methylprednisolone (max dose)",
-        "Methylprednisolone (binary)",
-        "Methylprednisolone (prescriptions)",
-        "Prednisone (max dose)",
-        "Prednisone (binary)",
-        "Prednisone (prescriptions)",
-        "L type calcium channel blocker (different active principles)",
-        "L type calcium channel blocker (binary)",
-        "L type calcium channel blocker (prescriptions)",
-        "Amlodipine (max dose)",
-        "Amlodipine (binary)",
-        "Proton pump inhibitor (different active principles)",
-        "Proton pump inhibitor (binary)",
-        "Proton pump inhibitor (prescriptions)",
-        "Statin (different active principles)",
-        "Statin (prescriptions)",
-        "Statin (binary)",
-        "Atorvastatin (max dose)",
-        "Lovastatin (max dose)",
-        "Pravastatin (max dose)",
-        "Rosuvastatin (max dose)",
-        "Simvastatin (max dose)",
-        "Atorvastatin (binary)",
-        "Lovastatin (binary)",
-        "Pravastatin (binary)",
-        "Rosuvastatin (binary)",
-        "Simvastatin (binary)",
-        "Statin",
-        "Thiazide (different active principles)",
-        "Thiazide (binary)",
-        "Thiazide (prescriptions)",
-        "Hydrochlorothiazide (max dose)",
-        "Niacin (prescriptions)",
-        "Niacin (binary)",
-        "Ezetimibe (prescriptions)",
-        "Ezetimibe (binary)",
-        "Antilipemics (prescriptions)",
-        "Antilipemics (binary)",
-        "Nasal route (prescriptions)",
-        "Inhalation route (prescriptions)",
-        "Otic route (number of different drugs)",
-        "Otic route (different active principles)",
-        "Otic route (binary)",
-        "Otic route (prescriptions)",
-        "Description",
-        "Ophtalmic allergy inflamatory (different active principles)",
-        "Ophtalmic allergy inflamatory (binary)",
-        "Ophtalmic allergy inflamatory (prescriptions)",
-        "Ophtalmic antibiotic (different active principles)",
-        "Ophtalmic antibiotic (binary)",
-        "Ophtalmic antibiotic (prescriptions)",
-        "Ophtalmic glaucoma (different active principles)",
-        "Ophtalmic glaucoma (binary)",
-        "Ophtalmic glaucoma (prescriptions)",
-        "Oral contraceptive (prescriptions)",
-        "Oral contraceptive (binary)",
-        "No oral contraceptive (prescriptions)",
-        "No oral contraceptive (binary)",
-        "Alfa1 blocker (prescriptions)",
-        "Calcium (prescriptions)",
-        "Calcium (binary)",
-        "Coxib (prescriptions)",
-        "Digoxin (prescriptions)",
-        "Laxatives (prescriptions)",
-        "Laxatives (binary)",
-        "5a-reductase (prescriptions)",
-        "Iron (prescriptions)",
-        "Loop diuretic (binary)",
-        "K-diuteric (prescriptions)",
-        "K-diuretic (binary)",
-        "Isosorbide (prescriptions)",
-        "Omega-3 (prescriptions)",
-        "Potassium chloride (binary)",
-        "Isopropyl (prescriptions)",
-        "Null medication description (prescriptions)",
-        "Osteoporosis drugs (binary)",
-        "Alkylamine (binary)",
-        "Amphetamine (prescriptions)",
-        "Blood preassure other drugs (prescriptions)",
-        "Blood preassure other drugs (binary)",
-        "Triptan (prescriptions)",
-        "Corticosteroids (prescriptions)",
-        "Gout drugs (prescriptions)",
-        "Gout drugs (binary)",
-        "Vitamin (binary)",
-        "Total active principles",
-        "Total prescriptions",
-        "Medication without prescription",
-        "No medication at all"
-    ]
+    "set": "fusion"
 }

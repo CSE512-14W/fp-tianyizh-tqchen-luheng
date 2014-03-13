@@ -23,7 +23,11 @@ $.get("cgi-bin/tree_manipulation.py",
 			history.update( init_request, data );
             gtreepath.update( [data.forest[0],] );
             btrees.init( data );
-            
+            /*
+            features = [];
+            for (var i = 0; i < data.nodes.length; i++) {
+            	features.push([data.nodes[i].feature, ]);
+            }*/
             new TableSort( "#featuretable",
             		[ { text: 'Features', sort: TableSort.alphabetic}, ],
                     data.features, { width: '200', height: '800' }

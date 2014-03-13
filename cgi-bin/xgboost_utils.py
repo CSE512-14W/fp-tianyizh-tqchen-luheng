@@ -15,38 +15,6 @@ TEMP_PATH = "./temp"
 
 DEFAULT_CONFIG = []
 
-"""
-DATASET_NAME = "mushroom"
-XGBOOST_PATH = "xgboost/xgboost"
-TRAIN_PATH = "./data/agaricus.txt.train"
-TEST_PATH = "./data/agaricus.txt.test"
-FEATMAP_PATH = "./data/featmap.txt"
-TEMP_PATH = "./temp"
-
-XGBOOST_PATH = "../../xgboost/xgboost"
-TRAIN_PATH = "../data/agaricus.txt.train"
-TEST_PATH = "../data/agaricus.txt.test"
-FEATMAP_PATH = "../data/featmap.txt"
-TEMP_PATH = "../temp"
-"""
-
-"""
-fusion.conf:
-num_round=3
-base_score = 0.5
-save_period=0
-data = "fusion.txt.train"
-eval[test] = "fusion.txt.test"
-test:data =  "fusion.txt.test"
-booster_type = 0
-loss_type = 2
-bst:tree_maker=2
-bst:eta=1.0
-bst:gamma=1.0
-bst:min_child_weight=1
-bst:max_depth=3
-"""
-
 def setDataset(dataset):
     global DATASET_NAME
     global TRAIN_PATH
@@ -68,7 +36,7 @@ def setDataset(dataset):
         TRAIN_PATH = "./data/agaricus.txt.train"
         TEST_PATH = "./data/agaricus.txt.test"
         FEATMAP_PATH = "./data/featmap.txt"
-        FEATTABLE_PATH = "./data/features.json"
+        FEATTABLE_PATH = "./data/feature.json"
         TEMP_PATH = "./temp"
         
     DEFAULT_CONFIG = [
@@ -142,8 +110,21 @@ def trainNewModel(op_iter, new_config):
     json_obj = dump2json(dump_path)
     json_obj['test_error'] = test_error
     json_obj['train_error'] = train_error
+    
+    if op_iter == 0:
+        json_obj['features'] = loadFeatureTable(FEATTABLE_PATH)
+        
     return json_obj
 
+def loadFeatureTable(ftable_path):
+    with open(ftable_path, 'r') as ftable_file:
+        ftable = json.load(ftable_file)
+        features = []
+        for node in ftable["nodes"]:
+            features.append([node["feature"], ])
+        ftable_file.close()
+    return features
+        
 def parseEval(eval_log):
     eval_info = eval_log.strip().split()[1:]
     return dict( [ (s.split(':')[0], float(s.split(':')[1])) for s in eval_info ])
