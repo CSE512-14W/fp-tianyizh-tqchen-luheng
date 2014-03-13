@@ -5,14 +5,22 @@ import os
 import sys
 import subprocess
 
-DATASET_NAME = "mushroom"
+DATASET_NAME = "fusion"
+XGBOOST_PATH = "./xgboost/xgboost"
+TRAIN_PATH = "./data/fusion/fusion.txt.train"
+TEST_PATH = "./data/fusion/fusion.txt.test"
+FEATMAP_PATH = "./data/fusion/featmap.txt"
+TEMP_PATH = "./temp"
 
+
+"""
+DATASET_NAME = "mushroom"
 XGBOOST_PATH = "xgboost/xgboost"
 TRAIN_PATH = "./data/agaricus.txt.train"
 TEST_PATH = "./data/agaricus.txt.test"
 FEATMAP_PATH = "./data/featmap.txt"
 TEMP_PATH = "./temp"
-"""
+
 XGBOOST_PATH = "../../xgboost/xgboost"
 TRAIN_PATH = "../data/agaricus.txt.train"
 TEST_PATH = "../data/agaricus.txt.test"
@@ -151,16 +159,29 @@ def dump2json(dump_path):
                 node_id = int(line.split(':')[0])
                 node['node_id'] = node_id
                 node['tree_id'] = booster_id
-                node['neg_cnt' ] = stats[booster_id][node_id][0]
-                node['pos_cnt' ] = stats[booster_id][node_id][1]
+                
+                try:
+                    node['neg_cnt' ] = stats[booster_id][node_id][0]
+                except KeyError:
+                    node['neg_cnt' ] = 0
+                try:
+                    node['pos_cnt' ] = stats[booster_id][node_id][1]
+                except KeyError:
+                    node['pos_cnt' ] = 0
+                    
                 node['samples'] = node['pos_cnt'] + node['neg_cnt']
                 
                 idx = line.find('[')
                 if idx != -1:   
                     node['label'] = line[idx+1:].split(']')[0]
+                    
+                    # binary tree!
                     node['children'] = [int(c.split('=')[1]) for c in\
-                                        line.split()[1].split(',')]
-                    node['edge_tags'] = ['yes','no']
+                                        line.split()[1].split(',')][:2]
+                                        
+                    node['edge_tags'] = [c.split('=')[0] for c in\
+                                        line.split()[1].split(',')][:2]
+                    
                     node['type'] = 'split'
                 else:
                     label = line.split(':')[1].strip()
