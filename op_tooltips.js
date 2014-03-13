@@ -43,6 +43,10 @@ op_tooltips.prototype = {
 						function(data) {
 							history.update(request, data);
 				            btrees.init(data);
+				            new TableSort( "#featuretable",
+				            		[ { text: 'Features', sort: TableSort.alphabetic}, ],
+				                    main_features, { width: '200', height: '800' }
+				            );
 						});
 			});
 	    	

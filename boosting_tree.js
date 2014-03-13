@@ -36,6 +36,7 @@ boosting_tree.prototype = {
 	clear : function() {
 		this.node_count = 0;
 	    this.node_mapper = {};
+	    this.used_features = {};
 	    this.tree_layout = [];
 	    this.is_collapsed = [];
 	    this.num_trees = 0;
@@ -47,7 +48,11 @@ boosting_tree.prototype = {
 		
 		var tree_delta = self.forest_data.length - self.num_trees;
 		self.num_trees = self.forest_data.length;
-		console.log("delta: ", tree_delta);
+		//console.log("delta: ", tree_delta);
+		
+		/**
+		 * auto collapsing
+		 */
 		for (var i = 0; i < self.num_trees; i++) {
 			// only use node_id of last time ..
 			var tree = self.forest_data[i];
@@ -60,7 +65,6 @@ boosting_tree.prototype = {
 				if (i < self.is_collapsed.length && self.is_collapsed[i]) {
 					self.toggle(self.forest_data[i]);
 				} 
-			
 			}
 		} else if (tree_delta == 1) {
 			/* growing a new tree, show last tree */
@@ -70,17 +74,17 @@ boosting_tree.prototype = {
 			self.auto_collapsing(0, true);
 		}
 		
+		/**
+		 * handle features
+		 */
+		self.used_features = [];
+		for (var i = 0; i < main_features.length; i++) {
+			self.used_features.push(false);
+		}
+		
 		self.first_root = self.forest_data[0];
 		self.num_samples = self.first_root.samples;
-		if (self.enable_toggle) {
-			for (var i = 0; i < self.num_trees; i++) {
-				if (forest_data[i].children) {
-					for (var j = 0; j < forest_data[i].children.length; j++) {
-						self.toggleAll(forest_data[i].children[j]);
-					}
-				}
-			}
-		}
+		
 		self.link_stroke_scale = d3.scale.linear()
 				.domain([0, self.num_samples])
 				.range([self.min_link_width, self.max_link_width]);
@@ -128,9 +132,12 @@ boosting_tree.prototype = {
 	tree_layout_helper : function() {
 		var self = this;
 		var layout = [];
+		var vertical = (self.width < 1100);
+		var tree_width = vertical ? self.width - 200 : self.width - 400;
+		
 		var width = function(d) {
 			// TODO: estimate width smarter
-			return d.children ? self.width - 400 : 100;
+			return d.children ? tree_width : 100;
 		};
 		var height = function(d) {
 			return 800;
@@ -144,10 +151,11 @@ boosting_tree.prototype = {
 			// ???
 		}
 		var leftbar_width = 300;
-		var last_x = leftbar_width;
-		var last_y = -50;
+		var last_x = vertical ? 0 : leftbar_width;
+		var last_y = vertical ? 300 : -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
+		
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
@@ -179,7 +187,10 @@ boosting_tree.prototype = {
 		
 		// compute tree layout info
 		self.tree_layout = self.tree_layout_helper();
-		
+
+		/**
+		 * process all the trees
+		 */
 		for (var i = 0; i < self.num_trees; i++) {
 			var tree = d3.layout.tree()
 				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
@@ -202,6 +213,13 @@ boosting_tree.prototype = {
 			});
 			nodes.push.apply(nodes, t_nodes);
 			links.push.apply(links, tree.links(t_nodes));
+			
+			// update features
+			t_nodes.forEach(function(d) {
+				if (d.feature_id) {
+					self.used_features[d.feature_id] = true;
+				}
+			});
 		}
 		// data binding for nodes and links
 		var node = self.svg.selectAll("g.node")
@@ -463,5 +481,15 @@ boosting_tree.prototype = {
 					weight : leaf_weight};
 		}
 	},
+	
+if (self.enable_toggle) {
+			for (var i = 0; i < self.num_trees; i++) {
+				if (forest_data[i].children) {
+					for (var j = 0; j < forest_data[i].children.length; j++) {
+						self.toggleAll(forest_data[i].children[j]);
+					}
+				}
+			}
+		}
  */
  

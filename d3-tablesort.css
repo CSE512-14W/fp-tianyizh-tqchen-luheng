@@ -37,6 +37,20 @@
     overflow: auto;
 }
 
+.body-table tr {
+    background: #fff;
+}
+
+.body-table tr.used {
+    background: lightblue;
+    /*
+    border-style: solid;
+    border-color: lightsteelblue;
+    */
+}
+
+
+/*
 .body-table tr:nth-child(odd) {
     background: #f3f6f9;
 }
@@ -44,3 +58,4 @@
 .body-table tr:nth-child(even) {
     background: #fff;
 }
+*/

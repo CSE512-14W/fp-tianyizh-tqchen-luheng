@@ -71,7 +71,7 @@ function(globals) {
             .data(function(d, i) { if (d.sort_column && sort_column === -1) { sort_column = i; } return d.sort? [d]: ''; }).enter()
             .append('span')
             .classed('sort_indicator sort_desc', true)
-            .on('click', sort)
+            .on('click', sort);
 
         innerTable = outerTable
     		.append("tr")
@@ -82,11 +82,17 @@ function(globals) {
     		.append("table")
     		.attr("class", "body-table")
     		.attr("style", "width:" + dim.tablew + "; height: " + dim.h + "; table-layout:fixed");
-
+    		
         tbody = innerTable.append("tbody");
 
         // Create a row for each object in the data and perform an intial sort.
-        rows = tbody.selectAll("tr").data(data).enter().append("tr");
+        rows = tbody.selectAll("tr")
+        		.data(data)
+        		.enter()
+        		.append("tr")
+        		.classed("used", function(d, i) {
+        			return btrees.used_features[i];
+        		});
 
         // set element attributes if data is given in the form of data = [ { ..., data: []}, { ..., data: []}, { ..., data: []}, { ..., data: []} ]
         // where '...' stands for attributes to set
@@ -99,33 +105,49 @@ function(globals) {
                 }
             }
             return obj;
-        })
+        });
 
         // initial sort
         if (sort_column >= 0 && columns[sort_column].sort) {
-            tbody.selectAll('tr').sort(function(a, b) { return columns[sort_column].sort(isArray(a)? a[sort_column]: a.data[sort_column], isArray(b)? b[sort_column]: b.data[sort_column], sort_order); })
+            tbody.selectAll('tr').sort(function(a, b) {
+            	return columns[sort_column].sort(isArray(a)? a[sort_column]: a.data[sort_column], isArray(b)? b[sort_column]: b.data[sort_column], sort_order);
+            });
         }
 
         // Create a cell in each row for each column
         rows.selectAll("td")
-            .data(function (d) { return isArray(d)? d: d.data; }).enter()
+            .data(function (d) {
+            	return isArray(d)? d: d.data;
+            })
+            .enter()
             .append("td")
-    		.text(function (d) { return d; });
-
+    		.text(function (d, i) {
+    			return d;
+    		});
+    		
         // get cell widths
         d3.select(rows.node())
             .selectAll('td')
-            .each(function(node, i) { dim.cell_widths.push(this.offsetablew); });
+            .each(function(node, i) {
+            	dim.cell_widths.push(this.offsetablew);
+            });
 
         // set cell widths to the header-table
         outerTable.selectAll('.header-table tr th')
             .data(dim.cell_widths)
-            .style('width', function(d) { this.style.width = d + 'px'; return 1; })
+            .style('width', function(d) {
+            	this.style.width = d + 'px'; return 1; 
+            });
 
-    }
+    };
 
-    globals.TableSort.alphabetic = function(a, b, sort_order) { return sort_order * a.localeCompare(b); }
-    globals.TableSort.numeric = function(a, b, sort_order) { return sort_order * (parseFloat(b) - parseFloat(a)); }
+    globals.TableSort.alphabetic = function(a, b, sort_order) {
+    	return sort_order * a.localeCompare(b);
+    };
+    
+    globals.TableSort.numeric = function(a, b, sort_order) {
+    	return sort_order * (parseFloat(b) - parseFloat(a));
+    };
 
 }
 

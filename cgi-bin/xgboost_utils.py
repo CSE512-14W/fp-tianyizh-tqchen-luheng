@@ -2,6 +2,7 @@
 import copy
 import json
 import os
+import re
 import sys
 import subprocess
 
@@ -107,23 +108,27 @@ def trainNewModel(op_iter, new_config):
     test_error = evals['test-error']
     train_error = evals['train-error']
     
-    json_obj = dump2json(dump_path)
+    features, feature_map = loadFeatureTable(FEATTABLE_PATH)
+    json_obj = dump2json(dump_path, feature_map)
     json_obj['test_error'] = test_error
     json_obj['train_error'] = train_error
-    
     if op_iter == 0:
-        json_obj['features'] = loadFeatureTable(FEATTABLE_PATH)
-        
+        json_obj['features'] = features 
+    
     return json_obj
 
 def loadFeatureTable(ftable_path):
+    feature_map = {}
     with open(ftable_path, 'r') as ftable_file:
         ftable = json.load(ftable_file)
         features = []
-        for node in ftable["nodes"]:
-            features.append([node["feature"], ])
+        for (fid, node) in enumerate(ftable["nodes"]):
+            feature = node["feature"]
+            features.append([feature, ])
+            feature_map[feature] = fid
         ftable_file.close()
-    return features
+        
+    return features, feature_map
         
 def parseEval(eval_log):
     eval_info = eval_log.strip().split()[1:]
@@ -171,7 +176,7 @@ def getRecursiveTreeData(nodes, node_id, rank):
         node['children'] = children
     return node
         
-def dump2json(dump_path):
+def dump2json(dump_path, raw_feature_map):
     nodes = {}
     forest = []
     booster_id = 0
@@ -215,6 +220,10 @@ def dump2json(dump_path):
                                         line.split()[1].split(',')][:2]
                     
                     node['type'] = 'split'
+                    
+                    raw_feature = re.split('[=><]+', node['label'])[0]
+                    sys.stderr.write(node['label'] + ", " + raw_feature + "\n")
+                    node['feature_id'] = raw_feature_map[raw_feature]
                 else:
                     label = line.split(':')[1].strip()
                     node['label'] = label
