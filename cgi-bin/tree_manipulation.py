@@ -16,11 +16,14 @@ request = cgi.FieldStorage()
 op_type = request["op_type"].value
 op_iter = int(request["op_iter"].value)
 num_trees = int(request["num_trees"].value)
+dataset = request["dataset"].value
 
 # initialize model
 new_config = []
 new_forest = None
 
+xgboost_utils.setDataset(dataset)
+    
 if op_iter > 0:
     booster_id = int(request["tree_id"].value)
     node_id = int(request["node_id"].value)

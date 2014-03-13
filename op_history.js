@@ -18,6 +18,7 @@ function op_history (margin, width, height, tag) {
     				.attr("class", "history");
     			
     this.tooltips = new op_tooltips(this.svg);
+    this.header = ["operation", ];
     this.ops = [];
     this.evals = [];
     this.active_op_id = 0;
@@ -47,19 +48,19 @@ op_history.prototype = {
 		
 		var opEnter = self.panel
 			.selectAll("rect")
-			.data(self.ops)
+			.data(self.ops.concat(self.header))
 			.enter();
 		
 		opEnter.append("rect")
 			.attr("x", 0)
 			.attr("y", function(d, i) {
-				var k = self.ops.length - 1 - i;
+				var k = self.ops.length - i;
 				return k * self.entry_height;
 			})
 			.attr("width", self.entry_width)
 			.attr("height", self.entry_height)
 			.on("mouseover", function(d, i) {
-				if (i != self.active_op_id - 1) {
+				if (i != self.active_op_id - 1 && i < self.ops.length) {
 					d3.select(this).classed("active", true);
 				}
 			})
@@ -72,8 +73,8 @@ op_history.prototype = {
 				if (i == self.active_op_id - 1) {
 					return;
 				}
-				var xx = self.entry_width - 100;
-				var yy = (self.ops.length - 1 - i) * self.entry_height;
+				var xx =  - 60;
+				var yy = (self.ops.length - i) * self.entry_height;
 				self.tooltips.add(xx, yy, {
 						op_type : "restore_op",
 						op_iter : i,
@@ -86,15 +87,56 @@ op_history.prototype = {
 		opEnter.append("text")
 			.attr("x", 10)
 			.attr("y", function(d, i) {
-				var k = self.ops.length - 1 - i;
+				var k = self.ops.length - i;
 				return (k + 0.6) * self.entry_height;
 			})
 			.attr("text-anchor", "left")
 			.text(function(d, i) {
-				return d + " | train-err: " + self.evals[i].train_error.toFixed(2) + " | test-err: " + self.evals[i].test_error.toFixed(2);
+				return d;
+			})
+			.style("font-weight", function(d, i) {
+				return (i == self.ops.length) ? "bold" : "normal";
 			})
 			.style("opacity", function(d, i) {
-				return (i < self.active_op_id ? 1.0 : 0.5); 
+				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
+			});
+		
+		opEnter.append("text")
+			.attr("x", 200)
+			.attr("y", function(d, i) {
+				var k = self.ops.length - i;
+				return (k + 0.6) * self.entry_height;
+			})
+			.attr("text-anchor", "left")
+			.text(function(d, i) {
+				return i == self.ops.length ?
+					"train-error" :
+					self.evals[i].train_error.toFixed(2);
+			})
+			.style("font-weight", function(d, i) {
+				return (i == self.ops.length) ? "bold" : "normal";
+			})
+			.style("opacity", function(d, i) {
+				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
+			});
+		
+		opEnter.append("text")
+			.attr("x", 300)
+			.attr("y", function(d, i) {
+				var k = self.ops.length - i;
+				return (k + 0.6) * self.entry_height;
+			})
+			.attr("text-anchor", "left")
+			.text(function(d, i) {
+				return i == self.ops.length ?
+						"test-error" :
+						self.evals[i].test_error.toFixed(2);
+			})
+			.style("font-weight", function(d, i) {
+				return (i == self.ops.length) ? "bold" : "normal";
+			})
+			.style("opacity", function(d, i) {
+				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
 			});
 		
 		// clear tooltips ...

@@ -23,6 +23,9 @@ op_tooltips.prototype = {
 	    var tt_width = tt_label.length * this.char_to_pxl;
 	    var tt_height = 24;
 	    
+	    request.dataset = main_dataset;
+	    console.log(request);
+	    
 	    tooltip.append("rect")
 			.attr("class", "tooltip")
 			.attr("rx", 2)

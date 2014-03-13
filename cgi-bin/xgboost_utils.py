@@ -10,8 +10,10 @@ XGBOOST_PATH = "./xgboost/xgboost"
 TRAIN_PATH = "./data/fusion/fusion.txt.train"
 TEST_PATH = "./data/fusion/fusion.txt.test"
 FEATMAP_PATH = "./data/fusion/featmap.txt"
+FEATTABLE_PATH = "./data/fusion/features.json"
 TEMP_PATH = "./temp"
 
+DEFAULT_CONFIG = []
 
 """
 DATASET_NAME = "mushroom"
@@ -45,23 +47,48 @@ bst:min_child_weight=1
 bst:max_depth=3
 """
 
-DEFAULT_CONFIG = [
-    ("num_round" , 1),
-    ("base_score", 0.5),
-    ("save_period" , 0),
-    ("eval_metric", "logloss"),
-    ("data" , TRAIN_PATH),
-    ("eval[test]" , TEST_PATH),
-    ("eval[train]" , TRAIN_PATH),
-    ("test:data" , TEST_PATH),
-    ("booster_type" , 0),
-    ("loss_type" , 2),
-    ("bst:tree_maker" , 2),
-    ("bst:eta" , 0.1),
-    ("bst:gamma" , 1.0),
-    ("bst:min_child_weight" , 1),
-    ("bst:max_depth" , 2)    
-]
+def setDataset(dataset):
+    global DATASET_NAME
+    global TRAIN_PATH
+    global TEST_PATH
+    global FEATMAP_PATH
+    global FEATTABLE_PATH
+    global TEMP_PATH 
+    global DEFAULT_CONFIG
+    
+    if dataset == "fusion":
+        DATASET_NAME = "fusion"
+        TRAIN_PATH = "./data/fusion/fusion.txt.train"
+        TEST_PATH = "./data/fusion/fusion.txt.test"
+        FEATMAP_PATH = "./data/fusion/featmap.txt"
+        FEATTABLE_PATH = "./data/fusion/features.json"
+        TEMP_PATH = "./temp"
+    else:
+        DATASET_NAME = "mushroom"
+        TRAIN_PATH = "./data/agaricus.txt.train"
+        TEST_PATH = "./data/agaricus.txt.test"
+        FEATMAP_PATH = "./data/featmap.txt"
+        FEATTABLE_PATH = "./data/features.json"
+        TEMP_PATH = "./temp"
+        
+    DEFAULT_CONFIG = [
+        ("num_round" , 3),
+        ("base_score", 0.5),
+        ("save_period" , 0),
+        ("eval_metric", "logloss"),
+        ("data" , TRAIN_PATH),
+        ("eval[test]" , TEST_PATH),
+        ("eval[train]" , TRAIN_PATH),
+        ("test:data" , TEST_PATH),
+        ("booster_type" , 0),
+        ("loss_type" , 2),
+        ("bst:tree_maker" , 2),
+        ("bst:eta" , 0.1),
+        ("bst:gamma" , 1.0),
+        ("bst:min_child_weight" , 1),
+        ("bst:max_depth" , 3)    
+    ]
+
 
 def loadModel(op_iter):
     dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
