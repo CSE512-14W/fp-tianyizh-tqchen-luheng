@@ -28,8 +28,9 @@
 #historygraph {
 	float: right;
 	width: auto;
-  height: auto;
+  height: 400;
   text-align: left;
+  overflow-y: auto;
 }
 
 /* tree path style */
