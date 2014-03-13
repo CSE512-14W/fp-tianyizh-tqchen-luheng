@@ -31,7 +31,7 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     this.rect_height = 22,
 	this.max_link_width = 20,
 	this.min_link_width = 1.5,
-	this.char_to_pxl = 5.5;
+	this.char_to_pxl = 6;
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -112,11 +112,9 @@ boosting_tree.prototype = {
 	tree_layout_helper : function() {
 		var self = this;
 		var layout = [];
-		var offset_x = 0;
-		var offset_y = 0;
 		var width = function(d) {
 			// TODO: estimate width smarter
-			return d.children ? 400 : 100;
+			return d.children ? 600 : 100;
 		};
 		var height = function(d) {
 			return 800;

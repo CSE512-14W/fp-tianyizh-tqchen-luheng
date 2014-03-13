@@ -27,8 +27,27 @@ TEST_PATH = "../data/agaricus.txt.test"
 FEATMAP_PATH = "../data/featmap.txt"
 TEMP_PATH = "../temp"
 """
+
+"""
+fusion.conf:
+num_round=3
+base_score = 0.5
+save_period=0
+data = "fusion.txt.train"
+eval[test] = "fusion.txt.test"
+test:data =  "fusion.txt.test"
+booster_type = 0
+loss_type = 2
+bst:tree_maker=2
+bst:eta=1.0
+bst:gamma=1.0
+bst:min_child_weight=1
+bst:max_depth=3
+"""
+
 DEFAULT_CONFIG = [
-    ("num_round" , 1),
+    ("num_round" , 3),
+    ("base_score", 0.5),
     ("save_period" , 0),
     ("data" , TRAIN_PATH),
     ("eval[test]" , TEST_PATH),
@@ -37,7 +56,7 @@ DEFAULT_CONFIG = [
     ("booster_type" , 0),
     ("loss_type" , 2),
     ("bst:tree_maker" , 2),
-    ("bst:eta" , 1.0),
+    ("bst:eta" , 0.1),
     ("bst:gamma" , 1.0),
     ("bst:min_child_weight" , 1),
     ("bst:max_depth" , 3)    

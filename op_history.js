@@ -1,10 +1,10 @@
 function op_history (margin, width, height, tag) {
 	this.margin = margin;
-    this.width = width - margin.left -margin.right;
-    this.height = height - margin.top - margin.bottom;
+    this.width = width;// - margin.left -margin.right;
+    this.height = height;// - margin.top - margin.bottom;
     
-    this.entry_width = 240;
-    this.entry_height = 24;
+    this.entry_width = 400;
+    this.entry_height = 22;
     var x0 = margin.left + (this.width - this.entry_width) * 0.5;
     var y0 = margin.top;
     this.svg = d3.select(tag)
@@ -30,16 +30,18 @@ op_history.prototype = {
 		
 		if (request.op_type != "restore_op") {
 			var log_content = self.op_log_helper(request);
-			var test_error = response.test_error;
 			if (self.active_op_id < self.ops.length) {
 				self.ops = this.ops.slice(0, self.active_op_id);
 			}
 			self.ops.push(log_content);
-			self.evals.push(test_error);
+			self.evals.push( {
+					test_error: 100.0 * response.test_error,
+					train_error : 100.0 * response.train_error} );
 		}
 		self.active_op_id = response.op_iter;
 		//console.log(this.ops, this.active_op_id);
-		
+		console.log(( { test_error: response.test_error,
+					train_error : response.train_error} ));
 		self.panel.selectAll("rect").remove();
 		self.panel.selectAll("text").remove();
 		
@@ -51,7 +53,8 @@ op_history.prototype = {
 		opEnter.append("rect")
 			.attr("x", 0)
 			.attr("y", function(d, i) {
-				return i * self.entry_height;
+				var k = self.ops.length - 1 - i;
+				return k * self.entry_height;
 			})
 			.attr("width", self.entry_width)
 			.attr("height", self.entry_height)
@@ -69,8 +72,8 @@ op_history.prototype = {
 				if (i == self.active_op_id - 1) {
 					return;
 				}
-				var xx = self.entry_width + 4;
-				var yy = i * self.entry_height;
+				var xx = self.entry_width - 100;
+				var yy = (self.ops.length - 1 - i) * self.entry_height;
 				self.tooltips.add(xx, yy, {
 						op_type : "restore_op",
 						op_iter : i,
@@ -81,13 +84,14 @@ op_history.prototype = {
 			});
 			
 		opEnter.append("text")
-			.attr("x", self.entry_width / 2)
+			.attr("x", 10)
 			.attr("y", function(d, i) {
-				return (i + 0.6) * self.entry_height;
+				var k = self.ops.length - 1 - i;
+				return (k + 0.6) * self.entry_height;
 			})
-			.attr("text-anchor", "middle")
+			.attr("text-anchor", "left")
 			.text(function(d, i) {
-				return d + " ... err: " + self.evals[i];
+				return d + " | train-err: " + self.evals[i].train_error.toFixed(2) + " | test-err: " + self.evals[i].test_error.toFixed(2);
 			})
 			.style("opacity", function(d, i) {
 				return (i < self.active_op_id ? 1.0 : 0.5); 
