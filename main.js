@@ -7,7 +7,7 @@ var history = new op_history( { top:10, right:10, bottom:10, left:20},
 								500, 300, "#historygraph");
 
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:10}, 
-								1000, 800, "#modeltreegraph" , false);
+								1200, 800, "#modeltreegraph" , false);
 
 var main_dataset = "";
 

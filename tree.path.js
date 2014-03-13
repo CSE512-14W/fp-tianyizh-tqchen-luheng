@@ -17,20 +17,6 @@ function pathgraph( margin, width, height, tag ){
     this.legend = this.svg.selectAll( '.legend' );
     this.textleft = null;
     this.textright = null;
-
-    this.svg.append('text')
-        .attr( "text-anchor", "start" )
-        .attr( "x", 10 )
-        .attr( "y", -10 )
-        .attr( "dy", ".35em" )
-        .text( "negative count" );
-
-    this.svg.append('text')
-        .attr( "text-anchor", "end" )
-        .attr( "x", this.width - this.legendwidth - 10 )
-        .attr( "y", -10 )
-        .attr( "dy", ".35em" )
-        .text( "positive count" );
 }
 
 pathgraph.prototype = {
@@ -39,6 +25,8 @@ pathgraph.prototype = {
         this.legend
         	.exit()
         	.remove();
+        
+        this.svg.selectAll('text').remove();
         
         var legend = this.legend = this.legend.data( data );    
         // initialize variables     
@@ -55,24 +43,47 @@ pathgraph.prototype = {
         
         var x = this.x;
         var xMax = data[ 0 ].pos_cnt + data[0].neg_cnt;
+        var xMax_right = data[0].pos_cnt;
         var barHeight = this.barHeight;
 
         x.domain( [ -xMax, xMax ] );                
 
         var y_offset = 20;
+        var max
+        // paint label
+        this.svg.append('text')
+            .attr( "text-anchor", "end" )
+            .attr( "x", x(0) -10 )
+            .attr( "y", -10 )
+            .attr( "dy", ".35em" )
+            .text( "Negative Count" );
+            //.style("opacity", 0.8);
+
+        this.svg.append('text')
+            .attr( "text-anchor", "start" )
+            .attr( "x", x(0) +10)
+            .attr( "y", -10 )
+            .attr( "dy", ".35em" )
+            .text( "Positive Count" );
+            //.style("opacity", 0.8);
+        
         // paint legend
         legend = legend.enter();
         legend.append( "g" )
             .append("text")
             .attr( "class", "pathgraph text" )
             .attr( "text-anchor", "start" )
-            .attr( "x", 3 + this.width - this.legendwidth )
+            .attr( "x", x ( xMax_right ) + 50 )
             .attr( "y", function(d,i) { return i*(barHeight+2) + barHeight / 2 + y_offset; } )
             .attr( "dy", ".35em" )
             .text( function(d,i){
                 if( i == 0 ) return "root";
                 else{
-                	return data[i-1].label + " ? " + data[i-1].edge_tags[data[i].rank];
+                	var label = data[i-1].label;
+                	if (i == 1) {
+                		label = label.split(":")[1];
+                	}
+                	return label + " ? " + data[i-1].edge_tags[data[i].rank];
                 }
             } );
         

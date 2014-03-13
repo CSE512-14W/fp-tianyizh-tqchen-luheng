@@ -6,7 +6,6 @@
   width: 10%;
   height: 600;
   margin-left: 50;
-  overflow-y: auto;
 }
 
 #modelview {
@@ -68,7 +67,6 @@
   font: 12px Helvetica;
   pointer-events: None;
 }
-
 
 .link {
   fill: none;

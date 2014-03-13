@@ -52,7 +52,7 @@ boosting_tree.prototype = {
 			// only use node_id of last time ..
 			var tree = self.forest_data[i];
 			self.node_id_helper(tree);
-			tree.label = "booster[" + i + "] : " + tree.label; 
+			tree.label = "tree[" + i + "] : " + tree.label; 
 		}
 
 		if (tree_delta <= 0) {
@@ -130,7 +130,7 @@ boosting_tree.prototype = {
 		var layout = [];
 		var width = function(d) {
 			// TODO: estimate width smarter
-			return d.children ? self.width - 280 : 100;
+			return d.children ? self.width - 400 : 100;
 		};
 		var height = function(d) {
 			return 800;

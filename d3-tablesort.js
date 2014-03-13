@@ -5,7 +5,9 @@
  * License: MIT
  */
 
-(function(globals) {
+(
+		
+function(globals) {
 
     var sort_column = -1, // don't sort any column by default
         sort_order = 1; // desc
@@ -44,10 +46,20 @@
             sort_order = is_desc? -1: 1;
             sort_btn.classed('sort_desc', !is_desc).classed('sort_asc', is_desc);
             sort_column = i;
-            tbody.selectAll("tr").sort(function(a, b) { return d.sort(isArray(a)? a[sort_column]: a.data[sort_column], isArray(b)? b[sort_column]: b.data[sort_column], sort_order); } );
+            tbody.selectAll("tr").sort(
+            		function(a, b) {
+            			return d.sort(
+            				isArray(a)? a[sort_column]: a.data[sort_column],
+            				isArray(b)? b[sort_column]: b.data[sort_column],
+            				sort_order ); 
+            });
         }
 
-        outerTable = ((typeof table === 'string')? d3.select(table): table).html(null).append("table").attr("style", "width:" + dim.w);
+        outerTable = ((typeof table === 'string')?	d3.select(table): table)
+        		.html(null)
+        		.append("table")
+        		.attr("style", "width:" + dim.w);
+        
         outerTable
             .append("tr")
             .append("td")
@@ -64,8 +76,12 @@
         innerTable = outerTable
     		.append("tr")
     		.append("td")
-    		.append("div").attr("class", "scroll-table").attr("style", "width: " + dim.divw + "; height:" + dim.divh + ";")
-    		.append("table").attr("class", "body-table").attr("style", "width:" + dim.tablew + "; height: " + dim.h + "; table-layout:fixed");
+    		.append("div")
+    		.attr("class", "scroll-table")
+    		.attr("style", "width: " + dim.divw + "; height:" + dim.divh + ";")
+    		.append("table")
+    		.attr("class", "body-table")
+    		.attr("style", "width:" + dim.tablew + "; height: " + dim.h + "; table-layout:fixed");
 
         tbody = innerTable.append("tbody");
 
@@ -111,4 +127,6 @@
     globals.TableSort.alphabetic = function(a, b, sort_order) { return sort_order * a.localeCompare(b); }
     globals.TableSort.numeric = function(a, b, sort_order) { return sort_order * (parseFloat(b) - parseFloat(a)); }
 
-}(window));
+}
+
+(window));
