@@ -6,12 +6,20 @@
 </head> 
 
  
-<body>
+<body onload="change_dataset();">
      
     <header>
     <h1>Transparent Boosting Tree: An Interactive Machine Learning Framework</h1>
     <!-- img src="image/mushroom.gif" alt="mushroom" width="1500" height="60"-->  
     </header>
+    
+    <hr style="background:#91C5EB; border:0; height:3px" />
+    
+    <select id="dataselect" onchange="change_dataset();">
+        <option value="mushroom">Mushroom Dataset</option>
+        <option value="fusion">Fusion Health Dataset</option>
+    </select> 
+    <button type="button" class="google button" id="retrain" onclick="change_dataset();">Re-train!</button>
     
     <hr style="background:#91C5EB; border:0; height:3px" />
     
