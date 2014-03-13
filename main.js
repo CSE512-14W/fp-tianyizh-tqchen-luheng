@@ -1,14 +1,16 @@
 // this is main js that cover all up
-var gtreepath = new pathgraph( { top:30, right:10, bottom:10, left:20}, 
-                                500, 200, "#modelpathgraph" );
+
+var gtreepath =  new pathgraph( { top:30, right:10, bottom:10, left:20}, 
+								500, 200, "#modelpathgraph" );
+
 var history = new op_history( { top:10, right:10, bottom:10, left:20}, 
-		 500, 300, "#historygraph");
+								500, 300, "#historygraph");
 
-var enable_toggle = false;
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:10}, 
-        						 1000, 800, "#modeltreegraph" , enable_toggle);
+								1000, 800, "#modeltreegraph" , false);
 
-var main_dataset = "mushroom";
+var main_dataset = "";
+
 /*
 var init_request = {
 	op_type : "init",
@@ -18,12 +20,15 @@ var init_request = {
 */
 var change_dataset = function() {
 	main_dataset = $("#dataselect").val();
+	btrees.clear();
+	history.clear();
 	console.log(main_dataset);
 	var init_request = {
 			op_type : "init",
 			op_iter : 0, num_trees : 0,
 			dataset : main_dataset 
 		};
+	
 	$.get("cgi-bin/tree_manipulation.py", 
 			init_request,
 			function(data) {

@@ -19,14 +19,7 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) { return [d.x, d.y]; });
-    
-    this.node_count = 0;
-    
-    this.node_mapper = {};
     this.tree_margin = 20;
-    this.tree_layout = [];
-    this.is_collapsed = [];
-    
     this.rect_width = 60,
     this.rect_height = 22,
 	this.max_link_width = 20,
@@ -35,9 +28,17 @@ function boosting_tree (margin, width, height, tag, enable_toggle) {
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
+    
+    this.clear();
 }
 
 boosting_tree.prototype = {
+	clear : function() {
+		this.node_count = 0;
+	    this.node_mapper = {};
+	    this.tree_layout = [];
+	    this.is_collapsed = [];
+	},
 	init : function(tdata) {
 		var self = this;
 		self.forest_data = tdata.forest;

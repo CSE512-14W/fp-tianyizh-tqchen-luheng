@@ -18,14 +18,17 @@ function op_history (margin, width, height, tag) {
     				.attr("class", "history");
     			
     this.tooltips = new op_tooltips(this.svg);
-    this.header = ["operation", ];
-    this.ops = [];
-    this.evals = [];
-    this.active_op_id = 0;
-	this.char_to_pxl = 5.5;
+    this.clear();
 }
 
 op_history.prototype = {
+	clear : function() {
+		this.header = ["operation", ];
+		this.ops = [];
+	    this.evals = [];
+	    this.active_op_id = 0;
+		this.char_to_pxl = 5.5;
+	},
 	update : function(request, response) {
 		var self = this;
 		
