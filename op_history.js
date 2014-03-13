@@ -114,7 +114,7 @@ op_history.prototype = {
 			.text(function(d, i) {
 				return i == self.ops.length ?
 					"train-error" :
-					self.evals[i].train_error.toFixed(2);
+					self.evals[i].train_error.toFixed(2) + "%";
 			})
 			.style("font-weight", function(d, i) {
 				return (i == self.ops.length) ? "bold" : "normal";
@@ -133,7 +133,7 @@ op_history.prototype = {
 			.text(function(d, i) {
 				return i == self.ops.length ?
 						"test-error" :
-						self.evals[i].test_error.toFixed(2);
+						self.evals[i].test_error.toFixed(2) + "%";
 			})
 			.style("font-weight", function(d, i) {
 				return (i == self.ops.length) ? "bold" : "normal";

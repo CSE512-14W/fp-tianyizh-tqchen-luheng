@@ -38,21 +38,36 @@ boosting_tree.prototype = {
 	    this.node_mapper = {};
 	    this.tree_layout = [];
 	    this.is_collapsed = [];
+	    this.num_trees = 0;
 	},
 	init : function(tdata) {
 		var self = this;
 		self.forest_data = tdata.forest;
-		//console.log(self.forest_data);
 		self.forest = [];
-		self.num_trees = self.forest_data.length;
-		self.tree_width = self.width / self.num_trees;
 		
+		var tree_delta = self.forest_data.length - self.num_trees;
+		self.num_trees = self.forest_data.length;
+		console.log("delta: ", tree_delta);
 		for (var i = 0; i < self.num_trees; i++) {
 			// only use node_id of last time ..
-			self.node_id_helper(self.forest_data[i]);
-			if (i < self.is_collapsed.length && self.is_collapsed[i]) {
-				self.toggle(self.forest_data[i]);
+			var tree = self.forest_data[i];
+			self.node_id_helper(tree);
+			tree.label = "booster[" + i + "] : " + tree.label; 
+		}
+
+		if (tree_delta <= 0) {
+			for (var i = 0; i < self.num_trees; i++) {
+				if (i < self.is_collapsed.length && self.is_collapsed[i]) {
+					self.toggle(self.forest_data[i]);
+				} 
+			
 			}
+		} else if (tree_delta == 1) {
+			/* growing a new tree, show last tree */
+			self.auto_collapsing(self.num_trees - 1, true);
+		} else if (tree_delta > 1) {
+			/* show first tree at initialization */
+			self.auto_collapsing(0, true);
 		}
 		
 		self.first_root = self.forest_data[0];
@@ -95,11 +110,11 @@ boosting_tree.prototype = {
 		if (d.children) {
 			d._children = d.children;
 			d.children = null;
-			return 0;
+			return false;
 		} else {
 			d.children = d._children;
 			d._children = null;
-			return 1;
+			return true;
 		}
 	},	
 	toggleAll : function (d) {
@@ -115,7 +130,7 @@ boosting_tree.prototype = {
 		var layout = [];
 		var width = function(d) {
 			// TODO: estimate width smarter
-			return d.children ? 600 : 100;
+			return d.children ? self.width - 280 : 100;
 		};
 		var height = function(d) {
 			return 800;
@@ -128,30 +143,25 @@ boosting_tree.prototype = {
 			// auto collapse trees
 			// ???
 		}
-		var last_x = 200;
+		var leftbar_width = 300;
+		var last_x = leftbar_width;
 		var last_y = -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
-				offset_x = 50;
+				offset_x = leftbar_width / 4;
 				offset_y = last_y + 50;
 				last_y = offset_y;
 			} else {
 				t_width = width(root);
 				t_height = height(root);
-				if (i > 0) {
-					offset_x = last_x + self.tree_margin;
-					offset_y = 0;
-					last_x = offset_x;
-				} else {
-					offset_x = 100;
-					offset_y = 0;
-				}
+				offset_x = last_x + self.tree_margin;
+				offset_y = 0;
 				last_x = offset_x + t_width;
 			}
-			console.log(i, offset_x, offset_y, last_x, last_y);
+			//console.log(i, offset_x, offset_y, last_x, last_y);
 			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
 		}
@@ -183,9 +193,7 @@ boosting_tree.prototype = {
 			}
 			t_nodes.forEach(function(d) {
 				// computing absolute node position
-				//if (!d.parent) console.log(d.x);
 				d.x = d.x + self.tree_layout[i].offset.x;
-				//if (!d.parent) console.log(d.x);
 				if (d.parent) {
 					d.y = d.parent.y + 80 + (d.rank * (self.rect_height + 8));
 				} else {
@@ -220,7 +228,10 @@ boosting_tree.prototype = {
 				// TODO: fix source 
 				return "translate(" + source.x0 + "," + source.y0 + ")"; })
 			.on("click", function(d) { 
-				self.toggle(d);
+				var is_expanded = self.toggle(d);
+				if (!d.parent && is_expanded) {
+					self.auto_collapsing(d.tree_id, is_expanded);
+				}
 				self.update(d);
 			})
 			.on("contextmenu", function(d) {
@@ -347,7 +358,22 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			self.is_collapsed.push(self.forest_data[i]._children ? true : false); 
 		}
-		console.log(self.is_collapsed);
+		// console.log(self.is_collapsed);
+	},
+	auto_collapsing : function(tree_id, is_expanded) {
+		// collapse everthing else other than the node nd
+		var self = this;
+		var prev_id = (tree_id > 0 ? tree_id - 1 : tree_id + 1);
+		console.log(prev_id, self.num_trees, is_expanded);
+		for (var i = 0; i < self.forest_data.length; i++) {
+			var tree = self.forest_data[i];
+			if (is_expanded && i != tree_id && tree.children) {
+				self.toggle(tree);
+			} else if (!is_expanded && prev_id < self.num_trees
+					&& self.forest_data[prev_id]._children) {
+				self.toggle(self.forest_data[prev_id]);
+			}
+		}
 	},
 	path_view_helper : function(nd) {
 		var self = this;
