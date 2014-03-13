@@ -46,9 +46,10 @@ bst:max_depth=3
 """
 
 DEFAULT_CONFIG = [
-    ("num_round" , 3),
+    ("num_round" , 1),
     ("base_score", 0.5),
     ("save_period" , 0),
+    ("eval_metric", "logloss"),
     ("data" , TRAIN_PATH),
     ("eval[test]" , TEST_PATH),
     ("eval[train]" , TRAIN_PATH),
@@ -59,7 +60,7 @@ DEFAULT_CONFIG = [
     ("bst:eta" , 0.1),
     ("bst:gamma" , 1.0),
     ("bst:min_child_weight" , 1),
-    ("bst:max_depth" , 3)    
+    ("bst:max_depth" , 2)    
 ]
 
 def loadModel(op_iter):
@@ -106,15 +107,19 @@ def trainNewModel(op_iter, new_config):
                     "model_in=" + model_out_path],
                     stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     
-    eval_info = proc.stderr.read().split()
-    sys.stderr.write("eval log: " + str(eval_info) + "\n")
-    test_error = float(eval_info[1].split(':')[1])
-    train_error = float(eval_info[2].split(':')[1])
+    evals = parseEval(proc.stderr.read())
+    sys.stderr.write("eval log: " + str(evals) + "\n")
+    test_error = evals['test-error']
+    train_error = evals['train-error']
     
     json_obj = dump2json(dump_path)
     json_obj['test_error'] = test_error
     json_obj['train_error'] = train_error
     return json_obj
+
+def parseEval(eval_log):
+    eval_info = eval_log.strip().split()[1:]
+    return dict( [ (s.split(':')[0], float(s.split(':')[1])) for s in eval_info ])
 
 def recordStats( rec, l, label ):
     for it in l.split(','):
