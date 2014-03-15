@@ -41,7 +41,7 @@ def setDataset(dataset):
         TEMP_PATH = "./temp"
         
     DEFAULT_CONFIG = [
-        ("num_round" , 3),
+        ("num_round" , 1),
         ("base_score", 0.5),
         ("save_period" , 0),
         ("eval_metric", "logloss"),
@@ -55,14 +55,34 @@ def setDataset(dataset):
         ("bst:eta" , 0.1),
         ("bst:gamma" , 1.0),
         ("bst:min_child_weight" , 1),
-        ("bst:max_depth" , 3)    
+        ("bst:max_depth" , 2)    
     ]
 
 
 def loadModel(op_iter):
+    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
+    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
     dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
     sys.stderr.write(dump_path + "\n")
-    return dump2json(dump_path)
+    
+    # evaluation
+    proc = subprocess.Popen([XGBOOST_PATH, config_path, "task=eval",\
+                    "model_in=" + model_out_path],
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    
+    evals = parseEval(proc.stderr.read())
+    sys.stderr.write("eval log: " + str(evals) + "\n")
+    test_error = evals['test-error']
+    train_error = evals['train-error']
+    
+    features, feature_map = loadFeatureTable(FEATTABLE_PATH)
+    json_obj = dump2json(dump_path, feature_map)
+    json_obj['test_error'] = test_error
+    json_obj['train_error'] = train_error
+    if op_iter == 0:
+        json_obj['features'] = features 
+        
+    return json_obj
 
 def trainNewModel(op_iter, new_config):
     config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
