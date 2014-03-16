@@ -6,6 +6,10 @@ import re
 import sys
 import subprocess
 
+from bson import Binary
+from bson.json_util import dumps as bson_dumps
+
+
 DATASET_NAME = "fusion"
 XGBOOST_PATH = "./xgboost/xgboost"
 TRAIN_PATH = "./data/fusion/fusion.txt.train"
@@ -59,10 +63,19 @@ def setDataset(dataset):
     ]
 
 
-def loadModel(op_iter):
-    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
-    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
-    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
+def loadModel(user_id, op_iter):
+    config_path = "%s/%s_%s_%04d.conf" % (TEMP_PATH,
+                                          str(user_id),
+                                          DATASET_NAME,
+                                          op_iter)
+    model_out_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
+                                              str(user_id),
+                                              DATASET_NAME,
+                                              op_iter + 1)
+    dump_path = "%s/%s_%s_%04d.dump" % (TEMP_PATH,
+                                        str(user_id),
+                                        DATASET_NAME,
+                                        op_iter + 1)
     sys.stderr.write(dump_path + "\n")
     
     # evaluation
@@ -84,11 +97,23 @@ def loadModel(op_iter):
         
     return json_obj
 
-def trainNewModel(op_iter, new_config):
-    config_path = "%s/%s_%04d.conf" % (TEMP_PATH, DATASET_NAME, op_iter)
-    model_in_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter)
-    model_out_path = "%s/%s_%04d.model" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
-    dump_path = "%s/%s_%04d.dump" % (TEMP_PATH, DATASET_NAME, op_iter + 1)
+def trainNewModel(user_id, op_iter, new_config):
+    config_path = "%s/%s_%s_%04d.conf" % (TEMP_PATH,
+                                          str(user_id),
+                                          DATASET_NAME,
+                                          op_iter)
+    model_in_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
+                                             str(user_id),
+                                             DATASET_NAME,
+                                             op_iter)
+    model_out_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
+                                              str(user_id),
+                                              DATASET_NAME,
+                                              op_iter + 1)
+    dump_path = "%s/%s_%s_%04d.dump" % (TEMP_PATH,
+                                        str(user_id),
+                                        DATASET_NAME,
+                                        op_iter + 1)
     
     sys.stderr.write("\n".join([config_path, model_in_path, model_out_path, dump_path]) + "\n")
     
@@ -129,13 +154,19 @@ def trainNewModel(op_iter, new_config):
     train_error = evals['train-error']
     
     features, feature_map = loadFeatureTable(FEATTABLE_PATH)
-    json_obj = dump2json(dump_path, feature_map)
-    json_obj['test_error'] = test_error
-    json_obj['train_error'] = train_error
+    response = dump2json(dump_path, feature_map)
+    response['test_error'] = test_error
+    response['train_error'] = train_error
     if op_iter == 0:
-        json_obj['features'] = features 
-    
-    return json_obj
+        response['features'] = features
+        
+    # add model binary
+    """
+    with open(model_out_path, "rb") as mfile:
+        response["model"] = Binary(mfile.read())
+        mfile.close()
+    """
+    return response
 
 def loadFeatureTable(ftable_path):
     feature_map = {}

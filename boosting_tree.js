@@ -429,6 +429,7 @@ boosting_tree.prototype = {
 			var y_offset = 0;
 			if (self.num_trees > 1) {
 				self.tooltips.add(d.x + box_width / 2 + 2, d.y - 15, {
+					user_id : main_user_id,
 					op_type : "tree_remove",
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
@@ -438,6 +439,7 @@ boosting_tree.prototype = {
 			}
 			// show expand tree option
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
+					user_id : main_user_id,
 					op_type : "tree_expand",
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
@@ -445,6 +447,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees + 1});
 		} else if (d.type === "split") {
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
+				user_id : main_user_id,
 				op_type : "node_remove",
 				op_iter :  history.active_op_id,
 				node_id : d.node_id,
@@ -452,6 +455,7 @@ boosting_tree.prototype = {
 				num_trees : self.num_trees});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
 			var request = {
+					user_id : main_user_id,
 					op_type : "node_expand",
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,

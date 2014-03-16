@@ -22,7 +22,7 @@ var history = new op_history( { top:10, right:0, bottom:10, left:10},
 								right_width, bottom_height,
 								"#historygraph");
 
-var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:10}, 
+var btrees = new boosting_tree( { top:30, right:100, bottom:10, left:10}, 
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
@@ -34,6 +34,7 @@ var ftable = new feature_table ( { top:10, right:10, bottom:10, left:10},
 
 var main_dataset = "";
 var main_features = null;
+var main_user_id = "";
 
 var change_dataset = function() {
 	main_dataset = $("#dataselect").val();
@@ -48,6 +49,7 @@ var change_dataset = function() {
 			num_trees : para.num_trees,
 			max_depth : para.max_depth,
 			dataset : main_dataset,
+			user_id : "",
 		};
 	
 	console.log(init_request);
@@ -55,6 +57,7 @@ var change_dataset = function() {
 			init_request,
 			function(data) {
 				main_features = data.features;
+				main_user_id = data.user_id;
 				history.update( init_request, data );
 	            gtreepath.update( [data.forest[0],] );
 	            btrees.init( data );
@@ -66,4 +69,18 @@ var change_dataset = function() {
 	            );
 	            */
 			});
+};
+
+var garbage_collection = function() {
+	if (main_user_id.length == 0) {
+		return "bye";
+	}
+	$.get("cgi-bin/garbage_collection.py", 
+			{ user_id : main_user_id,
+			  message : "garbage collection"
+			},
+			function (data) {
+				alert(data.message);
+			});
+	return "bye";
 };

@@ -8,7 +8,7 @@
 </head> 
 
  
-<body onload="change_dataset();">
+<body onload="change_dataset();" onbeforeunload="garbage_collection();">
    
     <h1>Transparent Boosting Tree: An Interactive Machine Learning Framework</h1>
     
@@ -57,6 +57,7 @@
   <script src="boosting_tree.js"></script>
   <script src="op_history.js"></script>
   <script src="op_tooltips.js"></script>
+  <script src="feature_table.js"></script>
   <script src="main.js"></script>
   
 </body>

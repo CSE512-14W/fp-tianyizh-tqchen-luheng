@@ -81,11 +81,13 @@ op_history.prototype = {
 				var xx =  - 60;
 				var yy = (self.ops.length - i) * self.entry_height;
 				self.tooltips.add(xx, yy, {
+						user_id : main_user_id,
 						op_type : "restore_op",
 						op_iter : i,
 						node_id : 0,
 						tree_id : 0,
-						num_trees : btrees.num_trees});
+						num_trees : btrees.num_trees
+					});
 				d3.event.preventDefault();
 			});
 			
