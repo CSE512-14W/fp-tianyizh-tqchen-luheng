@@ -144,7 +144,10 @@ def loadFeatureTable(ftable_path):
         features = []
         for (fid, node) in enumerate(ftable["nodes"]):
             feature = node["feature"]
-            features.append([feature, ])
+            #features.append([feature, ])
+            features.append( { "name" : feature, \
+                               "info" : node["explanation"], \
+                               "type" : "..." } )
             feature_map[feature] = fid
         ftable_file.close()
         

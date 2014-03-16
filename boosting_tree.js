@@ -17,7 +17,10 @@ function boosting_tree (margin, width, height, tag) {
     this.tooltips = new op_tooltips(this.svg);
     this.diagonal = d3.svg
     			.diagonal()
-    			.projection( function(d) { return [d.x, d.y]; });
+    			.projection( function(d) {
+    				return [d.x, d.y];
+    			});
+    
     this.tree_margin = 20;
     this.rect_width = 60,
     this.rect_height = 22,
@@ -354,7 +357,8 @@ boosting_tree.prototype = {
 			.duration(self.duration)
 			.attr("d", self.diagonal)
 			.style("stroke-width", function(d) {
-				return self.link_stroke_scale(d.target.samples);});
+				return self.link_stroke_scale(d.target.samples);
+			});
 			//.style("stroke", self.stroke_callback);
 	 
 		// removed links
@@ -381,7 +385,7 @@ boosting_tree.prototype = {
 		// collapse everthing else other than the node nd
 		var self = this;
 		var prev_id = (tree_id > 0 ? tree_id - 1 : tree_id + 1);
-		console.log(prev_id, self.num_trees, is_expanded);
+		// console.log(prev_id, self.num_trees, is_expanded);
 		for (var i = 0; i < self.forest_data.length; i++) {
 			var tree = self.forest_data[i];
 			if (is_expanded && i != tree_id && tree.children) {
@@ -397,7 +401,7 @@ boosting_tree.prototype = {
 		var path = self.path_helper(nd);
 		self.svg.selectAll("path.link")
 			.classed("active", false);
-		//link.classed("active", false);
+	
 		active_links = [];
 		for (var i = 0; i + 1 < path.length; i++) {
 			active_links.push({source : path[i], target : path[i+1]});
@@ -459,36 +463,4 @@ boosting_tree.prototype = {
 	}
 };
 
-/******** BACKUP CODE *******
- recursive_tree_helper : function (node_id, parent_id, my_rank) {
-		var node = this.tree_nodes[node_id];
-		this.parent_ptr[node_id] = parent_id;
-		if (node.children) {
-			var c_nodes = [];
-			for (var i = 0; i < node.children.length; i++) {
-				c_nodes.push(
-					this.recursive_tree_helper(node.children[i], node_id, i));
-			}
-			return { node_id : node_id, label : node.label, type : "split",
-					children : c_nodes, rank : my_rank,
-					samples : node.pos_cnt + node.neg_cnt,
-					weight : 1.0 };
-		} else {
-			var leaf_weight = parseFloat(node.label.split("=")[1]);
-			return { node_id : node_id, label : node.label, type : "leaf",
-					rank : my_rank, samples : node.pos_cnt + node.neg_cnt,
-					weight : leaf_weight};
-		}
-	},
-	
-if (self.enable_toggle) {
-			for (var i = 0; i < self.num_trees; i++) {
-				if (forest_data[i].children) {
-					for (var j = 0; j < forest_data[i].children.length; j++) {
-						self.toggleAll(forest_data[i].children[j]);
-					}
-				}
-			}
-		}
- */
  

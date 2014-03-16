@@ -41,12 +41,10 @@ op_tooltips.prototype = {
 			.on("click", function() {
 				$.get("cgi-bin/tree_manipulation.py", request,
 						function(data) {
+							//main_features = data.features;
 							history.update(request, data);
 				            btrees.init(data);
-				            new TableSort( "#featuretable",
-				            		[ { text: 'Features', sort: TableSort.alphabetic}, ],
-				                    main_features, { width: '200', height: '800' }
-				            );
+				            ftable.update();
 						});
 			});
 	    	

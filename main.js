@@ -3,9 +3,9 @@
 var window_width = window.innerWidth;
 var window_height = window.innerHeight;
 
-var left_width = window_width * 0.1;
+var left_width = window_width * 0.15;
 var middle_width = window_width * 0.6;
-var right_width = window_width * 0.3;
+var right_width = window_width * 0.35;
 
 var top_height = window_height * 0.3;
 var bottom_height = window_height * 0.7;
@@ -14,11 +14,11 @@ console.log("window width", window_width);
 console.log("window height", window_height);
 console.log("split width", left_width, middle_width, right_width);
 
-var gtreepath =  new pathgraph( { top:30, right:0, bottom:10, left:20}, 
+var gtreepath =  new pathgraph( { top:30, right:0, bottom:10, left:10}, 
 								right_width, top_height,
 								"#modelpathgraph" );
 
-var history = new op_history( { top:10, right:0, bottom:10, left:20}, 
+var history = new op_history( { top:10, right:0, bottom:10, left:10}, 
 								right_width, bottom_height,
 								"#historygraph");
 
@@ -26,6 +26,11 @@ var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:10},
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
+
+var ftable = new feature_table ( { top:10, right:10, bottom:10, left:10},
+								left_width,
+								window_height,
+								"#featuretable");
 
 var main_dataset = "";
 var main_features = null;
@@ -53,9 +58,12 @@ var change_dataset = function() {
 				history.update( init_request, data );
 	            gtreepath.update( [data.forest[0],] );
 	            btrees.init( data );
+	            ftable.init( main_features );
+	            /*
 	            new TableSort( "#featuretable",
 	            		[ { text: 'Features', sort: TableSort.alphabetic}, ],
 	                    main_features, { width: '200', height: '800' }
 	            );
+	            */
 			});
 };

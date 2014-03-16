@@ -3,7 +3,7 @@
 
 #featureview {
   float: left;
-  width: 10%;
+  width: 15%;
   height: 600;
   margin-left: 50;
 }
@@ -16,7 +16,7 @@
 
 #interactionview {
   float: right;
-  width: 30%;
+  width: 25%;
   height: auto;
 }
 

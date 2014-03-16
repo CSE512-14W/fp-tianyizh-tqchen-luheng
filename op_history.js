@@ -44,8 +44,10 @@ op_history.prototype = {
 		}
 		self.active_op_id = response.op_iter;
 		//console.log(this.ops, this.active_op_id);
+		/*
 		console.log(( { test_error: response.test_error,
 					train_error : response.train_error} ));
+		*/
 		self.panel.selectAll("rect").remove();
 		self.panel.selectAll("text").remove();
 		
