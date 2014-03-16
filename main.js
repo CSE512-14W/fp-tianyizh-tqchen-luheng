@@ -1,28 +1,51 @@
 // this is main js that cover all up
 
+var window_width = window.innerWidth;
+var window_height = window.innerHeight;
+
+var left_width = window_width * 0.1;
+var middle_width = window_width * 0.6;
+var right_width = window_width * 0.3;
+
+var top_height = window_height * 0.3;
+var bottom_height = window_height * 0.7;
+
+console.log("window width", window_width);
+console.log("window height", window_height);
+console.log("split width", left_width, middle_width, right_width);
+
 var gtreepath =  new pathgraph( { top:30, right:0, bottom:10, left:20}, 
-								500, 200, "#modelpathgraph" );
+								right_width, top_height,
+								"#modelpathgraph" );
 
 var history = new op_history( { top:10, right:0, bottom:10, left:20}, 
-								500, 300, "#historygraph");
+								right_width, bottom_height,
+								"#historygraph");
 
 var btrees = new boosting_tree( { top:30, right:50, bottom:10, left:10}, 
-								1200, 800, "#modeltreegraph" , false);
+								middle_width,
+								window_height * 0.8,
+								"#modeltreegraph");
 
 var main_dataset = "";
 var main_features = null;
 
 var change_dataset = function() {
 	main_dataset = $("#dataselect").val();
+	para = {num_trees : $("#numtreeinput").val(),
+			max_depth : $("#maxdepthinput").val()};
 	btrees.clear();
 	history.clear();
-	console.log(main_dataset);
+	
 	var init_request = {
 			op_type : "init",
-			op_iter : 0, num_trees : 0,
-			dataset : main_dataset 
+			op_iter : 0,
+			num_trees : para.num_trees,
+			max_depth : para.max_depth,
+			dataset : main_dataset,
 		};
 	
+	console.log(init_request);
 	$.get("cgi-bin/tree_manipulation.py", 
 			init_request,
 			function(data) {
@@ -36,38 +59,3 @@ var change_dataset = function() {
 	            );
 			});
 };
-
-/*
-$.get("cgi-bin/tree_manipulation.py", 
-		init_request,
-		function(data) {
-			history.update( init_request, data );
-            gtreepath.update( [data.forest[0],] );
-            btrees.init( data );
-            
-            features = [];
-            for (var i = 0; i < data.nodes.length; i++) {
-            	features.push([data.nodes[i].feature, ]);
-            }
-            new TableSort( "#featuretable",
-            		[ { text: 'Features', sort: TableSort.alphabetic}, ],
-                    data.features, { width: '200', height: '800' }
-            );
-         
-            d3.json( "data/fusion/features.json",
-                    function(error, data){
-           			var features = [];
-           			for (var i = 0; i < data.feature.length; i++) {
-           				features.push([data.feature[i],]);
-           			}
-                       new TableSort( "#featuretable",
-                           [ { text: 'Features', sort: TableSort.alphabetic},
-                           //    { text: 'Description', sort: TableSort.numeric, sort_column: true },
-                           //    { text: 'Details', sort: TableSort.alphabetic}
-                           ],
-                           features, { width: '200', height: '800' } );
-                    }
-                  );
-			
-		});
-*/

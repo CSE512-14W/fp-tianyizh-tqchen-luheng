@@ -164,3 +164,9 @@ h2 {
   text-shadow: 0px 1px 1px rgba(255,255,255,1);
   line-height: 1;
 }
+
+.parainput {
+	width: 30px;
+	height: 20px;
+	font: 14px helvetica normal;
+}

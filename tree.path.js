@@ -1,18 +1,22 @@
 // class to show a path in the tree
 function pathgraph( margin, width, height, tag ){
+	
     this.margin = margin;
     this.width = width - margin.left - margin.right;
-    this.legendwidth = this.width / 2.5;
     this.height = height - margin.top - margin.bottom;
+    this.legendwidth = this.width / 2.5;
+    
     this.barHeight = 30;
     this.x = d3.scale.linear()
         .range([0, this.width - this.legendwidth]);
 
-    this.svg = d3.select( tag ).append( "svg" )
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom )
+    this.svg = d3.select(tag)
+    	.append("svg")
+        .attr("width", width)
+        .attr("height", height)
         .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");        
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
     this.bar = this.svg.selectAll('.bar');
     this.legend = this.svg.selectAll( '.legend' );
     this.textleft = null;

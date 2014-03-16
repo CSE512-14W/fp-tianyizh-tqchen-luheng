@@ -29,14 +29,20 @@ if op_iter > 0:
     node_id = int(request["node_id"].value)
     
     if op_type == "node_expand":
-        new_config = [("interact:booster_index", booster_id), ("bst:interact:expand", node_id)]
+        new_config = [("interact:booster_index", booster_id),\
+                      ("bst:interact:expand", node_id)]
         sys.stderr.write(str(new_config) + "\n")
     elif op_type == "node_remove":
-        new_config = [("interact:booster_index", booster_id), ("bst:interact:remove", node_id)]
+        new_config = [("interact:booster_index", booster_id),
+                      ("bst:interact:remove", node_id)]
     elif op_type == "tree_expand":
-        new_config = [("num_round", num_trees + 1), ]
+        new_config = [("num_round", num_trees), ]
     elif op_type == "tree_remove":
-        new_config = [("interact:booster_index", booster_id), ("interact:action", "remove")]
+        new_config = [("interact:booster_index", booster_id),
+                      ("interact:action", "remove")]
+else:
+    new_config = [("num_round", num_trees),
+                  ("bst:max_depth", request["max_depth"].value)]
             
 if op_type == "restore_op": 
     new_forest = xgboost_utils.loadModel(op_iter)

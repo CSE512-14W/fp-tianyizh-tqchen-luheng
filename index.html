@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html>
 <meta charset="utf-8">
 <head>
   <title>Transparent Boosting Tree Learning using Interactive Visualization</title>
@@ -8,25 +9,26 @@
 
  
 <body onload="change_dataset();">
-     
-    <header>
+   
     <h1>Transparent Boosting Tree: An Interactive Machine Learning Framework</h1>
-    <!-- img src="image/mushroom.gif" alt="mushroom" width="1500" height="60"-->  
-    </header>
     
     <hr style="background:#91C5EB; border:0; height:3px" />
-    
+    <div align="center">
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
     <select id="dataselect" onchange="change_dataset();">
         <option value="mushroom">Mushroom Dataset</option>
         <option value="fusion">Fusion Health Dataset</option>
-    </select> 
+    </select>
+     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
+     number of trees: 
+    <input class="parainput" id="numtreeinput" type="number" step="1" value="1" />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+     max tree depth: 
+    <input class="parainput" id="maxdepthinput" type="number" step="1" value="2" />
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
     <button type="button" class="google button" id="rebuild" onclick="change_dataset();">REBUILD!</button>
-    
+    </div>
     <hr style="background:#91C5EB; border:0; height:3px" />
-    
-    <!-- div id = "featureview">
-      <div class = "container" id = "featuretable"></div>
-    </div> -->
     
     <div id="featureview">
       <div id="featuretable"> </div>
@@ -47,14 +49,6 @@
         </div>
     </div>
    
-  <!-- div id="container" class="c3">    
-      <div id="summaryview"></div>
-      <div id="detailview"></div>
-  </div -->
-
-  <!-- link rel="stylesheet" type="text/css" href="d3-tablesort.css"
-  -->
-  
   <script src="d3-tablesort.js"></script>
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.js"></script>

@@ -2,16 +2,15 @@
  * boosting tree visualizer 
  */
 
-function boosting_tree (margin, width, height, tag, enable_toggle) {
+function boosting_tree (margin, width, height, tag) {
 	this.margin = margin;
     this.width = width - margin.left - margin.right;
     this.height = height - margin.top - margin.bottom;
-    this.enable_toggle = enable_toggle;
     
     this.svg = d3.select(tag)
     			.append("svg")
-    			.attr("width", this.width + margin.left + margin.right)
-    			.attr("height", this.height + margin.top + margin.bottom )
+    			.attr("width", width)
+    			.attr("height", height)
     			.append("g")
     			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
    
@@ -132,7 +131,7 @@ boosting_tree.prototype = {
 	tree_layout_helper : function() {
 		var self = this;
 		var layout = [];
-		var vertical = (self.width < 1100);
+		var vertical = (self.width < 1000);
 		var tree_width = vertical ? self.width - 200 : self.width - 400;
 		
 		var width = function(d) {
@@ -439,7 +438,7 @@ boosting_tree.prototype = {
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
-					num_trees : self.num_trees});
+					num_trees : self.num_trees + 1});
 		} else if (d.type === "split") {
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
 				op_type : "node_remove",

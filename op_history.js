@@ -1,7 +1,7 @@
 function op_history (margin, width, height, tag) {
 	this.margin = margin;
-    this.width = width;// - margin.left -margin.right;
-    this.height = height;// - margin.top - margin.bottom;
+    this.width = width - margin.left -margin.right;
+    this.height = height - margin.top - margin.bottom;
     
     this.entry_width = 400;
     this.entry_height = 22;
@@ -9,8 +9,8 @@ function op_history (margin, width, height, tag) {
     var y0 = margin.top;
     this.svg = d3.select(tag)
     			.append("svg")
-    			.attr("width", this.width + margin.left + margin.right)
-    			.attr("height", this.height + margin.top + margin.bottom )
+    			.attr("width", width)
+    			.attr("height", height)
     			.append("g")
     			.attr("transform", "translate(" + x0 + ", " + y0 + ")");
     			
