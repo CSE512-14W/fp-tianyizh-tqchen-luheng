@@ -9,25 +9,29 @@ import subprocess
 from bson import Binary
 from bson.json_util import dumps as bson_dumps
 
+import feature_utils
 
 DATASET_NAME = "fusion"
-XGBOOST_PATH = "./xgboost/xgboost"
-TRAIN_PATH = "./data/fusion/fusion.txt.train"
-TEST_PATH = "./data/fusion/fusion.txt.test"
-FEATMAP_PATH = "./data/fusion/featmap.txt"
-FEATTABLE_PATH = "./data/fusion/features.json"
-TEMP_PATH = "./temp"
+XGBOOST_PATH = "../xgboost/xgboost"
+TRAIN_PATH = "../data/fusion/fusion.txt.train"
+TEST_PATH = "../data/fusion/fusion.txt.test"
+FEATMAP_PATH = "../data/fusion/featmap.txt"
+FEATTABLE_PATH = "../data/fusion/features.json"
+TEMP_PATH = "../temp"
 
 DEFAULT_CONFIG = []
 
 def setDataset(dataset):
     global DATASET_NAME
+    global XGBOOST_PATH
     global TRAIN_PATH
     global TEST_PATH
     global FEATMAP_PATH
     global FEATTABLE_PATH
     global TEMP_PATH 
     global DEFAULT_CONFIG
+    
+   
     
     if dataset == "fusion":
         DATASET_NAME = "fusion"
@@ -36,6 +40,15 @@ def setDataset(dataset):
         FEATMAP_PATH = "./data/fusion/featmap.txt"
         FEATTABLE_PATH = "./data/fusion/features.json"
         TEMP_PATH = "./temp"
+        XGBOOST_PATH = "./xgboost/xgboost"
+    elif dataset == "fusion_local":
+        DATASET_NAME = "fusion"
+        TRAIN_PATH = "../data/fusion/fusion.txt.train"
+        TEST_PATH = "../data/fusion/fusion.txt.test"
+        FEATMAP_PATH = "../data/fusion/featmap.txt"
+        FEATTABLE_PATH = "../data/fusion/features.json"
+        TEMP_PATH = "../temp"
+        XGBOOST_PATH = "../xgboost/xgboost"
     else:
         DATASET_NAME = "mushroom"
         TRAIN_PATH = "./data/agaricus.txt.train"
@@ -43,6 +56,7 @@ def setDataset(dataset):
         FEATMAP_PATH = "./data/featmap.txt"
         FEATTABLE_PATH = "./data/feature.json"
         TEMP_PATH = "./temp"
+        XGBOOST_PATH = "./xgboost/xgboost"
         
     DEFAULT_CONFIG = [
         ("num_round" , 1),
@@ -88,7 +102,7 @@ def loadModel(user_id, op_iter):
     test_error = evals['test-error']
     train_error = evals['train-error']
     
-    features, feature_map = loadFeatureTable(FEATTABLE_PATH)
+    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH)
     json_obj = dump2json(dump_path, feature_map)
     json_obj['test_error'] = test_error
     json_obj['train_error'] = train_error
@@ -125,7 +139,7 @@ def trainNewModel(user_id, op_iter, new_config):
         config_file.close()
     
     subprocess.call(["cat", config_path], stdout=sys.stderr)
-    
+
     if op_iter == 0:
         subprocess.call([XGBOOST_PATH, config_path,\
                         "model_out=" + model_out_path], stdout=sys.stderr)
@@ -153,7 +167,7 @@ def trainNewModel(user_id, op_iter, new_config):
     test_error = evals['test-error']
     train_error = evals['train-error']
     
-    features, feature_map = loadFeatureTable(FEATTABLE_PATH)
+    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH)
     response = dump2json(dump_path, feature_map)
     response['test_error'] = test_error
     response['train_error'] = train_error
@@ -167,22 +181,6 @@ def trainNewModel(user_id, op_iter, new_config):
         mfile.close()
     """
     return response
-
-def loadFeatureTable(ftable_path):
-    feature_map = {}
-    with open(ftable_path, 'r') as ftable_file:
-        ftable = json.load(ftable_file)
-        features = []
-        for (fid, node) in enumerate(ftable["nodes"]):
-            feature = node["feature"]
-            #features.append([feature, ])
-            features.append( { "name" : feature, \
-                               "info" : node["explanation"], \
-                               "type" : "..." } )
-            feature_map[feature] = fid
-        ftable_file.close()
-        
-    return features, feature_map
         
 def parseEval(eval_log):
     eval_info = eval_log.strip().split()[1:]
@@ -299,8 +297,9 @@ def dump2json(dump_path, raw_feature_map):
 
 if __name__ == "__main__":
     # test
-    forest = trainNewModel(0, [])
+    setDataset("fusion_local")
+    forest = trainNewModel("aaa", 0, [])
     print forest
     
-    forest = loadModel(0)
+    forest = loadModel("aaa", 0)
     print forest

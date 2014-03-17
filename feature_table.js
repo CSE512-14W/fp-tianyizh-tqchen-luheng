@@ -1,3 +1,7 @@
+/**
+ * Hierarchical Featuer Table
+ */
+
 function feature_table(margin, width, height, tag) {
 	this.width = width - margin.left - margin.right;
 	this.height = height - margin.top - margin.bottom;
@@ -5,12 +9,13 @@ function feature_table(margin, width, height, tag) {
 	
 	this.barHeight = 20,
 	this.barWidth = width * .8;
+	this.barOffset = 20;
 	
 	this.duration = 400,
-
+	
 	this.tree_layout = d3.layout.tree()
 	    	.size([0, 100]);
-
+	
 	this.diagonal = d3.svg.diagonal()
 	    .projection(function(d) {
 	    	return [d.y, d.x]; 
@@ -25,6 +30,8 @@ function feature_table(margin, width, height, tag) {
 	    .attr("width", width)
 	    .append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	d3.select(tag).style("height", height + "px");
 }
 
 feature_table.prototype = {
@@ -32,13 +39,21 @@ feature_table.prototype = {
 		var self = this;
 		self.node_count = 0;
 		// convert feature data to tree data
+		self.features = fdata;
 		self.feature_data = { x0 : 0,
 							  y0 : 0,
 							  name : "Features",
 							  info : "Features",
-							  type : "_",
-							  children : fdata 
+							  type : "_", 
 							};
+		
+		self.group_method = $("#fgselect").val();
+		switch (self.group_method) {
+		case "prefix" : self.makeGroups(self.prefixGroupMapper);
+						break;
+		default : self.makeGroups(self.identityGroupMapper);
+					break;
+		}
 		self.svg.selectAll("g.featnode").remove();
 		self.update(self.feature_data);
 	},
@@ -47,16 +62,14 @@ feature_table.prototype = {
 		var root = self.feature_data;
 		var nodes = self.tree_layout.nodes(root);
 		
-		/*
-		 * var height = Math.max(500,
-				nodes.length * barHeight + self.margin.top + self.margin.bottom);
-		d3.select("svg").attr("height", height);
-		d3.select(self.frameElement).style("height", height + "px");
-		*/
-		
+		var current_height = nodes.length * self.barHeight
+			+ self.margin.top + self.margin.bottom;
+		d3.select("svg")
+			.attr("height", current_height);
+				
 		nodes.forEach(function(d, i) {
 			d.x = i * self.barHeight;
-			d.y = d.depth <= 1 ? 0 : (d.depth - 1) * 5;
+			d.y = d.depth <= 1 ? 0 : (d.depth - 1) * self.barOffset;
 		});
 
 		var node = self.svg.selectAll("g.featnode")
@@ -127,5 +140,46 @@ feature_table.prototype = {
 			d.children = d._children;
 			d._children = null;
 		}
+	},
+	makeGroups : function(group_mapper) {
+		var self = this;
+		self.groups = [];
+		self.group_dict = {};
+		for (var i = 0; i < self.features.length; i++) {
+			var feature = self.features[i];
+			var gid = group_mapper(feature, self.groups, self.group_dict);
+			if (gid < 0) {
+				self.groups.push(feature);
+			} else {
+				self.groups[gid].children.push(feature);
+			}
+		}
+		self.feature_data.children = self.groups;
+		self.feature_data.children.forEach(self.toggle);
+	},
+	prefixGroupMapper : function(feature, groups, dict) {
+		if (!feature.prefix) {
+			return -1;
+		}
+		var gname = feature.prefix;
+		var gid = dict[gname];
+		if (gid === undefined) {
+			gid = groups.length;
+			dict[gname] = gid;
+			groups.push({ name : "feature group: " + gname, children : [] });
+		}
+		return gid;
+	},
+	identityGroupMapper : function(feature, groups, dict) {
+		var k = Math.floor(feature.feature_id / 20);
+		var gname = "id " + (k * 20) + " - " + (k * 20 + 19);
+		//console.log(feature, k, gname);
+		var gid = dict[gname];
+		if (gid === undefined) {
+			gid = groups.length;
+			dict[gname] = gid;
+			groups.push({ name : gname, children : [] });
+		}
+		return gid;
 	}
 };

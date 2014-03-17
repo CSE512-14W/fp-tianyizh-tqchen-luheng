@@ -1,6 +1,4 @@
-""" garbage collection, delete server-side temporary files
-"""
-
+#!/usr/bin/python
 import cgi
 import cgitb
 import json

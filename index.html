@@ -13,20 +13,28 @@
     <h1>Transparent Boosting Tree: An Interactive Machine Learning Framework</h1>
     
     <hr style="background:#91C5EB; border:0; height:3px" />
-    <div align="center">
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-    <select id="dataselect" onchange="change_dataset();">
-        <option value="mushroom">Mushroom Dataset</option>
-        <option value="fusion">Fusion Health Dataset</option>
-    </select>
-     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
-     number of trees: 
-    <input class="parainput" id="numtreeinput" type="number" step="1" value="1" />
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-     max tree depth: 
-    <input class="parainput" id="maxdepthinput" type="number" step="1" value="2" />
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
-    <button type="button" class="google button" id="rebuild" onclick="change_dataset();">REBUILD!</button>
+    <div id="toolbar" align="center">
+	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+	    <label for="dataelect">dataset</label>
+	    <select id="dataselect" onchange="change_dataset();">
+	        <option value="mushroom">Mushroom Dataset</option>
+	        <option value="fusion">Fusion Health Dataset</option>
+	    </select>
+	     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+	     <label for="fgselect">group features by</label>
+	     <select id="fgselect" onchange="ftable.init(main_features);">
+          <option value="prefix">feature name prefix</option>
+          <option value="value_type">value type</option>
+          <option value="none">id</option>
+      </select>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+      <label for="numtreeinput">initial number of trees</label>
+	    <input class="parainput" id="numtreeinput" type="number" step="1" value="1" />
+	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+	   <label for="maxdepthinput">initial max depth of trees</label>
+	    <input class="parainput" id="maxdepthinput" type="number" step="1" value="2" />
+	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+	    <button type="button" class="google button" id="rebuild" onclick="change_dataset();">REBUILD!</button>
     </div>
     <hr style="background:#91C5EB; border:0; height:3px" />
     

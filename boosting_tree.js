@@ -134,7 +134,7 @@ boosting_tree.prototype = {
 	tree_layout_helper : function() {
 		var self = this;
 		var layout = [];
-		var vertical = (self.width < 1000);
+		var vertical = (self.width < 800);
 		var tree_width = vertical ? self.width - 200 : self.width - 400;
 		
 		var width = function(d) {

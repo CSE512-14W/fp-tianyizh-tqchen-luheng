@@ -4,8 +4,9 @@
 #featureview {
   float: left;
   width: 15%;
-  height: 600;
+  height: 100%;
   margin-left: 50;
+  overflow-y: auto;
 }
 
 #modelview {
@@ -32,6 +33,11 @@
   height: 400;
   text-align: left;
   overflow-y: auto;
+}
+
+#featuretable {
+	height: 400px;
+	overflow: auto;
 }
 
 /* tree path style */
@@ -136,6 +142,17 @@
   background: lightsteelblue;
 }
 
+/* hierarchical feature table style */
+.featnode rect {
+  cursor: pointer;
+  fill: #fff;
+  stroke-width: 1.5px;
+}
+
+.featnode text {
+  font: 12px Helvetica;
+  pointer-events: None;
+}
 
 /* pretty html layout! */
 
@@ -167,6 +184,12 @@ h2 {
 
 .parainput {
 	width: 30px;
-	height: 20px;
+	height: 18px;
 	font: 14px helvetica normal;
+	color: #333;
+}
+
+label {
+	font: 14px helvetica normal;
+	color: #333;
 }
