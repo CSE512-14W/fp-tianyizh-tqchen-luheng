@@ -53,8 +53,9 @@ var change_dataset = function() {
 		};
 	
 	console.log(init_request);
+	
 	$.get("cgi-bin/tree_manipulation.py", 
-			init_request,
+			{ request : JSON.stringify(init_request) },
 			function(data) {
 				main_features = data.features;
 				main_user_id = data.user_id;
@@ -62,13 +63,8 @@ var change_dataset = function() {
 	            gtreepath.update( [data.forest[0],] );
 	            btrees.init( data );
 	            ftable.init( main_features );
-	            /*
-	            new TableSort( "#featuretable",
-	            		[ { text: 'Features', sort: TableSort.alphabetic}, ],
-	                    main_features, { width: '200', height: '800' }
-	            );
-	            */
 			});
+			
 };
 
 var garbage_collection = function() {

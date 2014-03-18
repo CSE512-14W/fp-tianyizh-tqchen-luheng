@@ -5,7 +5,9 @@ function op_tooltips(svg) {
 		"node_remove" : " - Remove this node",
 		"tree_expand" : " + Grow a new tree",
 		"tree_remove" : " - Remove this tree",
-		"restore_op" : " Restore "	
+		"restore_op" : " Restore ",
+		"node_expand_all" : " + Expand this node for all",
+		"node_remove_all" : " + Remove this node for all"
 	};
 	this.char_to_pxl = 6.4;
 }
@@ -39,7 +41,8 @@ op_tooltips.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function() {
-				$.get("cgi-bin/tree_manipulation.py", request,
+				$.get("cgi-bin/tree_manipulation.py", 
+						{ request : JSON.stringify(request) },
 						function(data) {
 							//main_features = data.features;
 							history.update(request, data);

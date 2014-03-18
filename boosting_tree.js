@@ -419,6 +419,7 @@ boosting_tree.prototype = {
     },
 	showNodeOperationTooltip : function(d) {
 		var self = this;
+		var tooltip_offset = 15;
 		// remove all previous tooltips
 		self.tooltips.clear();
 		history.tooltips.clear();
@@ -428,14 +429,14 @@ boosting_tree.prototype = {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
 			if (self.num_trees > 1) {
-				self.tooltips.add(d.x + box_width / 2 + 2, d.y - 15, {
+				self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "tree_remove",
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
 					num_trees : self.num_trees});
-				y_offset = 15;
+				y_offset = tooltip_offset;
 			}
 			// show expand tree option
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
@@ -446,13 +447,20 @@ boosting_tree.prototype = {
 					tree_id : d.tree_id,
 					num_trees : self.num_trees + 1});
 		} else if (d.type === "split") {
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y, {
-				user_id : main_user_id,
-				op_type : "node_remove",
-				op_iter :  history.active_op_id,
-				node_id : d.node_id,
-				tree_id : d.tree_id,
-				num_trees : self.num_trees});
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
+					user_id : main_user_id,
+					op_type : "node_remove",
+					op_iter :  history.active_op_id,
+					node_id : d.node_id,
+					tree_id : d.tree_id,
+					num_trees : self.num_trees });
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+					user_id : main_user_id,
+					op_type : "node_remove_all",
+					op_iter :  history.active_op_id,
+					node_id : [d.node_id, ],
+					tree_id : [d.tree_id, ],
+					num_trees : self.num_trees });
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
 			var request = {
 					user_id : main_user_id,
