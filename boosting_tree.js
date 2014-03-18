@@ -50,7 +50,6 @@ boosting_tree.prototype = {
 		
 		var tree_delta = self.forest_data.length - self.num_trees;
 		self.num_trees = self.forest_data.length;
-		//console.log("delta: ", tree_delta);
 		
 		/**
 		 * auto collapsing
@@ -59,7 +58,7 @@ boosting_tree.prototype = {
 			// only use node_id of last time ..
 			var tree = self.forest_data[i];
 			self.node_id_helper(tree);
-			tree.label = "tree[" + i + "] : " + tree.label; 
+			// tree.label = "tree[" + i + "] : " + tree.label; 
 		}
 
 		if (tree_delta <= 0) {
@@ -105,12 +104,17 @@ boosting_tree.prototype = {
 			}
 		}
 	},
-	path_helper : function (d) {
-		path = [];
-		for (var nd = d; nd != null; nd = nd.parent) {
-			path.push(nd);
+	node_label_helper : function(node) {
+		if (!node.parent) {
+			return "tree[" + node.tree_id + "] " + node.label;
 		}
-		return path.reverse();
+		if (node.type === "leaf") {
+			return "w=" + node.weight.toFixed(3);
+		}
+		return node.label;
+	},
+	node_color_helper : function(node) {
+		// TODO : color encoding
 	},
 	toggle : function (d) {
 		if (d.children) {
@@ -212,6 +216,7 @@ boosting_tree.prototype = {
 				} else {
 					d.y = self.tree_layout[i].offset.y;
 				}
+				d.show_label = self.node_label_helper(d);
 			});
 			nodes.push.apply(nodes, t_nodes);
 			links.push.apply(links, tree.links(t_nodes));
@@ -269,7 +274,7 @@ boosting_tree.prototype = {
 
 		nodeEnter.append("rect")
 		   .attr("x", function(d) {
-			   return - self.node_box_width(d.label) / 2;
+			   return - self.node_box_width(d.show_label) / 2;
 		   })
 		   .attr("width", 1e-6)
 		   .attr("height", 1e-6);
@@ -279,7 +284,7 @@ boosting_tree.prototype = {
 			.attr("dy", "12px")
 			.attr("text-anchor", "middle")
 			.text(function(d) {
-				return d.label; })
+				return d.show_label; })
 			.style("fill-opacity", 1e-6);
 		
 		// for every existing nodes
@@ -291,10 +296,10 @@ boosting_tree.prototype = {
 	 
 		nodeUpdate.select("rect")
 			.attr("x", function(d) {
-			   return - self.node_box_width(d.label) / 2;
+			   return - self.node_box_width(d.show_label) / 2;
 		   	})
 			.attr("width", function(d) {
-				return self.node_box_width(d.label);
+				return self.node_box_width(d.show_label);
 			})
 			.attr("height", self.rect_height)
 			.attr("rx", 2)
@@ -314,7 +319,8 @@ boosting_tree.prototype = {
 			.attr("dy", "12px")
 			.attr("text-anchor", "middle")
 			.text(function(d) {
-			   return d.label; })
+			   return d.show_label;
+			 })
 			.style("fill-opacity", 1);
 	 	
 		// For nodes that no longer bind with data ...
@@ -379,7 +385,6 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			self.is_collapsed.push(self.forest_data[i]._children ? true : false); 
 		}
-		// console.log(self.is_collapsed);
 	},
 	auto_collapsing : function(tree_id, is_expanded) {
 		// collapse everthing else other than the node nd
@@ -396,6 +401,13 @@ boosting_tree.prototype = {
 			}
 		}
 	},
+	path_helper : function (d) {
+		path = [];
+		for (var nd = d; nd != null; nd = nd.parent) {
+			path.push(nd);
+		}
+		return path.reverse();
+	},
 	path_view_helper : function(nd) {
 		var self = this;
 		var path = self.path_helper(nd);
@@ -408,9 +420,41 @@ boosting_tree.prototype = {
 		}
 		self.svg.selectAll("path.link")
 			.data(active_links, function(d) {
-				return d.target.id; })
+				return d.target.id;
+			})
 			.classed("active", true);
 		gtreepath.update(path);
+	},
+	path_matcher : function(path) {
+		var self = this;
+		var node_ids = [],
+			tree_ids = [];
+		for (var t = 0; t < self.forest_data.length; t++) {
+			var curr_node = self.forest_data[t];
+			for(var i = 0; i < path.length; i++) {
+				if (curr_node.label !== path[i].label) {
+					break;
+				}
+				if (i == path.length - 1) {
+					node_ids.push(curr_node.node_id);
+					tree_ids.push(curr_node.tree_id);
+				} else if (curr_node.type === "split") {
+					for (var j = 0; j < curr_node.edge_tags.length; j++) {
+						if (curr_node.edge_tags[j] ===
+							path[i].edge_tags[path[i+1].rank]) {
+							curr_node = curr_node.children ?
+									curr_node.children[j] :
+									curr_node._children[j];
+							break;
+						}
+					}
+				} else {
+					break;
+				}
+			}
+		}
+		return {node_ids : node_ids,
+				tree_ids : tree_ids};
 	},
 	node_box_width : function(label) {
     	var text_len = label.length * this.char_to_pxl + 15;
@@ -425,6 +469,11 @@ boosting_tree.prototype = {
 		history.tooltips.clear();
 		
 		var box_width = self.node_box_width(d.label);
+		var path = self.path_helper(d);
+		console.log("path", path);
+		var matched = self.path_matcher(path);
+		console.log(matched);
+		
 		if (d.parent == null) {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
@@ -435,7 +484,8 @@ boosting_tree.prototype = {
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
-					num_trees : self.num_trees});
+					num_trees : self.num_trees
+				});
 				y_offset = tooltip_offset;
 			}
 			// show expand tree option
@@ -445,7 +495,8 @@ boosting_tree.prototype = {
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
-					num_trees : self.num_trees + 1});
+					num_trees : self.num_trees + 1
+				});
 		} else if (d.type === "split") {
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
 					user_id : main_user_id,
@@ -453,24 +504,33 @@ boosting_tree.prototype = {
 					op_iter :  history.active_op_id,
 					node_id : d.node_id,
 					tree_id : d.tree_id,
-					num_trees : self.num_trees });
+					num_trees : self.num_trees
+				});
 			self.tooltips.add(d.x + box_width / 2 + 2, d.y + tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "node_remove_all",
 					op_iter :  history.active_op_id,
-					node_id : [d.node_id, ],
-					tree_id : [d.tree_id, ],
-					num_trees : self.num_trees });
-		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
-			var request = {
-					user_id : main_user_id,
-					op_type : "node_expand",
-					op_iter :  history.active_op_id,
-					node_id : d.node_id,
-					tree_id : d.tree_id,
+					node_id : matched.node_ids,
+					tree_id : matched.tree_ids,
 					num_trees : self.num_trees
-				};
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y, request);
+				});
+		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+				user_id : main_user_id,
+				op_type : "node_expand",
+				op_iter :  history.active_op_id,
+				node_id : d.node_id,
+				tree_id : d.tree_id,
+				num_trees : self.num_trees
+			});
+			self.tooltips.add(d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+				user_id : main_user_id,
+				op_type : "node_expand_all",
+				op_iter :  history.active_op_id,
+				node_id : matched.node_ids,
+				tree_id : matched.tree_ids,
+				num_trees : self.num_trees
+			});
 		}
 	}
 };

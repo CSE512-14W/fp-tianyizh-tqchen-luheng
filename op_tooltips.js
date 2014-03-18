@@ -44,7 +44,6 @@ op_tooltips.prototype = {
 				$.get("cgi-bin/tree_manipulation.py", 
 						{ request : JSON.stringify(request) },
 						function(data) {
-							//main_features = data.features;
 							history.update(request, data);
 				            btrees.init(data);
 				            ftable.update();

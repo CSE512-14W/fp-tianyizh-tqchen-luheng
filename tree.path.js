@@ -53,7 +53,6 @@ pathgraph.prototype = {
         x.domain( [ -xMax, xMax ] );                
 
         var y_offset = 20;
-        var max
         // paint label
         this.svg.append('text')
             .attr( "text-anchor", "end" )

@@ -31,8 +31,6 @@ def setDataset(dataset):
     global TEMP_PATH 
     global DEFAULT_CONFIG
     
-   
-    
     if dataset == "fusion":
         DATASET_NAME = "fusion"
         TRAIN_PATH = "./data/fusion/fusion.txt.train"
@@ -274,12 +272,13 @@ def dump2json(dump_path, raw_feature_map):
                     node['type'] = 'split'
                     
                     raw_feature = re.split('[=><]+', node['label'])[0]
-                    sys.stderr.write(node['label'] + ", " + raw_feature + "\n")
+                    #sys.stderr.write(node['label'] + ", " + raw_feature + "\n")
                     node['feature_id'] = raw_feature_map[raw_feature]
                 else:
                     label = line.split(':')[1].strip()
-                    node['label'] = label
-                    node['weight'] = float(label.split('=')[1])
+                    label_info = label.split('=')
+                    node['label'] = label_info[0]
+                    node['weight'] = float(label_info[1])
                     node['type'] = 'leaf'
                 
                 nodes[node_id] = node
