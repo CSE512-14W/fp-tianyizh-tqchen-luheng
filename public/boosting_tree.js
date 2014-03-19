@@ -175,7 +175,6 @@ boosting_tree.prototype = {
 				offset_y = 0;
 				last_x = offset_x + t_width;
 			}
-			//console.log(i, offset_x, offset_y, last_x, last_y);
 			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
 		}

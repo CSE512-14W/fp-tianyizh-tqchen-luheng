@@ -55,6 +55,7 @@ if op_iter > 0:
         new_config = [("interact:booster_index", booster_id),\
                       ("bst:interact:expand", node_id)]
 else:
+    # assign new user
     user_id = uuid.uuid1()
     new_config = [("num_round", num_trees),
                   ("bst:max_depth", request["max_depth"])]

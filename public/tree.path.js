@@ -6,7 +6,7 @@ function pathgraph( margin, width, height, tag ){
     this.height = height - margin.top - margin.bottom;
     this.legendwidth = this.width / 2.5;
     
-    this.barHeight = 30;
+    this.barHeight = 24;
     this.x = d3.scale.linear()
         .range([0, this.width - this.legendwidth]);
 

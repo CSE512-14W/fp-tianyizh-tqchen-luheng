@@ -6,6 +6,7 @@ import re
 import sys
 import subprocess
 
+from os.path import join as path_join
 from bson import Binary
 from bson.json_util import dumps as bson_dumps
 
@@ -76,19 +77,13 @@ def setDataset(dataset):
 
 
 def loadModel(user_id, op_iter):
-    config_path = "%s/%s_%s_%04d.conf" % (TEMP_PATH,
-                                          str(user_id),
-                                          DATASET_NAME,
-                                          op_iter)
-    model_out_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
-                                              str(user_id),
-                                              DATASET_NAME,
-                                              op_iter + 1)
-    dump_path = "%s/%s_%s_%04d.dump" % (TEMP_PATH,
-                                        str(user_id),
-                                        DATASET_NAME,
-                                        op_iter + 1)
-    sys.stderr.write(dump_path + "\n")
+    user_dir = path_join(TEMP_PATH, str(user_id))
+    curr_fn = "%s_%04d" % (DATASET_NAME, op_iter)
+    next_fn = "%s_%04d" % (DATASET_NAME, op_iter + 1)
+    config_path =  path_join(user_dir, curr_fn + ".conf")
+    model_out_path =  path_join(user_dir, next_fn + ".model")
+    dump_path =  path_join(user_dir, next_fn + ".dump")
+    sys.stderr.write("loading from: " + dump_path + "\n")
     
     # evaluation
     proc = subprocess.Popen([XGBOOST_PATH, config_path, "task=eval",\
@@ -110,24 +105,19 @@ def loadModel(user_id, op_iter):
     return json_obj
 
 def trainNewModel(user_id, op_iter, new_config):
-    config_path = "%s/%s_%s_%04d.conf" % (TEMP_PATH,
-                                          str(user_id),
-                                          DATASET_NAME,
-                                          op_iter)
-    model_in_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
-                                             str(user_id),
-                                             DATASET_NAME,
-                                             op_iter)
-    model_out_path = "%s/%s_%s_%04d.model" % (TEMP_PATH,
-                                              str(user_id),
-                                              DATASET_NAME,
-                                              op_iter + 1)
-    dump_path = "%s/%s_%s_%04d.dump" % (TEMP_PATH,
-                                        str(user_id),
-                                        DATASET_NAME,
-                                        op_iter + 1)
+    user_dir = path_join(TEMP_PATH, str(user_id))
+    curr_fn = "%s_%04d" % (DATASET_NAME, op_iter)
+    next_fn = "%s_%04d" % (DATASET_NAME, op_iter + 1)
+    if op_iter == 0:
+        subprocess.call(["mkdir", user_dir], stdout=sys.stderr)
+        
+    config_path =  path_join(user_dir, curr_fn + ".conf")
+    model_in_path =  path_join(user_dir, curr_fn + ".model")
+    model_out_path =  path_join(user_dir, next_fn + ".model")
+    dump_path =  path_join(user_dir, next_fn + ".dump")
     
-    sys.stderr.write("\n".join([config_path, model_in_path, model_out_path, dump_path]) + "\n")
+    sys.stderr.write("\n".join([config_path, model_in_path, model_out_path,
+                                dump_path]) + "\n")
     
     with open(config_path, 'w') as config_file:
         for cfg in DEFAULT_CONFIG:

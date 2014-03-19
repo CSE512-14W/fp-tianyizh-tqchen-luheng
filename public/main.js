@@ -54,7 +54,7 @@ var change_dataset = function() {
 	
 	console.log(init_request);
 	
-	$.get("cgi-bin/tree_manipulation.py", 
+	$.get("../cgi-bin/request_handler.py", 
 			{ request : JSON.stringify(init_request) },
 			function(data) {
 				main_features = data.features;
@@ -71,7 +71,7 @@ var garbage_collection = function() {
 	if (main_user_id.length == 0) {
 		return "bye";
 	}
-	$.get("cgi-bin/garbage_collection.py", 
+	$.get("../cgi-bin/request_handler.py", 
 			{ user_id : main_user_id,
 			  message : "garbage collection"
 			},
