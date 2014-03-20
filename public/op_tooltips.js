@@ -41,7 +41,7 @@ op_tooltips.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function() {
-				$.get("../cgi-bin/request_handler.py", 
+				$.get("cgi-bin/request_handler.py", 
 						{ request : JSON.stringify(request) },
 						function(data) {
 							history.update(request, data);

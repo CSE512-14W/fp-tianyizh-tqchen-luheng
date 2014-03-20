@@ -136,6 +136,7 @@ boosting_tree.prototype = {
 		}
 	},
 	tree_layout_helper : function() {
+		// FIXME
 		var self = this;
 		var layout = [];
 		var vertical = (self.width < 800);
@@ -156,7 +157,7 @@ boosting_tree.prototype = {
 			// auto collapse trees
 			// ???
 		}
-		var leftbar_width = 300;
+		var leftbar_width = 200;
 		var last_x = vertical ? 0 : leftbar_width;
 		var last_y = vertical ? 300 : -50;
 		var offset_x = 0, offset_y = 0;

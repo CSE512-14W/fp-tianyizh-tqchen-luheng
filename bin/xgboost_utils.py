@@ -32,15 +32,7 @@ def setDataset(dataset):
     global TEMP_PATH 
     global DEFAULT_CONFIG
     
-    if dataset == "fusion":
-        DATASET_NAME = "fusion"
-        TRAIN_PATH = "./data/fusion/fusion.txt.train"
-        TEST_PATH = "./data/fusion/fusion.txt.test"
-        FEATMAP_PATH = "./data/fusion/featmap.txt"
-        FEATTABLE_PATH = "./data/fusion/features.json"
-        TEMP_PATH = "./temp"
-        XGBOOST_PATH = "./xgboost/xgboost"
-    elif dataset == "fusion_local":
+    if dataset.startswith("fusion"):
         DATASET_NAME = "fusion"
         TRAIN_PATH = "../data/fusion/fusion.txt.train"
         TEST_PATH = "../data/fusion/fusion.txt.test"
@@ -50,12 +42,12 @@ def setDataset(dataset):
         XGBOOST_PATH = "../xgboost/xgboost"
     else:
         DATASET_NAME = "mushroom"
-        TRAIN_PATH = "./data/agaricus.txt.train"
-        TEST_PATH = "./data/agaricus.txt.test"
-        FEATMAP_PATH = "./data/featmap.txt"
-        FEATTABLE_PATH = "./data/feature.json"
-        TEMP_PATH = "./temp"
-        XGBOOST_PATH = "./xgboost/xgboost"
+        TRAIN_PATH = "../data/agaricus.txt.train"
+        TEST_PATH = "../data/agaricus.txt.test"
+        FEATMAP_PATH = "../data/featmap.txt"
+        FEATTABLE_PATH = "../data/feature.json"
+        TEMP_PATH = "../temp"
+        XGBOOST_PATH = "../xgboost/xgboost"
         
     DEFAULT_CONFIG = [
         ("num_round" , 1),

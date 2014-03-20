@@ -4,13 +4,19 @@
 """
 import cgi
 import cgitb
+import imp
 import json
+import os
 import sys
 import uuid
 
 from bson.json_util import dumps as bson_dumps
 
-import xgboost_utils
+#sys.path.append(os.path.dirname(__file__) + '../../bin/xgboost_utils.py')
+#import xgboost_utils
+xgboost_utils = imp.load_source('xgboost_utils',
+                                os.path.join(os.path.dirname(__file__),
+                                             '../../bin/xgboost_utils.py'))
 
 def makeInt(obj):
     if isinstance(obj, list):

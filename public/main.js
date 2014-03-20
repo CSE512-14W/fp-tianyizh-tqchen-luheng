@@ -53,8 +53,7 @@ var change_dataset = function() {
 		};
 	
 	console.log(init_request);
-	
-	$.get("../cgi-bin/request_handler.py", 
+	$.get("cgi-bin/request_handler.py", 
 			{ request : JSON.stringify(init_request) },
 			function(data) {
 				main_features = data.features;
@@ -71,12 +70,14 @@ var garbage_collection = function() {
 	if (main_user_id.length == 0) {
 		return "bye";
 	}
+	/*
+	last_request = {user_id : main_user_id,
+			  		message : "garbage collection" };
 	$.get("../cgi-bin/request_handler.py", 
-			{ user_id : main_user_id,
-			  message : "garbage collection"
-			},
+			{ request : JSON.stringify(last_request) },
 			function (data) {
 				alert(data.message);
 			});
 	return "bye";
+	*/
 };
