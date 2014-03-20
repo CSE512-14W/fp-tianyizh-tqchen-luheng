@@ -60,10 +60,10 @@ var change_dataset = function() {
 			function(data) {
 				main_features = data.features;
 				main_user_id = data.user_id;
-				history.update( init_request, data );
-	            gtreepath.update( [data.forest[0],] );
-	            btrees.init( data );
-	            ftable.init( main_features );
+				history.update(init_request, data);
+	            gtreepath.update([data.forest[0],]);	            
+	            btrees.init(data);
+	            ftable.init(main_features);
 			});
 			
 };

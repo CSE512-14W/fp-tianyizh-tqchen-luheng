@@ -37,7 +37,6 @@ boosting_tree.prototype = {
 	clear : function() {
 		this.node_count = 0;
 	    this.node_mapper = {};
-	    this.used_features = {};
 	    this.tree_layout = [];
 	    this.is_collapsed = [];
 	    this.num_trees = 0;
@@ -74,12 +73,7 @@ boosting_tree.prototype = {
 		
 		/**
 		 * handle features
-		 */
-		self.used_features = [];
-		for (var i = 0; i < main_features.length; i++) {
-			self.used_features.push(false);
-		}
-		
+		 */	
 		self.first_root = self.forest_data[0];
 		self.num_samples = self.first_root.samples;
 		
@@ -104,12 +98,6 @@ boosting_tree.prototype = {
 		var old_id = this.node_mapper[[node.tree_id, node.node_id]];
 		if (old_id != null) {
 			node.id = old_id;
-			/*
-			if (this.op_source &&
-				this.op_source.tree_id == node.tree_id &&
-				this.op_source.node_id == node.node_id) {
-				this.op_source.node = node;
-			} */
 		}
 		if (node.children) {
 			for (var i = 0; i < node.children.length; i++) {
@@ -231,13 +219,6 @@ boosting_tree.prototype = {
 			});
 			nodes.push.apply(nodes, t_nodes);
 			links.push.apply(links, tree.links(t_nodes));
-			
-			// update features
-			t_nodes.forEach(function(d) {
-				if (d.feature_id) {
-					self.used_features[d.feature_id] = true;
-				}
-			});
 		}
 		// data binding for nodes and links
 		var node = self.svg.selectAll("g.node")
@@ -395,6 +376,20 @@ boosting_tree.prototype = {
 		self.is_collapsed = [];
 		for (var i = 0; i < self.num_trees; i++) {
 			self.is_collapsed.push(self.forest_data[i]._children ? true : false); 
+		}
+	},
+	update_feature_count : function() {
+		var self = this;
+		for (var i = 0; i < self.num_trees; i++) {
+			var tree = d3.layout.tree()
+				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
+			var tree_data = self.forest_data[i];
+			var t_nodes = tree.nodes(tree_data);
+			t_nodes.forEach(function(d) {
+				if (d.feature_id) {
+					ftable.features[d.feature_id].count ++;
+				}
+			});
 		}
 	},
 	auto_collapsing : function(tree_id, is_expanded) {

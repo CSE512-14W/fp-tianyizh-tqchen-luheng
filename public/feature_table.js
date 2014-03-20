@@ -44,6 +44,7 @@ feature_table.prototype = {
 							  y0 : 0,
 							  name : "Features (frequency)",
 							  info : "Features",
+							  count : 0,
 							  type : "_", 
 							};
 		
@@ -59,13 +60,40 @@ feature_table.prototype = {
 			self.makeGroups(self.identityGroupMapper);
 			break;
 		}
+		
 		self.clear();
+		btrees.update_feature_count();
+		self.feature_count_helper(self.feature_data);
 		self.update(self.feature_data);
+	},
+	feature_count_helper : function(d) {
+		var children = d.children ? d.children : d._children;
+		if (children) {
+			for (var i = 0; i < children.length; i++) {
+				d.count += this.feature_count_helper(children[i]);
+			}
+		}
+		return d.count;
+	},
+	clear : function() {
+		this.features.forEach(function(d) {
+			d.id = undefined;
+			d.count = 0;
+		});
+		this.svg.selectAll("g.featnode").remove();
+		this.node_count = 0;
 	},
 	update : function (source) {
 		var self = this;
+		
 		var root = self.feature_data;
 		var nodes = self.tree_layout.nodes(root);
+		console.log(nodes);
+		nodes.forEach(function(d) {
+			if (d.parent) {
+				d.parent.count += d.count;
+			}
+		});
 		
 		var current_height = nodes.length * self.barHeight + self.margin.top
 							+ self.margin.bottom;
@@ -125,7 +153,7 @@ feature_table.prototype = {
 			.attr("dy", 3.5)
 			.attr("dx", 5.5)
 			.text(function(d) {
-				return d.name;
+				return d.parent ? d.name + " (" + d.count + ")" : d.name;
 			});
 
 		nodeEnter.transition()
@@ -157,13 +185,6 @@ feature_table.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
-	},
-	clear : function() {
-		this.features.forEach(function(d) {
-			d.id = undefined;
-		});
-		this.svg.selectAll("g.featnode").remove();
-		this.node_count = 0;
 	},
 	toggle : function(d) {
 		if (d.children) {
@@ -201,7 +222,9 @@ feature_table.prototype = {
 		if (gid === undefined) {
 			gid = groups.length;
 			dict[gname] = gid;
-			groups.push({ name : "feature group: " + gname, children : [] });
+			groups.push({ name : "feature group: " + gname,
+						children : [],
+						count : 0 });
 		}
 		return gid;
 	},
@@ -215,7 +238,9 @@ feature_table.prototype = {
 		if (gid === undefined) {
 			gid = groups.length;
 			dict[gname] = gid;
-			groups.push({ name : gname, children : [] });
+			groups.push({ name : gname,
+						children : [],
+						count : 0 });
 		}
 		return gid;
 	}

@@ -29,10 +29,10 @@
       </select>
       &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
       <label for="numtreeinput">initial number of trees</label>
-	    <input class="parainput" id="numtreeinput" type="number" step="1" value="1" />
+	    <input class="parainput" id="numtreeinput" type="number" step="1" value="1" min="1" max="200"/>
 	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 	   <label for="maxdepthinput">initial max depth of trees</label>
-	    <input class="parainput" id="maxdepthinput" type="number" step="1" value="2" />
+	    <input class="parainput" id="maxdepthinput" type="number" step="1" value="2" min="1" max="10" />
 	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 	    <button type="button" class="google button" id="rebuild" onclick="change_dataset();">REBUILD!</button>
     </div>
