@@ -146,8 +146,14 @@
 .featnode rect {
   cursor: pointer;
   fill: #fff;
-  stroke-width: 1.5px;
 }
+
+.featnode rect.active {
+  stroke-width: 3px;
+  stroke: yellow;
+  opacity: 0.3;
+}
+
 
 .featnode text {
   font: 12px Helvetica;

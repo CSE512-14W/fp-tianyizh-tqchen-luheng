@@ -93,6 +93,17 @@ feature_table.prototype = {
 			.on("click", function(d) {
 				self.toggle(d);
 				self.update(d);
+			})
+			.on("mouseover", function(d, i) {
+				if (i != self.active_op_id - 1 && i < self.ops.length) {
+					d3.select(this).classed("active", true);
+				}
+			})
+			.on("mouseout", function() {
+				d3.select(this).classed("active", false);
+			})
+			.on("contextmenu", function(d, i) {
+				// TODO: add operation
 			});
 
 		nodeEnter.append("text")

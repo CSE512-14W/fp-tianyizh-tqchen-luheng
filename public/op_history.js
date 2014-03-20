@@ -16,9 +16,6 @@ function op_history (margin, width, height, tag) {
     			
     this.panel = this.svg.append("g")
     				.attr("class", "history");
-    			
-    this.tooltips = new op_tooltips(this.svg);
-    this.clear();
 }
 
 op_history.prototype = {
@@ -31,6 +28,7 @@ op_history.prototype = {
 	},
 	update : function(request, response) {
 		var self = this;
+		tooltips.clear();
 		
 		if (request.op_type != "restore_op") {
 			var log_content = self.op_log_helper(request);
@@ -73,14 +71,13 @@ op_history.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("contextmenu", function(d, i) {
-				self.tooltips.clear();
-				btrees.tooltips.clear();
 				if (i == self.active_op_id - 1) {
 					return;
 				}
 				var xx =  - 60;
 				var yy = (self.ops.length - i) * self.entry_height;
-				self.tooltips.add(xx, yy, {
+				tooltips.clear();
+				tooltips.add(self.svg, xx, yy, {
 						user_id : main_user_id,
 						op_type : "restore_op",
 						op_iter : i,
@@ -145,9 +142,6 @@ op_history.prototype = {
 			.style("opacity", function(d, i) {
 				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
 			});
-		
-		// clear tooltips ...
-		self.tooltips.clear();
 	},
 	op_log_helper : function(request) {
 		if (request.op_type === "init") {

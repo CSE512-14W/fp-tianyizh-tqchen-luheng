@@ -39,9 +39,17 @@ new_config = []
 new_forest = None
 
 xgboost_utils.setDataset(dataset)
-    
-if op_iter > 0:
-    
+
+if op_type == "restore_op": 
+    user_id = request["user_id"]
+    new_forest = xgboost_utils.loadModel(user_id, op_iter)
+elif op_iter == 0:
+      # assign new user
+    user_id = uuid.uuid1()
+    new_config = [("num_round", num_trees),
+                  ("bst:max_depth", request["max_depth"])]
+    new_forest = xgboost_utils.trainNewModel(user_id, 0, new_config)
+else:
     booster_id = makeInt(request["tree_id"])
     node_id = makeInt(request["node_id"])
     user_id = request["user_id"]
@@ -63,16 +71,8 @@ if op_iter > 0:
     elif op_type == "node_remove_all":
         new_config = [("interact:booster_index", booster_id),\
                       ("bst:interact:expand", node_id)]
-else:
-    # assign new user
-    user_id = uuid.uuid1()
-    new_config = [("num_round", num_trees),
-                  ("bst:max_depth", request["max_depth"])]
-            
-if op_type == "restore_op": 
-    new_forest = xgboost_utils.loadModel(user_id, op_iter)
-else:
     new_forest = xgboost_utils.trainNewModel(user_id, op_iter, new_config)
+
 
 new_forest["op_iter"] = op_iter + 1
 new_forest["user_id"] = str(user_id)

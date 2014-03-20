@@ -32,6 +32,8 @@ var ftable = new feature_table ( { top:10, right:10, bottom:10, left:10},
 								window_height * 0.8,
 								"#featuretable");
 
+var tooltips = new op_tooltips();
+
 var main_dataset = "";
 var main_features = null;
 var main_user_id = "";

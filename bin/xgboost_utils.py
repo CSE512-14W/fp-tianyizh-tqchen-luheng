@@ -76,7 +76,8 @@ def loadModel(user_id, op_iter):
     config_path =  path_join(user_dir, curr_fn + ".conf")
     model_out_path =  path_join(user_dir, next_fn + ".model")
     dump_path =  path_join(user_dir, next_fn + ".dump")
-    sys.stderr.write("loading from: " + dump_path + "\n")
+    
+    sys.stderr.write("\n".join([config_path, model_out_path, dump_path]) + "\n")
     
     # evaluation
     proc = subprocess.Popen([XGBOOST_PATH, config_path, "task=eval",\

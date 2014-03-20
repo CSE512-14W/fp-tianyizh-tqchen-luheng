@@ -1,5 +1,4 @@
-function op_tooltips(svg) {
-	this.svg = svg;
+function op_tooltips() {
 	this.op_text_snippets = {
 		"node_expand" : " + Expand this node",
 		"node_remove" : " - Remove this node",
@@ -13,8 +12,9 @@ function op_tooltips(svg) {
 }
 
 op_tooltips.prototype = {
-	add : function(xx, yy, request) {
-	    var svg = this.svg;
+	add : function(svg, xx, yy, request) {
+		this.svg = svg;
+
 	    var snippets = this.op_text_snippets;
 	    var tooltip = svg.append("g")
 			.attr("class", "tooltip")
@@ -57,6 +57,8 @@ op_tooltips.prototype = {
 			.attr("text-anchor", "left");
 	},
 	clear : function() {
-		this.svg.selectAll("g.tooltip").remove();
+		if (this.svg) {
+			this.svg.selectAll("g.tooltip").remove();
+		}
 	}
 };

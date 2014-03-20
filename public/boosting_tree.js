@@ -13,8 +13,7 @@ function boosting_tree (margin, width, height, tag) {
     			.attr("height", height)
     			.append("g")
     			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-   
-    this.tooltips = new op_tooltips(this.svg);
+    
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) {
@@ -184,10 +183,8 @@ boosting_tree.prototype = {
 	update : function(source) {
 		var self = this;
 			
-		// remove tooltips and update history
-		self.tooltips.clear();
-		history.tooltips.clear();
-		
+		// remove tooltips
+		tooltips.clear();
 		var nodes = [],
 			links = [];
 		
@@ -464,21 +461,16 @@ boosting_tree.prototype = {
 	showNodeOperationTooltip : function(d) {
 		var self = this;
 		var tooltip_offset = 15;
-		// remove all previous tooltips
-		self.tooltips.clear();
-		history.tooltips.clear();
-		
 		var box_width = self.node_box_width(d.label);
 		var path = self.path_helper(d);
-		console.log("path", path);
 		var matched = self.path_matcher(path);
-		console.log(matched);
 		
+		tooltips.clear();
 		if (d.parent == null) {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
 			if (self.num_trees > 1) {
-				self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+				tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "tree_remove",
 					op_iter :  history.active_op_id,
@@ -489,7 +481,7 @@ boosting_tree.prototype = {
 				y_offset = tooltip_offset;
 			}
 			// show expand tree option
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y + y_offset, {
+			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + y_offset, {
 					user_id : main_user_id,
 					op_type : "tree_expand",
 					op_iter :  history.active_op_id,
@@ -498,7 +490,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees + 1
 				});
 		} else if (d.type === "split") {
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
+			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
 					user_id : main_user_id,
 					op_type : "node_remove",
 					op_iter :  history.active_op_id,
@@ -506,7 +498,7 @@ boosting_tree.prototype = {
 					tree_id : d.tree_id,
 					num_trees : self.num_trees
 				});
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "node_remove_all",
 					op_iter :  history.active_op_id,
@@ -515,7 +507,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees
 				});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand",
 				op_iter :  history.active_op_id,
@@ -523,7 +515,7 @@ boosting_tree.prototype = {
 				tree_id : d.tree_id,
 				num_trees : self.num_trees
 			});
-			self.tooltips.add(d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand_all",
 				op_iter :  history.active_op_id,
