@@ -7,8 +7,6 @@ import sys
 import subprocess
 
 from os.path import join as path_join
-from bson import Binary
-from bson.json_util import dumps as bson_dumps
 
 import feature_utils
 

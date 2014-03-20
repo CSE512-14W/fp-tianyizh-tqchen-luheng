@@ -10,7 +10,6 @@ import os
 import sys
 import uuid
 
-from bson.json_util import dumps as bson_dumps
 
 #sys.path.append(os.path.dirname(__file__) + '../../bin/xgboost_utils.py')
 #import xgboost_utils
@@ -75,4 +74,4 @@ new_forest["op_iter"] = op_iter + 1
 new_forest["user_id"] = str(user_id)
 
 print 'Content-type: application/json\n\n' 
-print bson_dumps(new_forest)
+print json.dumps(new_forest)
