@@ -8,8 +8,13 @@ function op_tooltips() {
 		"node_expand_all" : " + Expand this node for all",
 		"node_remove_all" : " + Remove this node for all",
 		"feat_ban" : " - Disallow this feature",
-		"feat_group_ban" : " - Disallow this feature group",
+		"feat_ban_group" : " - Disallow this feature group",
+		"feat_ban_all" : " - Disallow all features by default",
+		"feat_pass" : " + Allow this feature",
+		"feat_pass_group" : " + Allow this feature group",
+		"feat_pass_all" : " + Allow all features by default",
 	};
+	this.tt_height = 24;
 	this.char_to_pxl = 6.4;
 }
 
@@ -25,7 +30,6 @@ op_tooltips.prototype = {
 	    var op_type = request.op_type;
 	    var tt_label = snippets[op_type];
 	    var tt_width = tt_label.length * this.char_to_pxl;
-	    var tt_height = 24;
 	    
 	    request.dataset = main_dataset;
 	    console.log(request);
@@ -35,7 +39,7 @@ op_tooltips.prototype = {
 			.attr("rx", 2)
 			.attr("ry", 2)
 			.attr("width", tt_width)
-			.attr("height", tt_height)
+			.attr("height", this.tt_height)
 			.on("mouseover", function() {
 				d3.select(this).classed("active", true);
 			})
@@ -43,8 +47,8 @@ op_tooltips.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function() {
-				if (request.op_type.indexOf("feat") == 0) {
-					// TODO
+				if (request.callback) {
+					request.callback();
 				} else {
 					$.get("cgi-bin/request_handler.py", 
 							{ request : JSON.stringify(request) },

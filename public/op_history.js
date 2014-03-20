@@ -101,7 +101,8 @@ op_history.prototype = {
 				return (i == self.ops.length) ? "bold" : "normal";
 			})
 			.style("opacity", function(d, i) {
-				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
+				return (i == self.ops.length || i < self.active_op_id) ?
+						1.0 : 0.5; 
 			});
 		
 		opEnter.append("text")
@@ -120,7 +121,8 @@ op_history.prototype = {
 				return (i == self.ops.length) ? "bold" : "normal";
 			})
 			.style("opacity", function(d, i) {
-				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
+				return (i == self.ops.length || i < self.active_op_id) ?
+						1.0 : 0.5; 
 			});
 		
 		opEnter.append("text")
@@ -139,14 +141,16 @@ op_history.prototype = {
 				return (i == self.ops.length) ? "bold" : "normal";
 			})
 			.style("opacity", function(d, i) {
-				return (i == self.ops.length || i < self.active_op_id) ? 1.0 : 0.5; 
+				return (i == self.ops.length || i < self.active_op_id) ?
+						1.0 : 0.5; 
 			});
 	},
 	op_log_helper : function(request) {
 		if (request.op_type === "init") {
 			return "Initialize tree";
 		} else {
-			return request.op_type + " on " + request.tree_id + ", " + request.node_id;
+			return request.op_type + " on " + request.tree_id + ", "
+					+ request.node_id;
 		}
 	},
 	timeTravaled : function() {

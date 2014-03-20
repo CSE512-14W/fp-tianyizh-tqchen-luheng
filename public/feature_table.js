@@ -44,6 +44,7 @@ feature_table.prototype = {
 							  y0 : 0,
 							  name : "Features (frequency)",
 							  info : "Features",
+							  constraint : 0,
 							  count : 0,
 							  type : "_", 
 							};
@@ -79,32 +80,32 @@ feature_table.prototype = {
 		this.features.forEach(function(d) {
 			d.id = undefined;
 			d.count = 0;
+			d.constraint = 0; // 0 : none, -1 : disallow, 1 : allow
 		});
 		this.svg.selectAll("g.featnode").remove();
 		this.node_count = 0;
 	},
 	update : function (source) {
 		var self = this;
+		tooltips.clear();
 		
 		var root = self.feature_data;
 		var nodes = self.tree_layout.nodes(root);
-		console.log(nodes);
-		nodes.forEach(function(d) {
-			if (d.parent) {
-				d.parent.count += d.count;
-			}
-		});
-		
 		var current_height = nodes.length * self.barHeight + self.margin.top
 							+ self.margin.bottom;
 		d3.select("svg")
 			.attr("height", current_height);
+		d3.select("svg")
+			.selectAll("g.featnode")
+			.selectAll("text")
+			.remove();
 				
 		nodes.forEach(function(d, i) {
 			d.x = i * self.barHeight;
-			d.y = d.depth <= 1 ? 0 : (d.depth - 1) * self.barOffset;
+			d.y = 0;
+			//d.y = d.depth <= 1 ? 0 : (d.depth - 1) * self.barOffset;
 		});
-
+	
 		var node = self.svg.selectAll("g.featnode")
 				.data(nodes, function(d) {
 					return d.id || (d.id = ++ self.node_count);
@@ -123,6 +124,7 @@ feature_table.prototype = {
 			.attr("height", self.barHeight)
 			.attr("width", self.barWidth)
 			.style("fill", self.node_color)
+			.style("opacity", 0.6)
 			.on("click", function(d) {
 				self.toggle(d);
 				self.update(d);
@@ -135,24 +137,36 @@ feature_table.prototype = {
 			})
 			.on("contextmenu", function(d, i) {
 				tooltips.clear();
-				var xx = d.y + self.barWidth / 4;
-				var yy = d.x - self.barHeight / 2;
-				tooltips.add(self.svg, d, xx, yy, {
-						user_id : main_user_id,
-						op_type : d.children || d._children ?
-									"feat_group_ban" : "feat_ban",
-						op_iter : 0,
-						feat_id : d.feature_id,
-						num_trees : btrees.num_trees
-					});
+				d3.select(this).classed("active", true);
+				var y_offset = (d.constraint? 0 : - tooltips.tt_height / 2 - 2);
+				if (d.constraint != -1) {
+					var xx = d.y + self.barWidth / 4;
+					var yy = d.x - self.barHeight / 2 + y_offset;
+					tooltips.add(self.svg, d, xx, yy, {
+							op_type : d.children || d._children ?
+									(d.parent ? "feat_ban_group" :"feat_ban_all") :
+									"feat_ban",
+							callback : function() {
+								d.constraint = -1;
+								self.update(d);
+							}
+						});
+					y_offset += tooltips.tt_height + 1;
+				}
+				if (d.constraint != 1) {
+					var xx = d.y + self.barWidth / 4;
+					var yy = d.x - self.barHeight / 2 + y_offset;
+					tooltips.add(self.svg, d, xx, yy, {
+							op_type : d.children || d._children ?
+									(d.parent ? "feat_pass_group" :"feat_pass_all") :
+									"feat_pass",
+							callback : function() {
+								d.constraint = 1;
+								self.update(d);
+							}
+						});
+				}
 				d3.event.preventDefault();
-			});
-
-		nodeEnter.append("text")
-			.attr("dy", 3.5)
-			.attr("dx", 5.5)
-			.text(function(d) {
-				return d.parent ? d.name + " (" + d.count + ")" : d.name;
 			});
 
 		nodeEnter.transition()
@@ -161,7 +175,33 @@ feature_table.prototype = {
 				return "translate(" + d.y + "," + d.x + ")";
 			})
 			.style("opacity", 1);
-
+		/*
+		nodes.forEach(function(d) {
+			console.log(d.label, "constraint: ", d.constraint, "count: ", d.count);
+		});
+		*/
+		node.append("text")
+			.attr("dy", 3.5)
+			.attr("dx", 5.5)
+			.text(function(d) {
+				return d.parent ? d.name + " (" + d.count + ")" : d.name;
+			});
+		
+		node.append("text")
+			.attr("x", self.barWidth)
+			.attr("y", 0)
+			.attr("dy", 3.5)
+			.attr("dx", 5.5)
+			.text(function(d) {
+				if (d.constraint == 0) {
+					return "";
+				}
+				return d.constraint > 0 ? "[+]" : "[-]";
+			})
+			.style("font", "arial black")
+			.style("font-size", "16")
+			.style("font-weight", "bold");
+		
 		node.transition()
 			.duration(self.duration)
 	  		.attr("transform", function(d) {
@@ -221,8 +261,9 @@ feature_table.prototype = {
 		if (gid === undefined) {
 			gid = groups.length;
 			dict[gname] = gid;
-			groups.push({ name : "feature group: " + gname,
+			groups.push({ name : "group: " + gname,
 						children : [],
+						constraint : 0,
 						count : 0 });
 		}
 		return gid;
@@ -239,6 +280,7 @@ feature_table.prototype = {
 			dict[gname] = gid;
 			groups.push({ name : gname,
 						children : [],
+						constraint : 0,
 						count : 0 });
 		}
 		return gid;
