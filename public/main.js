@@ -22,12 +22,12 @@ var history = new op_history( { top:10, right:0, bottom:10, left:10},
 								right_width, bottom_height,
 								"#historygraph");
 
-var btrees = new boosting_tree( { top:30, right:80, bottom:10, left:10}, 
+var btrees = new boosting_tree( { top:50, right:80, bottom:10, left:10}, 
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
 
-var ftable = new feature_table ( { top:10, right:10, bottom:10, left:10},
+var ftable = new feature_table ( { top:50, right:10, bottom:10, left:10},
 								left_width,
 								window_height * 0.8,
 								"#featuretable");
