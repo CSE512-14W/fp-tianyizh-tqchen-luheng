@@ -26,4 +26,3 @@ try:
     print received
 finally:
     sock.close()
-
