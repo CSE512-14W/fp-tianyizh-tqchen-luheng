@@ -97,10 +97,10 @@
 } 
 
 .tooltip rect.active {
-	fill: lightsteelblue;
+	fill: azure;
   stroke-width: 2.5px;
   stroke: yellow;
-  opacity: 0.3;
+  opacity: 0.9;
 }
 
 .tooltip text {

@@ -135,9 +135,8 @@ feature_table.prototype = {
 			})
 			.on("contextmenu", function(d, i) {
 				tooltips.clear();
-				// FIXME: what happened???
-				var xx = d.x;
-				var yy = d.y + self.barWidth;
+				var xx = d.y + self.barWidth / 4;
+				var yy = d.x - self.barHeight / 2;
 				tooltips.add(self.svg, d, xx, yy, {
 						user_id : main_user_id,
 						op_type : d.children || d._children ?
