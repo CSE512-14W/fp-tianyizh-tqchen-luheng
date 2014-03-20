@@ -6,13 +6,15 @@ function op_tooltips() {
 		"tree_remove" : " - Remove this tree",
 		"restore_op" : " Restore ",
 		"node_expand_all" : " + Expand this node for all",
-		"node_remove_all" : " + Remove this node for all"
+		"node_remove_all" : " + Remove this node for all",
+		"feat_ban" : " - Disallow this feature",
+		"feat_group_ban" : " - Disallow this feature group",
 	};
 	this.char_to_pxl = 6.4;
 }
 
 op_tooltips.prototype = {
-	add : function(svg, xx, yy, request) {
+	add : function(svg, source, xx, yy, request) {
 		this.svg = svg;
 
 	    var snippets = this.op_text_snippets;
@@ -44,7 +46,7 @@ op_tooltips.prototype = {
 				$.get("cgi-bin/request_handler.py", 
 						{ request : JSON.stringify(request) },
 						function(data) {
-							history.update(request, data);
+							history.update(request, data, source);
 				            btrees.init(data);
 				            ftable.update();
 						});

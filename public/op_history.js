@@ -23,29 +23,28 @@ op_history.prototype = {
 		this.header = ["operation", ];
 		this.ops = [];
 	    this.evals = [];
+	    this.sources = [];
 	    this.active_op_id = 0;
 		this.char_to_pxl = 5.5;
 	},
-	update : function(request, response) {
+	update : function(request, response, source) {
 		var self = this;
 		tooltips.clear();
 		
 		if (request.op_type != "restore_op") {
 			var log_content = self.op_log_helper(request);
-			if (self.active_op_id < self.ops.length) {
+			if (self.timeTravaled()) {
 				self.ops = this.ops.slice(0, self.active_op_id);
+				self.evals = this.evals.slice(0, self.active_op_id);
+				self.sources = this.sources.slice(0, self.active_op_id);
 			}
 			self.ops.push(log_content);
 			self.evals.push( {
 					test_error: 100.0 * response.test_error,
 					train_error : 100.0 * response.train_error} );
+			self.sources.push(source);
 		}
 		self.active_op_id = response.op_iter;
-		//console.log(this.ops, this.active_op_id);
-		/*
-		console.log(( { test_error: response.test_error,
-					train_error : response.train_error} ));
-		*/
 		self.panel.selectAll("rect").remove();
 		self.panel.selectAll("text").remove();
 		
@@ -77,7 +76,7 @@ op_history.prototype = {
 				var xx =  - 60;
 				var yy = (self.ops.length - i) * self.entry_height;
 				tooltips.clear();
-				tooltips.add(self.svg, xx, yy, {
+				tooltips.add(self.svg, d, xx, yy, {
 						user_id : main_user_id,
 						op_type : "restore_op",
 						op_iter : i,
@@ -149,5 +148,8 @@ op_history.prototype = {
 		} else {
 			return request.op_type + " on " + request.tree_id + ", " + request.node_id;
 		}
+	},
+	timeTravaled : function() {
+		return this.active_op_id < this.ops.length;
 	}
 };

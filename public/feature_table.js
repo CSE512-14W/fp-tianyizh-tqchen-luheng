@@ -22,6 +22,7 @@ function feature_table(margin, width, height, tag) {
 	    });
 
 	this.node_color = function (d) {
+		//return d._children ? "#3182bd" : d.children ? "lightsteelblue" : "azure";
 		return d._children ? "#3182bd" : d.children ? "lightsteelblue" : "azure";
 	};
 	
@@ -37,24 +38,28 @@ function feature_table(margin, width, height, tag) {
 feature_table.prototype = {
 	init : function(fdata) {
 		var self = this;
-		self.node_count = 0;
 		// convert feature data to tree data
 		self.features = fdata;
 		self.feature_data = { x0 : 0,
 							  y0 : 0,
-							  name : "Features",
+							  name : "Features (frequency)",
 							  info : "Features",
 							  type : "_", 
 							};
 		
 		self.group_method = $("#fgselect").val();
 		switch (self.group_method) {
-		case "prefix" : self.makeGroups(self.prefixGroupMapper);
-						break;
-		default : self.makeGroups(self.identityGroupMapper);
-					break;
+		case "prefix" :
+			self.makeGroups(self.prefixGroupMapper);
+			break;
+		case "none" :
+			self.feature_data.children = self.features;
+			break;
+		default :
+			self.makeGroups(self.identityGroupMapper);
+			break;
 		}
-		self.svg.selectAll("g.featnode").remove();
+		self.clear();
 		self.update(self.feature_data);
 	},
 	update : function (source) {
@@ -62,8 +67,8 @@ feature_table.prototype = {
 		var root = self.feature_data;
 		var nodes = self.tree_layout.nodes(root);
 		
-		var current_height = nodes.length * self.barHeight
-			+ self.margin.top + self.margin.bottom;
+		var current_height = nodes.length * self.barHeight + self.margin.top
+							+ self.margin.bottom;
 		d3.select("svg")
 			.attr("height", current_height);
 				
@@ -95,15 +100,25 @@ feature_table.prototype = {
 				self.update(d);
 			})
 			.on("mouseover", function(d, i) {
-				if (i != self.active_op_id - 1 && i < self.ops.length) {
-					d3.select(this).classed("active", true);
-				}
+				d3.select(this).classed("active", true);
 			})
 			.on("mouseout", function() {
 				d3.select(this).classed("active", false);
 			})
 			.on("contextmenu", function(d, i) {
-				// TODO: add operation
+				tooltips.clear();
+				// FIXME: what happened???
+				var xx = d.x;
+				var yy = d.y + self.barWidth;
+				tooltips.add(self.svg, d, xx, yy, {
+						user_id : main_user_id,
+						op_type : d.children || d._children ?
+									"feat_group_ban" : "feat_ban",
+						op_iter : 0,
+						feat_id : d.feature_id,
+						num_trees : btrees.num_trees
+					});
+				d3.event.preventDefault();
 			});
 
 		nodeEnter.append("text")
@@ -143,6 +158,13 @@ feature_table.prototype = {
 		    d.y0 = d.y;
 		});
 	},
+	clear : function() {
+		this.features.forEach(function(d) {
+			d.id = undefined;
+		});
+		this.svg.selectAll("g.featnode").remove();
+		this.node_count = 0;
+	},
 	toggle : function(d) {
 		if (d.children) {
 			d._children = d.children;
@@ -158,7 +180,8 @@ feature_table.prototype = {
 		self.group_dict = {};
 		for (var i = 0; i < self.features.length; i++) {
 			var feature = self.features[i];
-			var gid = group_mapper(feature, self.groups, self.group_dict);
+			var gid = group_mapper(i, self.features, self.groups,
+									self.group_dict);
 			if (gid < 0) {
 				self.groups.push(feature);
 			} else {
@@ -168,7 +191,8 @@ feature_table.prototype = {
 		self.feature_data.children = self.groups;
 		self.feature_data.children.forEach(self.toggle);
 	},
-	prefixGroupMapper : function(feature, groups, dict) {
+	prefixGroupMapper : function(fid, features, groups, dict) {
+		var feature = features[fid];
 		if (!feature.prefix) {
 			return -1;
 		}
@@ -181,9 +205,11 @@ feature_table.prototype = {
 		}
 		return gid;
 	},
-	identityGroupMapper : function(feature, groups, dict) {
+	identityGroupMapper : function(fid, features, groups, dict) {
+		var feature = features[fid];
 		var k = Math.floor(feature.feature_id / 20);
-		var gname = "id " + (k * 20) + " - " + (k * 20 + 19);
+		var gname = "id " + (k * 20) + " - " +
+					Math.min((k * 20 + 19), features.length - 1);
 		//console.log(feature, k, gname);
 		var gid = dict[gname];
 		if (gid === undefined) {

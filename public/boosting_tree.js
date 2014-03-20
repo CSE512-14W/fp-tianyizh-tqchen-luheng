@@ -46,7 +46,6 @@ boosting_tree.prototype = {
 		var self = this;
 		self.forest_data = tdata.forest;
 		self.forest = [];
-		
 		var tree_delta = self.forest_data.length - self.num_trees;
 		self.num_trees = self.forest_data.length;
 		
@@ -56,8 +55,7 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			// only use node_id of last time ..
 			var tree = self.forest_data[i];
-			self.node_id_helper(tree);
-			// tree.label = "tree[" + i + "] : " + tree.label; 
+			self.node_id_helper(tree); 
 		}
 
 		if (tree_delta <= 0) {
@@ -88,14 +86,30 @@ boosting_tree.prototype = {
 		self.link_stroke_scale = d3.scale.linear()
 				.domain([0, self.num_samples])
 				.range([self.min_link_width, self.max_link_width]);
-		self.first_root.x0 = 0;
-		self.first_root.y0 = 0;
-		self.update(self.first_root);
+		
+		console.log("active op id: ", history.active_op_id);
+		
+		if (history.timeTravaled()) {
+			self.update(history.sources[history.active_op_id ]);
+		}
+		else if (history.active_op_id > 1) {
+			self.update(history.sources[history.active_op_id - 1]);
+		} else {
+			self.first_root.x0 = 0;
+			self.first_root.y0 = 0;
+			self.update(self.first_root);
+		}
 	},
 	node_id_helper : function (node) {
 		var old_id = this.node_mapper[[node.tree_id, node.node_id]];
 		if (old_id != null) {
 			node.id = old_id;
+			/*
+			if (this.op_source &&
+				this.op_source.tree_id == node.tree_id &&
+				this.op_source.node_id == node.node_id) {
+				this.op_source.node = node;
+			} */
 		}
 		if (node.children) {
 			for (var i = 0; i < node.children.length; i++) {
@@ -470,7 +484,7 @@ boosting_tree.prototype = {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
 			if (self.num_trees > 1) {
-				tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+				tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "tree_remove",
 					op_iter :  history.active_op_id,
@@ -481,7 +495,7 @@ boosting_tree.prototype = {
 				y_offset = tooltip_offset;
 			}
 			// show expand tree option
-			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + y_offset, {
+			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + y_offset, {
 					user_id : main_user_id,
 					op_type : "tree_expand",
 					op_iter :  history.active_op_id,
@@ -490,7 +504,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees + 1
 				});
 		} else if (d.type === "split") {
-			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
+			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
 					user_id : main_user_id,
 					op_type : "node_remove",
 					op_iter :  history.active_op_id,
@@ -498,7 +512,7 @@ boosting_tree.prototype = {
 					tree_id : d.tree_id,
 					num_trees : self.num_trees
 				});
-			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "node_remove_all",
 					op_iter :  history.active_op_id,
@@ -507,7 +521,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees
 				});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
-			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand",
 				op_iter :  history.active_op_id,
@@ -515,7 +529,7 @@ boosting_tree.prototype = {
 				tree_id : d.tree_id,
 				num_trees : self.num_trees
 			});
-			tooltips.add(self.svg, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand_all",
 				op_iter :  history.active_op_id,
