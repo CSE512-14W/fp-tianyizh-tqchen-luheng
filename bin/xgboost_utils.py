@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import copy
+import imp
 import json
 import os
 import re
@@ -8,7 +9,9 @@ import subprocess
 
 from os.path import join as path_join
 
-import feature_utils
+feature_utils = imp.load_source('feature_utils',
+                                os.path.join(os.path.dirname(__file__),
+                                             'feature_utils.py'))
 
 DATASET_NAME = "fusion"
 XGBOOST_PATH = "../xgboost/xgboost"
@@ -272,7 +275,7 @@ def dump2json(dump_path, raw_feature_map):
     json_obj = { "forest" : forest }
     #sys.stderr.write(json.dumps(json_obj, indent=4, separators=(',', ': ')) + "\n")
     return json_obj
-    
+
 
 if __name__ == "__main__":
     # test

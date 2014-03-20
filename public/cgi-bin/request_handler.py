@@ -10,12 +10,16 @@ import os
 import sys
 import uuid
 
-
 #sys.path.append(os.path.dirname(__file__) + '../../bin/xgboost_utils.py')
 #import xgboost_utils
+
 xgboost_utils = imp.load_source('xgboost_utils',
                                 os.path.join(os.path.dirname(__file__),
                                              '../../bin/xgboost_utils.py'))
+
+feature_utils = imp.load_source('feature_utils',
+                                os.path.join(os.path.dirname(__file__),
+                                             '../../bin/feature_utils.py'))
 
 def makeInt(obj):
     if isinstance(obj, list):
