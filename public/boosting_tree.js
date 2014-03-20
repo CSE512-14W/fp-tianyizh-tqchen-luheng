@@ -12,7 +12,8 @@ function boosting_tree (margin, width, height, tag) {
     			.attr("width", width)
     			.attr("height", height)
     			.append("g")
-    			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    			.attr("transform",
+    				"translate(" + margin.left + "," + margin.top + ")");
     
     this.diagonal = d3.svg
     			.diagonal()
@@ -26,6 +27,8 @@ function boosting_tree (margin, width, height, tag) {
 	this.max_link_width = 20,
 	this.min_link_width = 1.5,
 	this.char_to_pxl = 6;
+    
+    this.leftbar_width = 200;
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -89,8 +92,9 @@ boosting_tree.prototype = {
 		else if (history.active_op_id > 1) {
 			self.update(history.sources[history.active_op_id - 1]);
 		} else {
-			self.first_root.x0 = 0;
+			self.first_root.x0 = self.leftbar_width;
 			self.first_root.y0 = 0;
+			self.update(self.first_root);
 			self.update(self.first_root);
 		}
 	},
@@ -158,8 +162,7 @@ boosting_tree.prototype = {
 			// auto collapse trees
 			// ???
 		}
-		var leftbar_width = 200;
-		var last_x = vertical ? 0 : leftbar_width;
+		var last_x = vertical ? 0 : self.leftbar_width;
 		var last_y = vertical ? 300 : -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
@@ -167,7 +170,7 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
-				offset_x = leftbar_width / 4;
+				offset_x = self.leftbar_width / 4;
 				offset_y = last_y + 50;
 				last_y = offset_y;
 			} else {
@@ -196,35 +199,35 @@ boosting_tree.prototype = {
 		/**
 		 * process all the trees
 		 */
+		var is_collapsed_root = function(d) {
+			return !d.parent && !d.children;
+		};
 		for (var i = 0; i < self.num_trees; i++) {
 			var tree = d3.layout.tree()
-				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
+				.size([self.tree_layout[i].width,
+				       self.tree_layout[i].height]);
 			var tree_data = self.forest_data[i];
 			var t_nodes = tree.nodes(tree_data);
-			if (tree_data._children) {
-				t_nodes.forEach(function(d) {
-					d.x = self.tree_layout[i].offset.x;
-					d.y = self.tree_layout[i].offset.y;
-				});
-			}
 			t_nodes.forEach(function(d) {
 				// computing absolute node position
-				d.x = d.x + self.tree_layout[i].offset.x;
-				if (d.parent) {
-					d.y = d.parent.y + 80 + (d.rank * (self.rect_height + 8));
-				} else {
-					d.y = self.tree_layout[i].offset.y;
-				}
+				d.x = (is_collapsed_root(d) ? 0 : d.x)
+						+ self.tree_layout[i].offset.x;
+				d.y = d.parent ? d.parent.y + 80
+							+ (d.rank * (self.rect_height + 8))
+						: self.tree_layout[i].offset.y;
 				d.show_label = self.node_label_helper(d);
 			});
 			nodes.push.apply(nodes, t_nodes);
 			links.push.apply(links, tree.links(t_nodes));
 		}
+		/*
+		nodes.forEach(function(d) {
+			console.log(d.show_label, d.x, d.y);
+		});
+		*/
 		// data binding for nodes and links
 		var node = self.svg.selectAll("g.node")
 		   	 	.data(nodes, function(d) {
-		   	 		// TODO: check this:
-		   	 		// remap nodes here every time 
 		   	 		if (d.id == null) {
 		   	 			d.id = ++ self.node_count;
 		   	 			self.node_mapper[[d.tree_id, d.node_id]] = d.id;
@@ -242,8 +245,8 @@ boosting_tree.prototype = {
 			.append("g")
 			.attr("class", "node")
 			.attr("transform", function(d) {
-				// TODO: fix source 
-				return "translate(" + source.x0 + "," + source.y0 + ")"; })
+				return "translate(" + source.x0 + "," + source.y0 + ")";
+			})
 			.on("click", function(d) { 
 				var is_expanded = self.toggle(d);
 				if (!d.parent && is_expanded) {
@@ -279,7 +282,6 @@ boosting_tree.prototype = {
 				return d.show_label; })
 			.style("fill-opacity", 1e-6);
 		
-		// for every existing nodes
 		var nodeUpdate = node.transition()
 			.duration(self.duration)
 			.attr("transform", function(d) {
@@ -297,12 +299,14 @@ boosting_tree.prototype = {
 			.attr("rx", 2)
 			.attr("ry", 2)
 			.style("stroke", function(d) {
-				return d.type === "split" ? "steelblue" : "olivedrab";})
+				return d.type === "split" ? "steelblue" : "olivedrab";
+			})
 			.style("fill", function(d) {
 				if (d.type === "leaf") {
 					return d.weight > 0 ? "steelblue" : "brown";
 				}
-				return d._children ? "lightsteelblue" : "#fff"; })
+				return d._children ? "lightsteelblue" : "#fff";
+			})
 			.style("opacity", 0.6);
 		
 		nodeUpdate
@@ -314,12 +318,12 @@ boosting_tree.prototype = {
 			   return d.show_label;
 			 })
 			.style("fill-opacity", 1);
-	 	
-		// For nodes that no longer bind with data ...
+
 		var nodeExit = node.exit().transition()
 			.duration(self.duration)
 			.attr("transform", function(d) {
-				return "translate(" + source.x + "," + source.y + ")"; })
+				return "translate(" + source.x + "," + source.y + ")";
+			})
 			.remove();
 	 
 		nodeExit.select("rect").remove();/*
@@ -340,7 +344,8 @@ boosting_tree.prototype = {
 			.duration(self.duration)
 			.attr("d", self.diagonal)
 			.style("stroke-width", function(d) {
-				return self.link_stroke_scale(d.target.samples);});
+				return self.link_stroke_scale(d.target.samples);
+			});
 		
 		self.svg.selectAll("path.link")
 			.on("mouseover", function(d) {
@@ -350,7 +355,6 @@ boosting_tree.prototype = {
 				link.classed("active", false);
 			});
 		
-		// existing links
 		link.transition()
 			.duration(self.duration)
 			.attr("d", self.diagonal)
@@ -359,7 +363,6 @@ boosting_tree.prototype = {
 			});
 			//.style("stroke", self.stroke_callback);
 	 
-		// removed links
 		link.exit().transition()
 			.duration(self.duration)
 			.attr("d", function(d) {
@@ -367,15 +370,15 @@ boosting_tree.prototype = {
 				return self.diagonal({source: o, target: o});
 			})
 			.remove();
-	 
-		// backup locations
+
 		nodes.forEach(function(d) {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
 		self.is_collapsed = [];
 		for (var i = 0; i < self.num_trees; i++) {
-			self.is_collapsed.push(self.forest_data[i]._children ? true : false); 
+			self.is_collapsed.push(
+					self.forest_data[i]._children ? true : false); 
 		}
 	},
 	update_feature_count : function() {
@@ -396,7 +399,6 @@ boosting_tree.prototype = {
 		// collapse everthing else other than the node nd
 		var self = this;
 		var prev_id = (tree_id > 0 ? tree_id - 1 : tree_id + 1);
-		// console.log(prev_id, self.num_trees, is_expanded);
 		for (var i = 0; i < self.forest_data.length; i++) {
 			var tree = self.forest_data[i];
 			if (is_expanded && i != tree_id && tree.children) {
@@ -470,16 +472,16 @@ boosting_tree.prototype = {
 	showNodeOperationTooltip : function(d) {
 		var self = this;
 		var tooltip_offset = 15;
-		var box_width = self.node_box_width(d.label);
+		var box_width = self.node_box_width(d.show_label);
 		var path = self.path_helper(d);
 		var matched = self.path_matcher(path);
-		
+
 		tooltips.clear();
 		if (d.parent == null) {
 			// show remove tree option if this is not the first tree
 			var y_offset = 0;
 			if (self.num_trees > 1) {
-				tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+				tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "tree_remove",
 					op_iter :  history.active_op_id,
@@ -490,7 +492,7 @@ boosting_tree.prototype = {
 				y_offset = tooltip_offset;
 			}
 			// show expand tree option
-			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + y_offset, {
+			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + y_offset, {
 					user_id : main_user_id,
 					op_type : "tree_expand",
 					op_iter :  history.active_op_id,
@@ -499,7 +501,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees + 1
 				});
 		} else if (d.type === "split") {
-			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset,  {
+			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset,  {
 					user_id : main_user_id,
 					op_type : "node_remove",
 					op_iter :  history.active_op_id,
@@ -507,7 +509,7 @@ boosting_tree.prototype = {
 					tree_id : d.tree_id,
 					num_trees : self.num_trees
 				});
-			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + tooltip_offset, {
 					user_id : main_user_id,
 					op_type : "node_remove_all",
 					op_iter :  history.active_op_id,
@@ -516,7 +518,7 @@ boosting_tree.prototype = {
 					num_trees : self.num_trees
 				});
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
-			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y - tooltip_offset, {
+			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand",
 				op_iter :  history.active_op_id,
@@ -524,7 +526,7 @@ boosting_tree.prototype = {
 				tree_id : d.tree_id,
 				num_trees : self.num_trees
 			});
-			tooltips.add(self.svg, d, d.x + box_width / 2 + 2, d.y + tooltip_offset, {
+			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + tooltip_offset, {
 				user_id : main_user_id,
 				op_type : "node_expand_all",
 				op_iter :  history.active_op_id,

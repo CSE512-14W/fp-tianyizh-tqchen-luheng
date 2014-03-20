@@ -16,7 +16,7 @@ function op_tooltips() {
 op_tooltips.prototype = {
 	add : function(svg, source, xx, yy, request) {
 		this.svg = svg;
-
+		console.log("add tooltip at: ", xx, yy);
 	    var snippets = this.op_text_snippets;
 	    var tooltip = svg.append("g")
 			.attr("class", "tooltip")
@@ -43,13 +43,17 @@ op_tooltips.prototype = {
 				d3.select(this).classed("active", false);
 			})
 			.on("click", function() {
-				$.get("cgi-bin/request_handler.py", 
-						{ request : JSON.stringify(request) },
-						function(data) {
-							history.update(request, data, source);
-				            btrees.init(data);
-				            ftable.update();
-						});
+				if (request.op_type.indexOf("feat") == 0) {
+					// TODO
+				} else {
+					$.get("cgi-bin/request_handler.py", 
+							{ request : JSON.stringify(request) },
+							function(data) {
+								history.update(request, data, source);
+					            btrees.init(data);
+					            ftable.update();
+							});
+				}
 			});
 	    	
 	    tooltip.append("text")

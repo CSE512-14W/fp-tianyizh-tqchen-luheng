@@ -22,7 +22,7 @@ var history = new op_history( { top:10, right:0, bottom:10, left:10},
 								right_width, bottom_height,
 								"#historygraph");
 
-var btrees = new boosting_tree( { top:10, right:80, bottom:10, left:10}, 
+var btrees = new boosting_tree( { top:30, right:80, bottom:10, left:10}, 
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
@@ -61,7 +61,7 @@ var change_dataset = function() {
 				main_features = data.features;
 				main_user_id = data.user_id;
 				history.update(init_request, data);
-	            gtreepath.update([data.forest[0],]);	            
+	            gtreepath.update([data.forest[0],]);
 	            btrees.init(data);
 	            ftable.init(main_features);
 			});
