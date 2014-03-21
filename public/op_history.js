@@ -79,7 +79,7 @@ op_history.prototype = {
 				if (i == self.active_op_id - 1) {
 					return;
 				}
-				var xx =  - 60;
+				var xx =  60;
 				var yy = (self.ops.length - i) * self.entry_height;
 				tooltips.clear();
 				tooltips.add(self.svg, d, xx, yy, {
