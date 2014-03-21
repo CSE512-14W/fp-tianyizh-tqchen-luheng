@@ -7,6 +7,9 @@ Tianyi Zhou, Tianqi Chen, Luheng He {tianyizh,tqchen,luheng}@uw.edu
 * Luheng leads the implementation of interaction interface.
 * All the team members are involved in discussion, and development of ideas:)
 
+## Project Summary Page:
+http://cse512-14w.github.io/fp-tianyizh-tqchen-luheng/
+
 ## How to run the demo
 The demo can run in linux or mac machines, first make make sure system requirements are met
 * g++: we need g++ to compile backend machine learning algorithms
