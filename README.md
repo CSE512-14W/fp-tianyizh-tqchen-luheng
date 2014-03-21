@@ -10,6 +10,12 @@ Tianyi Zhou, Tianqi Chen, Luheng He {tianyizh,tqchen,luheng}@uw.edu
 ## Project Summary Page:
 http://cse512-14w.github.io/fp-tianyizh-tqchen-luheng/
 
+## Development Process
+* Start with toy dataset from UCI machine learning repository for prototyping our project.
+* Use static data exported from the machine learning tool for front-end development, such as visualization of tree and path.
+* For the next step, we implemented frontend-backend communication to enable user interaction and instant feedback of the machine learning algorithm.
+* From exploration with the current tool, we decided to add more powerful features such as feature selection (both groups and single features) and generalized tree modification. 
+
 ## How to run the demo
 The demo can run in linux or mac machines, first make make sure system requirements are met
 * g++: we need g++ to compile backend machine learning algorithms
