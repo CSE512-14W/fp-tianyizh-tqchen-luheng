@@ -24,6 +24,12 @@ function pathgraph( margin, width, height, tag ){
 }
 
 pathgraph.prototype = {
+	add_hint : function() {
+		console.log("add hint for tree path");
+		d3.selectAll(".hint").selectAll("p").remove();
+		d3.select(".hint").append("p")
+			.text("[Paths]: Showing number positive and negative samples associated with each node on the selected path. This is an indication of feature quality.");
+	},
     update: function( data ){
         this.legend = this.legend.data([]);
         this.legend

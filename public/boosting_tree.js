@@ -14,7 +14,7 @@ function boosting_tree (margin, width, height, tag) {
     			.append("g")
     			.attr("transform",
     				"translate(" + margin.left + "," + margin.top + ")");
-    
+    			
     this.diagonal = d3.svg
     			.diagonal()
     			.projection( function(d) {
@@ -37,6 +37,11 @@ function boosting_tree (margin, width, height, tag) {
 }
 
 boosting_tree.prototype = {
+	add_hint : function() {
+		d3.selectAll(".hint").selectAll("p").remove();
+		d3.select(".hint").append("p")
+			.text("[Trees]: Showing boosting trees. Left click to toggle nodes. Right click to see possible interations. Mouseover nodes and pathes to see purity histogram.");
+	},
 	clear : function() {
 		this.node_count = 0;
 	    this.node_mapper = {};

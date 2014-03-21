@@ -222,3 +222,13 @@ label {
 	font: 14px helvetica normal;
 	color: #333;
 }
+
+
+/* hint text style */
+p {
+  font: 12px Helvetica;
+  font-weight: normal;
+  fill: grey;
+  pointer-events: None;
+  text-align: center;
+}

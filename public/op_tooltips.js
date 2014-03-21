@@ -24,7 +24,7 @@ function op_tooltips(tt_class) {
 op_tooltips.prototype = {
 	add : function(svg, source, xx, yy, request) {
 		this.svg = svg;
-		console.log("add tooltip at: ", xx, yy);
+		//console.log("add tooltip at: ", xx, yy);
 	    var snippets = this.op_text_snippets;
 	    var tooltip = svg.append("g")
 			.attr("class", this.tt_class)

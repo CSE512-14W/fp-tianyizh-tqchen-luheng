@@ -31,7 +31,7 @@ function feature_table(margin, width, height, tag) {
 	    .attr("width", width)
 	    .append("g")
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
+	  
 	d3.select(tag).style("height", height + "px");
 	
 	// do this only once except when dataset changes
@@ -39,6 +39,11 @@ function feature_table(margin, width, height, tag) {
 }
 
 feature_table.prototype = {
+	add_hint : function() {
+		d3.selectAll(".hint").selectAll("p").remove();
+		d3.select(".hint").append("p")
+			.text("[Features]: Showing grouped features. Left click to toggle feature groups. Right click to allow/disallow features in subsequent interactions. Change of constraints on feature groups will be applied to its members.");
+	},
 	init : function(fdata) {
 		var self = this;
 		// convert feature data to tree data

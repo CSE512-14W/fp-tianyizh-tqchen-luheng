@@ -36,23 +36,27 @@
 	    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
 	    <button type="button" class="google button" id="rebuild" onclick="change_dataset();">REBUILD!</button>
     </div>
+    
+    <div class="hint">
+        <p> mouse-over different parts of the visualization to see hints </p> 
+    </div>
     <hr style="background:#91C5EB; border:0; height:3px" />
     
     <div id="featureview">
-      <div id="featuretable"> </div>
+      <div id="featuretable" onmouseover="ftable.add_hint();"> </div>
     </div>
 
     <div id="modelview">
-      <div id="modeltreegraph">
+      <div id="modeltreegraph" onmouseover="btrees.add_hint();">
           <h2> BOOSTING TREES </h2>
       </div>
     </div>
     
-    <div id="interactionview" >
-       <div id="modelpathgraph">
+    <div id="interactionview"" >
+       <div id="modelpathgraph" onmouseover="gtreepath.add_hint();">
           <h2> PATH PURITY </h2>
        </div>
-       <div id="historygraph">
+       <div id="historygraph" onmouseover="history.add_hint();">
           <h2> MODIFICATION HISTORY </h2>
         </div>
     </div>

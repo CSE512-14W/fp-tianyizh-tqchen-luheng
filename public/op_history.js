@@ -19,6 +19,11 @@ function op_history (margin, width, height, tag) {
 }
 
 op_history.prototype = {
+	add_hint : function() {
+		d3.selectAll(".hint").selectAll("p").remove();
+		d3.select(".hint").append("p")
+			.text("[Logs]: Showing history of user interactions. Right click on a non-latest history entry to rollback.");
+	},
 	clear : function() {
 		this.header = ["operation", ];
 		this.ops = [];
