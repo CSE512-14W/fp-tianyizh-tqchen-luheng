@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: sample.aux
 The style file: abbrv.bst
 Database file #1: sample.bib
-You've used 4 entries,
+Warning--empty publisher in ML
+You've used 5 entries,
             2118 wiz_defined-function locations,
-            522 strings with 4390 characters,
-and the built_in function-call counts, 1436 in all, are:
-= -- 137
-> -- 60
+            528 strings with 4521 characters,
+and the built_in function-call counts, 1733 in all, are:
+= -- 164
+> -- 78
 < -- 1
-+ -- 25
-- -- 20
-* -- 89
-:= -- 232
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 21
++ -- 33
+- -- 26
+* -- 109
+:= -- 284
+add.period$ -- 16
+call.type$ -- 5
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 4
-duplicate$ -- 62
-empty$ -- 123
-format.name$ -- 20
-if$ -- 307
+cite$ -- 6
+duplicate$ -- 74
+empty$ -- 145
+format.name$ -- 26
+if$ -- 368
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 5
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 30
+int.to.str$ -- 5
+missing$ -- 7
+newline$ -- 28
+num.names$ -- 10
+pop$ -- 39
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 23
 quote$ -- 0
-skip$ -- 43
+skip$ -- 49
 stack$ -- 0
-substring$ -- 92
-swap$ -- 17
+substring$ -- 98
+swap$ -- 18
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 14
-warning$ -- 0
-while$ -- 13
-width$ -- 5
-write$ -- 45
+type$ -- 16
+warning$ -- 1
+while$ -- 15
+width$ -- 6
+write$ -- 55
+(There was 1 warning)
