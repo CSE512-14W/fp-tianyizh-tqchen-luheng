@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  21 MAR 2014 04:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  21 MAR 2014 05:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -404,11 +404,11 @@ Overfull \hbox (14.1372pt too wide) in paragraph at lines 60--61
 la-neous---
  []
 
-<loop.pdf, id=52, 885.9623pt x 456.85129pt>
+<loop.pdf, id=53, 885.9623pt x 456.85129pt>
 File: loop.pdf Graphic file (type pdf)
  <use loop.pdf>
 Package pdftex.def Info: loop.pdf used on input line 70.
-(pdftex.def)             Requested size: 453.59692pt x 233.90427pt.
+(pdftex.def)             Requested size: 504.0pt x 259.89209pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 72.
 Missing character: There is no â in font ptmr7t!
@@ -420,20 +420,24 @@ Overfull \hbox (4.05803pt too wide) in paragraph at lines 76--77
  com-
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 Non-PDF special ignored!
 
-] [2 <./loop.pdf>]
-<intface.pdf, id=210, 733.74126pt x 422.57875pt>
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [2 <./loop.pdf>] <intface.pdf, id=209, 760.8425pt x 323.2075pt>
 File: intface.pdf Graphic file (type pdf)
  <use intface.pdf>
 Package pdftex.def Info: intface.pdf used on input line 101.
-(pdftex.def)             Requested size: 504.0pt x 290.27069pt.
+(pdftex.def)             Requested size: 529.20154pt x 224.81349pt.
+
+Overfull \hbox (25.20154pt too wide) in paragraph at lines 101--102
+ [] 
+ []
+
 
 Overfull \hbox (1.90398pt too wide) in paragraph at lines 116--118
 \OT1/ptm/m/n/10 In each stage, fix-ing the pre-vi-ous en-sem-ble of trees $\OML
@@ -454,17 +458,22 @@ Overfull \hbox (4.9374pt too wide) in paragraph at lines 229--243
  []
 
 [3]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1755) has occurred while \output is active []
 
-
-Underfull \vbox (badness 2261) has occurred while \output is active []
-
- [4 <./intface.pdf>] <user.pdf, id=333, 721.69624pt x 453.695pt>
+ [4 <./intface.pdf>] <user.pdf, id=345, 721.69624pt x 453.695pt>
 File: user.pdf Graphic file (type pdf)
  <use user.pdf>
 Package pdftex.def Info: user.pdf used on input line 258.
-(pdftex.def)             Requested size: 504.0pt x 316.83667pt.
- [5]
+(pdftex.def)             Requested size: 529.20154pt x 332.683pt.
+
+Overfull \hbox (25.20154pt too wide) in paragraph at lines 258--259
+ [] 
+ []
+
+[5]
+Underfull \vbox (badness 6016) has occurred while \output is active []
+
+
 (./sample.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 307.
  [6 <./user.pdf>]
@@ -477,13 +486,13 @@ Package rerunfilecheck Info: File `sample.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 307.
  ) 
 Here is how much of TeX's memory you used:
- 6231 strings out of 493315
- 88866 string characters out of 6137904
- 185985 words of memory out of 5000000
- 9538 multiletter control sequences out of 15000+600000
+ 6233 strings out of 493315
+ 88877 string characters out of 6137904
+ 187009 words of memory out of 5000000
+ 9539 multiletter control sequences out of 15000+600000
  34234 words of font info for 78 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 41i,11n,30p,1682b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,11n,30p,1786b,325s stack positions out of 5000i,500n,10000p,200000b,80000s
 pdfTeX warning (dest): name{section*.15} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -517,10 +526,10 @@ xmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dis
 t/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/ty
 pe1/urw/times/utmr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/ti
 mes/utmri8a.pfb>
-Output written on sample.pdf (6 pages, 4630961 bytes).
+Output written on sample.pdf (6 pages, 4811688 bytes).
 PDF statistics:
- 550 PDF objects out of 1000 (max. 8388607)
- 373 compressed objects within 4 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 559 PDF objects out of 1000 (max. 8388607)
+ 379 compressed objects within 4 object streams
+ 51 named destinations out of 1000 (max. 500000)
  112 words of extra memory for PDF output out of 10000 (max. 10000000)
 

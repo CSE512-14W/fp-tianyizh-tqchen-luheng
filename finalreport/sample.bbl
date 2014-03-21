@@ -11,6 +11,11 @@ J.~H. Friedman.
 \newblock Greedy function approximation: A gradient boosting machine.
 \newblock {\em Annals of Statistics}, 29:1189--1232, 2000.
 
+\bibitem{ML}
+T.~Hastie, R.~Tibshirani, and J.~Friedman.
+\newblock {\em The Elements of Statistical Learning}.
+\newblock Springer Series in Statistics. 2001.
+
 \bibitem{Ematrix}
 J.~Talbot, B.~Lee, A.~Kapoor, and D.~S. Tan.
 \newblock Ensemblematrix: Interactive visualization to support machine learning
