@@ -4,8 +4,8 @@ var window_width = window.innerWidth;
 var window_height = window.innerHeight;
 
 var left_width = window_width * 0.15;
-var middle_width = window_width * 0.6;
-var right_width = window_width * 0.35;
+var middle_width = window_width * 0.60;
+var right_width = window_width * 0.25;
 
 var top_height = window_height * 0.3;
 var bottom_height = window_height * 0.7;

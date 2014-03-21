@@ -28,7 +28,7 @@ function boosting_tree (margin, width, height, tag) {
 	this.min_link_width = 1.5,
 	this.char_to_pxl = 6;
     
-    this.leftbar_width = 200;
+    this.leftbar_width = 250;
 
     this.stroke_callback = "#ccc";
     this.duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -42,6 +42,7 @@ boosting_tree.prototype = {
 	    this.node_mapper = {};
 	    this.tree_layout = [];
 	    this.is_collapsed = [];
+	    this.expanded = [-1, -1];
 	    this.num_trees = 0;
 	},
 	init : function(tdata) {
@@ -72,6 +73,7 @@ boosting_tree.prototype = {
 		} else if (tree_delta > 1) {
 			/* show first tree at initialization */
 			self.auto_collapsing(0, true);
+			self.auto_collapsing(1, true);
 		}
 		
 		/**
@@ -141,11 +143,9 @@ boosting_tree.prototype = {
 		}
 	},
 	tree_layout_helper : function() {
-		// FIXME
 		var self = this;
 		var layout = [];
-		var vertical = (self.width < 800);
-		var tree_width = vertical ? self.width - 200 : self.width - 400;
+		var tree_width = self.width / 2;
 		
 		var width = function(d) {
 			// TODO: estimate width smarter
@@ -154,31 +154,43 @@ boosting_tree.prototype = {
 		var height = function(d) {
 			return 800;
 		};
-		var total_width = 0;
-		for (var i = 0; i < self.num_trees; i++) {
-			total_width += width(self.forest_data[i]);
-		}
-		if (total_width >= self.width) {
-			// auto collapse trees
-			// ???
-		}
-		var last_x = vertical ? 0 : self.leftbar_width;
-		var last_y = vertical ? 300 : -50;
+		
+		//var last_x = vertical ? 0 : self.leftbar_width;
+		//var last_y = vertical ? 300 : -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
 		
+		var num_collapsed = 0;
+		self.forest_data.forEach(function(d) {
+			if (d._children) {
+				num_collapsed += 1;
+			}
+		});
+		var top_bar_height = 50 * Math.ceil(num_collapsed / 4);
+		var curr_collapsed = 0;
+		var last_x = 0;
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
-				offset_x = self.leftbar_width / 4;
-				offset_y = last_y + 50;
-				last_y = offset_y;
+				// if is collapsed
+				var gx = curr_collapsed % 4;
+				var gy = (curr_collapsed - gx) / 4;
+				curr_collapsed ++;
+				offset_x = self.width / 4 * gx + 160;
+				offset_y = 50 * gy;
+				//last_y = offset_y;
 			} else {
+				// if is expanded
+				if (i == self.expanded[0]) {
+					offset_x = self.tree_margin;
+				} else {
+					offset_x =  self.tree_margin + tree_width;
+				}
+				offset_y = top_bar_height;
 				t_width = width(root);
 				t_height = height(root);
-				offset_x = last_x + self.tree_margin;
-				offset_y = 0;
-				last_x = offset_x + t_width;
+				//offset_x = last_x + self.tree_margin;
+				//last_x = offset_x + t_width;
 			}
 			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
@@ -388,16 +400,35 @@ boosting_tree.prototype = {
 		}
 	},
 	auto_collapsing : function(tree_id, is_expanded) {
-		// collapse everthing else other than the node nd
 		var self = this;
-		var prev_id = (tree_id > 0 ? tree_id - 1 : tree_id + 1);
-		for (var i = 0; i < self.forest_data.length; i++) {
+		if (is_expanded) {
+			if (self.expanded[1] != -1) {
+				if (self.expanded[0] != -1) {
+					self.toggle(self.forest_data[self.expanded[0]]);
+				}
+				self.expanded[0] = self.expanded[1];
+			}
+			self.expanded[1] = tree_id;
+			if (self.expanded[0] == -1) {
+				self.expanded[0] = self.expanded[1];
+				self.expanded[1] = -1;
+			}
+		} else {
+			if (tree_id == self.expanded[0]) {
+				self.expanded[0] = -1;
+			} else if (tree_id == self.expanded[1]) {
+				self.expanded[1] = -1;
+			}
+		}
+		console.log(self.expanded);
+		for (var i = self.num_trees - 1; i >= 0; i--) {
 			var tree = self.forest_data[i];
-			if (is_expanded && i != tree_id && tree.children) {
+			if (i == self.expanded[0] || i == self.expanded[1]) {
+				if (tree._children) {
+					self.toggle(tree);
+				}
+			} else if (tree.children) {
 				self.toggle(tree);
-			} else if (!is_expanded && prev_id < self.num_trees
-					&& self.forest_data[prev_id]._children) {
-				self.toggle(self.forest_data[prev_id]);
 			}
 		}
 	},
