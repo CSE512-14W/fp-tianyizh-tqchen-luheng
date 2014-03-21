@@ -1273,1876 +1273,1846 @@
             "id": 212
         },
         {
-            "explanation": "Description",
-            "feature": "Feature",
-            "types": "",
-            "id": 213
-        },
-        {
             "explanation": "Osteoarthrosis (level 2)(number of diagnostics)",
             "feature": "L2_Osteoarthrosis",
             "types": "",
-            "id": 214
+            "id": 213
         },
         {
             "explanation": "Osteoporosis (level 2)(number of diagnostics)",
             "feature": "L2_Osteoporosis",
             "types": "",
-            "id": 215
+            "id": 214
         },
         {
             "explanation": "Otalgia (level 2)(number of diagnostics)",
             "feature": "L2_Otalgia",
             "types": "",
-            "id": 216
+            "id": 215
         },
         {
             "explanation": "Other infection (level 2)(number of diagnostics)",
             "feature": "L2_OtherInfection",
             "types": "",
-            "id": 217
+            "id": 216
         },
         {
             "explanation": "Otitis media (level 2)(number of diagnostics)",
             "feature": "L2_OtitisMedia",
             "types": "",
-            "id": 218
+            "id": 217
         },
         {
             "explanation": "Ovarian cyst (level 2)(number of diagnostics)",
             "feature": "L2_OvarianCyst",
             "types": "",
-            "id": 219
+            "id": 218
         },
         {
             "explanation": "Ovaries (level 2)(number of diagnostics)",
             "feature": "L2_Ovaries",
             "types": "",
-            "id": 220
+            "id": 219
         },
         {
             "explanation": "Overweight (level 2)(number of diagnostics)",
             "feature": "L2_Overweight",
             "types": "",
-            "id": 221
+            "id": 220
         },
         {
             "explanation": "Pain joint (level 2)(number of diagnostics)",
             "feature": "L2_PainJoint",
             "types": "",
-            "id": 222
+            "id": 221
         },
         {
             "explanation": "Pancreas (level 2)(number of diagnostics)",
             "feature": "L2_Pancreas",
             "types": "",
-            "id": 223
+            "id": 222
         },
         {
             "explanation": "Parasite infection (level 2)(number of diagnostics)",
             "feature": "L2_ParasiteInfection",
             "types": "",
-            "id": 224
+            "id": 223
         },
         {
             "explanation": "Parkinson (level 2)(number of diagnostics)",
             "feature": "L2_Parkinson",
             "types": "",
-            "id": 225
+            "id": 224
         },
         {
             "explanation": "Pericardic endocardic miocardic (level 2)(number of diagnostics)",
             "feature": "L2_PerEndMiocard",
             "types": "",
-            "id": 226
+            "id": 225
         },
         {
             "explanation": "Peripheral neuropathy (level 2)(number of diagnostics)",
             "feature": "L2_PeriphNeuropathy",
             "types": "",
-            "id": 227
+            "id": 226
         },
         {
             "explanation": "Pneumonia (level 2)(number of diagnostics)",
             "feature": "L2_Pneumonia",
             "types": "",
-            "id": 228
+            "id": 227
         },
         {
             "explanation": "Peripheral nervous system (level 2)(number of diagnostics)",
             "feature": "L2_PNS",
             "types": "",
-            "id": 229
+            "id": 228
         },
         {
             "explanation": "Nervous system face (level 2)(number of diagnostics)",
             "feature": "L2_PNSFace",
             "types": "",
-            "id": 230
+            "id": 229
         },
         {
             "explanation": "PNS Inflamatory or Toxic (level 2)(number of diagnostics)",
             "feature": "L2_PNSInflamToxic",
             "types": "",
-            "id": 231
+            "id": 230
         },
         {
             "explanation": "Polydipsia (level 2)(number of diagnostics)",
             "feature": "L2_Polydipsia",
             "types": "",
-            "id": 232
+            "id": 231
         },
         {
             "explanation": "Polyuria (level 2)(number of diagnostics)",
             "feature": "L2_Polyuria",
             "types": "",
-            "id": 233
+            "id": 232
         },
         {
             "explanation": "Proctology (level 2)(number of diagnostics)",
             "feature": "L2_Proctology",
             "types": "",
-            "id": 234
+            "id": 233
         },
         {
             "explanation": "Prostate benign (level 2)(number of diagnostics)",
             "feature": "L2_ProstateBenign",
             "types": "",
-            "id": 235
+            "id": 234
         },
         {
             "explanation": "Proteinuria (level 2)(number of diagnostics)",
             "feature": "L2_Proteinuria",
             "types": "",
-            "id": 236
+            "id": 235
         },
         {
             "explanation": "PSA (level 2)(number of diagnostics)",
             "feature": "L2_PSA",
             "types": "",
-            "id": 237
+            "id": 236
         },
         {
             "explanation": "Psoriasis (level 2)(number of diagnostics)",
             "feature": "L2_Psoriasis",
             "types": "",
-            "id": 238
+            "id": 237
         },
         {
             "explanation": "Pyrosis (level 2)(number of diagnostics)",
             "feature": "L2_Pyrosis",
             "types": "",
-            "id": 239
+            "id": 238
         },
         {
             "explanation": "Renal (level 2)(number of diagnostics)",
             "feature": "L2_Renal",
             "types": "",
-            "id": 240
+            "id": 239
         },
         {
             "explanation": "Respiratory fail (level 2)(number of diagnostics)",
             "feature": "L2_RespiratoryFail",
             "types": "",
-            "id": 241
+            "id": 240
         },
         {
             "explanation": "Respiratory upper chronic (level 2)(number of diagnostics)",
             "feature": "L2_RespUpAcute",
             "types": "",
-            "id": 242
+            "id": 241
         },
         {
             "explanation": "Respiratory upper acute (level 2)(number of diagnostics)",
             "feature": "L2_RespUpChronic",
             "types": "",
-            "id": 243
+            "id": 242
         },
         {
             "explanation": "Rheumatic pain (level 2)(number of diagnostics)",
             "feature": "L2_RheumaticPain",
             "types": "",
-            "id": 244
+            "id": 243
         },
         {
             "explanation": "Rhinitis (level 2)(number of diagnostics)",
             "feature": "L2_Rhinitis",
             "types": "",
-            "id": 245
+            "id": 244
         },
         {
             "explanation": "Restless legs syndrome (level 2)(number of diagnostics)",
             "feature": "L2_RLS",
             "types": "",
-            "id": 246
+            "id": 245
         },
         {
             "explanation": "Schizophrenic (level 2)(number of diagnostics)",
             "feature": "L2_Schizophrenic",
             "types": "",
-            "id": 247
+            "id": 246
         },
         {
             "explanation": "Sciatic pain (level 2)(number of diagnostics)",
             "feature": "L2_SciaticPain",
             "types": "",
-            "id": 248
+            "id": 247
         },
         {
             "explanation": "Screening (level 2)(number of diagnostics)",
             "feature": "L2_Screening",
             "types": "",
-            "id": 249
+            "id": 248
         },
         {
             "explanation": "Seborrheic cyst (level 2)(number of diagnostics)",
             "feature": "L2_SeborrheicCyst",
             "types": "",
-            "id": 250
+            "id": 249
         },
         {
             "explanation": "Seborrheic dermatitis (level 2)(number of diagnostics)",
             "feature": "L2_SeborrheicDermatitis",
             "types": "",
-            "id": 251
+            "id": 250
         },
         {
             "explanation": "Sex dysfunction (level 2)(number of diagnostics)",
             "feature": "L2_SexDysfunction",
             "types": "",
-            "id": 252
+            "id": 251
         },
         {
             "explanation": "Shoulder (level 2)(number of diagnostics)",
             "feature": "L2_Shoulder",
             "types": "",
-            "id": 253
+            "id": 252
         },
         {
             "explanation": "Sinus (level 2)(number of diagnostics)",
             "feature": "L2_Sinus",
             "types": "",
-            "id": 254
+            "id": 253
         },
         {
             "explanation": "Skin atrophic (level 2)(number of diagnostics)",
             "feature": "L2_SkinAtrophic",
             "types": "",
-            "id": 255
+            "id": 254
         },
         {
             "explanation": "Skin inflammatory (level 2)(number of diagnostics)",
             "feature": "L2_SkinInflammatory",
             "types": "",
-            "id": 256
+            "id": 255
         },
         {
             "explanation": "Skin keratosis (level 2)(number of diagnostics)",
             "feature": "L2_SkinKeratosis",
             "types": "",
-            "id": 257
+            "id": 256
         },
         {
             "explanation": "Skin other (level 2)(number of diagnostics)",
             "feature": "L2_SkinOther",
             "types": "",
-            "id": 258
+            "id": 257
         },
         {
             "explanation": "Skin sense (level 2)(number of diagnostics)",
             "feature": "L2_SkinSense",
             "types": "",
-            "id": 259
+            "id": 258
         },
         {
             "explanation": "Skin viric (level 2)(number of diagnostics)",
             "feature": "L2_SkinViric",
             "types": "",
-            "id": 260
+            "id": 259
         },
         {
             "explanation": "Sleep (level 2)(number of diagnostics)",
             "feature": "L2_Sleep",
             "types": "",
-            "id": 261
+            "id": 260
         },
         {
             "explanation": "Sleep apnea (level 2)(number of diagnostics)",
             "feature": "L2_SleepApnea",
             "types": "",
-            "id": 262
+            "id": 261
         },
         {
             "explanation": "Spinal stenosis (level 2)(number of diagnostics)",
             "feature": "L2_SpinalStenosis",
             "types": "",
-            "id": 263
+            "id": 262
         },
         {
             "explanation": "Spondylosis (level 2)(number of diagnostics)",
             "feature": "L2_Spondylosis",
             "types": "",
-            "id": 264
+            "id": 263
         },
         {
             "explanation": "Sprains (level 2)(number of diagnostics)",
             "feature": "L2_Sprains",
             "types": "",
-            "id": 265
+            "id": 264
         },
         {
             "explanation": "Stress (level 2)(number of diagnostics)",
             "feature": "L2_Stress",
             "types": "",
-            "id": 266
+            "id": 265
         },
         {
             "explanation": "Superficial injury (level 2)(number of diagnostics)",
             "feature": "L2_SuperficialInjury",
             "types": "",
-            "id": 267
+            "id": 266
         },
         {
             "explanation": "Sweat gland (level 2)(number of diagnostics)",
             "feature": "L2_SweatGland",
             "types": "",
-            "id": 268
+            "id": 267
         },
         {
             "explanation": "Syncope (level 2)(number of diagnostics)",
             "feature": "L2_Syncope",
             "types": "",
-            "id": 269
+            "id": 268
         },
         {
             "explanation": "Syndrome X (level 2)(number of diagnostics)",
             "feature": "L2_SyndromeX",
             "types": "",
-            "id": 270
+            "id": 269
         },
         {
             "explanation": "Synovium and tendon (level 2)(number of diagnostics)",
             "feature": "L2_SynoviumTendon",
             "types": "",
-            "id": 271
+            "id": 270
         },
         {
             "explanation": "Teeth (level 2)(number of diagnostics)",
             "feature": "L2_Teeth",
             "types": "",
-            "id": 272
+            "id": 271
         },
         {
             "explanation": "Temporomandibular (level 2)(number of diagnostics)",
             "feature": "L2_Temporomandibular",
             "types": "",
-            "id": 273
+            "id": 272
         },
         {
             "explanation": "Tensional psicalgia (level 2)(number of diagnostics)",
             "feature": "L2_TensionalPsicalgia",
             "types": "",
-            "id": 274
+            "id": 273
         },
         {
             "explanation": "Testicular dysfunction (level 2)(number of diagnostics)",
             "feature": "L2_TesticularDysfunction",
             "types": "",
-            "id": 275
+            "id": 274
         },
         {
             "explanation": "Thyroid other (level 2)(number of diagnostics)",
             "feature": "L2_ThyroidOther",
             "types": "",
-            "id": 276
+            "id": 275
         },
         {
             "explanation": "Tobacco (level 2)(number of diagnostics)",
             "feature": "L2_Tobacco",
             "types": "",
-            "id": 277
+            "id": 276
         },
         {
             "explanation": "Tonsils and adenoids (level 2)(number of diagnostics)",
             "feature": "L2_TonsilsAdenoids",
             "types": "",
-            "id": 278
+            "id": 277
         },
         {
             "explanation": "Trigger finger (level 2)(number of diagnostics)",
             "feature": "L2_TriggerFinger",
             "types": "",
-            "id": 279
+            "id": 278
         },
         {
             "explanation": "Ulcer (level 2)(number of diagnostics)",
             "feature": "L2_Ulcer",
             "types": "",
-            "id": 280
+            "id": 279
         },
         {
             "explanation": "Ulcerous colitis (level 2)(number of diagnostics)",
             "feature": "L2_UlcerousColitis",
             "types": "",
-            "id": 281
+            "id": 280
         },
         {
             "explanation": "Urinary incontinency (level 2)(number of diagnostics)",
             "feature": "L2_UrinaryIncontinency",
             "types": "",
-            "id": 282
+            "id": 281
         },
         {
             "explanation": "Urinary urgency (level 2)(number of diagnostics)",
             "feature": "L2_UrinaryUrgency",
             "types": "",
-            "id": 283
+            "id": 282
         },
         {
             "explanation": "Urticaria (level 2)(number of diagnostics)",
             "feature": "L2_Urticaria",
             "types": "",
-            "id": 284
+            "id": 283
         },
         {
             "explanation": "UTI Other (level 2)(number of diagnostics)",
             "feature": "L2_UTIOther",
             "types": "",
-            "id": 285
+            "id": 284
         },
         {
             "explanation": "Vaccine (level 2)(number of diagnostics)",
             "feature": "L2_Vaccine",
             "types": "",
-            "id": 286
+            "id": 285
         },
         {
             "explanation": "Vaginal (level 2)(number of diagnostics)",
             "feature": "L2_Vaginal",
             "types": "",
-            "id": 287
+            "id": 286
         },
         {
             "explanation": "Varix leg (level 2)(number of diagnostics)",
             "feature": "L2_VarixLeg",
             "types": "",
-            "id": 288
+            "id": 287
         },
         {
             "explanation": "Vascular peripheral (level 2)(number of diagnostics)",
             "feature": "L2_VascularPeripheral",
             "types": "",
-            "id": 289
+            "id": 288
         },
         {
             "explanation": "Vertiginous syndromes (level 2)(number of diagnostics)",
             "feature": "L2_VertiginousSyndromes",
             "types": "",
-            "id": 290
+            "id": 289
         },
         {
             "explanation": "Vih (level 2)(number of diagnostics)",
             "feature": "L2_VIH",
             "types": "",
-            "id": 291
+            "id": 290
         },
         {
             "explanation": "Vitamin B (level 2)(number of diagnostics)",
             "feature": "L2_VitaminB",
             "types": "",
-            "id": 292
+            "id": 291
         },
         {
             "explanation": "Vitamin D (level 2)(number of diagnostics)",
             "feature": "L2_VitaminD",
             "types": "",
-            "id": 293
+            "id": 292
         },
         {
             "explanation": "Vomiting and nausea (level 2)(number of diagnostics)",
             "feature": "L2_VomitingNausea",
             "types": "",
-            "id": 294
+            "id": 293
         },
         {
             "explanation": "Weight gain (level 2)(number of diagnostics)",
             "feature": "L2_WeightGain",
             "types": "",
-            "id": 295
+            "id": 294
         },
         {
             "explanation": "Weight loss (level 2)(number of diagnostics)",
             "feature": "L2_WeightLoss",
             "types": "",
-            "id": 296
+            "id": 295
         },
         {
             "explanation": "Anemia (level 1)(number of diagnostics)",
             "feature": "L1_Anemia",
             "types": "",
-            "id": 297
+            "id": 296
         },
         {
             "explanation": "Back (level 1)(number of diagnostics)",
             "feature": "L1_Back",
             "types": "",
-            "id": 298
+            "id": 297
         },
         {
             "explanation": "Colitis miscelanea (level 1)(number of diagnostics)",
             "feature": "L1_ColitisMSC",
             "types": "",
-            "id": 299
+            "id": 298
         },
         {
             "explanation": "Connective tissue (level 1)(number of diagnostics)",
             "feature": "L1_ConnectiveTissue",
             "types": "",
-            "id": 300
+            "id": 299
         },
         {
             "explanation": "Dermatitis (level 1)(number of diagnostics)",
             "feature": "L1_Dermatitis",
             "types": "",
-            "id": 301
+            "id": 300
         },
         {
             "explanation": "Digestive (level 1)(number of diagnostics)",
             "feature": "L1_Digestive",
             "types": "",
-            "id": 302
+            "id": 301
         },
         {
             "explanation": "DM Symptom (level 1)(number of diagnostics)",
             "feature": "L1_DMSymptom",
             "types": "",
-            "id": 303
+            "id": 302
         },
         {
             "explanation": "Glucose (level 1)(number of diagnostics)",
             "feature": "L1_Glucose",
             "types": "",
-            "id": 304
+            "id": 303
         },
         {
             "explanation": "Headache (level 1)(number of diagnostics)",
             "feature": "L1_Headache",
             "types": "",
-            "id": 305
+            "id": 304
         },
         {
             "explanation": "Herpes (level 1)(number of diagnostics)",
             "feature": "L1_Herpes",
             "types": "",
-            "id": 306
+            "id": 305
         },
         {
             "explanation": "Hormonal (level 1)(number of diagnostics)",
             "feature": "L1_Hormonal",
             "types": "",
-            "id": 307
+            "id": 306
         },
         {
             "explanation": "Insomnia (level 1)(number of diagnostics)",
             "feature": "L1_Insomnia",
             "types": "",
-            "id": 308
+            "id": 307
         },
         {
             "explanation": "Ischemic cardiopathy (level 1)(number of diagnostics)",
             "feature": "L1_IschemicCardiopathy",
             "types": "",
-            "id": 309
+            "id": 308
         },
         {
             "explanation": "Mycosis foot (level 1)(number of diagnostics)",
             "feature": "L1_MycosisFoot",
             "types": "",
-            "id": 310
+            "id": 309
         },
         {
             "explanation": "Nervous system other (level 1)(number of diagnostics)",
             "feature": "L1_NervousSystemOther",
             "types": "",
-            "id": 311
+            "id": 310
         },
         {
             "explanation": "Prostate (level 1)(number of diagnostics)",
             "feature": "L1_Prostate",
             "types": "",
-            "id": 312
+            "id": 311
         },
         {
             "explanation": "Respinfec (level 1)(number of diagnostics)",
             "feature": "L1_RespInfec",
             "types": "",
-            "id": 313
+            "id": 312
         },
         {
             "explanation": "Skin (level 1)(number of diagnostics)",
             "feature": "L1_Skin",
             "types": "",
-            "id": 314
+            "id": 313
         },
         {
             "explanation": "Skin infection (level 1)(number of diagnostics)",
             "feature": "L1_SkinInfection",
             "types": "",
-            "id": 315
+            "id": 314
         },
         {
             "explanation": "Skin inflammatory (level 1)(number of diagnostics)",
             "feature": "L1_SkinInflammatory",
             "types": "",
-            "id": 316
+            "id": 315
         },
         {
             "explanation": "Skin other (level 1)(number of diagnostics)",
             "feature": "L1_SkinOther",
             "types": "",
-            "id": 317
+            "id": 316
         },
         {
             "explanation": "Oldest start year of all diagnostics",
             "feature": "StartYear",
             "types": "",
-            "id": 318
+            "id": 317
         },
         {
             "explanation": "Number of diagnostics with start year < 2009",
             "feature": "PreviousYear",
             "types": "",
-            "id": 319
+            "id": 318
         },
         {
             "explanation": "Number of different level1 with level2=DMSymptom",
             "feature": "DiffDMOtherRelatedSymptoms",
             "types": "",
-            "id": 320
+            "id": 319
         },
         {
             "explanation": "Visits with diagnostics with level2=DMSymptom",
             "feature": "VisitsDMOtherRelatedSymptoms",
             "types": "",
-            "id": 321
+            "id": 320
         },
         {
             "explanation": "Different level 2 categories with diagnostics",
             "feature": "DiffLevel2Diag",
             "types": "",
-            "id": 322
+            "id": 321
         },
         {
             "explanation": "Different 3 digit icd9 categories with diagnostics",
             "feature": "Tot3digitICD9",
             "types": "",
-            "id": 323
+            "id": 322
         },
         {
             "explanation": "Total diagnostics per weighted year",
             "feature": "TotDiagWYear",
             "types": "",
-            "id": 324
+            "id": 323
         },
         {
             "explanation": "Total diagnostics",
             "feature": "TotDiag",
             "types": "",
-            "id": 325
+            "id": 324
         },
         {
             "explanation": "Total diagnostics per visit",
             "feature": "TotDiagPerVisit",
             "types": "",
-            "id": 326
+            "id": 325
         },
         {
             "explanation": "Total diagnostics without transcripts",
             "feature": "TotDiagWOTranscript",
             "types": "",
-            "id": 327
+            "id": 326
         },
         {
             "explanation": "Acetaminophen (binary)",
             "feature": "acetaminophen_bin",
             "types": "",
-            "id": 328
+            "id": 327
         },
         {
             "explanation": "Acetaminophen (max dose)",
             "feature": "acetaminophen_dose",
             "types": "",
-            "id": 329
+            "id": 328
         },
         {
             "explanation": "Acetaminophen (prescriptions)",
             "feature": "acetaminophen_npr",
             "types": "",
-            "id": 330
+            "id": 329
         },
         {
             "explanation": "ACEI (binary)",
             "feature": "ACEI_bin",
             "types": "",
-            "id": 331
+            "id": 330
         },
         {
             "explanation": "Benazepril (binary)",
             "feature": "benazepril_bin",
             "types": "",
-            "id": 332
+            "id": 331
         },
         {
             "explanation": "Benazepril (max dose)",
             "feature": "benazepril_dose",
             "types": "",
-            "id": 333
+            "id": 332
         },
         {
             "explanation": "Enalapril (binary)",
             "feature": "enalapril_bin",
             "types": "",
-            "id": 334
+            "id": 333
         },
         {
             "explanation": "Enalapril (max dose)",
             "feature": "enalapril_dose",
             "types": "",
-            "id": 335
+            "id": 334
         },
         {
             "explanation": "Ramipril (binary)",
             "feature": "ramipril_bin",
             "types": "",
-            "id": 336
+            "id": 335
         },
         {
             "explanation": "Ramipril (max dose)",
             "feature": "ramipril_dose",
             "types": "",
-            "id": 337
+            "id": 336
         },
         {
             "explanation": "Lisinopril (binary)",
             "feature": "lisinopril_bin",
             "types": "",
-            "id": 338
+            "id": 337
         },
         {
             "explanation": "Lisinopril (max dose)",
             "feature": "lisinopril_dose",
             "types": "",
-            "id": 339
+            "id": 338
         },
         {
             "explanation": "ACEI (max dose)",
             "feature": "ACEI_dose",
             "types": "",
-            "id": 340
+            "id": 339
         },
         {
             "explanation": "ACEI (prescriptions)",
             "feature": "ACEI_npr",
             "types": "",
-            "id": 341
+            "id": 340
         },
         {
             "explanation": "Aspirin (binary)",
             "feature": "aspirin_bin",
             "types": "",
-            "id": 342
+            "id": 341
         },
         {
             "explanation": "Aspirin (max dose)",
             "feature": "aspirin_dose",
             "types": "",
-            "id": 343
+            "id": 342
         },
         {
             "explanation": "Aspirin (prescriptions)",
             "feature": "aspirin_npr",
             "types": "",
-            "id": 344
-        },
-        {
-            "explanation": "Description",
-            "feature": "Feature",
-            "types": "",
-            "id": 345
+            "id": 343
         },
         {
             "explanation": "Losartan (binary)",
             "feature": "losartan_bin",
             "types": "",
-            "id": 346
+            "id": 344
         },
         {
             "explanation": "Olmesartan (binary)",
             "feature": "olmesartan_bin",
             "types": "",
-            "id": 347
+            "id": 345
         },
         {
             "explanation": "Telmisartan (binary)",
             "feature": "telmisartan_bin",
             "types": "",
-            "id": 348
+            "id": 346
         },
         {
             "explanation": "Valsartan (binary)",
             "feature": "valsartan_bin",
             "types": "",
-            "id": 349
+            "id": 347
         },
         {
             "explanation": "Losartan (prescriptions)",
             "feature": "losartan_npr",
             "types": "",
-            "id": 350
+            "id": 348
         },
         {
             "explanation": "Olmesartan (prescriptions)",
             "feature": "olmesartan_npr",
             "types": "",
-            "id": 351
+            "id": 349
         },
         {
             "explanation": "Telmisartan (prescriptions)",
             "feature": "telmisartan_npr",
             "types": "",
-            "id": 352
+            "id": 350
         },
         {
             "explanation": "Valsartan (prescriptions)",
             "feature": "valsartan_npr",
             "types": "",
-            "id": 353
+            "id": 351
         },
         {
             "explanation": "Losartan (max dose)",
             "feature": "losartan_dose",
             "types": "",
-            "id": 354
+            "id": 352
         },
         {
             "explanation": "Olmesartan (max dose)",
             "feature": "olmesartan_dose",
             "types": "",
-            "id": 355
+            "id": 353
         },
         {
             "explanation": "Telmisartan (max dose)",
             "feature": "telmisartan_dose",
             "types": "",
-            "id": 356
+            "id": 354
         },
         {
             "explanation": "Valsartan (max dose)",
             "feature": "valsartan_dose",
             "types": "",
-            "id": 357
+            "id": 355
         },
         {
             "explanation": "AIIRA (different active principles)",
             "feature": "AIIRA_nap",
             "types": "",
-            "id": 358
+            "id": 356
         },
         {
             "explanation": "AIIRA (binary)",
             "feature": "AIIRA_bin",
             "types": "",
-            "id": 359
+            "id": 357
         },
         {
             "explanation": "Losartan (max dose)",
             "feature": "losartan_telmisartan_dose",
             "types": "",
-            "id": 360
+            "id": 358
         },
         {
             "explanation": "AIIRA (prescriptions)",
             "feature": "AIIRA_npr",
             "types": "",
-            "id": 361
+            "id": 359
         },
         {
             "explanation": "Antifungal (prescriptions)",
             "feature": "antifungical_general_npr",
             "types": "",
-            "id": 362
+            "id": 360
         },
         {
             "explanation": "Antifungal (different active principles)",
             "feature": "antifungical_general_nap",
             "types": "",
-            "id": 363
+            "id": 361
         },
         {
             "explanation": "Antifungal (binary)",
             "feature": "antifungical_general_bin",
             "types": "",
-            "id": 364
+            "id": 362
         },
         {
             "explanation": "Antifungal (prescriptions)",
             "feature": "antifungical_topical_npr",
             "types": "",
-            "id": 365
+            "id": 363
         },
         {
             "explanation": "Antifungal (different active principles)",
             "feature": "antifungical_topical_nap",
             "types": "",
-            "id": 366
+            "id": 364
         },
         {
             "explanation": "Antifungal (binary)",
             "feature": "antifungical_topical_bin",
             "types": "",
-            "id": 367
+            "id": 365
         },
         {
             "explanation": "Antiplatelet (binary)",
             "feature": "antiplatelet_bin",
             "types": "",
-            "id": 368
+            "id": 366
         },
         {
             "explanation": "Antiplatelet (max dose)",
             "feature": "antiplatelet_dose",
             "types": "",
-            "id": 369
+            "id": 367
         },
         {
             "explanation": "Antiplatelet (prescriptions)",
             "feature": "antiplatelet_npr",
             "types": "",
-            "id": 370
+            "id": 368
         },
         {
             "explanation": "Alprazolam (binary)",
             "feature": "alprazolam_bin",
             "types": "",
-            "id": 371
+            "id": 369
         },
         {
             "explanation": "Alprazolam (max dose)",
             "feature": "alprazolam_dose",
             "types": "",
-            "id": 372
+            "id": 370
         },
         {
             "explanation": "Clonazepam (binary)",
             "feature": "clonazepam_bin",
             "types": "",
-            "id": 373
+            "id": 371
         },
         {
             "explanation": "Clonazepam (max dose)",
             "feature": "clonazepam_dose",
             "types": "",
-            "id": 374
+            "id": 372
         },
         {
             "explanation": "Diazepam (binary)",
             "feature": "diazepam_bin",
             "types": "",
-            "id": 375
+            "id": 373
         },
         {
             "explanation": "Diazepam (max dose)",
             "feature": "diazepam_dose",
             "types": "",
-            "id": 376
+            "id": 374
         },
         {
             "explanation": "Lorazepam (binary)",
             "feature": "lorazepam_bin",
             "types": "",
-            "id": 377
+            "id": 375
         },
         {
             "explanation": "Lorazepam (max dose)",
             "feature": "lorazepam_dose",
             "types": "",
-            "id": 378
+            "id": 376
         },
         {
             "explanation": "Temazepam (binary)",
             "feature": "temazepam_bin",
             "types": "",
-            "id": 379
+            "id": 377
         },
         {
             "explanation": "Temazepam (max dose)",
             "feature": "temazepam_dose",
             "types": "",
-            "id": 380
+            "id": 378
         },
         {
             "explanation": "Benzodiazepine (different active principles)",
             "feature": "benzodiazepine_nap",
             "types": "",
-            "id": 381
+            "id": 379
         },
         {
             "explanation": "Benzodiazepine (binary)",
             "feature": "benzodiazepine_bin",
             "types": "",
-            "id": 382
+            "id": 380
         },
         {
             "explanation": "Benzodiazepine (prescriptions)",
             "feature": "benzodiazepine_npr",
             "types": "",
-            "id": 383
+            "id": 381
         },
         {
             "explanation": "Atenolol (binary)",
             "feature": "atenolol_bin",
             "types": "",
-            "id": 384
+            "id": 382
         },
         {
             "explanation": "Atenolol (prescriptions)",
             "feature": "atenolol_npr",
             "types": "",
-            "id": 385
+            "id": 383
         },
         {
             "explanation": "Atenolol (max dose)",
             "feature": "atenolol_dose",
             "types": "",
-            "id": 386
+            "id": 384
         },
         {
             "explanation": "Carvedilol (binary)",
             "feature": "carvedilol_bin",
             "types": "",
-            "id": 387
+            "id": 385
         },
         {
             "explanation": "Carvedilol (prescriptions)",
             "feature": "carvedilol_npr",
             "types": "",
-            "id": 388
+            "id": 386
         },
         {
             "explanation": "Carvedilol (max dose)",
             "feature": "carvedilol_dose",
             "types": "",
-            "id": 389
-        },
-        {
-            "explanation": "Description",
-            "feature": "Feature",
-            "types": "",
-            "id": 390
+            "id": 387
         },
         {
             "explanation": "Metoprolol (binary)",
             "feature": "metoprolol_bin",
             "types": "",
-            "id": 391
+            "id": 388
         },
         {
             "explanation": "Metoprolol (max dose)",
             "feature": "metoprolol_dose",
             "types": "",
-            "id": 392
+            "id": 389
         },
         {
             "explanation": "Nebivolol (binary)",
             "feature": "nebivolol_bin",
             "types": "",
-            "id": 393
+            "id": 390
         },
         {
             "explanation": "Nebivolol (max dose)",
             "feature": "nebivolol_dose",
             "types": "",
-            "id": 394
+            "id": 391
         },
         {
             "explanation": "Propranolol (binary)",
             "feature": "propranolol_bin",
             "types": "",
-            "id": 395
+            "id": 392
         },
         {
             "explanation": "Propranolol (max dose)",
             "feature": "propranolol_dose",
             "types": "",
-            "id": 396
+            "id": 393
         },
         {
             "explanation": "Betablocker (different active principles)",
             "feature": "betablocker_nap",
             "types": "",
-            "id": 397
+            "id": 394
         },
         {
             "explanation": "Betablocker (binary)",
             "feature": "betablocker_bin",
             "types": "",
-            "id": 398
+            "id": 395
         },
         {
             "explanation": "Betablocker (prescriptions)",
             "feature": "betablocker_npr",
             "types": "",
-            "id": 399
+            "id": 396
         },
         {
             "explanation": "Fenofibrate (max dose)",
             "feature": "fenofibrate_dose",
             "types": "",
-            "id": 400
+            "id": 397
         },
         {
             "explanation": "Fenofibric (max dose)",
             "feature": "fenofibric_acid_dose",
             "types": "",
-            "id": 401
+            "id": 398
         },
         {
             "explanation": "Gemfibrozil (max dose)",
             "feature": "gemfibrozil_dose",
             "types": "",
-            "id": 402
+            "id": 399
         },
         {
             "explanation": "Fenofibrate (binary)",
             "feature": "fenofibrate_bin",
             "types": "",
-            "id": 403
+            "id": 400
         },
         {
             "explanation": "Fenofibric (binary)",
             "feature": "fenofibric_acid_bin",
             "types": "",
-            "id": 404
+            "id": 401
         },
         {
             "explanation": "Gemfibrozil (binary)",
             "feature": "gemfibrozil_bin",
             "types": "",
-            "id": 405
+            "id": 402
         },
         {
             "explanation": "Fibrate (prescriptions)",
             "feature": "fibrate_npr",
             "types": "",
-            "id": 406
+            "id": 403
         },
         {
             "explanation": "Fibrate (binary)",
             "feature": "fibrate_bin",
             "types": "",
-            "id": 407
+            "id": 404
         },
         {
             "explanation": "Fibrate (different active principles)",
             "feature": "fibrate_nap",
             "types": "",
-            "id": 408
+            "id": 405
         },
         {
             "explanation": "Gabapentin (max dose)",
             "feature": "gabapentin_dose",
             "types": "",
-            "id": 409
+            "id": 406
         },
         {
             "explanation": "Pregabalin (max dose)",
             "feature": "pregabalin_dose",
             "types": "",
-            "id": 410
+            "id": 407
         },
         {
             "explanation": "Gabapentin (binary)",
             "feature": "gabapentin_bin",
             "types": "",
-            "id": 411
+            "id": 408
         },
         {
             "explanation": "Pregabalin (binary)",
             "feature": "pregabalin_bin",
             "types": "",
-            "id": 412
+            "id": 409
         },
         {
             "explanation": "GABA (prescriptions)",
             "feature": "GABA_npr",
             "types": "",
-            "id": 413
+            "id": 410
         },
         {
             "explanation": "GABA (binary)",
             "feature": "GABA_bin",
             "types": "",
-            "id": 414
+            "id": 411
         },
         {
             "explanation": "Gastroparesia drugs (binary)",
             "feature": "gastroparesia_bin",
             "types": "",
-            "id": 415
+            "id": 412
         },
         {
             "explanation": "Gastroparesia drugs (max dose)",
             "feature": "gastroparesia_dose",
             "types": "",
-            "id": 416
+            "id": 413
         },
         {
             "explanation": "Gastroparesia drugs (prescriptions)",
             "feature": "gastroparesia_npr",
             "types": "",
-            "id": 417
+            "id": 414
         },
         {
             "explanation": "Glucocorticoid injectable (binary)",
             "feature": "glucocorticoid_injec_bin",
             "types": "",
-            "id": 418
+            "id": 415
         },
         {
             "explanation": "Glucocorticoid injectable (prescriptions)",
             "feature": "glucocorticoid_injec_npr",
             "types": "",
-            "id": 419
+            "id": 416
         },
         {
             "explanation": "Glucocorticoid local (prescriptions)",
             "feature": "glucocorticoid_local_npr",
             "types": "",
-            "id": 420
+            "id": 417
         },
         {
             "explanation": "Glucocorticoid local (different active principles)",
             "feature": "glucocorticoid_local_nap",
             "types": "",
-            "id": 421
+            "id": 418
         },
         {
             "explanation": "Glucocorticoid local (binary)",
             "feature": "glucocorticoid_local_bin",
             "types": "",
-            "id": 422
+            "id": 419
         },
         {
             "explanation": "Betamethasone (prescriptions)",
             "feature": "betamethasone_local_npr",
             "types": "",
-            "id": 423
+            "id": 420
         },
         {
             "explanation": "Betamethasone (binary)",
             "feature": "betamethasone_local_bin",
             "types": "",
-            "id": 424
+            "id": 421
         },
         {
             "explanation": "Hydrocortisone (prescriptions)",
             "feature": "hydrocortisone_local_npr",
             "types": "",
-            "id": 425
+            "id": 422
         },
         {
             "explanation": "Hydrocortisone (binary)",
             "feature": "hydrocortisone_local_bin",
             "types": "",
-            "id": 426
+            "id": 423
         },
         {
             "explanation": "Triamcinolone (prescriptions)",
             "feature": "triamcinolone_local_npr",
             "types": "",
-            "id": 427
+            "id": 424
         },
         {
             "explanation": "Triamcinolone (binary)",
             "feature": "triamcinolone_local_bin",
             "types": "",
-            "id": 428
+            "id": 425
         },
         {
             "explanation": "Glucocorticoid (prescriptions)",
             "feature": "glucocorticoid_general_npr",
             "types": "",
-            "id": 429
+            "id": 426
         },
         {
             "explanation": "Glucocorticoid (different active principles)",
             "feature": "glucocorticoid_general_nap",
             "types": "",
-            "id": 430
+            "id": 427
         },
         {
             "explanation": "Glucocorticoid (binary)",
             "feature": "glucocorticoid_general_bin",
             "types": "",
-            "id": 431
+            "id": 428
         },
         {
             "explanation": "Hydrocortisone (max dose)",
             "feature": "hydrocortisone_general_dose",
             "types": "",
-            "id": 432
+            "id": 429
         },
         {
             "explanation": "Hydrocortisone (binary)",
             "feature": "hydrocortisone_general_bin",
             "types": "",
-            "id": 433
+            "id": 430
         },
         {
             "explanation": "Hydrocortisone (prescriptions)",
             "feature": "hydrocortisone_general_npr",
             "types": "",
-            "id": 434
-        },
-        {
-            "explanation": "Description",
-            "feature": "Feature",
-            "types": "",
-            "id": 435
+            "id": 431
         },
         {
             "explanation": "Methylprednisolone (max dose)",
             "feature": "methylprednisolone_general_dose",
             "types": "",
-            "id": 436
+            "id": 432
         },
         {
             "explanation": "Methylprednisolone (binary)",
             "feature": "methylprednisolone_general_bin",
             "types": "",
-            "id": 437
+            "id": 433
         },
         {
             "explanation": "Methylprednisolone (prescriptions)",
             "feature": "methylprednisolone_general_npr",
             "types": "",
-            "id": 438
+            "id": 434
         },
         {
             "explanation": "Prednisone (max dose)",
             "feature": "prednisone_general_dose",
             "types": "",
-            "id": 439
+            "id": 435
         },
         {
             "explanation": "Prednisone (binary)",
             "feature": "prednisone_general_bin",
             "types": "",
-            "id": 440
+            "id": 436
         },
         {
             "explanation": "Prednisone (prescriptions)",
             "feature": "prednisone_general_npr",
             "types": "",
-            "id": 441
+            "id": 437
         },
         {
             "explanation": "L type calcium channel blocker (different active principles)",
             "feature": "LtypeCaChB_nap",
             "types": "",
-            "id": 442
+            "id": 438
         },
         {
             "explanation": "L type calcium channel blocker (binary)",
             "feature": "LtypeCaChB_bin",
             "types": "",
-            "id": 443
+            "id": 439
         },
         {
             "explanation": "L type calcium channel blocker (prescriptions)",
             "feature": "LtypeCaChB_npr",
             "types": "",
-            "id": 444
+            "id": 440
         },
         {
             "explanation": "Amlodipine (max dose)",
             "feature": "amlodipine_dose",
             "types": "",
-            "id": 445
+            "id": 441
         },
         {
             "explanation": "Amlodipine (binary)",
             "feature": "amlodipine_bin",
             "types": "",
-            "id": 446
+            "id": 442
         },
         {
             "explanation": "Proton pump inhibitor (different active principles)",
             "feature": "protonpumpinhibitor_nap",
             "types": "",
-            "id": 447
+            "id": 443
         },
         {
             "explanation": "Proton pump inhibitor (binary)",
             "feature": "protonpumpinhibitor_bin",
             "types": "",
-            "id": 448
+            "id": 444
         },
         {
             "explanation": "Proton pump inhibitor (prescriptions)",
             "feature": "protonpumpinhibitor_npr",
             "types": "",
-            "id": 449
+            "id": 445
         },
         {
             "explanation": "Statin (different active principles)",
             "feature": "statin_nap",
             "types": "",
-            "id": 450
+            "id": 446
         },
         {
             "explanation": "Statin (prescriptions)",
             "feature": "statin_npr",
             "types": "",
-            "id": 451
+            "id": 447
         },
         {
             "explanation": "Statin (binary)",
             "feature": "statin_bin",
             "types": "",
-            "id": 452
+            "id": 448
         },
         {
             "explanation": "Atorvastatin (max dose)",
             "feature": "atorvastatin_dose",
             "types": "",
-            "id": 453
+            "id": 449
         },
         {
             "explanation": "Lovastatin (max dose)",
             "feature": "lovastatin_dose",
             "types": "",
-            "id": 454
+            "id": 450
         },
         {
             "explanation": "Pravastatin (max dose)",
             "feature": "pravastatin_dose",
             "types": "",
-            "id": 455
+            "id": 451
         },
         {
             "explanation": "Rosuvastatin (max dose)",
             "feature": "rosuvastatin_dose",
             "types": "",
-            "id": 456
+            "id": 452
         },
         {
             "explanation": "Simvastatin (max dose)",
             "feature": "simvastatin_dose",
             "types": "",
-            "id": 457
+            "id": 453
         },
         {
             "explanation": "Atorvastatin (binary)",
             "feature": "atorvastatin_bin",
             "types": "",
-            "id": 458
+            "id": 454
         },
         {
             "explanation": "Lovastatin (binary)",
             "feature": "lovastatin_bin",
             "types": "",
-            "id": 459
+            "id": 455
         },
         {
             "explanation": "Pravastatin (binary)",
             "feature": "pravastatin_bin",
             "types": "",
-            "id": 460
+            "id": 456
         },
         {
             "explanation": "Rosuvastatin (binary)",
             "feature": "rosuvastatin_bin",
             "types": "",
-            "id": 461
+            "id": 457
         },
         {
             "explanation": "Simvastatin (binary)",
             "feature": "simvastatin_bin",
             "types": "",
-            "id": 462
+            "id": 458
         },
         {
             "explanation": "Statin",
             "feature": "statin_dose_adjusted",
             "types": "",
-            "id": 463
+            "id": 459
         },
         {
             "explanation": "Thiazide (different active principles)",
             "feature": "thiazide_nap",
             "types": "",
-            "id": 464
+            "id": 460
         },
         {
             "explanation": "Thiazide (binary)",
             "feature": "thiazide_bin",
             "types": "",
-            "id": 465
+            "id": 461
         },
         {
             "explanation": "Thiazide (prescriptions)",
             "feature": "thiazide_npr",
             "types": "",
-            "id": 466
+            "id": 462
         },
         {
             "explanation": "Hydrochlorothiazide (max dose)",
             "feature": "hydrochlorothiazide_dose",
             "types": "",
-            "id": 467
+            "id": 463
         },
         {
             "explanation": "Niacin (prescriptions)",
             "feature": "niacin_npr",
             "types": "",
-            "id": 468
+            "id": 464
         },
         {
             "explanation": "Niacin (binary)",
             "feature": "niacin_bin",
             "types": "",
-            "id": 469
+            "id": 465
         },
         {
             "explanation": "Ezetimibe (prescriptions)",
             "feature": "ezetimibe_npr",
             "types": "",
-            "id": 470
+            "id": 466
         },
         {
             "explanation": "Ezetimibe (binary)",
             "feature": "ezetimibe_bin",
             "types": "",
-            "id": 471
+            "id": 467
         },
         {
             "explanation": "Antilipemics (prescriptions)",
             "feature": "antilipid_npr",
             "types": "",
-            "id": 472
+            "id": 468
         },
         {
             "explanation": "Antilipemics (binary)",
             "feature": "antilipid_bin",
             "types": "",
-            "id": 473
+            "id": 469
         },
         {
             "explanation": "Nasal route (prescriptions)",
             "feature": "nasal_npr",
             "types": "",
-            "id": 474
+            "id": 470
         },
         {
             "explanation": "Inhalation route (prescriptions)",
             "feature": "inhalation_npr",
             "types": "",
-            "id": 475
+            "id": 471
         },
         {
             "explanation": "Otic route (number of different drugs)",
             "feature": "otic_nmed",
             "types": "",
-            "id": 476
+            "id": 472
         },
         {
             "explanation": "Otic route (different active principles)",
             "feature": "otic_nap",
             "types": "",
-            "id": 477
+            "id": 473
         },
         {
             "explanation": "Otic route (binary)",
             "feature": "otic_bin",
             "types": "",
-            "id": 478
+            "id": 474
         },
         {
             "explanation": "Otic route (prescriptions)",
             "feature": "otic_npr",
             "types": "",
-            "id": 479
-        },
-        {
-            "explanation": "Description",
-            "feature": "Feature",
-            "types": "",
-            "id": 480
+            "id": 475
         },
         {
             "explanation": "Ophtalmic allergy inflamatory (different active principles)",
             "feature": "allergy_inflam_opht_nap",
             "types": "",
-            "id": 481
+            "id": 476
         },
         {
             "explanation": "Ophtalmic allergy inflamatory (binary)",
             "feature": "allergy_inflam_opht_bin",
             "types": "",
-            "id": 482
+            "id": 477
         },
         {
             "explanation": "Ophtalmic allergy inflamatory (prescriptions)",
             "feature": "allergy_inflam_opht_npr",
             "types": "",
-            "id": 483
+            "id": 478
         },
         {
             "explanation": "Ophtalmic antibiotic (different active principles)",
             "feature": "antibiotic_opht_nap",
             "types": "",
-            "id": 484
+            "id": 479
         },
         {
             "explanation": "Ophtalmic antibiotic (binary)",
             "feature": "antibiotic_opht_bin",
             "types": "",
-            "id": 485
+            "id": 480
         },
         {
             "explanation": "Ophtalmic antibiotic (prescriptions)",
             "feature": "antibiotic_opht_npr",
             "types": "",
-            "id": 486
+            "id": 481
         },
         {
             "explanation": "Ophtalmic glaucoma (different active principles)",
             "feature": "glaucoma_opht_nap",
             "types": "",
-            "id": 487
+            "id": 482
         },
         {
             "explanation": "Ophtalmic glaucoma (binary)",
             "feature": "glaucoma_opht_bin",
             "types": "",
-            "id": 488
+            "id": 483
         },
         {
             "explanation": "Ophtalmic glaucoma (prescriptions)",
             "feature": "glaucoma_opht_npr",
             "types": "",
-            "id": 489
+            "id": 484
         },
         {
             "explanation": "Oral contraceptive (prescriptions)",
             "feature": "oral_contracep_npr",
             "types": "",
-            "id": 490
+            "id": 485
         },
         {
             "explanation": "Oral contraceptive (binary)",
             "feature": "oral_contracep_bin",
             "types": "",
-            "id": 491
+            "id": 486
         },
         {
             "explanation": "No oral contraceptive (prescriptions)",
             "feature": "no_oral_contracep_npr",
             "types": "",
-            "id": 492
+            "id": 487
         },
         {
             "explanation": "No oral contraceptive (binary)",
             "feature": "no_oral_contracep_bin",
             "types": "",
-            "id": 493
+            "id": 488
         },
         {
             "explanation": "Alfa1 blocker (prescriptions)",
             "feature": "alfa1blocker_npr",
             "types": "",
-            "id": 494
+            "id": 489
         },
         {
             "explanation": "Calcium (prescriptions)",
             "feature": "calcium_npr",
             "types": "",
-            "id": 495
+            "id": 490
         },
         {
             "explanation": "Calcium (binary)",
             "feature": "calcium_bin",
             "types": "",
-            "id": 496
+            "id": 491
         },
         {
             "explanation": "Coxib (prescriptions)",
             "feature": "coxib_npr",
             "types": "",
-            "id": 497
+            "id": 492
         },
         {
             "explanation": "Digoxin (prescriptions)",
             "feature": "digoxin_npr",
             "types": "",
-            "id": 498
+            "id": 493
         },
         {
             "explanation": "Laxatives (prescriptions)",
             "feature": "laxatives_npr",
             "types": "",
-            "id": 499
+            "id": 494
         },
         {
             "explanation": "Laxatives (binary)",
             "feature": "laxatives_bin",
             "types": "",
-            "id": 500
+            "id": 495
         },
         {
             "explanation": "5a-reductase (prescriptions)",
             "feature": "fiveareductase_npr",
             "types": "",
-            "id": 501
+            "id": 496
         },
         {
             "explanation": "Iron (prescriptions)",
             "feature": "iron_npr",
             "types": "",
-            "id": 502
+            "id": 497
         },
         {
             "explanation": "Loop diuretic (binary)",
             "feature": "loopdiuretic_bin",
             "types": "",
-            "id": 503
+            "id": 498
         },
         {
             "explanation": "K-diuteric (prescriptions)",
             "feature": "Kdiuretic_npr",
             "types": "",
-            "id": 504
+            "id": 499
         },
         {
             "explanation": "K-diuretic (binary)",
             "feature": "Kdiuretic_bin",
             "types": "",
-            "id": 505
+            "id": 500
         },
         {
             "explanation": "Isosorbide (prescriptions)",
             "feature": "isosorbide_npr",
             "types": "",
-            "id": 506
+            "id": 501
         },
         {
             "explanation": "Omega-3 (prescriptions)",
             "feature": "omega_3_npr",
             "types": "",
-            "id": 507
+            "id": 502
         },
         {
             "explanation": "Potassium chloride (binary)",
             "feature": "potassium_chloride_bin",
             "types": "",
-            "id": 508
+            "id": 503
         },
         {
             "explanation": "Isopropyl (prescriptions)",
             "feature": "isopropyl_npr",
             "types": "",
-            "id": 509
+            "id": 504
         },
         {
             "explanation": "Null medication description (prescriptions)",
             "feature": "null_npr",
             "types": "",
-            "id": 510
+            "id": 505
         },
         {
             "explanation": "Osteoporosis drugs (binary)",
             "feature": "osteoporosis_bin",
             "types": "",
-            "id": 511
+            "id": 506
         },
         {
             "explanation": "Alkylamine (binary)",
             "feature": "alkylamine_bin",
             "types": "",
-            "id": 512
+            "id": 507
         },
         {
             "explanation": "Amphetamine (prescriptions)",
             "feature": "amphetamine_npr",
             "types": "",
-            "id": 513
+            "id": 508
         },
         {
             "explanation": "Blood preassure other drugs (prescriptions)",
             "feature": "BPOther_npr",
             "types": "",
-            "id": 514
+            "id": 509
         },
         {
             "explanation": "Blood preassure other drugs (binary)",
             "feature": "BPOther_bin",
             "types": "",
-            "id": 515
+            "id": 510
         },
         {
             "explanation": "Triptan (prescriptions)",
             "feature": "triptan_npr",
             "types": "",
-            "id": 516
+            "id": 511
         },
         {
             "explanation": "Corticosteroids (prescriptions)",
             "feature": "corticosteroids_npr",
             "types": "",
-            "id": 517
+            "id": 512
         },
         {
             "explanation": "Gout drugs (prescriptions)",
             "feature": "gout_npr",
             "types": "",
-            "id": 518
+            "id": 513
         },
         {
             "explanation": "Gout drugs (binary)",
             "feature": "gout_bin",
             "types": "",
-            "id": 519
+            "id": 514
         },
         {
             "explanation": "Vitamin (binary)",
             "feature": "vitamin_bin",
             "types": "",
-            "id": 520
+            "id": 515
         },
         {
             "explanation": "Total active principles",
             "feature": "active_principle",
             "types": "",
-            "id": 521
+            "id": 516
         },
         {
             "explanation": "Total prescriptions",
             "feature": "prescripts",
             "types": "",
-            "id": 522
+            "id": 517
         },
         {
             "explanation": "Medication without prescription",
             "feature": "medication_wo_prescript",
             "types": "",
-            "id": 523
+            "id": 518
         },
         {
             "explanation": "No medication at all",
             "feature": "nomedication",
             "types": "",
-            "id": 524
+            "id": 519
         }
     ],
     "set": "fusion"

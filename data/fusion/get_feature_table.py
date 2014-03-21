@@ -15,8 +15,7 @@ with open('fmap.raw.txt', 'r') as fmap_file:
     feat_id = 0
     for line in fmap_file:
         info = line.strip().split("\t")
-        print info
-        if len(info) < 2:
+        if len(info) < 2 or info[0].startswith("Feature"):
             continue
         
         feat_id += 1
