@@ -1,4 +1,11 @@
-#Transparent Boosting Tree Learning using Interactive Visualization
+##Transparent Boosting: An Interactive Machine Learning Framework
+===============
+Tianyi Zhou, Tianqi Chen, Luheng He {tianyizh,tqchen,luheng}@uw.edu
+
+* Tianyi takes the charges project report, presentation.
+* Tianqi takes charge of machine learning backend support, and interactive update when user feedback is given.
+* Luheng leads the implementation of interaction interface.
+* All the team members are involved in discussion, and development of ideas:)
 
 ## How to run the demo
 The demo can run in linux or mac machines, first make make sure system requirements are met
