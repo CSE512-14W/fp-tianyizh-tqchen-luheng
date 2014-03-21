@@ -1,5 +1,5 @@
 ##Transparent Boosting: An Interactive Machine Learning Framework
-===============
+========
 Tianyi Zhou, Tianqi Chen, Luheng He {tianyizh,tqchen,luheng}@uw.edu
 
 * Tianyi takes the charges project report, presentation.
