@@ -1,7 +1,26 @@
 \begin{thebibliography}{1}
 
-\bibitem{acm_categories}
-{How to Classify Works Using ACM's Computing Classification System}.
-\newblock \small{\url{http://www.acm.org/class/how_to_use.html}}.
+\bibitem{aai}
+S.~Amershi, J.~Fogarty, A.~Kapoor, and D.~S. Tan.
+\newblock Effective end-user interaction with machine learning.
+\newblock In {\em Association for the Advancement of Artificial Intelligence
+  (AAAI)}, 2011.
+
+\bibitem{GBRT}
+J.~H. Friedman.
+\newblock Greedy function approximation: A gradient boosting machine.
+\newblock {\em Annals of Statistics}, 29:1189--1232, 2000.
+
+\bibitem{Ematrix}
+J.~Talbot, B.~Lee, A.~Kapoor, and D.~S. Tan.
+\newblock Ensemblematrix: Interactive visualization to support machine learning
+  with multiple classifiers.
+\newblock In {\em Proceedings of the SIGCHI Conference on Human Factors in
+  Computing Systems}, pages 1283--1292, 2009.
+
+\bibitem{visual}
+E.~R. Tufte.
+\newblock {\em The Visual Display of Quantitative Information}.
+\newblock Graphics Press, Cheshire, CT, USA, 1986.
 
 \end{thebibliography}
