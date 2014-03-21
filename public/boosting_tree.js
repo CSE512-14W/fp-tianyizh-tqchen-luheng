@@ -469,71 +469,74 @@ boosting_tree.prototype = {
     	var width = d3.max([this.rect_width, text_len]);
     	return width;
     },
+    getNodeOperationRequest : function(d, op_type) {
+    	var request = {
+			user_id : main_user_id,
+			op_type : op_type,
+			op_iter :  history.active_op_id,
+			node_id : d.node_id,
+			tree_id : d.tree_id,
+			num_trees : this.num_trees
+		};
+    	if (op_type === "tree_expand") {
+    		request.num_trees = this.num_trees + 1;
+    	}
+    	var feat_filters = ftable.getFeatureFilters();
+    	if (feat_filters != null) {
+    		request.fdefault = feat_filters.fdefault;
+    		request.fban = feat_filters.fban;
+    		request.fpass = feat_filters.fpass;
+    	}
+    	return request;
+    },
 	showNodeOperationTooltip : function(d) {
 		var self = this;
 		var tooltip_offset = 15;
 		var box_width = self.node_box_width(d.show_label);
 		var path = self.path_helper(d);
 		var matched = self.path_matcher(path);
-
+		
 		tooltips.clear();
 		if (d.parent == null) {
-			// show remove tree option if this is not the first tree
 			var y_offset = 0;
 			if (self.num_trees > 1) {
-				tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset, {
-					user_id : main_user_id,
-					op_type : "tree_remove",
-					op_iter :  history.active_op_id,
-					node_id : d.node_id,
-					tree_id : d.tree_id,
-					num_trees : self.num_trees
-				});
+				tooltips.add(self.svg, d,
+						d.x0 + box_width / 2 + 2,
+						d.y0 - tooltip_offset, 
+						self.getNodeOperationRequest(d, "tree_remove")
+				);
 				y_offset = tooltip_offset;
 			}
-			// show expand tree option
-			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + y_offset, {
-					user_id : main_user_id,
-					op_type : "tree_expand",
-					op_iter :  history.active_op_id,
-					node_id : d.node_id,
-					tree_id : d.tree_id,
-					num_trees : self.num_trees + 1
-				});
+			tooltips.add(self.svg, d,
+					d.x0 + box_width / 2 + 2,
+					d.y0 + y_offset,
+					self.getNodeOperationRequest(d, "tree_expand"));
 		} else if (d.type === "split") {
-			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset,  {
-					user_id : main_user_id,
-					op_type : "node_remove",
-					op_iter :  history.active_op_id,
-					node_id : d.node_id,
-					tree_id : d.tree_id,
-					num_trees : self.num_trees
-				});
-			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + tooltip_offset, {
-					user_id : main_user_id,
-					op_type : "node_remove_all",
-					op_iter :  history.active_op_id,
-					node_id : matched.node_ids,
-					tree_id : matched.tree_ids,
-					num_trees : self.num_trees
-				});
+			tooltips.add(self.svg, d,
+					d.x0 + box_width / 2 + 2,
+					d.y0 - tooltip_offset, 
+					self.getNodeOperationRequest(d, "node_remove")
+			);
+			var request = self.getNodeOperationRequest(d, "node_remove_all");
+			request.node_id = matched.node_ids;
+			request.tree_id = matched.tree_ids;
+			tooltips.add(self.svg, d,
+					d.x0 + box_width / 2 + 2,
+					d.y0 + tooltip_offset, request
+			);
 		} else if (d.pos_cnt > 0 && d.neg_cnt > 0) {
-			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 - tooltip_offset, {
-				user_id : main_user_id,
-				op_type : "node_expand",
-				op_iter :  history.active_op_id,
-				node_id : d.node_id,
-				tree_id : d.tree_id,
-				num_trees : self.num_trees
-			});
-			tooltips.add(self.svg, d, d.x0 + box_width / 2 + 2, d.y0 + tooltip_offset, {
-				user_id : main_user_id,
-				op_type : "node_expand_all",
-				op_iter :  history.active_op_id,
-				node_id : matched.node_ids,
-				tree_id : matched.tree_ids,
-				num_trees : self.num_trees
-			});
+			tooltips.add(self.svg, d,
+					d.x0 + box_width / 2 + 2,
+					d.y0 - tooltip_offset, 
+					self.getNodeOperationRequest(d, "node_expand")
+			);
+			var request = self.getNodeOperationRequest(d, "node_expand_all");
+			request.node_id = matched.node_ids;
+			request.tree_id = matched.tree_ids;
+			tooltips.add(self.svg, d,
+					d.x0 + box_width / 2 + 2,
+					d.y0 + tooltip_offset, request
+			);
 		}
 	}
 };

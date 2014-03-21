@@ -149,8 +149,8 @@ op_history.prototype = {
 		if (request.op_type === "init") {
 			return "Initialize tree";
 		} else {
-			return request.op_type + " on " + request.tree_id + ", "
-					+ request.node_id;
+			return request.op_type;
+			// + " on " + request.tree_id + ", " + request.node_id;
 		}
 	},
 	timeTravaled : function() {

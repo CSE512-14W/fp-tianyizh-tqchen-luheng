@@ -41,51 +41,51 @@ def handleReq( request ):
         ''' restore old model
         '''
         new_forest = xgboost_utils.loadModel(user_id, op_iter)
-    elif op_type == "init":
-        ''' re-train the model
-        '''
-        new_config = [("num_round", num_trees),
-                      ("bst:max_depth", request["max_depth"])]
-        ''' add feature constraints
-        '''
-        if "fdefault" in request and int(request["fdefault"]) < 0:
-            new_config.append(("bst:fdefault", -1))
-        if "fban" in request and len(request["fban"]) > 0:
-                new_config.extend([("bst:fban", f) for f in request["fban"]])
-        if "fpass" in request and len(request["fpass"]) > 0:
-            new_config.extend([("bst:fpass", f) for f in request["fpass"]])
-            
-        new_forest = xgboost_utils.trainNewModel(user_id, 0, new_config)
     else:
-        ''' interative mode
-        '''
-        booster_id = request["tree_id"]
-        node_id = request["node_id"]
-        
-        if op_type == "node_expand":
-            new_config = [("interact:booster_index", booster_id),\
-                          ("bst:interact:expand", node_id)]
-        elif op_type == "node_remove":
-            new_config = [("interact:booster_index", booster_id),
-                          ("bst:interact:remove", node_id)]
-        elif op_type == "tree_expand":
-            new_config = [("num_round", num_trees), ]
-        elif op_type == "tree_remove":
-            new_config = [("interact:booster_index", booster_id),
-                          ("interact:action", "remove")]
-        elif op_type == "node_expand_all":
-            bsize = len(booster_id)
-            for i in range(bsize):
-                new_config.extend([("batch:interact:booster_index", booster_id[i]),
-                                   ("batch:bst:interact:expand", node_id[i]),
-                                   ("batch:run", 1)])
-        elif op_type == "node_remove_all":
-            bsize = len(booster_id)
-            for i in range(bsize):
-                new_config.extend([("batch:interact:booster_index", booster_id[i]),
-                                   ("batch:bst:interact:remove", node_id[i]),
-                                   ("batch:run", 1)])
-        
+        if op_type == "init":
+            ''' re-train the model
+            '''
+            new_config = [("num_round", num_trees),
+                          ("bst:max_depth", request["max_depth"])]
+        else:
+            ''' interative mode
+            '''
+            booster_id = request["tree_id"]
+            node_id = request["node_id"]
+            
+            if op_type == "node_expand":
+                new_config = [("interact:booster_index", booster_id),\
+                              ("bst:interact:expand", node_id)]
+            elif op_type == "node_remove":
+                new_config = [("interact:booster_index", booster_id),
+                              ("bst:interact:remove", node_id)]
+            elif op_type == "tree_expand":
+                new_config = [("num_round", num_trees), ]
+            elif op_type == "tree_remove":
+                new_config = [("interact:booster_index", booster_id),
+                              ("interact:action", "remove")]
+            elif op_type == "node_expand_all":
+                bsize = len(booster_id)
+                for i in range(bsize):
+                    new_config.extend([("batch:interact:booster_index", booster_id[i]),
+                                       ("batch:bst:interact:expand", node_id[i]),
+                                       ("batch:run", 1)])
+            elif op_type == "node_remove_all":
+                bsize = len(booster_id)
+                for i in range(bsize):
+                    new_config.extend([("batch:interact:booster_index", booster_id[i]),
+                                       ("batch:bst:interact:remove", node_id[i]),
+                                       ("batch:run", 1)])
+                    
+            ''' add feature constraints
+            '''
+            if "fdefault" in request and int(request["fdefault"]) < 0:
+                new_config.append(("bst:fdefault", -1))
+            if "fban" in request and len(request["fban"]) > 0:
+                    new_config.extend([("bst:fban", f) for f in request["fban"]])
+            if "fpass" in request and len(request["fpass"]) > 0:
+                new_config.extend([("bst:fpass", f) for f in request["fpass"]])
+                
         new_forest = xgboost_utils.trainNewModel(user_id, op_iter, new_config)    
 
     new_forest["op_iter"] = op_iter + 1
