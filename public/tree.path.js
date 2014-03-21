@@ -31,6 +31,7 @@ pathgraph.prototype = {
         	.remove();
         
         this.svg.selectAll('text').remove();
+        console.log(data);
         
         var legend = this.legend = this.legend.data( data );    
         // initialize variables     
@@ -83,9 +84,6 @@ pathgraph.prototype = {
                 if( i == 0 ) return "root";
                 else{
                 	var label = data[i-1].label;
-                	if (i == 1) {
-                		label = label.split(":")[1];
-                	}
                 	return label + " ? " + data[i-1].edge_tags[data[i].rank];
                 }
             } );
