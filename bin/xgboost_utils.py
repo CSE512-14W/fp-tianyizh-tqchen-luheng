@@ -19,7 +19,7 @@ TEST_PATH = "."
 FEATMAP_PATH = ""
 FEATTABLE_PATH = ""
 XGBOOST_PATH = "../xgboost/xgboost"
-TEMP_PATH = "/tmp/timl-temp"
+TEMP_PATH = "../temp"
 
 DEFAULT_CONFIG = []
 

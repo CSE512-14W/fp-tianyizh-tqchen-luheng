@@ -59,8 +59,8 @@ def handleReq( request ):
     else:
         ''' interative mode
         '''
-        booster_id = makeInt(request["tree_id"])
-        node_id = makeInt(request["node_id"])
+        booster_id = request["tree_id"]
+        node_id = request["node_id"]
         
         if op_type == "node_expand":
             new_config = [("interact:booster_index", booster_id),\
@@ -74,18 +74,19 @@ def handleReq( request ):
             new_config = [("interact:booster_index", booster_id),
                           ("interact:action", "remove")]
         elif op_type == "node_expand_all":
-            """
-             batch:interact:booster_index=0 batch:bst:interact:remove=1 batch:run=1\
-             batch:interact:booster_index=1 batch:bst:interact:remove=1 batch:run=1\
-             batch:interact:booster_index=1 batch:bst:interact:expand=9 batch:run=1\
-            """
-            new_config = [("interact:booster_index", booster_id),\
-                          ("bst:interact:expand", node_id)]
+            bsize = len(booster_id)
+            for i in range(bsize):
+                new_config.extend([("batch:interact:booster_index", booster_id[i]),
+                                   ("batch:bst:interact:expand", node_id[i]),
+                                   ("batch:run", 1)])
         elif op_type == "node_remove_all":
-            new_config = [("interact:booster_index", booster_id),\
-                          ("bst:interact:expand", node_id)]
-        new_forest = xgboost_utils.trainNewModel(user_id, op_iter, new_config)
-            
+            bsize = len(booster_id)
+            for i in range(bsize):
+                new_config.extend([("batch:interact:booster_index", booster_id[i]),
+                                   ("batch:bst:interact:remove", node_id[i]),
+                                   ("batch:run", 1)])
+        
+        new_forest = xgboost_utils.trainNewModel(user_id, op_iter, new_config)    
 
     new_forest["op_iter"] = op_iter + 1
     new_forest["user_id"] = str(user_id)
