@@ -41,11 +41,15 @@ var main_user_id = "";
 var change_dataset = function() {
 	// re-train everything!
 	var feat_filters = null;
-	curr_dataset = $("#dataselect").val();
+	var curr_dataset = $("#dataselect").val();
+	console.log(curr_dataset, main_dataset);
 	if (main_dataset != curr_dataset) {
 		main_dataset = curr_dataset;
+		ftable.clear_constraints();
 	} else {
+		console.log("here");
 		feat_filters = ftable.getFeatureFilters();
+		console.log(feat_filters.fban.length, feat_filters.fpass.length);
 	}
 
 	para = {num_trees : $("#numtreeinput").val(),

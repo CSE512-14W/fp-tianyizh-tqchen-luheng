@@ -33,6 +33,9 @@ function feature_table(margin, width, height, tag) {
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 	
 	d3.select(tag).style("height", height + "px");
+	
+	// do this only once except when dataset changes
+	this.clear_constraints();
 }
 
 feature_table.prototype = {
@@ -44,7 +47,7 @@ feature_table.prototype = {
 							  y0 : 0,
 							  name : "Features (frequency)",
 							  info : "Features",
-							  constraint : 1,
+							  constraint : self.fdefault,
 							  count : 0,
 							  type : "_", 
 							};
@@ -67,7 +70,14 @@ feature_table.prototype = {
 			this.feature_count_helper(btrees.forest_data[i]);
 		}
 		self.group_count_helper(self.feature_data);
-		self.feature_constraint_helper(self.feature_data);
+		self.feature_constraint_helper(self.feature_data, "topdown");
+		self.fban.forEach(function(d) {
+			self.features[d].constraint = -1;
+		});
+		self.fpass.forEach(function(d) {
+			self.features[d].constraint = 1;
+		});
+		self.feature_constraint_helper(self.feature_data, "bottomup");
 		self.update(self.feature_data);
 	},
 	feature_count_helper : function(d) {
@@ -90,12 +100,30 @@ feature_table.prototype = {
 		}
 		return d.count;
 	},
-	feature_constraint_helper : function(d) {
+	feature_constraint_helper : function(d, prop) {
+		// propagate constraints from d
 		var children = d.children ? d.children : d._children;
 		if (children) {
+			var num_fban = 0, num_fpass = 0;
 			for (var i = 0; i < children.length; i++) {
-				children[i].constraint = d.constraint;
-				this.feature_constraint_helper(children[i]);
+				if (prop === "topdown") {
+					children[i].constraint = d.constraint;
+					this.feature_constraint_helper(children[i], prop);
+				} else {
+					this.feature_constraint_helper(children[i], prop);
+					if (children[i].constraint < 0) {
+						num_fban ++;
+					} else {
+						num_fpass ++;
+					}
+				}
+			}
+			if (prop == "bottomup") {
+				if (num_fban == children.length) {
+					d.constraint = -1;
+				} else if (num_fpass == children.length) {
+					d.constraint = 1;
+				}
 			}
 		}
 	},
@@ -107,6 +135,11 @@ feature_table.prototype = {
 		});
 		this.svg.selectAll("g.featnode").remove();
 		this.node_count = 0;
+	},
+	clear_constraints : function() {
+		this.fdefault = 1;
+		this.fban = [];
+		this.fpass = [];
 	},
 	update : function (source) {
 		var self = this;
@@ -171,7 +204,7 @@ feature_table.prototype = {
 									"feat_ban",
 							callback : function() {
 								d.constraint = -1;
-								self.feature_constraint_helper(d);
+								self.feature_constraint_helper(d, "topdown");
 								self.update(d);
 							}
 						});
@@ -186,7 +219,7 @@ feature_table.prototype = {
 									"feat_pass",
 							callback : function() {
 								d.constraint = 1;
-								self.feature_constraint_helper(d);
+								self.feature_constraint_helper(d, "topdown");
 								self.update(d);
 							}
 						});
@@ -251,26 +284,32 @@ feature_table.prototype = {
 		});
 	},
 	getFeatureFilters : function() {
-		if (!this.feature_data || !this.feature_data.constraint) {
+		var self = this;
+		if (!self.feature_data || !self.feature_data.constraint) {
 			return null;
 		}
-		var fdefault = this.feature_data.constraint,
-			fpass = [],
-			fban = [];
-		this.features.forEach(function(d) {
-			if (d.constraint != fdefault) {
+		self.fdefault = self.feature_data.constraint,
+		self.fpass = [],
+		self.fban = [];
+		
+		var res = {};
+		res.fdefault = self.feature_data.constraint,
+		res.fpass = [],
+		res.fban = [];
+		
+		self.features.forEach(function(d, i) {
+			console.log(self.fdefault, d.constraint);
+			if (d.constraint != self.fdefault) {
 				if (d.constraint > 0) {
-					fpass.push(d.start + "-" + d.end);
+					res.fpass.push(d.start + "-" + d.end);
+					self.fpass.push(i);
 				} else {
-					fban.push(d.start + "-" + d.end);
+					res.fban.push(d.start + "-" + d.end);
+					self.fban.push(i);
 				}
 			}
 		});
-		return {
-			fdefault : fdefault,
-			fpass : fpass,
-			fban : fban
-		};
+		return res;
 	},
 	toggle : function(d) {
 		if (d.children) {
