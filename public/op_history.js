@@ -1,6 +1,6 @@
 function op_history (margin, width, height, tag) {
 	this.margin = margin;
-    this.width = width - margin.left -margin.right;
+    this.width = width - margin.left - margin.right;
     this.height = height - margin.top - margin.bottom;
     
     this.entry_width = 400;
@@ -47,6 +47,12 @@ op_history.prototype = {
 		self.active_op_id = response.op_iter;
 		self.panel.selectAll("rect").remove();
 		self.panel.selectAll("text").remove();
+		
+		var current_height = self.ops.length * self.entry_height
+							+ self.margin.top + self.margin.bottom;
+		console.log("current_height", current_height);
+		d3.select("svg")
+			.attr("height", current_height);
 		
 		var opEnter = self.panel
 			.selectAll("rect")

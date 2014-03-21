@@ -8,7 +8,7 @@ var middle_width = window_width * 0.60;
 var right_width = window_width * 0.25;
 
 var top_height = window_height * 0.3;
-var bottom_height = window_height * 0.7;
+var bottom_height = window_height * 0.6;
 
 console.log("window width", window_width);
 console.log("window height", window_height);
@@ -22,7 +22,7 @@ var history = new op_history( { top:10, right:0, bottom:10, left:10},
 								right_width, bottom_height,
 								"#historygraph");
 
-var btrees = new boosting_tree( { top:20, right:80, bottom:10, left:10}, 
+var btrees = new boosting_tree( { top:20, right:120, bottom:10, left:10}, 
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
@@ -32,11 +32,20 @@ var ftable = new feature_table ( { top:20, right:10, bottom:10, left:10},
 								window_height * 0.8,
 								"#featuretable");
 
-var tooltips = new op_tooltips();
+var tooltips = new op_tooltips("tooltip");
+var nt_tooltips = new op_tooltips("tooltip2"); // tooltip for new tree
 
 var main_dataset = "";
 var main_features = null;
 var main_user_id = "";
+var main_num_trees = 1;
+var main_max_depth = 2;
+
+var change_parameters = function() {
+	main_num_trees = $("#numtreeinput").val();
+	main_max_depth = $("#maxdepthinput").val();
+	console.log("change parameters", main_num_trees, main_max_depth);
+};
 
 var change_dataset = function() {
 	// re-train everything!
@@ -52,6 +61,7 @@ var change_dataset = function() {
 		console.log(feat_filters.fban.length, feat_filters.fpass.length);
 	}
 
+	change_parameters();
 	para = {num_trees : $("#numtreeinput").val(),
 			max_depth : $("#maxdepthinput").val()};
 	btrees.clear();

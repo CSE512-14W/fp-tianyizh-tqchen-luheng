@@ -41,7 +41,6 @@ boosting_tree.prototype = {
 		this.node_count = 0;
 	    this.node_mapper = {};
 	    this.tree_layout = [];
-	    this.is_collapsed = [];
 	    this.expanded = [-1, -1];
 	    this.num_trees = 0;
 	},
@@ -61,12 +60,15 @@ boosting_tree.prototype = {
 			self.node_id_helper(tree); 
 		}
 
-		if (tree_delta <= 0) {
-			for (var i = 0; i < self.num_trees; i++) {
-				if (i < self.is_collapsed.length && self.is_collapsed[i]) {
-					self.toggle(self.forest_data[i]);
-				} 
+		if (tree_delta < 0) {
+			self.expanded = [-1, -1];
+			self.auto_collapsing(self.num_trees - 1, true);
+			if (self.num_trees > 1) {
+				self.auto_collapsing(self.num_trees - 2, true);
 			}
+		} else if (tree_delta == 0) {
+			/* number of trees didnot change */
+			self.auto_collapsing(-1, false);
 		} else if (tree_delta == 1) {
 			/* growing a new tree, show last tree */
 			self.auto_collapsing(self.num_trees - 1, true);
@@ -94,10 +96,10 @@ boosting_tree.prototype = {
 		else if (history.active_op_id > 1) {
 			self.update(history.sources[history.active_op_id - 1]);
 		} else {
-			self.first_root.x0 = self.leftbar_width;
+			self.first_root.x0 = 0;
 			self.first_root.y0 = 0;
 			self.update(self.first_root);
-			self.update(self.first_root);
+			//self.update(self.first_root);
 		}
 	},
 	node_id_helper : function (node) {
@@ -155,8 +157,6 @@ boosting_tree.prototype = {
 			return 800;
 		};
 		
-		//var last_x = vertical ? 0 : self.leftbar_width;
-		//var last_y = vertical ? 300 : -50;
 		var offset_x = 0, offset_y = 0;
 		var t_width = 0, t_height = 0;
 		
@@ -166,9 +166,9 @@ boosting_tree.prototype = {
 				num_collapsed += 1;
 			}
 		});
-		var top_bar_height = 50 * Math.ceil(num_collapsed / 4);
+		var top_bar_height = 50 * Math.ceil((num_collapsed + 1) / 4);
 		var curr_collapsed = 0;
-		var last_x = 0;
+		//var last_x = 0;
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
@@ -195,6 +195,22 @@ boosting_tree.prototype = {
 			layout.push( { width : t_width, height : t_height,
 				offset : { x : offset_x, y : offset_y} } );
 		}
+		
+		// for new tree tooltip
+		var gx = num_collapsed % 4;
+		var gy = (num_collapsed - gx) / 4;
+		var xx = self.width / 4 * gx + 100;
+		var yy = 50 * gy;
+		var last_root = self.forest_data[self.num_trees - 1];
+		/*if (nt_tooltips.svg) {
+			nt_tooltips.move(xx, yy);
+		} else {*/
+		nt_tooltips.clear();
+		console.log("num_trees", self.num_trees);
+		console.log("nt tt", gx, gy);
+		nt_tooltips.add(self.svg, last_root, xx, yy,
+			self.getNodeOperationRequest(last_root, "tree_expand"));
+	
 		return layout;
 	},
 	update : function(source) {
@@ -393,15 +409,10 @@ boosting_tree.prototype = {
 		    d.x0 = d.x;
 		    d.y0 = d.y;
 		});
-		self.is_collapsed = [];
-		for (var i = 0; i < self.num_trees; i++) {
-			self.is_collapsed.push(
-					self.forest_data[i]._children ? true : false); 
-		}
 	},
 	auto_collapsing : function(tree_id, is_expanded) {
 		var self = this;
-		if (is_expanded) {
+		if (tree_id != -1 && is_expanded) {
 			if (self.expanded[1] != -1) {
 				if (self.expanded[0] != -1) {
 					self.toggle(self.forest_data[self.expanded[0]]);
@@ -413,7 +424,7 @@ boosting_tree.prototype = {
 				self.expanded[0] = self.expanded[1];
 				self.expanded[1] = -1;
 			}
-		} else {
+		} else if (tree_id != -1) {
 			if (tree_id == self.expanded[0]) {
 				self.expanded[0] = -1;
 			} else if (tree_id == self.expanded[1]) {
@@ -499,10 +510,11 @@ boosting_tree.prototype = {
 			op_iter :  history.active_op_id,
 			node_id : d.node_id,
 			tree_id : d.tree_id,
-			num_trees : this.num_trees
+			num_trees : this.num_trees,
 		};
     	if (op_type === "tree_expand") {
     		request.num_trees = this.num_trees + 1;
+    		request.max_depth = main_max_depth;
     	}
     	var feat_filters = ftable.getFeatureFilters();
     	if (feat_filters != null) {
@@ -521,19 +533,21 @@ boosting_tree.prototype = {
 		
 		tooltips.clear();
 		if (d.parent == null) {
-			var y_offset = 0;
+			//var y_offset = 0;
 			if (self.num_trees > 1) {
 				tooltips.add(self.svg, d,
 						d.x0 + box_width / 2 + 2,
-						d.y0 - tooltip_offset, 
+						d.y0, 
 						self.getNodeOperationRequest(d, "tree_remove")
 				);
-				y_offset = tooltip_offset;
+				//y_offset = tooltip_offset;
 			}
+			/*
 			tooltips.add(self.svg, d,
 					d.x0 + box_width / 2 + 2,
 					d.y0 + y_offset,
 					self.getNodeOperationRequest(d, "tree_expand"));
+			*/
 		} else if (d.type === "split") {
 			tooltips.add(self.svg, d,
 					d.x0 + box_width / 2 + 2,

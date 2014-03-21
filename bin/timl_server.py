@@ -60,7 +60,8 @@ def handleReq( request ):
                 new_config = [("interact:booster_index", booster_id),
                               ("bst:interact:remove", node_id)]
             elif op_type == "tree_expand":
-                new_config = [("num_round", num_trees), ]
+                new_config = [("num_round", num_trees),
+                              ("bst:max_depth", request["max_depth"])]
             elif op_type == "tree_remove":
                 new_config = [("interact:booster_index", booster_id),
                               ("interact:action", "remove")]

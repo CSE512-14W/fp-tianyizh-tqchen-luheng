@@ -30,13 +30,14 @@
 #historygraph {
 	float: right;
 	width: auto;
-  height: auto;
+	height: 300px;
   text-align: left;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
 #featuretable {
-	height: 400px;
+	height: 600px;
 	overflow: auto;
 }
 
@@ -104,6 +105,28 @@
 }
 
 .tooltip text {
+  font: 12px Helvetica;
+  font-weight: bold;
+  fill: black;
+  pointer-events: None;
+}
+
+.tooltip2 rect {
+  cursor: pointer;
+  fill: lightsteelblue;
+  stroke-width: 1.5px;
+  stroke: steelblue;
+  opacity: 0.9;
+} 
+
+.tooltip2 rect.active {
+  fill: azure;
+  stroke-width: 2.5px;
+  stroke: yellow;
+  opacity: 0.9;
+}
+
+.tooltip2 text {
   font: 12px Helvetica;
   font-weight: bold;
   fill: black;

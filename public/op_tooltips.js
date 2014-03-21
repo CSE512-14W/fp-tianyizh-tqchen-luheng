@@ -1,4 +1,4 @@
-function op_tooltips() {
+function op_tooltips(tt_class) {
 	this.op_text_snippets = {
 		"node_expand" : " + Expand this node",
 		"node_remove" : " - Remove this node",
@@ -14,8 +14,11 @@ function op_tooltips() {
 		"feat_pass_group" : " + Allow this feature group",
 		"feat_pass_all" : " + Allow all features by default",
 	};
+	this.tt_class = tt_class;
 	this.tt_height = 24;
 	this.char_to_pxl = 6.4;
+	this.duration = 300;
+	this.svg = null;
 }
 
 op_tooltips.prototype = {
@@ -24,7 +27,7 @@ op_tooltips.prototype = {
 		console.log("add tooltip at: ", xx, yy);
 	    var snippets = this.op_text_snippets;
 	    var tooltip = svg.append("g")
-			.attr("class", "tooltip")
+			.attr("class", this.tt_class)
 			.attr("transform", "translate(" + xx + "," + yy + ")");
 	    	
 	    var op_type = request.op_type;
@@ -35,7 +38,7 @@ op_tooltips.prototype = {
 	    console.log(request);
 	    
 	    tooltip.append("rect")
-			.attr("class", "tooltip")
+			//.attr("class", "tooltip")
 			.attr("rx", 2)
 			.attr("ry", 2)
 			.attr("width", tt_width)
@@ -50,6 +53,9 @@ op_tooltips.prototype = {
 				if (request.callback) {
 					request.callback();
 				} else {
+					if (request.op_type === "tree_expand") {
+						request.max_depth = main_max_depth;
+					}
 					$.get("cgi-bin/request_handler.py", 
 							{ request : JSON.stringify(request) },
 							function(data) {
@@ -66,9 +72,18 @@ op_tooltips.prototype = {
 			.attr("y", 15)
 			.attr("text-anchor", "left");
 	},
+	move : function(xx, yy) {
+		// FIXME: not working
+		this.svg.selectAll("g." + this.tt_class)
+			.transition()
+			.duration(this.duration)
+			.attr("transform", function(d) {
+				return "translate(" + xx + "," + yy + ")";
+			});
+	},
 	clear : function() {
 		if (this.svg) {
-			this.svg.selectAll("g.tooltip").remove();
+			this.svg.selectAll("g." + this.tt_class).remove();
 		}
 	}
 };
