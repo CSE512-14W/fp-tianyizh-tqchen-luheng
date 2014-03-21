@@ -3,7 +3,7 @@
 Tianyi Zhou, Tianqi Chen, Luheng He {tianyizh,tqchen,luheng}@uw.edu
 
 * Tianyi leads the project report, presentation.
-* Tianqi leads machine learning backend support.
+* Tianqi leads machine learning backend server support.
 * Luheng leads the implementation of interaction interface.
 * All the team members are involved in discussion, and development of ideas:)
 
