@@ -75,14 +75,14 @@ However, non-experts often treat ML as a fancy ``black box'' with few convincing
 
 Moreover, parameter tuning and determination of model complexity are two tricky problems that are critical to the performance of ML algorithms. Although there exists some statistical methods for solving them, it turns out that human intelligence based on domain knowledge always performs better and is more reliable on these decision-making problems, e.g., determining the depth of a decision tree, feature selection, and reasoning of performance enhancement. In addition, the emergence of human intelligence often offer better interpretation than machine intelligence. However, in the previous ML systems, it is also hard to involve users’ wisdom into learning process to improve both the generalization ability and interpretability of the ML models. 
 
-In contrast, visualization is a popular and powerful tool to explore data by concentrating human intelligence on visually encoded informations extracted from data. It shows different types of features of data in separate and interpretable ways, and also takes the relationship between features and samples into account. The visual representation of data is expected to help, facilitate and improve the comprehension of audiences, and thus stimulate more effective analytic thinking and decision making. However, visualization usually suffers from high dimensions and large volume of data. In this situation, the audiences suffer from an information overload caused by the big data, and the cognitive calculation could be slowed.
+In contrast, visualization \cite{visual} is a popular and powerful tool to explore data by concentrating human intelligence on visually encoded informations extracted from data. It shows different types of features of data in separate and interpretable ways, and also takes the relationship between features and samples into account. The visual representation of data is expected to help, facilitate and improve the comprehension of audiences, and thus stimulate more effective analytic thinking and decision making. However, visualization usually suffers from high dimensions and large volume of data. In this situation, the audiences suffer from an information overload caused by the big data, and the cognitive calculation could be slowed.
 
 \subsection{Main Idea}
 
 In this paper, we are going to close a loop between machine learning and visualization so they can benefit each other in data analysis and complete an interactive learning system that makes ML transparent to users. An overview of this system is given in Figure \ref{fig:system}. In each iteration of the loop, ML algorithm updates the prediction model according to given data and user feedback, then visualization provides a visual encoding to the model structures and the prediction results on training data by using the current model. In the visualization interface, user is able to track both the model structure and the prediction of training data, and operate on the model
 to change its structures based on domain knowledge. These user operations will be the input of the next run of the ML algorithm. ML algorithm will update the model by treating user's feedback as constraint in its learning. In this loop, ML is in charge of updating model, choosing useful information to visualize, and processing user's feedback, while user is in charge of modification to the updated model. 
 
-In particular, we choose gradient boosting tree (GBT) as our ML algorithm in the loop because of its appealing performance in lots of practical problems. GBT is an ensemble of decision trees that are established in a forward stagewise fashion similar to boosting. It learns an additive model defining  decision rules for effective prediction from input features, such as classification and regression. GBT has been well known as the state-of-the-art method for many challenging real world problems. Each step of GBT learning can be treated as learning a decision tree based on all the previous trees. Each node of each decision tree corresponds to a selected feature and a decision rule. 
+In particular, we choose gradient boosting tree (GBT) \cite{GBRT} as our ML algorithm in the loop because of its appealing performance in lots of practical problems. GBT is an ensemble of decision trees that are established in a forward stagewise fashion similar to boosting. It learns an additive model defining  decision rules for effective prediction from input features, such as classification and regression. GBT has been well known as the state-of-the-art method for many challenging real world problems. Each step of GBT learning can be treated as learning a decision tree based on all the previous trees. Each node of each decision tree corresponds to a selected feature and a decision rule. 
 
 In the interactive learning system called ``transparent boosting tree (TBT)'', visualization interface provides four views of model and data, i.e., feature view listing the feature groups and highlighting the selected features, forest view listing all previous trees, tree view showing the detailed structure of the current tree, path purity view capturing the prediction results of training set on each node along a selected path on the tree, and history view tracking both the training error and test error of each update in the learning process. In each step, users are accessible to these views to evaluate the current model, and our system allows the users to add/remove a tree, select feature group for building a new tree, remove a node on the current tree, expand a leaf node, and go back to any previous model in the learning loop. Then GBT algorithm will take these user operations as inputs to update the ensemble of decision trees accordingly. 
 
@@ -90,9 +90,9 @@ In this paper, we implement TBT by building an interactive visualization system,
 
 \section{Related Works}
 
-There are several, though not many, early efforts on improving the interpretation of ML models by using effective visualization. EnsembleMatrix [] enables users to choose any combination of multiple classifiers to build a combination model, after showing users the confusion matrix of all classifiers. Thus it provides an interaction visualization tool emerging user intelligence in ML process. However, both the training and mode structure of each classifier are still invisible to users.
+There are several, though not many, early efforts on improving the interpretation of ML models by using effective visualization \cite{aai}. EnsembleMatrix \cite{Ematrix} enables users to choose any combination of multiple classifiers to build a combination model, after showing users the confusion matrix of all classifiers. Thus it provides an interaction visualization tool emerging user intelligence in ML process. However, both the training and mode structure of each classifier are still invisible to users.
 
-Some recent works like BigML [] focuses on the visualization of decision tree, which is related to ensemble boosting tree in our project. However, decision tree is less powerful and also simpler than ensemble boosting tree. In addition, they compute all possible paths before showing them to users rather than instantaneously update them, and allow fewer operations of users on the tree. So the loop has not been really built, the benefits of interaction is limited, and the computation could be expensive.
+Some recent works like BigML\footnote{https://bigml.com} focuses on the visualization of decision tree, which is related to ensemble boosting tree in our project. However, decision tree is less powerful and also simpler than ensemble boosting tree. In addition, they compute all possible paths before showing them to users rather than instantaneously update them, and allow fewer operations of users on the tree. So the loop has not been really built, the benefits of interaction is limited, and the computation could be expensive.
 
 \section{Transparent Boosting Tree}
 
@@ -100,7 +100,7 @@ Some recent works like BigML [] focuses on the visualization of decision tree, w
 \begin{center}
  \includegraphics[width=1\linewidth]{intface.pdf}
 \end{center}
-   \caption{Views in visualization interface of transparent boosting tree.}
+   \caption{Visual encoding and exploration in five views of visualization interface of transparent boosting tree.}
 \label{fig:interface}
 \end{figure*} 
 
@@ -143,14 +143,14 @@ In the following tables, we list the major visually encoded information and inte
 \begin{center}
 \begin{tabular}{|l|}
 \hline
-Visual Encoding\\
+Visual Encoding/Exploration\\
 \hline
 Feature group (text)\\
 Feature name (text)\\
 No. of features per group (integer) \\
 \hline
 \hline 
-User Operation\\
+User Operation/Interaction\\
 \hline
 allow the feature (right click feature \& select)\\
 block the feature (right click feature \& select)\\
@@ -164,13 +164,13 @@ block the feature (right click feature \& select)\\
 \begin{center}
 \begin{tabular}{|l|}
 \hline
-Visual Encoding\\
+Visual Encoding/Exploration\\
 \hline
 Tree index (integer)\\
 Feature and decision rule for root node (text)\\
 \hline
 \hline 
-User Operation\\
+User Operation/Interaction\\
 \hline
 Collapse the whole tree (left click)\\
 \hline
@@ -183,7 +183,7 @@ Collapse the whole tree (left click)\\
 \begin{center}
 \begin{tabular}{|l|}
 \hline
-Visual Encoding\\
+Visual Encoding/Exploration\\
 \hline
 Feature (text)\\
 Decision rule (text)\\
@@ -191,9 +191,10 @@ Path weight on leaf node (ratio)\\
 Major class on leaf node (color)\\
 No. of samples on each edge (width)\\
 Highlight a path (brushing a path)\\
+Link a path to its prediction bar charts\\
 \hline
 \hline 
-User Operation\\
+User Operation/Interaction\\
 \hline
 Remove the current tree (right click root node \& select)\\
 Grow a new tree (right click root node \& select)\\
@@ -212,9 +213,9 @@ Expand the leaf node on all trees (right click node \& select)\\
 \begin{center}
 \begin{tabular}{|l|}
 \hline
-Visual Encoding\\
+Visual Encoding/Exploration\\
 \hline
-Prediction results on a path (brushing a path in tree view)\\
+Prediction statistics on a path (linked to brushed path)\\
 Negative and positive counts on nodes (bar charts)\\
 Decision rule (text)\\
 \hline
@@ -227,14 +228,14 @@ Decision rule (text)\\
 \begin{center}
 \begin{tabular}{|l|}
 \hline
-Visual Encoding\\
+Visual Encoding/Exploration\\
 \hline
 Historical operation (text)\\
 Training error (ratio)\\
 Test error (ratio)\\
 \hline
 \hline 
-User Operation\\
+User Operation/Interaction\\
 \hline
 Go back to former model (right click row \& select restore)\\
 \hline
@@ -244,23 +245,61 @@ Go back to former model (right click row \& select restore)\\
 
 On one hand, the ``forest view'' and ``tree view'' visualize the structure of GBT model in learning process, i.e., multiple decision trees from root node to current leaf nodes, the weight of each path, and the feature with associated decision rule on each node. These two views provide a detailed and transparent visualization of GBT model structure to user. They lead to a clear explanation of the current model, e.g., what features were selected to build decision rules, and how these features cooperate with each other. So users can justify which nodes on the current model are consistent with domain knowledge or common sense, and which are not. 
 
-On the other hand, ``path purity view'' and ``history view'' visualize the prediction results on each node along the brushed path in the tree view, and the overall historical training/test error after each user operation, respectively. These two views let users track the performance changes of each feature 
-
-The “data view” shows both the overview of the prediction results on all data points and the data points classified by the selected node. By assigning different feature to the selected node, users are able to track the resulting changes in prediction performance.
-
-The data view provides users an evaluation evidence from the performance of current model on training data. In particular, the data view will includes bar charts showing the numbers of positive and negative samples after applying decision rule on each node or along each path.
+On the other hand, ``path purity view'' and ``history view'' visualize the prediction results on each node along the brushed path in the tree view, and the overall historical training/test error after each user operation, respectively. These two views let users track the performance changes caused by the feature(s) and the associated decision rule(s) on each node, each pat, each tree, and each user operation in the history. Even without sufficient domain knowledge, users can still find important clues from the prediction results of the current GBT model to evaluate the performance of selected features, decision rules, established trees and paths. 
 
 By showing users both the model structure and performance on training data, we expect to collect the wisdom of users from both their domain knowledge and judgement based on the prediction result on data via their feedback. In our visualization tool, users have complete freedom to modify the structure of each tree, e.g., to choose feature for each node, to prune an existing node/path, and to add a new node/path. The model will be updated according to these instantaneous feedbacks from users, and we will show the new views for the updated model. 
 
 In the learning process, ML algorithm is in charge of learning candidates of model, estimating the numerical weights of the model, and updating model according to user feedback, while users are in charge of modifying the ML model by their domain knowledge and feedback from the current learning results. Interactive visualization bridges these two components by conveying the feedback of one to the other. Therefore,  we can close a loop between these two so that one helps enhance the performance of the other in a mutually rewarding way, until we achieve a promising ML model.
 
+\subsection{Exploration of GBT model in TBT}
+
+\begin{figure*}[tH!]
+\begin{center}
+ \includegraphics[width=1\linewidth]{user.pdf}
+\end{center}
+   \caption{Interaction and user operation in visualization interface of transparent boosting tree.}
+\label{fig:user}
+\end{figure*} 
+
+One primary contribution of this paper is that TBT enables full exploration of complex machine learning model by user. We show the visual encoding/exploration contained in TBT in Figure \ref{fig:interface}. In particular, although TBT allows to learn hundreds of trees in a second, the detailed structure of each decision tree can be collapsed by an animation and shown in the tree view when clicking the tree index listed in the forest view. Thus user is able to evaluate each tree by going to its details quickly. 
+
+In the tree view, user is able to explore the feature and corresponding decision rule on each node, as well as the composite decision rule defined by each path, and the number of training samples associated with each edge of each path. So the features and decision rules can be evaluated by users' domain knowledge. In addition, by brushing arbitrary path on the tree, the prediction statistics on each node along the selected path can be displayed in bar charts within the path purity view. By investigating the prediction statistics, it is very convenient for user to determine the best depth of the path that can avoid possible overfitting, and do manual feature selection according to the contribution of each feature in the prediction task.
+
+Therefore, users is able to gain a comprehensive and course-to-fine understanding of the ML model via the visualization and exploration of both the model structure and prediction results on data. This is essentially helpful to generating feedback of high quality after analytic thinking and cognitive inference in human brain. 
+
+\subsection{Interaction and User Operation in TBT}
+
+Another key insight of this paper is that TBT allows rich user operations on the ML model and is able to take those user feedback as input of the learning algorithm in the next model update. As shown in Figure \ref{fig:user}, users are allowed to operate on different scales of GBT model. 
+
+Specifically, on the forest scale, they can remove/add arbitrary number of trees to the model. In addition, in any stage of learning process, user can define a subset of features by ``allow/block features'' in the feature view, such that all any feature selected in the rest trees are confined in the subset. 
+
+On the tree scale, users can remove any node or expand any leaf node. This results in feature selection. It worth noting that TBT supports a very powerful and useful function called ``remove/expand this node for all'', which is able to remove/add the selected node on all the same paths appearing in all the trees. This plays a role of global filter that reflects the attitude of users to the composite decision rule defined by the path.
+
+On the time scale, the ``restore'' button in history view of TBT allows user to go back to the model in any learning stage marked by a historical user operation. This is very necessary because some human operations are possible to result in a weaker model. By tracking the training/test error in the history view, users are able to justify if the operations are helpful to the learning process or not. And the ``restore'' button can conveniently undo the operations that are justified not helpful, while users do not need to go back the the very beginning of the learning process.
+
 \section{Results}
 
+We implement the visualization interface of TBT by using d3 and javascripts, develop the backend support of GBT algorithm for model updating in a package called ``xgboost''\footnote{https://github.com/tqchen/xgboost}, and build a server supporting multiple users simultaneously. The beta version of TBT is published on a public accessible website\footnote{http://timl.cs.washington.edu/}.
+
+We apply TBT to two datasets, i.e., mushroom\footnote{https://archive.ics.uci.edu/ml/datasets/Mushroom} and fusion health Diabetes dataset\footnote{http://www.kaggle.com/c/pf2012-diabetes/data}. In mushroom dataset, there are $8124$ data samples with $22$ features, and the goal is to train a classifier separating poisonous mushrooms and edible mushrooms. In fusion health dataset, there are $9948$ training samples and $4979$ test samples, and the goal is to recognize if a given patient has a diagnosis of Type 2 diabetes mellitus (T2DM). TBT is going to build GBT model for prediction tasks for the two datasets. 
+
+It shows that TBT performs effectively in presenting a transparent and interpretable understanding of GBT model and its learning process to users. In spite of the large number of samples and features, TBT is able to show how the GBT model is established by integrating different features and decision rules using ensemble of trees, and how the model works on real data. User is able to explore the model from forest scale to feature scale. Moreover, the interaction and user operation is proved to be effective in testing the performance and tracking the changes casued of each part of the model. Furthermore, the update of model in TBT is real-time scale, and thus the learning loop between ML and visualization can be iterated efficiently.
 
 \section{Discussion}
 
+By applying TBT to the two real datasets, we discover that it can provide several novel insights that cannot be offered by directly running GBT on the datasets. Firstly, instead of learning a great number of decision trees blindly, we find out that lots of decision trees learned in GBT share the same paths or even have very similar structure. This indicates that the complexity of GBT can be significantly reduced by user exploration.
+
+Secondly, TBT is able to show the features or feature groups that have been selected to build decision rules in the trees. The prediction statistics along a path in path purity view and training/test error shown in history view provide important clues to evaluate and understand the roles the selected features and decision rules play in the prediction. 
+
+Thirdly, by using the information shown in the path purity view and history view, it is convenient to prune the trees and thus avoid overfitting of GBT model.
 
 \section{Future Work}
+
+In the future, we will do user study on our published website and collect the performance of TBT by involving different users' interaction into the learning process. The collected data can be used to evaluate TBT more accurately. 
+
+Moreover, we plan to study whether and when human intelligence in TBT is able to improve the performance of ML in the loop. Both a theoretical analysis and empirical studies are necessary to be conducted in the future.
+
+Furthermore, we will attempt to extend the transparent machine learning idea to other ML models and algorithms, and try to find if the interactive visualization can result in new understanding of the popular ML black boxes.
 
 \bibliographystyle{abbrv}
 \bibliography{sample}
