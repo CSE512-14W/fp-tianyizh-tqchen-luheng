@@ -13,8 +13,9 @@ http://cse512-14w.github.io/fp-tianyizh-tqchen-luheng/
 ## Development Process
 * Start with toy dataset from UCI machine learning repository for prototyping our project.
 * Use static data exported from the machine learning tool for front-end development, such as visualization of tree and path.
+* We added another larger dataset from Kaggle in the health domain to see if this tool can help difficult machine learning problems.
 * For the next step, we implemented frontend-backend communication to enable user interaction and instant feedback of the machine learning algorithm.
-* From exploration with the current tool, we decided to add more powerful features such as feature selection (both groups and single features) and generalized tree modification. 
+* From exploration with the current tool, we decided to add more powerful features such as feature selection (both groups and single features) and generalized tree modification. Both frontend and backend need to make big changes to support these new interations.
 
 ## How to run the demo
 The demo can run in linux or mac machines, first make make sure system requirements are met
