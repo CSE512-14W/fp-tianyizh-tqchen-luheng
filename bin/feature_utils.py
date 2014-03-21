@@ -8,8 +8,26 @@ import subprocess
 
 from collections import Counter
 
-def loadFeatureTable(ftable_path):
+def loadFeatureMap(fmap_path):
+    feat_range = {}
+    with open(fmap_path, 'r') as fmap_file:
+        for line in fmap_file:
+            info = line.strip().split()
+            fid = int(info[0])
+            fname = info[1]
+            if "=" in fname:
+                fname = "=".join(fname.split("=")[:-1])
+            if not fname in feat_range:
+                feat_range[fname] = [fid, fid + 1]
+            else:
+                range = feat_range[fname]
+                feat_range[fname] = [range[0], fid + 1]
+        fmap_file.close()
+    return feat_range
+
+def loadFeatureTable(ftable_path, fmap_path):
     feature_map = {}
+    feature_range = loadFeatureMap(fmap_path)
     prefix_map = Counter()
     with open(ftable_path, 'r') as ftable_file:
         ftable = json.load(ftable_file)
@@ -18,10 +36,18 @@ def loadFeatureTable(ftable_path):
             feature = node["feature"]
             fsplit = getFeatureSegments(feature)
             prefix_map.update([".".join(fsplit[:i]) for i in range(1, len(fsplit))])
+            if not feature in feature_range:
+                sys.stderr.write("unmapped featrue: " + feature + "\n")
+                frange = [0, 0]
+            else:
+                frange = feature_range[feature]
+                
             features.append( { "name" : feature,
                                "info" : node["explanation"],
                                "type" : "unk",
-                               "feature_id" : fid
+                               "feature_id" : fid,
+                               "start" : frange[0],
+                               "end" :  frange[1]
                             } )
             feature_map[feature] = fid
         ftable_file.close()

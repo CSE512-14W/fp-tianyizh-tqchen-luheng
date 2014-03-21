@@ -13,7 +13,8 @@ HOST, PORT = "localhost", 9911
 
 cgitb.enable()
 rawreq = cgi.FieldStorage()["request"].value;
-print rawreq
+sys.stderr.write(str(json.loads(rawreq)) + "\n")
+sys.stderr.write(str("fdefault" in json.loads(rawreq)) + "\n")
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:

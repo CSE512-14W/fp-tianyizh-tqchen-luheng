@@ -22,12 +22,12 @@ var history = new op_history( { top:10, right:0, bottom:10, left:10},
 								right_width, bottom_height,
 								"#historygraph");
 
-var btrees = new boosting_tree( { top:50, right:80, bottom:10, left:10}, 
+var btrees = new boosting_tree( { top:20, right:80, bottom:10, left:10}, 
 								middle_width,
 								window_height * 0.8,
 								"#modeltreegraph");
 
-var ftable = new feature_table ( { top:50, right:10, bottom:10, left:10},
+var ftable = new feature_table ( { top:20, right:10, bottom:10, left:10},
 								left_width,
 								window_height * 0.8,
 								"#featuretable");
@@ -39,20 +39,34 @@ var main_features = null;
 var main_user_id = "";
 
 var change_dataset = function() {
-	main_dataset = $("#dataselect").val();
+	// re-train everything!
+	var feat_filters = null;
+	curr_dataset = $("#dataselect").val();
+	if (main_dataset != curr_dataset) {
+		main_dataset = curr_dataset;
+	} else {
+		feat_filters = ftable.getFeatureFilters();
+	}
+
 	para = {num_trees : $("#numtreeinput").val(),
 			max_depth : $("#maxdepthinput").val()};
 	btrees.clear();
 	history.clear();
-	
+	 
 	var init_request = {
 			op_type : "init",
 			op_iter : 0,
 			num_trees : para.num_trees,
 			max_depth : para.max_depth,
 			dataset : main_dataset,
-			user_id : "",
+			user_id : main_user_id,
 		};
+	 
+	if (feat_filters != null) {
+		init_request.fdefault = feat_filters.fdefault;
+		init_request.fban = feat_filters.fban;
+		init_request.fpass = feat_filters.fpass;
+	}
 	
 	console.log(init_request);
 	$.get("cgi-bin/request_handler.py", 

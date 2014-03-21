@@ -13,24 +13,22 @@ feature_utils = imp.load_source('feature_utils',
                                 os.path.join(os.path.dirname(__file__),
                                              'feature_utils.py'))
 
-DATASET_NAME = "fusion"
+DATASET_NAME = ""
+TRAIN_PATH = ""
+TEST_PATH = "."
+FEATMAP_PATH = ""
+FEATTABLE_PATH = ""
 XGBOOST_PATH = "../xgboost/xgboost"
-TRAIN_PATH = "../data/fusion/fusion.txt.train"
-TEST_PATH = "../data/fusion/fusion.txt.test"
-FEATMAP_PATH = "../data/fusion/featmap.txt"
-FEATTABLE_PATH = "../data/fusion/features.json"
-TEMP_PATH = "../temp"
+TEMP_PATH = "/tmp/timl-temp"
 
 DEFAULT_CONFIG = []
 
 def setDataset(dataset):
     global DATASET_NAME
-    global XGBOOST_PATH
     global TRAIN_PATH
     global TEST_PATH
     global FEATMAP_PATH
     global FEATTABLE_PATH
-    global TEMP_PATH 
     global DEFAULT_CONFIG
     
     if dataset.startswith("fusion"):
@@ -39,16 +37,12 @@ def setDataset(dataset):
         TEST_PATH = "../data/fusion/fusion.txt.test"
         FEATMAP_PATH = "../data/fusion/featmap.txt"
         FEATTABLE_PATH = "../data/fusion/features.json"
-        TEMP_PATH = "../temp"
-        XGBOOST_PATH = "../xgboost/xgboost"
     else:
         DATASET_NAME = "mushroom"
         TRAIN_PATH = "../data/agaricus.txt.train"
         TEST_PATH = "../data/agaricus.txt.test"
         FEATMAP_PATH = "../data/featmap.txt"
         FEATTABLE_PATH = "../data/feature.json"
-        TEMP_PATH = "../temp"
-        XGBOOST_PATH = "../xgboost/xgboost"
         
     DEFAULT_CONFIG = [
         ("num_round" , 1),
@@ -89,7 +83,8 @@ def loadModel(user_id, op_iter):
     test_error = evals['test-error']
     train_error = evals['train-error']
     
-    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH)
+    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH,
+                                                           FEATMAP_PATH)
     json_obj = dump2json(dump_path, feature_map)
     json_obj['test_error'] = test_error
     json_obj['train_error'] = train_error
@@ -102,7 +97,7 @@ def trainNewModel(user_id, op_iter, new_config):
     user_dir = path_join(TEMP_PATH, str(user_id))
     curr_fn = "%s_%04d" % (DATASET_NAME, op_iter)
     next_fn = "%s_%04d" % (DATASET_NAME, op_iter + 1)
-    if op_iter == 0:
+    if not os.path.isdir(user_dir):
         subprocess.call(["mkdir", user_dir], stdout=sys.stderr)
         
     config_path =  path_join(user_dir, curr_fn + ".conf")
@@ -149,7 +144,8 @@ def trainNewModel(user_id, op_iter, new_config):
     test_error = evals['test-error']
     train_error = evals['train-error']
     
-    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH)
+    features, feature_map = feature_utils.loadFeatureTable(FEATTABLE_PATH,
+                                                           FEATMAP_PATH)
     response = dump2json(dump_path, feature_map)
     response['test_error'] = test_error
     response['train_error'] = train_error

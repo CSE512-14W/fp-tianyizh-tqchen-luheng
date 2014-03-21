@@ -44,7 +44,7 @@ feature_table.prototype = {
 							  y0 : 0,
 							  name : "Features (frequency)",
 							  info : "Features",
-							  constraint : 0,
+							  constraint : 1,
 							  count : 0,
 							  type : "_", 
 							};
@@ -65,6 +65,7 @@ feature_table.prototype = {
 		self.clear();
 		btrees.update_feature_count();
 		self.feature_count_helper(self.feature_data);
+		self.feature_constraint_helper(self.feature_data);
 		self.update(self.feature_data);
 	},
 	feature_count_helper : function(d) {
@@ -76,11 +77,20 @@ feature_table.prototype = {
 		}
 		return d.count;
 	},
+	feature_constraint_helper : function(d) {
+		var children = d.children ? d.children : d._children;
+		if (children) {
+			for (var i = 0; i < children.length; i++) {
+				children[i].constraint = d.constraint;
+				this.feature_constraint_helper(children[i]);
+			}
+		}
+	},
 	clear : function() {
 		this.features.forEach(function(d) {
 			d.id = undefined;
 			d.count = 0;
-			d.constraint = 0; // 0 : none, -1 : disallow, 1 : allow
+			d.constraint = 1; // 0 : none, -1 : disallow, 1 : allow
 		});
 		this.svg.selectAll("g.featnode").remove();
 		this.node_count = 0;
@@ -148,6 +158,7 @@ feature_table.prototype = {
 									"feat_ban",
 							callback : function() {
 								d.constraint = -1;
+								self.feature_constraint_helper(d);
 								self.update(d);
 							}
 						});
@@ -162,6 +173,7 @@ feature_table.prototype = {
 									"feat_pass",
 							callback : function() {
 								d.constraint = 1;
+								self.feature_constraint_helper(d);
 								self.update(d);
 							}
 						});
@@ -225,6 +237,28 @@ feature_table.prototype = {
 		    d.y0 = d.y;
 		});
 	},
+	getFeatureFilters : function() {
+		if (!this.feature_data || !this.feature_data.constraint) {
+			return null;
+		}
+		var fdefault = this.feature_data.constraint,
+			fpass = [],
+			fban = [];
+		this.features.forEach(function(d) {
+			if (d.constraint != fdefault) {
+				if (d.constraint > 0) {
+					fpass.push(d.start + "-" + d.end);
+				} else {
+					fban.push(d.start + "-" + d.end);
+				}
+			}
+		});
+		return {
+			fdefault : fdefault,
+			fpass : fpass,
+			fban : fban
+		};
+	},
 	toggle : function(d) {
 		if (d.children) {
 			d._children = d.children;
@@ -263,7 +297,7 @@ feature_table.prototype = {
 			dict[gname] = gid;
 			groups.push({ name : "group: " + gname,
 						children : [],
-						constraint : 0,
+						constraint : 1,
 						count : 0 });
 		}
 		return gid;
@@ -280,7 +314,7 @@ feature_table.prototype = {
 			dict[gname] = gid;
 			groups.push({ name : gname,
 						children : [],
-						constraint : 0,
+						constraint : 1,
 						count : 0 });
 		}
 		return gid;
