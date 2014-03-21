@@ -166,22 +166,23 @@ boosting_tree.prototype = {
 		var t_width = 0, t_height = 0;
 		
 		var num_collapsed = 0;
+		var num_align = (self.width < 800 ? 2 : 4);
 		self.forest_data.forEach(function(d) {
 			if (d._children) {
 				num_collapsed += 1;
 			}
 		});
-		var top_bar_height = 50 * Math.ceil((num_collapsed + 1) / 4);
+		var top_bar_height = 50 * Math.ceil((num_collapsed + 1) / num_align);
 		var curr_collapsed = 0;
 		//var last_x = 0;
 		for (var i = 0; i < self.num_trees; i++) {
 			var root = self.forest_data[i];
 			if (root._children) {
 				// if is collapsed
-				var gx = curr_collapsed % 4;
-				var gy = (curr_collapsed - gx) / 4;
+				var gx = curr_collapsed % num_align;
+				var gy = (curr_collapsed - gx) / num_align;
 				curr_collapsed ++;
-				offset_x = self.width / 4 * gx + 160;
+				offset_x = self.width / num_align * gx + 160;
 				offset_y = 50 * gy;
 				//last_y = offset_y;
 			} else {
@@ -202,9 +203,9 @@ boosting_tree.prototype = {
 		}
 		
 		// for new tree tooltip
-		var gx = num_collapsed % 4;
-		var gy = (num_collapsed - gx) / 4;
-		var xx = self.width / 4 * gx + 100;
+		var gx = num_collapsed % num_align;
+		var gy = (num_collapsed - gx) / num_align;
+		var xx = self.width / num_align * gx + 100;
 		var yy = 50 * gy;
 		var last_root = self.forest_data[self.num_trees - 1];
 		/*if (nt_tooltips.svg) {

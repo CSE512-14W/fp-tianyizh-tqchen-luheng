@@ -8,7 +8,7 @@ function feature_table(margin, width, height, tag) {
 	this.margin = margin;
 	
 	this.barHeight = 20,
-	this.barWidth = width * .8;
+	this.barWidth = width * .75;
 	this.barOffset = 20;
 	
 	this.duration = 400,

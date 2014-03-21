@@ -3,9 +3,9 @@ function op_history (margin, width, height, tag) {
     this.width = width - margin.left - margin.right;
     this.height = height - margin.top - margin.bottom;
     
-    this.entry_width = 400;
+    this.entry_width = width * 0.9;
     this.entry_height = 22;
-    var x0 = margin.left + (this.width - this.entry_width) * 0.5;
+    var x0 = margin.left;
     var y0 = margin.top;
     this.svg = d3.select(tag)
     			.append("svg")
@@ -117,7 +117,7 @@ op_history.prototype = {
 			});
 		
 		opEnter.append("text")
-			.attr("x", 200)
+			.attr("x", self.entry_width * 0.4)
 			.attr("y", function(d, i) {
 				var k = self.ops.length - i;
 				return (k + 0.6) * self.entry_height;
@@ -137,7 +137,7 @@ op_history.prototype = {
 			});
 		
 		opEnter.append("text")
-			.attr("x", 300)
+			.attr("x", self.entry_width * 0.7)
 			.attr("y", function(d, i) {
 				var k = self.ops.length - i;
 				return (k + 0.6) * self.entry_height;
