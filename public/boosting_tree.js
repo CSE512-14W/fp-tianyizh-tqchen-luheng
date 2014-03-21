@@ -289,9 +289,9 @@ boosting_tree.prototype = {
 				self.update(d);
 			})
 			.on("contextmenu", function(d) {
-				if (!d.parent || !d._children) {
-					self.showNodeOperationTooltip(d);
-				}
+				//if (!d.parent || !d._children) {
+				self.showNodeOperationTooltip(d);
+				//}
 				d3.event.preventDefault();
 			})
 			.on("mouseover", function(d) {
