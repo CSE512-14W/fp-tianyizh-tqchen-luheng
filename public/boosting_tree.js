@@ -208,13 +208,19 @@ boosting_tree.prototype = {
 				       self.tree_layout[i].height]);
 			var tree_data = self.forest_data[i];
 			var t_nodes = tree.nodes(tree_data);
+			
+			dep_hist = [];
 			t_nodes.forEach(function(d) {
 				// computing absolute node position
-				d.x = (is_collapsed_root(d) ? 0 : d.x)
-						+ self.tree_layout[i].offset.x;
-				d.y = d.parent ? d.parent.y + 80
-							+ (d.rank * (self.rect_height + 8))
-						: self.tree_layout[i].offset.y;
+				if (is_collapsed_root(d)) {
+					d.x = 0;
+				} 
+				d.x += self.tree_layout[i].offset.x; 
+				if (d.parent) {
+					d.y = d.parent.y + 60 + d.rank * (self.rect_height + 4);
+				} else {
+					d.y += self.tree_layout[i].offset.y;
+				}
 				d.show_label = self.node_label_helper(d);
 			});
 			nodes.push.apply(nodes, t_nodes);
@@ -379,20 +385,6 @@ boosting_tree.prototype = {
 		for (var i = 0; i < self.num_trees; i++) {
 			self.is_collapsed.push(
 					self.forest_data[i]._children ? true : false); 
-		}
-	},
-	update_feature_count : function() {
-		var self = this;
-		for (var i = 0; i < self.num_trees; i++) {
-			var tree = d3.layout.tree()
-				.size([self.tree_layout[i].width, self.tree_layout[i].height]);
-			var tree_data = self.forest_data[i];
-			var t_nodes = tree.nodes(tree_data);
-			t_nodes.forEach(function(d) {
-				if (d.feature_id) {
-					ftable.features[d.feature_id].count ++;
-				}
-			});
 		}
 	},
 	auto_collapsing : function(tree_id, is_expanded) {

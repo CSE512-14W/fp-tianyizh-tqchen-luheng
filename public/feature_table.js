@@ -63,16 +63,29 @@ feature_table.prototype = {
 		}
 		
 		self.clear();
-		btrees.update_feature_count();
-		self.feature_count_helper(self.feature_data);
+		for(var i = 0; i < btrees.forest_data.length; i++) {
+			this.feature_count_helper(btrees.forest_data[i]);
+		}
+		self.group_count_helper(self.feature_data);
 		self.feature_constraint_helper(self.feature_data);
 		self.update(self.feature_data);
 	},
 	feature_count_helper : function(d) {
+		if (d.feature_id) {
+			ftable.features[d.feature_id].count ++;
+		}
 		var children = d.children ? d.children : d._children;
 		if (children) {
 			for (var i = 0; i < children.length; i++) {
-				d.count += this.feature_count_helper(children[i]);
+				this.feature_count_helper(children[i]);
+			}
+		}
+	},
+	group_count_helper : function(d) {
+		var children = d.children ? d.children : d._children;
+		if (children) {
+			for (var i = 0; i < children.length; i++) {
+				d.count += this.group_count_helper(children[i]);
 			}
 		}
 		return d.count;

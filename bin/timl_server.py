@@ -77,14 +77,14 @@ def handleReq( request ):
                                        ("batch:bst:interact:remove", node_id[i]),
                                        ("batch:run", 1)])
                     
-            ''' add feature constraints
-            '''
-            if "fdefault" in request and int(request["fdefault"]) < 0:
-                new_config.append(("bst:fdefault", -1))
-            if "fban" in request and len(request["fban"]) > 0:
-                    new_config.extend([("bst:fban", f) for f in request["fban"]])
-            if "fpass" in request and len(request["fpass"]) > 0:
-                new_config.extend([("bst:fpass", f) for f in request["fpass"]])
+        ''' add feature constraints
+        '''
+        if "fdefault" in request and int(request["fdefault"]) < 0:
+            new_config.append(("bst:fdefault", -1))
+        if "fban" in request and len(request["fban"]) > 0:
+                new_config.extend([("bst:fban", f) for f in request["fban"]])
+        if "fpass" in request and len(request["fpass"]) > 0:
+            new_config.extend([("bst:fpass", f) for f in request["fpass"]])
                 
         new_forest = xgboost_utils.trainNewModel(user_id, op_iter, new_config)    
 
